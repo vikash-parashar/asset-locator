@@ -157,8 +157,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="totalPowerWatt">Total Power (Watt)</label>
-                                    <input type="text" class="form-control" id="totalPowerWatt"
-                                        name="total_power_watt">
+                                    <input type="number" class="form-control" id="totalPowerWatt" name="total_power_watt" step="any">
                                 </div>
                             </div>
                         </div>
@@ -166,15 +165,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="totalBTU">Total BTU</label>
-                                    <input type="text" step="0.01" class="form-control" id="totalBTU"
-                                        name="total_btu">
+                                    <input type="number" class="form-control" id="totalBTU" name="total_btu" step="any">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="totalPowerCable">Total Power Cable</label>
-                                    <input type="text" class="form-control" id="totalPowerCable"
-                                        name="total_power_cable">
+                                    <input type="number" class="form-control" id="totalPowerCable"
+                                        name="total_power_cable" step="any">
                                 </div>
                             </div>
                         </div>
@@ -250,27 +248,22 @@
             // Get form data
             const formData = new FormData(document.getElementById("entryForm"));
 
-            // Send the form data to your backend API using fetch or another AJAX method
-            fetch("http://localhost:8080/api/v1/power-details", {
-                method: "POST",
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    // Handle the API response here
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/api/v1/power-details", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Request completed, handle response
+                    var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         alert("Success: Entry added successfully.");
-                        location.reload(); // Reload the page on success
+                        location.reload();
                     } else {
                         alert("Error: Entry not added. Please try again.");
                     }
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("Error: An error occurred. Please try again.");
-                });
+                }
+            };
+            xhr.send(formData);
 
-            // Close the modal
             $("#createEntryModal").modal("hide");
         });
 
