@@ -1,6 +1,16 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"go-server/render"
+
+	"github.com/gin-gonic/gin"
+)
+
+func Dashboard(c *gin.Context) {
+
+	// display dashboard
+	render.RenderTemplate(c.Writer, "index", nil)
+}
 
 func GetData(c *gin.Context) {
 

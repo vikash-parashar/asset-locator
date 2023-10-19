@@ -1,7 +1,6 @@
 package main
 
 import (
-	config "go-server/db"
 	"go-server/handlers"
 	"log"
 	"os"
@@ -21,24 +20,25 @@ func init() {
 func main() {
 	port := os.Getenv("PORT")
 
-	db, err := config.ConnectDB()
-	if err != nil {
-		log.Println("failed to connect with db")
-		log.Fatalln(err)
-	}
+	// db, err := config.ConnectDB()
+	// if err != nil {
+	// 	log.Println("failed to connect with db")
+	// 	log.Fatalln(err)
+	// }
 
-	err = config.CreateDatabaseTables(db)
-	if err != nil {
-		log.Println("failed to create tables into db")
-		log.Fatalln(err)
-	}
+	// err = config.CreateDatabaseTables(db)
+	// if err != nil {
+	// 	log.Println("failed to create tables into db")
+	// 	log.Fatalln(err)
+	// }
 
-	defer db.Close()
+	// defer db.Close()
 
 	r := gin.Default()
 
+	r.GET("/", handlers.Dashboard)
 	r.GET("/api/get-data", handlers.GetData)
-	r.GET("/api/add-data", handlers.AddData)
+	r.POST("/api/add-data", handlers.AddData)
 
 	log.Fatalln(r.Run(":" + port))
 }

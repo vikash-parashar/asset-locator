@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auto-Hide Sidebar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Canvas-like background with CSS gradient */
+     /* Canvas-like background with CSS gradient */
+     body {
+            background: linear-gradient(45deg, #27374D, #DB005B, #116D6E, #C23373, #1D5B79, #461959, #461959, #2E8A99);
+            background-size: 800% 1800%;
+            animation: gradient 120s infinite;
+            color: #f8f9fa;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        /* Custom CSS for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: -250px; /* Initially hidden */
+            background-color: #343a40; /* Bootstrap dark background color */
+            padding-top: 20px;
+            transition: left 0.3s;
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #f8f9fa; /* Bootstrap light text color */
+            display: block;
+        }
+        .sidebar a:hover {
+            color: #17a2b8; /* Bootstrap primary color for hover effect */
+        }
+        /* Custom CSS for the content */
+        .content {
+            margin-left: 0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <a href="#" class="btn btn-dark btn-block">Button 1</a>
+        <a href="#" class="btn btn-dark btn-block">Button 2</a>
+        <a href="#" class="btn btn-dark btn-block">Button 3</a>
+        <a href="#" class="btn btn-dark btn-block">Button 4</a>
+        <a href="#" class="btn btn-dark btn-block">Button 5</a>
+    </div>
+    <div class="content">
+        <h2>Content Area</h2>
+        <p>This is the default content area. Click on a button to display associated content here.</p>
+    </div>
+    <!-- Bootstrap JS (jQuery and Popper.js required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+
+        document.addEventListener('mousemove', (e) => {
+            if (e.clientX < 250) {
+                sidebar.style.left = '0';
+            } else {
+                sidebar.style.left = '-250px';
+            }
+        });
+    </script>
+</body>
+</html>
