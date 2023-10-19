@@ -33,38 +33,6 @@
 
         }
 
-        /* Custom CSS for the sidebar */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: -250px;
-            /* Initially hidden */
-            background-color: #0A4D68;
-            /* Bootstrap dark background color */
-            padding-top: 20px;
-            transition: left 0.3s;
-        }
-
-        .sidebar a {
-            padding: 8px 8px 8px 16px;
-            margin-left: 5px;
-            margin-right: 5px;
-            text-decoration: none;
-            font-size: 15px;
-            color: #00235B;
-            /* Bootstrap light text color */
-            background-color: #FEFAE0;
-            display: block;
-        }
-
-        .sidebar a:hover {
-            color: #17a2b8;
-            /* Bootstrap primary color for hover effect */
-        }
-
         /* Custom CSS for the content */
         .content {
             margin-left: 0;
@@ -104,14 +72,14 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col mt-5">
                 <h1>Device Power Details</h1>
             </div>
         </div>
     </div>
-    <div class="container mb-5 mt-5">
+    <div class="container mb-2 mt-2 d-flex justify-content-center">
         <div class="row">
             <div class="col">
                 <button id="newEntryButton">Create New Entry</button>
@@ -121,7 +89,7 @@
 
 
 
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
                 <!-- ... (previous HTML code) ... -->
@@ -156,7 +124,7 @@
                         {{end}}
                     </tbody>
                 </table>
-                
+
 
                 <!-- ... (remaining HTML code) ... -->
 

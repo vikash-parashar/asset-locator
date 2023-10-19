@@ -22,7 +22,6 @@ func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		log.Println(data)
 		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "location_details.html", data)
 		// render.RenderTemplate(c.Writer, "location_details", gin.H{"data": data})
@@ -37,7 +36,6 @@ func GetOwnerDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		log.Println(data)
 		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "owner_details.html", data)
 		// render.RenderTemplate(c.Writer, "owner_details", gin.H{"data": data})
@@ -52,7 +50,6 @@ func GetPowerDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		log.Println(data)
 		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "power_details.html", data)
 		// render.RenderTemplate(c.Writer, "power_details", gin.H{"data": data})
@@ -70,7 +67,6 @@ func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		log.Println(data)
 		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "fiber_details.html", data)
 		// render.RenderTemplate(c.Writer, "fiber_details", gin.H{"data": data})
