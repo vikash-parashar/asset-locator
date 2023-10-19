@@ -46,6 +46,24 @@
             padding-left: 5px;
             padding-right: 5px;
         }
+
+
+        label {
+            color: #ffffff;
+        }
+
+        input {
+            background-color: #DDF7E3;
+            color: #000000;
+        }
+
+        .modal-title {
+            color: #ffffff;
+        }
+
+        .modal-content {
+            background-color: #025464;
+        }
     </style>
 </head>
 
@@ -232,7 +250,7 @@
             const formData = new FormData(document.getElementById("entryForm"));
 
             // Send the form data to your backend API using fetch or another AJAX method
-            fetch("YOUR_API_URL", {
+            fetch("http://localhost:8080/api/v1/owner-details", {
                 method: "POST",
                 body: formData,
             })
