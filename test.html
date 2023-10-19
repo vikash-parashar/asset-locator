@@ -6,29 +6,38 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Data Models</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);" id="devicePowerBtn">Device Power</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);" id="deviceEthernetBtn">Device Ethernet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);" id="deviceAMCBtn">Device AMC</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);" id="deviceLocationBtn">Device Location</a>
-                </li>
-            </ul>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <!-- Rest of your content -->
+            </div>
+            <div class="col py-3">
+                Content area...
+            </div>
         </div>
-    </nav>
+    </div>
+    
 
     <!-- Content Container -->
     <div class="container mt-4">
@@ -41,31 +50,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        // Function to fetch and display data
-        function fetchData(model) {
-            $.get("/api/" + model, function(data) {
-                // Replace this with code to display data
-                $("#dataContainer").html(data);
-            });
-        }
-
-        // Event handlers for navigation buttons
-        $("#devicePowerBtn").click(function() {
-            fetchData("devicePower");
-        });
-
-        $("#deviceEthernetBtn").click(function() {
-            fetchData("deviceEthernet");
-        });
-
-        $("#deviceAMCBtn").click(function() {
-            fetchData("deviceAMC");
-        });
-
-        $("#deviceLocationBtn").click(function() {
-            fetchData("deviceLocation");
-        });
-    </script>
+   
 </body>
 </html>
