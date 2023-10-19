@@ -3,7 +3,7 @@ package handlers
 import (
 	"go-server/db"
 	"go-server/models"
-	"go-server/render"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,34 +11,51 @@ import (
 
 func Dashboard(c *gin.Context) {
 
-	// display dashboard
-	render.RenderTemplate(c.Writer, "index", nil)
+	c.HTML(http.StatusOK, "index.html", nil)
 }
 
 // GetLocationDetails handles the GET request to retrieve location details.
 func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Implement your logic to fetch location details from the database and return them as a JSON response
-		// Example: data, err := db.GetAllDeviceLocationDetail()
-		// Handle errors and send a response
+		data, err := db.GetAllDeviceLocationDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Println(data)
+		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
+		c.HTML(http.StatusOK, "location_details.html", data)
+		// render.RenderTemplate(c.Writer, "location_details", gin.H{"data": data})
 	}
 }
 
 // GetOwnerDetails handles the GET request to retrieve owner details.
 func GetOwnerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Implement your logic to fetch owner details from the database and return them as a JSON response
-		// Example: data, err := db.GetAllDeviceAMCOwnerDetail()
-		// Handle errors and send a response
+		data, err := db.GetAllDeviceAMCOwnerDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Println(data)
+		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
+		c.HTML(http.StatusOK, "owner_details.html", data)
+		// render.RenderTemplate(c.Writer, "owner_details", gin.H{"data": data})
 	}
 }
 
 // GetPowerDetails handles the GET request to retrieve power details.
 func GetPowerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Implement your logic to fetch power details from the database and return them as a JSON response
-		// Example: data, err := db.GetAllDevicePowerDetail()
-		// Handle errors and send a response
+		data, err := db.GetAllDevicePowerDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Println(data)
+		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
+		c.HTML(http.StatusOK, "power_details.html", data)
+		// render.RenderTemplate(c.Writer, "power_details", gin.H{"data": data})
 	}
 }
 
@@ -48,6 +65,15 @@ func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 		// Implement your logic to fetch fiber details from the database and return them as a JSON response
 		// Example: data, err := db.GetAllDeviceEthernetFiberDetail()
 		// Handle errors and send a response
+		data, err := db.GetAllDeviceEthernetFiberDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		log.Println(data)
+		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
+		c.HTML(http.StatusOK, "fiber_details.html", data)
+		// render.RenderTemplate(c.Writer, "fiber_details", gin.H{"data": data})
 	}
 }
 

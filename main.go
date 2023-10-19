@@ -36,9 +36,8 @@ func main() {
 
 	r := gin.Default()
 
-	// Routes
+	r.LoadHTMLGlob("templates/*.html")
 	r.GET("/", handlers.Dashboard)
-	// Routes with version prefix
 	r.GET("/api/v1/location-details", handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", handlers.GetOwnerDetails(db))
 	r.GET("/api/v1/power-details", handlers.GetPowerDetails(db))

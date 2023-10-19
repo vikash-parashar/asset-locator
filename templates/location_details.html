@@ -82,17 +82,30 @@
 </head>
 
 <body>
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <div class="sidebar" id="sidebar">
-                    <a href="./location_details.html" class="btn btn-primary btn-sm">Locations Details</a>
-                    <a href="./owner_details.html" class="btn btn-primary btn-sm">Owners/AMC Details</a>
-                    <a href="./power_details.html" class="btn btn-primary btn-sm">Power Details</a>
-                    <a href="./fiber_details.html" class="btn btn-primary btn-sm">Ethernet/Fiber Details</a>
-                </div>
-            </div>
             <div class="col mt-5">
                 <h1>Device Location Details</h1>
             </div>
@@ -110,6 +123,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <!-- ... (previous HTML code) ... -->
+
+                <!-- ... (previous HTML code) ... -->
+
                 <table border="1" class="table table-hover table-primary">
                     <thead>
                         <tr>
@@ -128,147 +145,37 @@
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
-                        <!-- Table content will be inserted here -->
+                        {{range .}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            <td>{{.SerialNumber}}</td>
+                            <td>{{.DeviceMakeModel}}</td>
+                            <td>{{.Model}}</td>
+                            <td>{{.DeviceType}}</td>
+                            <td>{{.DataCenter}}</td>
+                            <td>{{.Region}}</td>
+                            <td>{{.DCLocation}}</td>
+                            <td>{{.DeviceLocation}}</td>
+                            <td>{{.DeviceRowNumber}}</td>
+                            <td>{{.DeviceRackNumber}}</td>
+                            <td>{{.DeviceRUNumber}}</td>
+                        </tr>
+                        {{end}}
                     </tbody>
                 </table>
+
+
+                <!-- ... (remaining HTML code) ... -->
+
+
+                <!-- ... (remaining HTML code) ... -->
+
             </div>
         </div>
     </div>
 
- <div class="container">
-    <div class="row">
-        <div class="col">
-               <!-- Form for creating a new entry (initially hidden) -->
-    <div id="newEntryForm" style="display: none;">
-        <form id="entryForm">
-            <label for="serialNumber">Serial Number:</label>
-            <input type="text" id="serialNumber" required><br>
-            <label for="makeModel">Device Make & Model:</label>
-            <input type="text" id="makeModel" required><br>
-            <label for="dataCenter">Data Center:</label>
-            <input type="text" id="dataCenter" required><br>
-            <label for="region">Region:</label>
-            <input type="text" id="region" required><br>
-            <label for="dcLocation">DC Location:</label>
-            <input type="text" id="dcLocation" required><br>
-            <label for="deviceLocation">Device Location:</label>
-            <input type="text" id="deviceLocation" required><br>
-            <label for="deviceRowNumber">Device Row Number:</label>
-            <input type="text" id="deviceRowNumber" required><br>
-            <label for="deviceRackNumber">Device Rack Number:</label>
-            <input type="text" id="deviceRackNumber" required><br>
-            <label for="deviceRUNumber">Device RU Number:</label>
-            <input type="text" id="deviceRUNumber" required><br>
-            <button type="submit">Submit</button>
-        </form>
-        <p id="createFormMessage"></p>
-    </div>
-        </div>
-    </div>
- </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        const sidebar = document.getElementById('sidebar');
-
-        document.addEventListener('mousemove', (e) => {
-            if (e.clientX < 250) {
-                sidebar.style.left = '0';
-            } else {
-                sidebar.style.left = '-250px';
-            }
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to fetch and display data from the backend API
-            function fetchData() {
-                fetch("your_backend_api_url")
-                    .then(response => response.json())
-                    .then(data => {
-                        const deviceDetails = document.getElementById("deviceDetails");
-                        deviceDetails.innerHTML = ""; // Clear the existing table content
-
-                        if (data.length > 0) {
-                            data.forEach(item => {
-                                const row = document.createElement("tr");
-                                row.innerHTML = `
-                                    <td>${item.ID}</td>
-                                    <td>${item.SerialNumber}</td>
-                                    <td>${item.DeviceMakeModel}</td>
-                                    <td>${item.Model}</td>
-                                    <td>${item.DeviceType}</td>
-                                    <td>${item.DataCenter}</td>
-                                    <td>${item.Region}</td>
-                                    <td>${item.DCLocation}</td>
-                                    <td>${item.DeviceLocation}</td>
-                                    <td>${item.DeviceRowNumber}</td>
-                                    <td>${item.DeviceRackNumber}</td>
-                                    <td>${item.DeviceRUNumber}</td>
-                                `;
-                                deviceDetails.appendChild(row);
-                            });
-                        } else {
-                            deviceDetails.innerHTML = "<tr><td colspan='12'>No data available.</td></tr>";
-                        }
-                    })
-                    .catch(error => console.error("Error fetching data: " + error));
-            }
-
-            // Function to show or hide the new entry form
-            function toggleNewEntryForm() {
-                const form = document.getElementById("newEntryForm");
-                form.style.display = form.style.display === "none" ? "block" : "none";
-            }
-
-            // Function to handle form submission
-            document.getElementById("entryForm").addEventListener("submit", function (e) {
-                e.preventDefault();
-
-                const serialNumber = document.getElementById("serialNumber").value;
-                const makeModel = document.getElementById("makeModel").value;
-                const dataCenter = document.getElementById("dataCenter").value;
-                const region = document.getElementById("region").value;
-                const dcLocation = document.getElementById("dcLocation").value;
-                const deviceLocation = document.getElementById("deviceLocation").value;
-                const deviceRowNumber = document.getElementById("deviceRowNumber").value;
-                const deviceRackNumber = document.getElementById("deviceRackNumber").value;
-                const deviceRUNumber = document.getElementById("deviceRUNumber").value;
-
-                fetch("your_backend_api_url", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        SerialNumber: serialNumber,
-                        DeviceMakeModel: makeModel,
-                        DataCenter: dataCenter,
-                        Region: region,
-                        DCLocation: dcLocation,
-                        DeviceLocation: deviceLocation,
-                        DeviceRowNumber: deviceRowNumber,
-                        DeviceRackNumber: deviceRackNumber,
-                        DeviceRUNumber: deviceRUNumber,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        const createFormMessage = document.getElementById("createFormMessage");
-                        createFormMessage.textContent = data.success ? "Entry created successfully." : "Failed to create entry.";
-                        fetchData(); // Reload data after submission
-                    })
-                    .catch(error => console.error("Error creating entry: " + error));
-            });
-
-            // Fetch and display data when the page loads
-            fetchData();
-
-            // Add an event listener to the "Create New Entry" button
-            document.getElementById("newEntryButton").addEventListener("click", toggleNewEntryForm);
-        });
-    </script>
 </body>
 
 </html>

@@ -33,38 +33,6 @@
 
         }
 
-        /* Custom CSS for the sidebar */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: -250px;
-            /* Initially hidden */
-            background-color: #0A4D68;
-            /* Bootstrap dark background color */
-            padding-top: 20px;
-            transition: left 0.3s;
-        }
-
-        .sidebar a {
-            padding: 8px 8px 8px 8px;
-            margin-left: 5px;
-            margin-right: 5px;
-            text-decoration: none;
-            font-size: 15px;
-            color: #00235B;
-            /* Bootstrap light text color */
-            background-color: #FEFAE0;
-            display: block;
-        }
-
-        .sidebar a:hover {
-            color: #17a2b8;
-            /* Bootstrap primary color for hover effect */
-        }
-
         /* Custom CSS for the content */
         .content {
             margin-left: 0;
@@ -74,16 +42,30 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="row">
-            <div class="col">
-                <div class="sidebar" id="sidebar">
-                    <a href="./location_details.html" class="btn btn-primary btn-sm">Locations Details</a>
-                    <a href="./owner_details.html" class="btn btn-primary btn-sm">Owners/AMC Details</a>
-                    <a href="./power_details.html" class="btn btn-primary btn-sm">Power Details</a>
-                    <a href="./fiber_details.html" class="btn btn-primary btn-sm">Ethernet/Fiber Details</a>
-                </div>
-            </div>
             <div class="col">
                 <div class="content">
                     <h2>Content Area</h2>
@@ -93,21 +75,9 @@
         </div>
     </div>
 
-
     <!-- Bootstrap JS (jQuery and Popper.js required) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        const sidebar = document.getElementById('sidebar');
-
-        document.addEventListener('mousemove', (e) => {
-            if (e.clientX < 240) {
-                sidebar.style.left = '0';
-            } else {
-                sidebar.style.left = '-255px';
-            }
-        });
-    </script>
 </body>
 
 </html>
