@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Display</title>
+</head>
+<body>
+    <h1>Data Display</h1>
+    <table>
+        <tr>
+            <th>Serial Number</th>
+            <th>Device Make/Model</th>
+            <th>Model</th>
+            <th>Device Type</th>
+            <th>Device Physical Port</th>
+            <th>Device Port Type</th>
+            <th>Device Port MAC Address/WWN</th>
+            <th>Connected Device Port</th>
+        </tr>
+        {{range .Data}}
+        <tr>
+            <td>{{.SerialNumber}}</td>
+            <td>{{.DeviceMakeModel}}</td>
+            <td>{{.Model}}</td>
+            <td>{{.DeviceType}}</td>
+            <td>{{.DevicePhysicalPort}}</td>
+            <td>{{.DevicePortType}}</td>
+            <td>{{.DevicePortMACAddressWWN}}</td>
+            <td>{{.ConnectedDevicePort}}</td>
+        </tr>
+        {{end}}
+    </table>
+
+    <!-- Button to create a new data entity -->
+    <button id="createEntity">Create New Entity</button>
+
+    <script>
+        // JavaScript to make an API call when the button is clicked
+        document.getElementById('createEntity').addEventListener('click', function() {
+            // Make an API call to create a new entity here
+            // Reload the page upon success
+            location.reload();
+        });
+    </script>
+</body>
+</html>
