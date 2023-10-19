@@ -285,6 +285,8 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Request completed, handle response
                     var data = JSON.parse(xhr.responseText);
+                    console.log(xhr.responseText);
+
                     if (data.success) {
                         alert("Success: Entry added successfully.");
                         location.reload();
@@ -295,6 +297,7 @@
             };
             xhr.send(formData);
             // Close the modal
+            
             $("#createEntryModal").modal("hide");
         });
 

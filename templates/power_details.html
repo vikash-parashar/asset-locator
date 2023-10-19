@@ -255,6 +255,8 @@
                     // Request completed, handle response
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
+                        console.log(xhr.responseText);
+
                         alert("Success: Entry added successfully.");
                         location.reload();
                     } else {
@@ -263,6 +265,7 @@
                 }
             };
             xhr.send(formData);
+            
 
             $("#createEntryModal").modal("hide");
         });
