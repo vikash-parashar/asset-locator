@@ -109,7 +109,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <table border="1">
+                <table border="1" class="table table-hover table-primary">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -132,18 +132,23 @@
     </div>
 
 
-    <!-- Form for creating a new entry (initially hidden) -->
-    <div id="newEntryForm" style="display: none;">
-        <h2>Create New Entry</h2>
-        <form id="entryForm">
-            <label for="serialNumber">Serial Number:</label>
-            <input type="text" id="serialNumber" required><br>
-            <label for="makeModel">Device Make & Model:</label>
-            <input type="text" id="makeModel" required><br>
-            <!-- Add more form fields for other properties -->
-            <button type="submit">Submit</button>
-        </form>
-        <p id="createFormMessage"></p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Form for creating a new entry (initially hidden) -->
+                <div id="newEntryForm" class="form-group" style="display: none;">
+                    <form id="entryForm">
+                        <label for="serialNumber">Serial Number:</label>
+                        <input type="text" id="serialNumber" required><br>
+                        <label for="makeModel">Device Make & Model:</label>
+                        <input type="text" id="makeModel" required><br>
+                        <!-- Add more form fields for other properties -->
+                        <button type="submit">Submit</button>
+                    </form>
+                    <p id="createFormMessage"></p>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
+            background: linear-gradient(45deg, #BBD6B8, #AEC2B6, #94AF9F, #AEC2B6);
             background-size: 800% 1800%;
             animation: gradient 120s infinite;
-            color: #f8f9fa;
+            color: #000000;
             font-family: 'Josefin Sans', sans-serif;
             font-family: 'Tilt Neon', sans-serif;
         }
@@ -42,7 +42,7 @@
             top: 0;
             left: -250px;
             /* Initially hidden */
-            background-color: #0A4D68;
+            background-color: #DBE4C6;
             /* Bootstrap dark background color */
             padding-top: 20px;
             transition: left 0.3s;
@@ -56,7 +56,7 @@
             font-size: 15px;
             color: #00235B;
             /* Bootstrap light text color */
-            background-color: #FEFAE0;
+            background-color: #DBE4C6;
             display: block;
         }
 
@@ -110,7 +110,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <table border="1">
+                <table border="1" class="table table-hover table-primary">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -135,7 +135,10 @@
         </div>
     </div>
 
-    <!-- Form for creating a new entry (initially hidden) -->
+ <div class="container">
+    <div class="row">
+        <div class="col">
+               <!-- Form for creating a new entry (initially hidden) -->
     <div id="newEntryForm" style="display: none;">
         <form id="entryForm">
             <label for="serialNumber">Serial Number:</label>
@@ -151,15 +154,18 @@
             <label for="deviceLocation">Device Location:</label>
             <input type="text" id="deviceLocation" required><br>
             <label for="deviceRowNumber">Device Row Number:</label>
-            <input type="number" id="deviceRowNumber" required><br>
+            <input type="text" id="deviceRowNumber" required><br>
             <label for="deviceRackNumber">Device Rack Number:</label>
-            <input type="number" id="deviceRackNumber" required><br>
+            <input type="text" id="deviceRackNumber" required><br>
             <label for="deviceRUNumber">Device RU Number:</label>
             <input type="text" id="deviceRUNumber" required><br>
             <button type="submit">Submit</button>
         </form>
         <p id="createFormMessage"></p>
     </div>
+        </div>
+    </div>
+ </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
