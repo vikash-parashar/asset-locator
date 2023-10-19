@@ -103,14 +103,14 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 			DeviceRUNumber:   deviceRUNumber,
 		}
 
-		// At this point, the data variable contains the values cast to their respective types
-		log.Println(data)
-		data2, err := db.GetAllDeviceLocationDetail()
-		if err != nil {
+		if err := db.CreateDeviceLocationDetail(&data); err != nil {
 			log.Println(err)
 			return
 		}
-		c.HTML(http.StatusOK, "location_details.html", data2)
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Entry Added Successfully"},
+		)
 	}
 }
 
@@ -153,14 +153,14 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 			DeviceOwner:     deviceOwner,
 		}
 
-		// At this point, the data variable contains the date values as time.Time
-		log.Println(data)
-		data2, err := db.GetAllDeviceAMCOwnerDetail()
-		if err != nil {
+		if err := db.CreateDeviceAMCOwnerDetail(&data); err != nil {
 			log.Println(err)
 			return
 		}
-		c.HTML(http.StatusOK, "owner_details.html", data2)
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Entry Added Successfully"},
+		)
 	}
 }
 
@@ -198,14 +198,14 @@ func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 			PowerSocketType: powerSocketType,
 		}
 
-		// At this point, the data variable contains the values cast to their respective types
-		log.Println(data)
-		data2, err := db.GetAllDevicePowerDetail()
-		if err != nil {
+		if err := db.CreateDevicePowerDetail(&data); err != nil {
 			log.Println(err)
 			return
 		}
-		c.HTML(http.StatusOK, "power_details.html", data2)
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Entry Added Successfully"},
+		)
 	}
 }
 
@@ -217,12 +217,13 @@ func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		log.Println(data)
-		data2, err := db.GetAllDeviceEthernetFiberDetail()
-		if err != nil {
+		if err := db.CreateDeviceEthernetFiberDetail(&data); err != nil {
 			log.Println(err)
 			return
 		}
-		c.HTML(http.StatusOK, "fiber_details.html", data2)
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Entry Added Successfully"},
+		)
 	}
 }
