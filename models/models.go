@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type DevicePowerDetail struct {
 	ID              int     `json:"id"`
 	SerialNumber    string  `json:"serial_number"`
@@ -25,16 +27,16 @@ type DeviceEthernetFiberDetail struct {
 }
 
 type DeviceAMCOwnerDetail struct {
-	ID              int    `json:"id"`
-	SerialNumber    string `json:"serial_number"`
-	DeviceMakeModel string `json:"device_make_model"`
-	Model           string `json:"model"`
-	PONumber        string `json:"po_number"`
-	POOrderDate     string `json:"po_order_date"`
-	EOSLDate        string `json:"eosl_date"`
-	AMCStartDate    string `json:"amc_start_date"`
-	AMCEndDate      string `json:"amc_end_date"`
-	DeviceOwner     string `json:"device_owner"`
+	ID              int       `json:"id"`
+	SerialNumber    string    `json:"serial_number"`
+	DeviceMakeModel string    `json:"device_make_model"`
+	Model           string    `json:"model"`
+	PONumber        string    `json:"po_number"`
+	POOrderDate     time.Time `json:"po_order_date"`
+	EOSLDate        time.Time `json:"eosl_date"`
+	AMCStartDate    time.Time `json:"amc_start_date"`
+	AMCEndDate      time.Time `json:"amc_end_date"`
+	DeviceOwner     string    `json:"device_owner"`
 }
 
 type DeviceLocationDetail struct {
@@ -51,3 +53,23 @@ type DeviceLocationDetail struct {
 	DeviceRackNumber int    `json:"device_rack_number"`
 	DeviceRUNumber   string `json:"device_ru_number"`
 }
+
+const (
+	DeviceTypeServer        = "Server"
+	DeviceTypeObjectStorage = "Object Storage"
+	DeviceTypeSwitch        = "Switch"
+	DeviceTypeSANSwitch     = "SAN Switch"
+)
+const (
+	DeviceMakeOracle  = "Oracle"
+	DeviceMakeHitachi = "Hitachi"
+	DeviceMakeCisco   = "Cisco"
+	DeviceMakeBrocade = "Brocade"
+)
+
+const (
+	DeviceModelT84        = "T8-4"
+	DeviceModelHCPG10     = "HCP-G10"
+	DeviceModelNEXUS93108 = "NEXUS-93108"
+	DeviceModel6520       = "6520"
+)
