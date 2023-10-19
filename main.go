@@ -37,8 +37,14 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/", handlers.Dashboard)
-	r.GET("/api/get-data", handlers.GetData)
-	r.POST("/api/add-data", handlers.AddData)
+	r.GET("/api/location-details", handlers.GetLocationDetails)
+	r.GET("/api/owner-details", handlers.GetOwnerDetails)
+	r.GET("/api/power-details", handlers.GetPowerDetails)
+	r.GET("/api/fiber-details", handlers.GetFiberDetails)
+	r.POST("/api/location-details", handlers.CreateNewLocationDetails)
+	r.POST("/api/owner-details", handlers.CreateNewOwnerDetails)
+	r.POST("/api/power-details", handlers.CreateNewPowerDetails)
+	r.POST("/api/fiber-details", handlers.CreateNewFiberDetails)
 
 	log.Fatalln(r.Run(":" + port))
 }

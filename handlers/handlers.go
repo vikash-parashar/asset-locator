@@ -15,7 +15,27 @@ func Dashboard(c *gin.Context) {
 func GetData(c *gin.Context) {
 
 }
+func GetLocationDetails(c *gin.Context) {
 
-func AddData(c *gin.Context) {
+}
+func GetOwnerDetails(c *gin.Context) {
+
+}
+func GetPowerDetails(c *gin.Context) {
+
+}
+func GetFiberDetails(c *gin.Context) {
+
+}
+func CreateNewLocationDetails(c *gin.Context) {
+
+}
+func CreateNewOwnerDetails(c *gin.Context) {
+
+}
+func CreateNewPowerDetails(c *gin.Context) {
+
+}
+func CreateNewFiberDetails(c *gin.Context) {
 
 }

@@ -6,14 +6,17 @@
     <title>Auto-Hide Sidebar</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
-        /* Canvas-like background with CSS gradient */
-     /* Canvas-like background with CSS gradient */
      body {
-            background: linear-gradient(45deg, #27374D, #DB005B, #116D6E, #C23373, #1D5B79, #461959, #461959, #2E8A99);
+            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
             background-size: 800% 1800%;
             animation: gradient 120s infinite;
             color: #f8f9fa;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
@@ -37,15 +40,18 @@
             z-index: 1;
             top: 0;
             left: -250px; /* Initially hidden */
-            background-color: #343a40; /* Bootstrap dark background color */
+            background-color: #0A4D68; /* Bootstrap dark background color */
             padding-top: 20px;
             transition: left 0.3s;
         }
         .sidebar a {
             padding: 8px 8px 8px 16px;
+            margin-left: 5px;
+            margin-right: 5px;
             text-decoration: none;
-            font-size: 20px;
-            color: #f8f9fa; /* Bootstrap light text color */
+            font-size: 15px;
+            color: #00235B; /* Bootstrap light text color */
+            background-color: #FEFAE0;
             display: block;
         }
         .sidebar a:hover {
@@ -54,17 +60,16 @@
         /* Custom CSS for the content */
         .content {
             margin-left: 0;
-            padding: 20px;
+            padding: 50px;
         }
     </style>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
-        <a href="#" class="btn btn-dark btn-block">Button 1</a>
-        <a href="#" class="btn btn-dark btn-block">Button 2</a>
-        <a href="#" class="btn btn-dark btn-block">Button 3</a>
-        <a href="#" class="btn btn-dark btn-block">Button 4</a>
-        <a href="#" class="btn btn-dark btn-block">Button 5</a>
+        <a href="/api/location-details" class="btn btn-dark btn-block">Locations Details</a>
+        <a href="/api/owner-details" class="btn btn-dark btn-block">Owners/AMC Details</a>
+        <a href="/api/power-details" class="btn btn-dark btn-block">Power Details</a>
+        <a href="/api/fiber-details" class="btn btn-dark btn-block">Ethernet/Fiber Details</a>
     </div>
     <div class="content">
         <h2>Content Area</h2>
