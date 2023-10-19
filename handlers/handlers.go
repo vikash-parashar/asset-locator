@@ -5,6 +5,8 @@ import (
 	"go-server/models"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -62,14 +64,46 @@ func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// CreateNewLocationDetails handles the POST request to create new location details.
 func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceLocationDetail
-		if err := c.ShouldBindJSON(&data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
+
+		// Retrieve form data
+		idStr := c.PostForm("id")
+		serialNumber := c.PostForm("serial_number")
+		deviceMakeModel := c.PostForm("device_make_model")
+		model := c.PostForm("model")
+		deviceType := c.PostForm("device_type")
+		dataCenter := c.PostForm("data_center")
+		region := c.PostForm("region")
+		dcLocation := c.PostForm("dc_location")
+		deviceLocation := c.PostForm("device_location")
+		deviceRowNumberStr := c.PostForm("device_row_number")
+		deviceRackNumberStr := c.PostForm("device_rack_number")
+		deviceRUNumber := c.PostForm("device_ru_number")
+
+		// Parse and cast the string values to their respective types
+		id, _ := strconv.Atoi(idStr)
+		deviceRowNumber, _ := strconv.Atoi(deviceRowNumberStr)
+		deviceRackNumber, _ := strconv.Atoi(deviceRackNumberStr)
+
+		// Assign the values to the DeviceLocationDetail struct
+		data = models.DeviceLocationDetail{
+			ID:               id,
+			SerialNumber:     serialNumber,
+			DeviceMakeModel:  deviceMakeModel,
+			Model:            model,
+			DeviceType:       deviceType,
+			DataCenter:       dataCenter,
+			Region:           region,
+			DCLocation:       dcLocation,
+			DeviceLocation:   deviceLocation,
+			DeviceRowNumber:  deviceRowNumber,
+			DeviceRackNumber: deviceRackNumber,
+			DeviceRUNumber:   deviceRUNumber,
 		}
+
+		// At this point, the data variable contains the values cast to their respective types
 		log.Println(data)
 		data2, err := db.GetAllDeviceLocationDetail()
 		if err != nil {
@@ -80,14 +114,46 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// CreateNewOwnerDetails handles the POST request to create new owner details.
 func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceAMCOwnerDetail
-		if err := c.ShouldBindJSON(&data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
+
+		// Retrieve form data
+		idStr := c.PostForm("id")
+		serialNumber := c.PostForm("serial_number")
+		deviceMakeModel := c.PostForm("device_make_model")
+		model := c.PostForm("model")
+		poNumber := c.PostForm("po_number")
+		poOrderDateStr := c.PostForm("po_order_date")
+		eoslDateStr := c.PostForm("eosl_date")
+		amcStartDateStr := c.PostForm("amc_start_date")
+		amcEndDateStr := c.PostForm("amc_end_date")
+		deviceOwner := c.PostForm("device_owner")
+
+		// Parse the date strings into time.Time values
+		poOrderDate, _ := time.Parse("2006-01-02", poOrderDateStr)
+		eoslDate, _ := time.Parse("2006-01-02", eoslDateStr)
+		amcStartDate, _ := time.Parse("2006-01-02", amcStartDateStr)
+		amcEndDate, _ := time.Parse("2006-01-02", amcEndDateStr)
+
+		// Convert ID to int
+		id, _ := strconv.Atoi(idStr)
+
+		// Assign the values to the DeviceAMCOwnerDetail struct
+		data = models.DeviceAMCOwnerDetail{
+			ID:              id,
+			SerialNumber:    serialNumber,
+			DeviceMakeModel: deviceMakeModel,
+			Model:           model,
+			PONumber:        poNumber,
+			POOrderDate:     poOrderDate,
+			EOSLDate:        eoslDate,
+			AMCStartDate:    amcStartDate,
+			AMCEndDate:      amcEndDate,
+			DeviceOwner:     deviceOwner,
 		}
+
+		// At this point, the data variable contains the date values as time.Time
 		log.Println(data)
 		data2, err := db.GetAllDeviceAMCOwnerDetail()
 		if err != nil {
@@ -98,14 +164,41 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// CreateNewPowerDetails handles the POST request to create new power details.
 func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DevicePowerDetail
-		if err := c.ShouldBindJSON(&data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
+
+		// Retrieve form data
+		idStr := c.PostForm("id")
+		serialNumber := c.PostForm("serial_number")
+		deviceMakeModel := c.PostForm("device_make_model")
+		model := c.PostForm("model")
+		deviceType := c.PostForm("device_type")
+		totalPowerWattStr := c.PostForm("total_power_watt")
+		totalBTUStr := c.PostForm("total_btu")
+		totalPowerCableStr := c.PostForm("total_power_cable")
+		powerSocketType := c.PostForm("power_socket_type")
+
+		// Parse and cast the string values to their respective types
+		id, _ := strconv.Atoi(idStr)
+		totalPowerWatt, _ := strconv.Atoi(totalPowerWattStr)
+		totalBTU, _ := strconv.ParseFloat(totalBTUStr, 64)
+		totalPowerCable, _ := strconv.Atoi(totalPowerCableStr)
+
+		// Assign the values to the DevicePowerDetail struct
+		data = models.DevicePowerDetail{
+			ID:              id,
+			SerialNumber:    serialNumber,
+			DeviceMakeModel: deviceMakeModel,
+			Model:           model,
+			DeviceType:      deviceType,
+			TotalPowerWatt:  totalPowerWatt,
+			TotalBTU:        totalBTU,
+			TotalPowerCable: totalPowerCable,
+			PowerSocketType: powerSocketType,
 		}
+
+		// At this point, the data variable contains the values cast to their respective types
 		log.Println(data)
 		data2, err := db.GetAllDevicePowerDetail()
 		if err != nil {
