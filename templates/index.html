@@ -45,7 +45,7 @@
             transition: left 0.3s;
         }
         .sidebar a {
-            padding: 8px 8px 8px 16px;
+            padding: 8px 8px 8px 8px;
             margin-left: 5px;
             margin-right: 5px;
             text-decoration: none;
@@ -65,16 +65,26 @@
     </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <a href="/api/location-details" class="btn btn-dark btn-block">Locations Details</a>
-        <a href="/api/owner-details" class="btn btn-dark btn-block">Owners/AMC Details</a>
-        <a href="/api/power-details" class="btn btn-dark btn-block">Power Details</a>
-        <a href="/api/fiber-details" class="btn btn-dark btn-block">Ethernet/Fiber Details</a>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="sidebar" id="sidebar">
+                    <a href="/api/location-details" class="btn btn-dark btn-block">Locations Details</a>
+                    <a href="/api/owner-details" class="btn btn-dark btn-block">Owners/AMC Details</a>
+                    <a href="/api/power-details" class="btn btn-dark btn-block">Power Details</a>
+                    <a href="/api/fiber-details" class="btn btn-dark btn-block">Ethernet/Fiber Details</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="content">
+                    <h2>Content Area</h2>
+                    <p>This is the default content area. Click on a button to display associated content here.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="content">
-        <h2>Content Area</h2>
-        <p>This is the default content area. Click on a button to display associated content here.</p>
-    </div>
+   
+   
     <!-- Bootstrap JS (jQuery and Popper.js required) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
@@ -82,10 +92,10 @@
         const sidebar = document.getElementById('sidebar');
 
         document.addEventListener('mousemove', (e) => {
-            if (e.clientX < 250) {
+            if (e.clientX < 240) {
                 sidebar.style.left = '0';
             } else {
-                sidebar.style.left = '-250px';
+                sidebar.style.left = '-255px';
             }
         });
     </script>
