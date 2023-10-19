@@ -82,10 +82,70 @@
     <div class="container mb-2 mt-2 d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton">Create New Entry</button>
+                <button id="newEntryButton" class="btn btn-success" data-toggle="modal" data-target="#createEntryModal">
+                    Create New Entry
+                </button>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="entryForm">
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="serialNumber">Serial Number</label>
+                            <input type="text" class="form-control" id="serialNumber" name="serial_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="deviceMakeModel">Device Make & Model</label>
+                            <input type="text" class="form-control" id="deviceMakeModel" name="device_make_model">
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Model</label>
+                            <input type="text" class="form-control" id="model" name="model">
+                        </div>
+                        <div class="form-group">
+                            <label for="deviceType">Device Type</label>
+                            <input type="text" class="form-control" id="deviceType" name="device_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="devicePhysicalPort">Device Physical Port</label>
+                            <input type="text" class="form-control" id="devicePhysicalPort" name="device_physical_port">
+                        </div>
+                        <div class="form-group">
+                            <label for="devicePortType">Device Port Type</label>
+                            <input type="text" class="form-control" id="devicePortType" name="device_port_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="devicePortMACWWN">Device Port MAC/WWN</label>
+                            <input type="text" class="form-control" id="devicePortMACWWN" name="device_port_macwwn">
+                        </div>
+                        <div class="form-group">
+                            <label for="connectedDevicePort">Connected Device Port</label>
+                            <input type="text" class="form-control" id="connectedDevicePort"
+                                name="connected_device_port">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -127,7 +187,39 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById("entryForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission
 
+            // Get form data
+            const formData = new FormData(document.getElementById("entryForm"));
+
+            // Send the form data to your backend API using fetch or another AJAX method
+            fetch("YOUR_API_URL", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Handle the API response here
+                    if (data.success) {
+                        alert("Success: Entry added successfully.");
+                        location.reload(); // Reload the page on success
+                    } else {
+                        alert("Error: Entry not added. Please try again.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Error: An error occurred. Please try again.");
+                });
+
+            // Close the modal
+            $("#createEntryModal").modal("hide");
+        });
+
+    </script>
 </body>
 
 </html>
