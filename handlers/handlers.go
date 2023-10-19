@@ -22,9 +22,7 @@ func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "location_details.html", data)
-		// render.RenderTemplate(c.Writer, "location_details", gin.H{"data": data})
 	}
 }
 
@@ -36,9 +34,7 @@ func GetOwnerDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "owner_details.html", data)
-		// render.RenderTemplate(c.Writer, "owner_details", gin.H{"data": data})
 	}
 }
 
@@ -50,85 +46,90 @@ func GetPowerDetails(db *db.DB) gin.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "power_details.html", data)
-		// render.RenderTemplate(c.Writer, "power_details", gin.H{"data": data})
 	}
 }
 
 // GetFiberDetails handles the GET request to retrieve fiber details.
 func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Implement your logic to fetch fiber details from the database and return them as a JSON response
-		// Example: data, err := db.GetAllDeviceEthernetFiberDetail()
-		// Handle errors and send a response
 		data, err := db.GetAllDeviceEthernetFiberDetail()
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		// c.JSON(http.StatusFound, gin.H{"status": "data fetched successfully", "data": data})
 		c.HTML(http.StatusOK, "fiber_details.html", data)
-		// render.RenderTemplate(c.Writer, "fiber_details", gin.H{"data": data})
 	}
 }
 
 // CreateNewLocationDetails handles the POST request to create new location details.
 func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse JSON request payload and create a new location detail record in the database
 		var data models.DeviceLocationDetail
 		if err := c.ShouldBindJSON(&data); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		// Implement your logic to create the new record
-		// Example: err := db.CreateDeviceLocationDetail(&data)
-		// Handle errors and send a response
+		log.Println(data)
+		data2, err := db.GetAllDeviceLocationDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		c.HTML(http.StatusOK, "location_details.html", data2)
 	}
 }
 
 // CreateNewOwnerDetails handles the POST request to create new owner details.
 func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse JSON request payload and create a new owner detail record in the database
 		var data models.DeviceAMCOwnerDetail
 		if err := c.ShouldBindJSON(&data); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		// Implement your logic to create the new record
-		// Example: err := db.CreateDeviceAMCOwnerDetail(&data)
-		// Handle errors and send a response
+		log.Println(data)
+		data2, err := db.GetAllDeviceAMCOwnerDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		c.HTML(http.StatusOK, "owner_details.html", data2)
 	}
 }
 
 // CreateNewPowerDetails handles the POST request to create new power details.
 func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse JSON request payload and create a new power detail record in the database
 		var data models.DevicePowerDetail
 		if err := c.ShouldBindJSON(&data); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		// Implement your logic to create the new record
-		// Example: err := db.CreateDevicePowerDetail(&data)
-		// Handle errors and send a response
+		log.Println(data)
+		data2, err := db.GetAllDevicePowerDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		c.HTML(http.StatusOK, "power_details.html", data2)
 	}
 }
 
 // CreateNewFiberDetails handles the POST request to create new fiber details.
 func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse JSON request payload and create a new fiber detail record in the database
 		var data models.DeviceEthernetFiberDetail
 		if err := c.ShouldBindJSON(&data); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		// Implement your logic to create the new record
-		// Example: err := db.CreateDeviceEthernetFiberDetail(&data)
-		// Handle errors and send a response
+		log.Println(data)
+		data2, err := db.GetAllDeviceEthernetFiberDetail()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		c.HTML(http.StatusOK, "fiber_details.html", data2)
 	}
 }

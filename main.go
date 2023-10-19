@@ -37,11 +37,14 @@ func main() {
 	r := gin.Default()
 
 	r.LoadHTMLGlob("templates/*.html")
+
 	r.GET("/", handlers.Dashboard)
+
 	r.GET("/api/v1/location-details", handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", handlers.GetOwnerDetails(db))
 	r.GET("/api/v1/power-details", handlers.GetPowerDetails(db))
 	r.GET("/api/v1/fiber-details", handlers.GetFiberDetails(db))
+
 	r.POST("/api/v1/location-details", handlers.CreateNewLocationDetails(db))
 	r.POST("/api/v1/owner-details", handlers.CreateNewOwnerDetails(db))
 	r.POST("/api/v1/power-details", handlers.CreateNewPowerDetails(db))
