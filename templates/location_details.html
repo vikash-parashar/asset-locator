@@ -10,25 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #468B97, #468B97, #EF6262, #F3AA60, #472855, #FDFFAE, #2E8A99);
+            background: linear-gradient(45deg, #FFF5E0, #CEDEBD, #FAF0E6, #AEC3AE);
             background-size: 800% 1800%;
             animation: gradient 20s infinite;
             background-color: rgba(0, 0, 0, 0.5);
             /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #fafaf8;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Tilt Neon', sans-serif;
+            color: #040D12;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         .navbar {
-            background: linear-gradient(45deg, #468B97, #468B97, #EF6262, #F3AA60, #472855, #FDFFAE, #2E8A99);
+            background: linear-gradient(45deg, #FFF5E0, #CEDEBD, #FAF0E6, #AEC3AE);
             background-size: 800% 1800%;
             animation: gradient 5s infinite;
             background-color: rgba(0, 0, 0, 0.5);
             /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #fafaf8;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Tilt Neon', sans-serif;
+            color: #040D12;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
@@ -43,7 +41,6 @@
             100% {
                 background-position: 0% 50%;
             }
-
         }
 
         /* Custom CSS for the content */
@@ -55,7 +52,7 @@
         /* Add border and margin to table headers */
         table th {
             border: 2px solid #ffffff;
-            margin: 5px, 5px, 5px, 5px;
+            margin: 5px 5px 5px 5px;
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -77,34 +74,37 @@
             background-color: #025464;
         }
 
-
-
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
             border-radius: 10px;
-
-
         }
 
         .update-button {
-            background-color: #79AC78;
+            background-color: #008170;
             color: #F1EFEF;
             border-radius: 10px;
-
         }
 
         .nav-btn {
             background-color: #219C90;
             color: #F1EFEF;
             border-radius: 10px;
+        }
 
+        .custom-table th,
+        .custom-table td {
+            color: #040D12;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #d7e7f3;">
+    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -112,24 +112,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/"><button class="nav-btn">Home</button></a>
+                    <a class="nav-link" href="http://localhost:8080/"><button
+                            class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn">Locations
+                            class="nav-btn btn-outline-info">Locations
                         </button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn">Owners/AMC</button></a>
+                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn">Power</button></a>
+                            class="nav-btn btn-outline-info">Power</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn">Ethernet/Fiber</button></a>
+                            class="nav-btn btn-outline-info">Ethernet/Fiber</button></a>
                 </li>
             </ul>
         </div>
@@ -179,7 +180,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div a="form-group">
+                                <div class="form-group">
                                     <label for="deviceMakeModel">Device Make & Model</label>
                                     <input type="text" class="form-control" id="deviceMakeModel"
                                         name="device_make_model">
@@ -261,11 +262,7 @@
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <!-- ... (previous HTML code) ... -->
-
-                <!-- ... (previous HTML code) ... -->
-
-                <table border="1" class="table table-hover table-primary">
+                <table class="table table-hover custom-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -306,13 +303,6 @@
                         {{end}}
                     </tbody>
                 </table>
-
-
-                <!-- ... (remaining HTML code) ... -->
-
-
-                <!-- ... (remaining HTML code) ... -->
-
             </div>
         </div>
     </div>
