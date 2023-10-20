@@ -18,6 +18,15 @@
             font-family: 'Tilt Neon', sans-serif;
         }
 
+        .navbar {
+            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
+            background-size: 800% 1800%;
+            animation: gradient 120s infinite;
+            color: #f8f9fa;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Tilt Neon', sans-serif;
+        }
+
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -67,24 +76,30 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg" style="background-color: #d7e7f3;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                    <a class="nav-link" href="http://localhost:8080/"><button class="nav-btn">Home</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button class="nav-btn">Locations
+                        </button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    <a class="nav-link"
+                        href="http://localhost:8080/api/v1/owner-details"><button class="nav-btn">Owners/AMC</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button class="nav-btn">Power</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                        href="http://localhost:8080/api/v1/fiber-details"><button>Ethernet/Fiber</button></a>
                 </li>
             </ul>
         </div>
@@ -157,7 +172,8 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="totalPowerWatt">Total Power (Watt)</label>
-                                    <input type="number" class="form-control" id="totalPowerWatt" name="total_power_watt" step="any">
+                                    <input type="number" class="form-control" id="totalPowerWatt"
+                                        name="total_power_watt" step="any">
                                 </div>
                             </div>
                         </div>
@@ -265,7 +281,7 @@
                 }
             };
             xhr.send(formData);
-            
+
 
             $("#createEntryModal").modal("hide");
         });
