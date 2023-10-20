@@ -10,19 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #BBD6B8, #AEC2B6, #94AF9F, #AEC2B6);
+            background: linear-gradient(45deg, #468B97, #468B97, #EF6262, #F3AA60, #472855, #FDFFAE, #2E8A99);
             background-size: 800% 1800%;
-            animation: gradient 120s infinite;
-            color: #000000;
+            animation: gradient 20s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #fafaf8;
             font-family: 'Josefin Sans', sans-serif;
             font-family: 'Tilt Neon', sans-serif;
         }
 
         .navbar {
-            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
+            background: linear-gradient(45deg, #468B97, #468B97, #EF6262, #F3AA60, #472855, #FDFFAE, #2E8A99);
             background-size: 800% 1800%;
-            animation: gradient 120s infinite;
-            color: #f8f9fa;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #fafaf8;
             font-family: 'Josefin Sans', sans-serif;
             font-family: 'Tilt Neon', sans-serif;
         }
@@ -74,7 +78,7 @@
         }
 
 
-        
+
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
@@ -89,11 +93,12 @@
             border-radius: 10px;
 
         }
-        .nav-btn{
+
+        .nav-btn {
             background-color: #219C90;
             color: #F1EFEF;
             border-radius: 10px;
-            
+
         }
     </style>
 </head>
@@ -123,8 +128,8 @@
                             class="nav-btn">Power</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="http://localhost:8080/api/v1/fiber-details"><button class="nav-btn">Ethernet/Fiber</button></a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn">Ethernet/Fiber</button></a>
                 </li>
             </ul>
         </div>
