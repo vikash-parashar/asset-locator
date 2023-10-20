@@ -54,7 +54,7 @@
 
         /* Add border and margin to table headers */
         table th {
-            border: 2px solid #ffffff;
+            border: 1px solid #17050589;
             margin: 5px, 5px, 5px, 5px;
             padding-left: 10px;
             padding-right: 10px;
@@ -209,7 +209,7 @@
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <table border="1" class="table table-hover">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -227,7 +227,7 @@
                     </thead>
                     <tbody id="deviceDetails">
                         {{range .}}
-                        <tr>
+                        <tr class="row-transition">
                             <td>{{.ID}}</td>
                             <td>{{.SerialNumber}}</td>
                             <td>{{.DeviceMakeModel}}</td>
@@ -244,6 +244,7 @@
                         </tr>
                         {{end}}
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -253,6 +254,22 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script>
+
+
+        // Delay the row animation when the page loads
+        const tableRows = document.querySelectorAll(".row-transition");
+
+        tableRows.forEach((row, index) => {
+            row.style.opacity = "0";
+            row.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                row.style.transition = "opacity 0.2s ease, transform 0.5s ease";
+                row.style.opacity = "1";
+                row.style.transform = "translateY(0)";
+            }, 500 * (index + 1)); // 500ms (0.5s) delay for each row
+        });
+
+
         // JavaScript to handle form submission
         document.getElementById("entryForm").addEventListener("submit", function (e) {
             e.preventDefault(); // Prevent the default form submission
