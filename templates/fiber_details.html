@@ -194,6 +194,8 @@
                             <th>Device Port Type</th>
                             <th>Device Port MAC/WWN</th>
                             <th>Connected Device Port</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
@@ -208,6 +210,7 @@
                             <td>{{.DevicePortType}}</td>
                             <td>{{.DevicePortMACWWN}}</td>
                             <td>{{.ConnectedDevicePort}}</td>
+                            <td><button><a href="">Delete</a></button><button><a href="">Update</a></button></td>
                         </tr>
                         {{end}}
                     </tbody>
@@ -237,7 +240,7 @@
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         console.log(xhr.responseText);
-                        alert("Success: Entry added successfully.");
+                        alert("Success: Entry Added Successfully.");
                         location.reload();
                     } else {
                         alert("Error: Entry not added. Please try again.");

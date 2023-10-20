@@ -40,15 +40,29 @@ func main() {
 
 	r.GET("/", handlers.Dashboard)
 
+	//TODO: Get Handlers
 	r.GET("/api/v1/location-details", handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", handlers.GetOwnerDetails(db))
 	r.GET("/api/v1/power-details", handlers.GetPowerDetails(db))
 	r.GET("/api/v1/fiber-details", handlers.GetFiberDetails(db))
 
+	//TODO: Post Handlers
 	r.POST("/api/v1/location-details", handlers.CreateNewLocationDetails(db))
 	r.POST("/api/v1/owner-details", handlers.CreateNewOwnerDetails(db))
 	r.POST("/api/v1/power-details", handlers.CreateNewPowerDetails(db))
 	r.POST("/api/v1/fiber-details", handlers.CreateNewFiberDetails(db))
+
+	//TODO: Delete Handlers
+	// r.POST("/api/v1/location-details", handlers.CreateNewLocationDetails(db))
+	// r.POST("/api/v1/owner-details", handlers.CreateNewOwnerDetails(db))
+	// r.POST("/api/v1/power-details", handlers.CreateNewPowerDetails(db))
+	// r.POST("/api/v1/fiber-details", handlers.CreateNewFiberDetails(db))
+
+	//TODO: Update Handlers
+	// r.POST("/api/v1/location-details", handlers.CreateNewLocationDetails(db))
+	// r.POST("/api/v1/owner-details", handlers.CreateNewOwnerDetails(db))
+	// r.POST("/api/v1/power-details", handlers.CreateNewPowerDetails(db))
+	// r.POST("/api/v1/fiber-details", handlers.CreateNewFiberDetails(db))
 
 	log.Fatalln(r.Run(":" + port))
 }
