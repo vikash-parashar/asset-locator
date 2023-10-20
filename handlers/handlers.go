@@ -209,21 +209,45 @@ func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// CreateNewFiberDetails handles the POST request to create new fiber details.
 func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceEthernetFiberDetail
-		if err := c.ShouldBindJSON(&data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
+
+		// Retrieve form data in a similar manner as your original code
+		idStr := c.PostForm("id")
+		serialNumber := c.PostForm("serial_number")
+		deviceMakeModel := c.PostForm("device_make_model")
+		model := c.PostForm("model")
+		deviceType := c.PostForm("device_type")
+		devicePhysicalPort := c.PostForm("device_physical_port")
+		devicePortType := c.PostForm("device_port_type")
+		devicePortMACWWN := c.PostForm("device_port_macwwn")
+		connectedDevicePort := c.PostForm("connected_device_port")
+
+		// Parse and cast the string values to their respective types
+		id, _ := strconv.Atoi(idStr)
+
+		// Assign the values to the DeviceEthernetFiberDetail struct
+		data = models.DeviceEthernetFiberDetail{
+			ID:                  id,
+			SerialNumber:        serialNumber,
+			DeviceMakeModel:     deviceMakeModel,
+			Model:               model,
+			DeviceType:          deviceType,
+			DevicePhysicalPort:  devicePhysicalPort,
+			DevicePortType:      devicePortType,
+			DevicePortMACWWN:    devicePortMACWWN,
+			ConnectedDevicePort: connectedDevicePort,
 		}
+
 		if err := db.CreateDeviceEthernetFiberDetail(&data); err != nil {
 			log.Println(err)
 			return
 		}
+
 		c.JSON(http.StatusOK, gin.H{
 			"success": true,
-			"message": "Entry Added Successfully"},
-		)
+			"message": "Entry Added Successfully",
+		})
 	}
 }
