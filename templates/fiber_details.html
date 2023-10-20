@@ -74,6 +74,28 @@
         .modal-content {
             background-color: #025464;
         }
+
+        
+        .delete-button {
+            background-color: #D80032;
+            color: #F1EFEF;
+            border-radius: 10px;
+
+
+        }
+
+        .update-button {
+            background-color: #79AC78;
+            color: #F1EFEF;
+            border-radius: 10px;
+
+        }
+        .nav-btn{
+            background-color: #219C90;
+            color: #F1EFEF;
+            border-radius: 10px;
+            
+        }
     </style>
 </head>
 
@@ -103,7 +125,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="http://localhost:8080/api/v1/fiber-details"><button>Ethernet/Fiber</button></a>
+                        href="http://localhost:8080/api/v1/fiber-details"><button class="nav-btn">Ethernet/Fiber</button></a>
                 </li>
             </ul>
         </div>
@@ -210,7 +232,10 @@
                             <td>{{.DevicePortType}}</td>
                             <td>{{.DevicePortMACWWN}}</td>
                             <td>{{.ConnectedDevicePort}}</td>
-                            <td><button><a href="">Delete</a></button><button><a href="">Update</a></button></td>
+                            <td>
+                                <button class="delete-button" data-id="{{.ID}}">Delete</button>
+                                <button class="update-button" data-id="{{.ID}}">Update</button>
+                            </td>
                         </tr>
                         {{end}}
                     </tbody>
@@ -252,8 +277,68 @@
             // Close the modal
             $("#createEntryModal").modal("hide");
         });
+        // Function to send a DELETE request
+        function deleteRecord(id) {
+            fetch(`/api/v1/fiber-details/${id}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Success: Record Deleted Successfully.");
+                        location.reload(); // Reload the page
+                    } else {
+                        alert("Error: Record not deleted. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+
+        // Function to send a PUT request
+        function updateRecord(id) {
+            fetch(`/api/v1/fiber-details/${id}`, {
+                method: 'PUT',
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Success: Record Updated Successfully.");
+                        location.reload(); // Reload the page
+                    } else {
+                        alert("Error: Record not updated. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+
+        // Add event listeners to the buttons
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        const updateButtons = document.querySelectorAll(".update-button");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                if (confirm("Are you sure you want to delete this record?")) {
+                    deleteRecord(id);
+                }
+            });
+        });
+
+        updateButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                if (confirm("Are you sure you want to update this record?")) {
+                    updateRecord(id);
+                }
+            });
+        });
 
     </script>
+
 </body>
 
 </html>
