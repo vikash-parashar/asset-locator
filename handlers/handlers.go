@@ -251,3 +251,179 @@ func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 		})
 	}
 }
+
+// UpdateDeviceLocationDetailHandler updates a DeviceLocationDetail record based on its ID.
+func UpdateDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		var data models.DeviceLocationDetail
+		if err := c.ShouldBind(&data); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+			return
+		}
+
+		if err := db.UpdateDeviceLocationDetail(id, &data); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceLocationDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceLocationDetail updated successfully"})
+	}
+}
+
+// DeleteDeviceLocationDetailHandler deletes a DeviceLocationDetail record based on its ID.
+func DeleteDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		if err := db.DeleteDeviceLocationDetail(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DeviceLocationDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceLocationDetail deleted successfully"})
+	}
+}
+
+// UpdateDeviceAMCOwnerDetailHandler updates a DeviceAMCOwnerDetail record based on its ID.
+func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		var data models.DeviceAMCOwnerDetail
+		if err := c.ShouldBind(&data); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+			return
+		}
+
+		if err := db.UpdateDeviceAMCOwnerDetail(id, &data); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceAMCOwnerDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceAMCOwnerDetail updated successfully"})
+	}
+}
+
+// DeleteDeviceAMCOwnerDetailHandler deletes a DeviceAMCOwnerDetail record based on its ID.
+func DeleteDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		if err := db.DeleteDeviceAMCOwnerDetail(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DeviceAMCOwnerDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceAMCOwnerDetail deleted successfully"})
+	}
+}
+
+// UpdateDevicePowerDetailHandler updates a DevicePowerDetail record based on its ID.
+func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		var data models.DevicePowerDetail
+		if err := c.ShouldBind(&data); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+			return
+		}
+
+		if err := db.UpdateDevicePowerDetail(id, &data); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DevicePowerDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DevicePowerDetail updated successfully"})
+	}
+}
+
+// DeleteDevicePowerDetailHandler deletes a DevicePowerDetail record based on its ID.
+func DeleteDevicePowerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		if err := db.DeleteDevicePowerDetail(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DevicePowerDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DevicePowerDetail deleted successfully"})
+	}
+}
+
+// UpdateDeviceEthernetFiberDetailHandler updates a DeviceEthernetFiberDetail record based on its ID.
+func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		var data models.DeviceEthernetFiberDetail
+		if err := c.ShouldBind(&data); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+			return
+		}
+
+		if err := db.UpdateDeviceEthernetFiberDetail(id, &data); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceEthernetFiberDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail updated successfully"})
+	}
+}
+
+// DeleteDeviceEthernetFiberDetailHandler deletes a DeviceEthernetFiberDetail record based on its ID.
+func DeleteDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		if err := db.DeleteDeviceEthernetFiberDetail(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DeviceEthernetFiberDetail"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail deleted successfully"})
+	}
+}
