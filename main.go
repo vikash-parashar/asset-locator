@@ -41,7 +41,7 @@ func main() {
 
 	r.GET("/health-check", handlers.HealthCheck)
 
-	r.GET("/", handlers.RenderHomepage)
+	r.GET("/", handlers.RenderIndexPage)
 
 	r.GET("/signup", handlers.RenderRegisterUser)
 	r.GET("/login", handlers.RenderLoginUser)
@@ -50,7 +50,7 @@ func main() {
 	r.POST("/login", handlers.Login(db))
 	r.POST("/logout", handlers.Logout())
 	//protected routes
-	r.GET("/home", middleware.AuthMiddleware("admin", "general"), handlers.Dashboard(db))
+	r.GET("/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
 	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
 	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))

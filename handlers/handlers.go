@@ -16,13 +16,13 @@ func HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "application is running"})
 }
 
-func RenderHomepage(c *gin.Context) {
+func RenderIndexPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
 }
 
-func Dashboard(db *db.DB) gin.HandlerFunc {
+func RenderHomePage(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.HTML(http.StatusOK, "dashboard.html", nil)
+		c.HTML(http.StatusOK, "home.html", nil)
 	}
 }
 
@@ -90,16 +90,19 @@ func Login(db *db.DB) gin.HandlerFunc {
 		// Retrieve form data
 		username := c.PostForm("username")
 		password := c.PostForm("password")
-
+		log.Println(username)
+		log.Println(password)
 		// Check if the user exists in the database
 		user, err := db.GetUserByUsername(username)
 		if err != nil {
+			log.Println(err)
 			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "User not found"})
 			return
 		}
 
 		// Verify the password
 		if !utils.VerifyPassword(password, user.Password) {
+			log.Println(err)
 			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Incorrect password"})
 			return
 		}

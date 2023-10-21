@@ -297,7 +297,7 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 		WHERE email = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role, &user.CreatedAt, &user.UpdatedAt, &user.DeletedAt)
+	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by email: %v", err)
 		return nil, err
@@ -312,7 +312,7 @@ func (db *DB) GetUserByUsername(username string) (*models.User, error) {
 		WHERE username = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, username).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role, &user.CreatedAt, &user.UpdatedAt, &user.DeletedAt)
+	err := db.QueryRow(query, username).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by username: %v", err)
 		return nil, err
@@ -323,28 +323,13 @@ func (db *DB) GetUserByUsername(username string) (*models.User, error) {
 // RegisterUser creates a new user record in the database.
 func (db *DB) RegisterUser(user *models.User) error {
 	query := `
-		INSERT INTO users (first_name, last_name, username, email, password, role, created_at, updated_at, deleted_at)
-		VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW(), NULL)
+		INSERT INTO users (first_name, last_name, username, email, password, role)
+		VALUES ($1, $2, $3, $4, $5, $6)
 		RETURNING id
 	`
 	err := db.QueryRow(query, user.FirstName, user.LastName, user.Username, user.Email, user.Password, user.Role).Scan(&user.ID)
 	if err != nil {
 		log.Printf("Error registering user: %v", err)
-		return err
-	}
-	return nil
-}
-
-// DeleteUser deletes a user by their ID.
-func (db *DB) DeleteUser(userID int) error {
-	query := `
-		UPDATE users
-		SET deleted_at = NOW()
-		WHERE id = $1
-	`
-	_, err := db.Exec(query, userID)
-	if err != nil {
-		log.Printf("Error deleting user: %v", err)
 		return err
 	}
 	return nil
@@ -381,7 +366,7 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 	users := make([]*models.User, 0)
 	for rows.Next() {
 		user := &models.User{}
-		err := rows.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role, &user.CreatedAt, &user.UpdatedAt, &user.DeletedAt)
+		err := rows.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 		if err != nil {
 			log.Printf("Error scanning user rows: %v", err)
 			return nil, err

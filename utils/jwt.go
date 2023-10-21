@@ -13,6 +13,10 @@ import (
 
 var jwtSecret string
 
+func init() {
+	GetSecretKey()
+}
+
 // Claims represents the JWT claims.
 type Claims struct {
 	UserID   int    `json:"user_id"`
@@ -26,13 +30,16 @@ func GetSecretKey() {
 }
 
 func GenerateJWTToken(user *models.User) (string, error) {
-	claims := jwt.MapClaims{
-		"user_id":   user.ID,
-		"user_role": user.Role,
-		"exp":       time.Now().Add(time.Hour * 1).Unix(),
+	claims := Claims{
+		UserID:   user.ID,
+		Username: user.Username,
+		UserRole: user.Role,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
+		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(jwtSecret)
+	return token.SignedString([]byte(jwtSecret))
 }
 
 func ValidateJWTToken(tokenString string) (*jwt.Token, error) {
@@ -61,11 +68,10 @@ func ExtractClaims(r *http.Request) (jwt.MapClaims, bool) {
 	return claims, true
 }
 
-// VerifyJWTToken verifies and decodes a JWT token and returns the claims if it's valid.
 func VerifyJWTToken(tokenString string) (Claims, bool) {
 	claims := Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
-		return jwtSecret, nil
+		return []byte(jwtSecret), nil
 	})
 	if err != nil {
 		return claims, false

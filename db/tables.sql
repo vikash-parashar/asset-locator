@@ -61,9 +61,6 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL, -- Increased length for storing hashed passwords
-    role VARCHAR(255),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    deleted_at TIMESTAMP
+    role VARCHAR(255)
 );
 
