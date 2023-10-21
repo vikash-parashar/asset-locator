@@ -267,6 +267,9 @@
                     Create New Entry
                 </button>
             </div>
+            <div class="col">
+                <button id="downloadDataButton" class="btn btn-primary">Download Data</button>
+            </div>
         </div>
     </div>
 
@@ -367,6 +370,9 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
 
 
     <script>
@@ -475,6 +481,32 @@
             });
         });
 
+    </script>
+    <script>
+        document.getElementById("downloadDataButton").addEventListener("click", function () {
+            // Create a function to download data as PDF
+            function downloadAsPDF() {
+                var doc = new jsPDF();
+                doc.text("Your PDF Content Here", 10, 10); // Replace with your content
+                doc.save("data.pdf");
+            }
+
+            // Create a function to download data as XLSX
+            function downloadAsXLSX() {
+                var data = [ /* Your data in the required format */];
+                var ws = XLSX.utils.json_to_sheet(data);
+                var wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Data");
+                XLSX.writeFile(wb, "data.xlsx");
+            }
+
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as PDF?")) {
+                downloadAsPDF();
+            } else {
+                downloadAsXLSX();
+            }
+        });
     </script>
 
 </body>
