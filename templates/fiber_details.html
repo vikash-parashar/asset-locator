@@ -14,7 +14,6 @@
             background-size: 800% 1800%;
             animation: gradient 120s infinite;
             background-color: rgba(0, 0, 0, 0.5);
-            /* Adjust the alpha (0.5) for the desired level of transparency */
             color: #FF8551;
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
@@ -47,43 +46,9 @@
             padding: 30px;
         }
 
-        /* Add border and margin to table headers */
-        table th {
-            border: 1px solid #062b36;
-            margin: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        label {
-            color: #ffffff;
-        }
-
-        input {
-            background-color: #DDF7E3;
-            color: #000000;
-        }
-
-        .modal-title {
-            color: #ffffff;
-        }
-
-        .modal-content {
-            background-color: #025464;
-        }
-
-        .delete-button {
-            background-color: #D80032;
-            color: #F1EFEF;
-            border-radius: 10px;
-        }
-
-        .update-button {
-            background-color: #008170;
-            color: #F1EFEF;
-            border-radius: 20px;
+        /* Improved Navbar Styling */
+        .navbar {
+            padding: 10px;
         }
 
         .nav-btn {
@@ -92,41 +57,40 @@
             border-radius: 20px;
         }
 
-
-        .custom-table {
-            border-width: 1px;
-            border-color: #FFF6DC;
+        .navbar-collapse {
+            margin-left: auto;
         }
 
-        .custom-table th {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #FFFAD7;
+        /* Improved Header Styling */
+        .container h1 {
             text-align: center;
-            /* Center-align text in header and data cells */
-            vertical-align: middle;
-            /* Vertically center content */
-            vertical-align: middle;
+            color: #fff;
         }
 
-        tbody {
-            border-width: 1px;
-            border-color: #FFF6DC;
+        /* Improved Buttons Styling */
+        .btn {
+            margin: 5px;
+            padding: 10px 20px;
         }
 
-        tr {
-            border-width: 1px;
-            border-color: #FFF6DC;
+        /* Custom Table Styling */
+        .custom-table th {
+            padding: 10px;
+            margin: 5px;
         }
 
         .custom-table td {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #ffffff;
-            text-align: center;
-            /* Center-align text in header and data cells */
-            vertical-align: middle;
-            /* Vertically center content */
+            padding: 10px;
+            margin: 5px;
+        }
+        .delete-button {
+            background-color: #D80032;
+            color: #F1EFEF;
+        }
+
+        .update-button {
+            background-color: #008170;
+            color: #F1EFEF;
         }
     </style>
 </head>
@@ -138,47 +102,48 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/home/"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
                             class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn-outline-info">Locations</button></a>
+                            class="nav-btn btn-outline-info">Location Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
+                            class="nav-btn btn-outline-info">Owners Details</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn btn-outline-info">Power</button></a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Fiber Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
-                    <a class="nav-link" id="logout-button" href="#">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
-                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
+                            class="btn btn-danger">Logout</button></a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="col mt-5">
-                <h1>Device Ethernet Fiber Details</h1>
-            </div>
-        </div>
+
+    <div class="container mt-4 text-center">
+        <h1 style="color: #fff;">Device Ethernet Fiber Details</h1>
     </div>
-    <div class="container mb-5 mt-5 d-flex justify-content-center">
+
+    <div class="container mb-4 mt-4 d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-outline-info  btn-sm" data-toggle="modal"
-                    data-target="#createEntryModal" style="font-size:small;">
-                    Add Data
-                </button>
+                <button id="newEntryButton" class="btn btn-info">Add Data</button>
             </div>
             <div class="col">
-                <button id="downloadDataButton" class="btn btn-outline-warning  btn-sm">Download</button>
+                <button id="downloadDataButton" class="btn btn-warning">Download</button>
             </div>
         </div>
     </div>

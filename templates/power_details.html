@@ -9,124 +9,141 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
+        /* Improve Typography */
         body {
-            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
-            background-size: 800% 1800%;
-            animation: gradient 120s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #FF8551;
-            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            /* Dark text for better readability */
         }
-
-        .navbar {
-            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
-            background-size: 800% 1800%;
-            animation: gradient 5s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
-            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Custom CSS for the content */
-        .content {
-            margin-left: 0;
-            padding: 30px;
-        }
-
-        /* Add border and margin to table headers */
-        table th {
-            border: 1px solid #062b36;
-            margin: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        label {
-            color: #ffffff;
-        }
-
-        input {
-            background-color: #DDF7E3;
-            color: #000000;
-        }
-
-        .modal-title {
-            color: #ffffff;
-        }
-
-        .modal-content {
-            background-color: #025464;
-        }
-
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
-            border-radius: 10px;
         }
 
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
-            border-radius: 20px;
         }
 
-        .nav-btn {
+        /* Navbar Styling */
+        .navbar {
+            background: #1F4172;
+            /* Dark blue background */
+            padding: 15px;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 10px 20px;
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #1F4172;
+            /* Hover color same as the background */
+            color: #FF8551;
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: #1F4172;
+            color: #FF8551;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            background-color: #1F4172;
+            /* Dark blue header background */
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #FF8551;
+            /* Orange button background */
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FF6A30;
+            /* Slightly darker orange on hover */
+        }
+
+        .btn-outline-info {
+            background-color: transparent;
+            border: 2px solid #219C90;
+            color: #219C90;
+        }
+
+        .btn-outline-info:hover {
             background-color: #219C90;
-            color: #F1EFEF;
+            color: #fff;
+        }
+
+        /* Table Styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #062b36;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1F4172;
+            color: #fff;
+        }
+
+        td {
+            background-color: #025464;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #04364A;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #001524;
+        }
+
+        /* Modal Styling */
+        .modal-title {
+            color: #333;
+            /* Darker text in the modal */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            /* White modal background */
+            color: #333;
+            /* Dark text in the modal */
+        }
+
+        .modal-footer {
+            background-color: #fff;
+        }
+
+        .modal-footer .btn {
+            background-color: #FF8551;
+            color: #fff;
             border-radius: 20px;
         }
 
-
-        .custom-table {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        .custom-table th {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #FFFAD7;
-            text-align: center;
-            /* Center-align text in header and data cells */
-            vertical-align: middle;
-            /* Vertically center content */
-            vertical-align: middle;
-        }
-
-        tbody {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        tr {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        .custom-table td {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #ffffff;
-            text-align: center;
-            /* Center-align text in header and data cells */
-            vertical-align: middle;
-            /* Vertically center content */
+        .modal-footer .btn:hover {
+            background-color: #FF6A30;
         }
     </style>
 </head>
@@ -140,26 +157,29 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/home/"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
                             class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn-outline-info">Locations
-                        </button></a>
+                            class="nav-btn btn-outline-info">Location Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
+                            class="nav-btn btn-outline-info">Owners Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn btn-outline-info">Ethernet/Fiber</button></a>
+                            class="nav-btn btn-outline-info">Fiber Details</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
                 <li class="nav-item ml-auto">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout">Logout</a>
+                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
+                            class="btn">Logout</button></a>
                 </li>
-                
             </ul>
         </div>
     </nav>
@@ -461,25 +481,25 @@
             fetch("/logout", {
                 method: "POST",
             })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    alert(data.message);
-                    window.location.href = "http://localhost:8080/login"; // Redirect to the login page
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch((error) => {
-                console.error("An error occurred while logging out.");
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.href = "http://localhost:8080/login"; // Redirect to the login page
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("An error occurred while logging out.");
+                });
         }
-    
+
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
     </script>
-    
+
 
 </body>
 

@@ -10,43 +10,82 @@
 
     <style>
         body {
-            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
-            background-size: 2000% 2000%;
+            background: linear-gradient(45deg, #1E2129, #39424E, #1E2129, #39424E);
+            background-size: 1800% 1800%;
             animation: gradient 10s infinite;
             background-color: rgba(0, 0, 0, 0.5);
-            /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #FF8551;
+            color: #F5F5F5;
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
             0% {
-                background-position: 20% 50%;
+                background-position: 0% 50%;
             }
 
             50% {
-                background-position: 50% 50%;
+                background-position: 100% 50%;
             }
 
             100% {
-                background-position: 10% 50%;
+                background-position: 0% 50%;
             }
         }
-        a{
-            color: aliceblue;
+
+        .container {
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        h1 {
+            color: #2196F3;
+            font-size: 3rem;
+        }
+
+        p {
+            color: #F5F5F5;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FFF;
+        }
+
+        .btn-primary {
+            background-color: #2196F3;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #1976D2;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #388E3C;
         }
     </style>
 </head>
 
 <body>
-    <div class="container text-center mt-5">
+    <div class="container">
         <h1>Welcome to Our Website</h1>
         <p>Please choose an option to proceed:</p>
 
         <button class="btn btn-primary m-3" id="login-button"><a href="http://localhost:8080/login">Login</a></button>
-        <button class="btn btn-success m-3" id="register-button"><a href="http://localhost:8080/signup">Register</a></button>
+        <button class="btn btn-success m-3" id="register-button"><a
+                href="http://localhost:8080/signup">Register</a></button>
     </div>
-
 </body>
 
 </html>

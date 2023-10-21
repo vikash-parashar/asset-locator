@@ -4,7 +4,7 @@
 <head>
     <title>Device AMC Owner Details</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
@@ -13,9 +13,10 @@
             background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
             background-size: 800% 1800%;
             animation: gradient 120s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #FF8551;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Improved background transparency */
+            color: #ffffff;
+            /* Improved text color */
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
@@ -23,7 +24,8 @@
             background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
             background-size: 800% 1800%;
             animation: gradient 5s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Improved background transparency */
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
@@ -51,10 +53,16 @@
         table th {
             border: 1px solid #062b36;
             margin: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding: 10px;
+            /* Increased padding for better spacing */
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+            color: #FFFAD7;
+            /* Improved text color */
+            background-color: #025464;
+            /* Header background color */
         }
 
         label {
@@ -92,96 +100,86 @@
             border-radius: 20px;
         }
 
+        .container {
+            margin-top: 20px;
+            /* Improved top margin for containers */
+        }
 
+        .btn {
+            font-size: 16px;
+            /* Increased button font size for better readability */
+        }
+
+        /* Improved table styling */
         .custom-table {
-            border-width: 1px;
-            border-color: #FFF6DC;
+            border: 1px solid #FFF6DC;
         }
 
         .custom-table th {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #FFFAD7;
+            padding: 10px;
             text-align: center;
-            /* Center-align text in header and data cells */
             vertical-align: middle;
-            /* Vertically center content */
-            vertical-align: middle;
-        }
-
-        tbody {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        tr {
-            border-width: 1px;
-            border-color: #FFF6DC;
         }
 
         .custom-table td {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #ffffff;
+            padding: 10px;
             text-align: center;
-            /* Center-align text in header and data cells */
             vertical-align: middle;
-            /* Vertically center content */
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
+    <nav class="navbar navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/home/"><button
-                            class="nav-btn btn-outline-info">Home</button></a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button class="nav-btn btn">Home</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn-outline-info">Locations
-                        </button></a>
+                            class="nav-btn btn">Location Details</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn btn-outline-info">Power</button></a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
+                            class="nav-btn btn">Owners Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn btn-outline-info">Ethernet/Fiber</button></a>
+                            class="nav-btn btn">Fiber Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
-                    <a class="nav-link" id="logout-button" href="#">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
+                            class="nav-btn btn">Power Details</button></a>
                 </li>
-                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
+                            class="nav-btn btn">Logout</button></a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="col mt-5">
-                <h1>Device AMC Owner Details</h1>
-            </div>
-        </div>
+
+    <div class="container text-center mt-4">
+        <h1>Device AMC Owner Details</h1>
     </div>
 
-
-    <div class="container mb-5 mt-5 d-flex justify-content-center">
+    <div class="container mt-4 mb-4 text-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-outline-info  btn-sm" data-toggle="modal"
-                    data-target="#createEntryModal" style="font-size:small;">
+                <button id="newEntryButton" class="btn btn-info btn-sm" data-toggle="modal"
+                    data-target="#createEntryModal">
                     Add Data
                 </button>
             </div>
             <div class="col">
-                <button id="downloadDataButton" class="btn btn-outline-warning  btn-sm">Download</button>
+                <button id="downloadDataButton" class="btn btn-warning btn-sm">Download</button>
             </div>
         </div>
     </div>
@@ -353,11 +351,6 @@
     </script>
 
     <script>
-
-
-
-
-
         // Delay the row animation when the page loads
         const tableRows = document.querySelectorAll(".row-transition");
 

@@ -50,7 +50,7 @@ func main() {
 	r.POST("/login", handlers.Login(db))
 	r.POST("/logout", handlers.Logout())
 	//protected routes
-	r.GET("/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
+	r.GET("/api/v1/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
 	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
 	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
