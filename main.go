@@ -43,7 +43,7 @@ func main() {
 
 	r.GET("/", handlers.RenderHomepage)
 
-	r.GET("/register", handlers.RenderRegisterUser)
+	r.GET("/signup", handlers.RenderRegisterUser)
 	r.GET("/login", handlers.RenderLoginUser)
 
 	r.POST("/signup", handlers.RegisterUser(db))
