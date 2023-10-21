@@ -51,7 +51,10 @@
 <body>
     <div class="container">
         <h1>Login</h1>
-        <div id="error-message" style="color: red;"></div> <!-- Error message container -->
+        <div id="error-message" style="color: red;"></div>
+        <div id="success-message" class="alert alert-success" style="display: none;">
+            Login was successful! Redirecting to the home page...
+        </div>
         <form id="login-form">
             <div class="form-group">
                 <label for="login-username">Username</label>
@@ -81,6 +84,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const loginForm = document.getElementById("login-form");
             const errorMessage = document.getElementById("error-message");
+            const successMessage = document.getElementById("success-message");
 
             loginForm.addEventListener("submit", function (event) {
                 event.preventDefault();
@@ -99,15 +103,25 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.success) {
-                            // If login is successful, redirect the user to the home page
-                            window.location.href = "http://localhost:8080/home";
+                            // If login is successful, show the success message
+                            successMessage.style.display = "block";
+                            errorMessage.style.display = "none";
+
+                            // Hide the success message after 1 second and redirect
+                            setTimeout(function () {
+                                window.location.href = "http://localhost:8080/home";
+                            }, 1000);
                         } else {
                             // If there is an error, display the error message to the user
                             errorMessage.textContent = data.message;
+                            errorMessage.style.display = "block";
+                            successMessage.style.display = "none";
                         }
                     })
                     .catch((error) => {
                         errorMessage.textContent = "An error occurred while logging in.";
+                        errorMessage.style.display = "block";
+                        successMessage.style.display = "none";
                     });
             });
         });
