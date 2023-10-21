@@ -37,7 +37,7 @@ func RenderRegisterUser(c *gin.Context) {
 }
 
 // RegisterUser handles the registration of a new user.
-func RegisterUser(db *db.DB) gin.HandlerFunc {
+func SignUp(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Retrieve form data
 		firstName := c.PostForm("first_name")
@@ -84,8 +84,8 @@ func RegisterUser(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// LoginUser handles the user login and returns a JWT token upon successful login.
-func LoginUser(db *db.DB) gin.HandlerFunc {
+// LoginUserHandler handles the user login and returns a JWT token upon successful login.
+func Login(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Retrieve form data
 		username := c.PostForm("username")
@@ -107,12 +107,32 @@ func LoginUser(db *db.DB) gin.HandlerFunc {
 		// Generate a JWT token
 		token, err := utils.GenerateJWTToken(user)
 		if err != nil {
-			log.Println("failed to generate JWT token")
+			log.Println("Failed to generate JWT token")
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate JWT token"})
 			return
 		}
 
+		cookie := http.Cookie{
+			Name:    "jwt-token",
+			Value:   token,
+			Expires: time.Now().Add(5 * time.Minute),
+		}
+		http.SetCookie(c.Writer, &cookie)
 		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
+	}
+}
+
+// LogoutUserHandler handles the user logout by clearing the JWT token cookie.
+func Logout() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Clear the JWT token cookie
+		cookie := http.Cookie{
+			Name:    "jwt-token",
+			Value:   "",
+			Expires: time.Unix(0, 0),
+		}
+		http.SetCookie(c.Writer, &cookie)
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Logout successful"})
 	}
 }
 
