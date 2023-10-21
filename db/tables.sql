@@ -53,3 +53,14 @@ CREATE TABLE IF NOT EXISTS device_ethernet_fiber (
     device_port_mac_address_wwn VARCHAR(255),
     connected_device_port VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(60) NOT NULL, -- Increased length for storing hashed passwords
+    role VARCHAR(255)
+);
+
