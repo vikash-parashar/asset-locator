@@ -8,14 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
-    <style>
+    <!-- <style>
         body {
-            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
+            background: linear-gradient(45deg, #FFF5E0, #CEDEBD, #FAF0E6, #AEC3AE);
             background-size: 800% 1800%;
-            animation: gradient 120s infinite;
-            color: #f8f9fa;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Tilt Neon', sans-serif;
+            animation: gradient 20s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #040D12;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #071952, #331D2C, #35A29F, #F31559);
+            background-size: 800% 1800%;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #040D12;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
@@ -30,7 +41,6 @@
             100% {
                 background-position: 0% 50%;
             }
-
         }
 
         /* Custom CSS for the content */
@@ -41,13 +51,106 @@
 
         /* Add border and margin to table headers */
         table th {
-            border: 2px solid #ffffff;
-            margin: 5px, 5px, 5px, 5px;
+            /* border: 1px solid #FFF8C9; */
+            margin: 5px 5px 5px 5px;
             padding-left: 10px;
             padding-right: 10px;
         }
 
+        label {
+            color: #FFF8C9;
+        }
 
+        input {
+            background-color: #DDF7E3;
+            color: #000000;
+        }
+
+        .modal-title {
+            color: #ffffff;
+        }
+
+        .modal-content {
+            background-color: #025464;
+        }
+
+        .delete-button {
+            background-color: #D80032;
+            color: #F1EFEF;
+            border-radius: 10px;
+        }
+
+        .update-button {
+            background-color: #008170;
+            color: #F1EFEF;
+            border-radius: 10px;
+        }
+
+        .nav-btn {
+            /* background-color: #219C90;
+            color: #F1EFEF; */
+            border-radius: 10px;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            color: #040D12;
+            border-radius: 1px 1px 1px 1px;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+        }
+    </style> -->
+
+    <style>
+        body {
+            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
+            background-size: 800% 1800%;
+            animation: gradient 120s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #FFF6DC;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
+            background-size: 800% 1800%;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Custom CSS for the content */
+        .content {
+            margin-left: 0;
+            padding: 30px;
+        }
+
+        /* Add border and margin to table headers */
+        table th {
+            border: 1px solid #062b36;
+            margin: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
 
         label {
             color: #ffffff;
@@ -65,28 +168,86 @@
         .modal-content {
             background-color: #025464;
         }
+
+        .delete-button {
+            background-color: #D80032;
+            color: #F1EFEF;
+            border-radius: 10px;
+        }
+
+        .update-button {
+            background-color: #008170;
+            color: #F1EFEF;
+            border-radius: 20px;
+        }
+
+        .nav-btn {
+            background-color: #219C90;
+            color: #F1EFEF;
+            border-radius: 20px;
+        }
+
+        .custom-table {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        .custom-table th {
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #FEFFAC;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+            vertical-align: middle;
+        }
+
+        tbody {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        tr {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        .custom-table td {
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #ffffff;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                    <a class="nav-link" href="http://localhost:8080/"><button
+                            class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
+                            class="nav-btn btn-outline-info">Locations</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
+                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
+                            class="nav-btn btn-outline-info">Power</button></a>
                 </li>
             </ul>
         </div>
@@ -98,10 +259,11 @@
             </div>
         </div>
     </div>
-    <div class="container mb-2 mt-2 d-flex justify-content-center">
+    <div class="container mb-5 mt-5 d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-success" data-toggle="modal" data-target="#createEntryModal">
+                <button id="newEntryButton" class="btn btn-outline-info" data-toggle="modal"
+                    data-target="#createEntryModal">
                     Create New Entry
                 </button>
             </div>
@@ -120,10 +282,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="entryForm">
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id">
-                        </div>
                         <div class="form-group">
                             <label for="serialNumber">Serial Number</label>
                             <input type="text" class="form-control" id="serialNumber" name="serial_number">
@@ -165,36 +323,40 @@
         </div>
     </div>
 
-
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <table border="1" class="table table-hover table-primary">
+                <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Serial Number</th>
-                            <th>Device Make & Model</th>
-                            <th>Model</th>
-                            <th>Device Type</th>
-                            <th>Device Physical Port</th>
-                            <th>Device Port Type</th>
-                            <th>Device Port MAC/WWN</th>
-                            <th>Connected Device Port</th>
+                            <th style="font-size:medium;color: #FEFFAC;">ID</th>
+                            <th style="font-size:medium;">Serial Number</th>
+                            <th style="font-size:medium;">Device Make & Model</th>
+                            <th style="font-size:medium;">Model</th>
+                            <th style="font-size:medium;">Device Type</th>
+                            <th style="font-size:medium;">Device Physical Port</th>
+                            <th style="font-size:medium;">Device Port Type</th>
+                            <th style="font-size:medium;">Device Port MAC/WWN</th>
+                            <th style="font-size:medium;">Connected Device Port</th>
+                            <th style="font-size:medium;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
                         {{range .}}
-                        <tr>
-                            <td>{{.ID}}</td>
-                            <td>{{.SerialNumber}}</td>
-                            <td>{{.DeviceMakeModel}}</td>
-                            <td>{{.Model}}</td>
-                            <td>{{.DeviceType}}</td>
-                            <td>{{.DevicePhysicalPort}}</td>
-                            <td>{{.DevicePortType}}</td>
-                            <td>{{.DevicePortMACWWN}}</td>
-                            <td>{{.ConnectedDevicePort}}</td>
+                        <tr class="row-transition">
+                            <td style="font-size:small;">{{.ID}}</td>
+                            <td style="font-size:small;">{{.SerialNumber}}</td>
+                            <td style="font-size:small;">{{.DeviceMakeModel}}</td>
+                            <td style="font-size:small;">{{.Model}}</td>
+                            <td style="font-size:small;">{{.DeviceType}}</td>
+                            <td style="font-size:small;">{{.DevicePhysicalPort}}</td>
+                            <td style="font-size:small;">{{.DevicePortType}}</td>
+                            <td style="font-size:small;">{{.DevicePortMACWWN}}</td>
+                            <td style="font-size:small;">{{.ConnectedDevicePort}}</td>
+                            <td style="font-size:small;">
+                                <button class="delete-button" data-id="{{.ID}}">Delete</button>
+                                <button class="update-button" data-id="{{.ID}}">Update</button>
+                            </td>
                         </tr>
                         {{end}}
                     </tbody>
@@ -203,10 +365,27 @@
         </div>
     </div>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+
     <script>
+
+
+        // Delay the row animation when the page loads
+        const tableRows = document.querySelectorAll(".row-transition");
+
+        tableRows.forEach((row, index) => {
+            row.style.opacity = "0";
+            row.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                row.style.transition = "opacity 0.2s ease, transform 0.5s ease";
+                row.style.opacity = "1";
+                row.style.transform = "translateY(0)";
+            }, 500 * (index + 1)); // 500ms (0.5s) delay for each row
+        });
+
+
         // JavaScript to handle form submission
         document.getElementById("entryForm").addEventListener("submit", function (e) {
             e.preventDefault(); // Prevent the default form submission
@@ -223,7 +402,8 @@
                     // Request completed, handle response
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
-                        alert("Success: Entry added successfully.");
+                        console.log(xhr.responseText);
+                        alert("Success: Entry Added Successfully.");
                         location.reload();
                     } else {
                         alert("Error: Entry not added. Please try again.");
@@ -235,8 +415,68 @@
             // Close the modal
             $("#createEntryModal").modal("hide");
         });
+        // Function to send a DELETE request
+        function deleteRecord(id) {
+            fetch(`/api/v1/fiber-details/${id}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Success: Record Deleted Successfully.");
+                        location.reload(); // Reload the page
+                    } else {
+                        alert("Error: Record not deleted. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+
+        // Function to send a PUT request
+        function updateRecord(id) {
+            fetch(`/api/v1/fiber-details/${id}`, {
+                method: 'PUT',
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Success: Record Updated Successfully.");
+                        location.reload(); // Reload the page
+                    } else {
+                        alert("Error: Record not updated. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+
+        // Add event listeners to the buttons
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        const updateButtons = document.querySelectorAll(".update-button");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                if (confirm("Are you sure you want to delete this record?")) {
+                    deleteRecord(id);
+                }
+            });
+        });
+
+        updateButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                if (confirm("Are you sure you want to update this record?")) {
+                    updateRecord(id);
+                }
+            });
+        });
 
     </script>
+
 </body>
 
 </html>

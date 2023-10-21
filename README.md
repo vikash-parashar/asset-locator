@@ -1,1 +1,1 @@
-# go-server
+owner details - not deleted

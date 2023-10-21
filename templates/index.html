@@ -10,12 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #025464, #f3287c, #116D6E, #e78646, #1D5B79, #472855, #461959, #2E8A99);
+            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
             background-size: 800% 1800%;
             animation: gradient 120s infinite;
-            color: #f8f9fa;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Tilt Neon', sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #F5F5DC;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+            justify-content: center;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
+            background-size: 800% 1800%;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
@@ -38,42 +48,66 @@
             margin-left: 0;
             padding: 50px;
         }
+
+        .nav-btn {
+            background-color: #219C90;
+            color: #F1EFEF;
+            border-radius: 10px;
+
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Locations Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
+                            class="nav-btn btn-outline-info">Locations
+                        </button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owners/AMC Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
+                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
+                            class="nav-btn btn-outline-info">Power</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Ethernet/Fiber Details</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Ethernet/Fiber</button></a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-5"
+        style="background: linear-gradient(45deg, #d8d841, #2d7963, #7A316F, #7b44eb); background-size: 800% 800%;">
         <div class="row">
             <div class="col">
                 <div class="content">
-                    <h2>Content Area</h2>
-                    <p>This is the default content area. Click on a button to display associated content here.</p>
+                    <h2>Welcome to Device Management Portal</h2>
+                    <p class="mt-5">Are you ready to streamline your device management processes?
+                        <br>Our Device Management Portal provides comprehensive solutions for organizing, tracking, and
+                        optimizing your IT infrastructure.
+                        <br>From device locations to maintenance and power consumption, our platform offers a
+                        centralized hub to manage it all.
+                        <br>Explore our robust features, effortlessly update records, and enhance your operational
+                        efficiency.
+                        <br>Join us in simplifying device management and take control of your IT assets like never
+                        before.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap JS (jQuery and Popper.js required) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

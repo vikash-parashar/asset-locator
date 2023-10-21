@@ -187,3 +187,105 @@ func (db *DB) GetAllDeviceLocationDetail() ([]models.DeviceLocationDetail, error
 
 	return results, nil
 }
+
+func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
+	query := "DELETE FROM device_ethernet_fiber WHERE id = $1"
+	_, err := db.Exec(query, id)
+	if err != nil {
+		log.Printf("Error deleting DeviceEthernetFiberDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEthernetFiberDetail) error {
+	query := `
+        UPDATE device_ethernet_fiber
+        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, device_physical_port = $6, device_port_type = $7, device_port_mac_address_wwn = $8, connected_device_port = $9
+        WHERE id = $1
+    `
+	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DevicePhysicalPort, data.DevicePortType, data.DevicePortMACWWN, data.ConnectedDevicePort)
+	if err != nil {
+		log.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// UpdateDeviceLocationDetail updates an existing record in the device_location table based on the ID.
+func (db *DB) UpdateDeviceLocationDetail(id int, data *models.DeviceLocationDetail) error {
+	query := `
+        UPDATE device_location
+        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, data_center = $6, region = $7, dc_location = $8, device_location = $9, device_row_number = $10, device_rack_number = $11, device_ru_number = $12
+        WHERE id = $1
+    `
+	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber)
+	if err != nil {
+		log.Printf("Error updating DeviceLocationDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// DeleteDeviceLocationDetail deletes a record from the device_location table based on the ID.
+func (db *DB) DeleteDeviceLocationDetail(id int) error {
+	query := "DELETE FROM device_location WHERE id = $1"
+	_, err := db.Exec(query, id)
+	if err != nil {
+		log.Printf("Error deleting DeviceLocationDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// UpdateDeviceAMCOwnerDetail updates an existing record in the device_amc_owner table based on the ID.
+func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDetail) error {
+	query := `
+        UPDATE device_amc_owner
+        SET serial_number = $2, device_make_model = $3, model = $4, po_number = $5, po_order_date = $6, eosl_date = $7, amc_start_date = $8, amc_end_date = $9, device_owner = $10
+        WHERE id = $1
+    `
+	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
+	if err != nil {
+		log.Printf("Error updating DeviceAMCOwnerDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// DeleteDeviceAMCOwnerDetail deletes a record from the device_amc_owner table based on the ID.
+func (db *DB) DeleteDeviceAMCOwnerDetail(id int) error {
+	query := "DELETE FROM device_amc_owner WHERE id = $1"
+	_, err := db.Exec(query, id)
+	if err != nil {
+		log.Printf("Error deleting DeviceAMCOwnerDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// UpdateDevicePowerDetail updates an existing record in the device_power table based on the ID.
+func (db *DB) UpdateDevicePowerDetail(id int, data *models.DevicePowerDetail) error {
+	query := `
+        UPDATE device_power
+        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, total_power_watt = $6, total_btu = $7, total_power_cable = $8, power_socket_type = $9
+        WHERE id = $1
+    `
+	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.TotalPowerWatt, data.TotalBTU, data.TotalPowerCable, data.PowerSocketType)
+	if err != nil {
+		log.Printf("Error updating DevicePowerDetail: %v", err)
+		return err
+	}
+	return nil
+}
+
+// DeleteDevicePowerDetail deletes a record from the device_power table based on the ID.
+func (db *DB) DeleteDevicePowerDetail(id int) error {
+	query := "DELETE FROM device_power WHERE id = $1"
+	_, err := db.Exec(query, id)
+	if err != nil {
+		log.Printf("Error deleting DevicePowerDetail: %v", err)
+		return err
+	}
+	return nil
+}
