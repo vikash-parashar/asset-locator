@@ -27,12 +27,10 @@ func RenderHomePage(db *db.DB) gin.HandlerFunc {
 }
 
 func RenderLoginUser(c *gin.Context) {
-
 	c.HTML(http.StatusOK, "login.html", nil)
 }
 
 func RenderRegisterUser(c *gin.Context) {
-
 	c.HTML(http.StatusOK, "register.html", nil)
 }
 

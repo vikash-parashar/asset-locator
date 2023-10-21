@@ -155,6 +155,10 @@
                     <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power</button></a>
                 </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" id="logout-button" href="#">Logout</a>
+                </li>
+                
             </ul>
         </div>
     </nav>
@@ -414,7 +418,30 @@
             }
         });
     </script>
+    <script>
+        // Function to handle logout
+        function handleLogout() {
+            fetch("/logout", {
+                method: "POST",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.href = "http://localhost:8080/login"; // Redirect to the login page
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("An error occurred while logging out.");
+                });
+        }
 
+        // Attach the handleLogout function to the logout button's click event
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.addEventListener("click", handleLogout);
+    </script>
 </body>
 
 </html>
