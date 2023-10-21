@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,14 +17,17 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
         }
+
         h1 {
             text-align: center;
         }
+
         .btn {
             width: 100%;
             margin-top: 10px;
@@ -33,18 +37,22 @@
             padding: 10px;
             cursor: pointer;
         }
+
         .btn-login {
             background-color: #9400FF;
         }
+
         .btn-login:hover {
             background: #6B00E6;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form>
+        <div id="error-message" style="color: red;"></div> <!-- Error message container -->
+        <form id="login-form">
             <div class="form-group">
                 <label for="login-username">Username</label>
                 <input type="text" id="login-username" class="form-control" required>
@@ -55,7 +63,7 @@
             </div>
             <button class="btn btn-login" type="submit">Login</button>
         </form>
-       
+
     </div>
     <div class="container">
         <div class="row">
@@ -69,5 +77,42 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("login-form");
+            const errorMessage = document.getElementById("error-message");
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const username = document.getElementById("login-username").value;
+                const password = document.getElementById("login-password").value;
+
+                // Send a POST request to the backend API
+                fetch("/login", {
+                    method: "POST",
+                    body: new URLSearchParams({ username, password }),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            // If login is successful, redirect the user to the home page
+                            window.location.href = "http://localhost:8080/home";
+                        } else {
+                            // If there is an error, display the error message to the user
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch((error) => {
+                        errorMessage.textContent = "An error occurred while logging in.";
+                    });
+            });
+        });
+    </script>
+
 </body>
+
 </html>

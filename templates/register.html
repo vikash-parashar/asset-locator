@@ -51,7 +51,8 @@
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form>
+        <div id="error-message" style="color: red;"></div> <!-- Error message container -->
+        <form id="register-form">
             <div class="form-group">
                 <label for="first_name">First Name</label>
                 <input type="text" id="first_name" class="form-control" required>
@@ -89,6 +90,52 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const registerForm = document.getElementById("register-form");
+            const errorMessage = document.getElementById("error-message");
+
+            registerForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const firstName = document.getElementById("first_name").value;
+                const lastName = document.getElementById("last_name").value;
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                // Send a POST request to the backend API
+                fetch("/signup", {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        first_name: firstName,
+                        last_name: lastName,
+                        username: username,
+                        email: email,
+                        password: password,
+                    }),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.status === "success") {
+                            // If registration is successful, redirect the user to the login page
+                            window.location.href = "http://localhost:8080/login";
+                        } else {
+                            // If there is an error, display the error message to the user
+                            errorMessage.textContent = data.message;
+                        }
+                    })
+                    .catch((error) => {
+                        errorMessage.textContent = "An error occurred while registering.";
+                    });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
