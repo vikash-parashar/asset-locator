@@ -379,3 +379,9 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 	}
 	return users, nil
 }
+
+// TODO:s
+func (db *DB) FetchDataFromTable1() ([]*models.DeviceAMCOwnerDetail, error)      { return nil, nil }
+func (db *DB) FetchDataFromTable2() ([]*models.DeviceEthernetFiberDetail, error) { return nil, nil }
+func (db *DB) FetchDataFromTable3() ([]*models.DeviceLocationDetail, error)      { return nil, nil }
+func (db *DB) FetchDataFromTable4() ([]*models.DevicePowerDetail, error)         { return nil, nil }
