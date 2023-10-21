@@ -10,22 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #FFF5E0, #CEDEBD, #FAF0E6, #AEC3AE);
+            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
             background-size: 800% 1800%;
-            animation: gradient 20s infinite;
+            animation: gradient 120s infinite;
             background-color: rgba(0, 0, 0, 0.5);
             /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #040D12;
+            color: #F5F5DC;
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         .navbar {
-            background: linear-gradient(45deg, #071952, #331D2C, #35A29F, #F31559);
+            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
             background-size: 800% 1800%;
             animation: gradient 5s infinite;
             background-color: rgba(0, 0, 0, 0.5);
-            /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #040D12;
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
@@ -46,15 +44,17 @@
         /* Custom CSS for the content */
         .content {
             margin-left: 0;
-            padding: 50px;
+            padding: 30px;
         }
 
         /* Add border and margin to table headers */
         table th {
-            border: 2px solid #ffffff;
+            border: 1px solid #062b36;
             margin: 5px;
             padding-left: 10px;
             padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         label {
@@ -83,18 +83,46 @@
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
-            border-radius: 10px;
+            border-radius: 20px;
         }
 
         .nav-btn {
             background-color: #219C90;
             color: #F1EFEF;
-            border-radius: 10px;
+            border-radius: 20px;
         }
 
-        .custom-table th,
+
+        .custom-table {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        .custom-table th {
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #FEFFAC;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+            vertical-align: middle;
+        }
+
+        tbody {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        tr {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
         .custom-table td {
-            color: #040D12;
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #ffffff;
             text-align: center;
             /* Center-align text in header and data cells */
             vertical-align: middle;
@@ -131,6 +159,7 @@
             </ul>
         </div>
     </nav>
+
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col mt-5">
@@ -138,10 +167,12 @@
             </div>
         </div>
     </div>
-    <div class="container mb-2 mt-2 d-flex justify-content-center">
+
+    <div class="container mb-5 mt-5 d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-success" data-toggle="modal" data-target="#createEntryModal">
+                <button id="newEntryButton" class="btn btn-outline-info" data-toggle="modal"
+                    data-target="#createEntryModal">
                     Create New Entry
                 </button>
             </div>
@@ -242,31 +273,31 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Serial Number</th>
-                            <th>Device Make & Model</th>
-                            <th>Model</th>
-                            <th>Device Type</th>
-                            <th>Total Power (Watt)</th>
-                            <th>Total BTU</th>
-                            <th>Total Power Cable</th>
-                            <th>Power Socket Type</th>
-                            <th>Action</th>
+                            <th style="font-size:medium;color: #FEFFAC;">ID</th>
+                            <th style="font-size:medium;">Serial Number</th>
+                            <th style="font-size:medium;">Device Make & Model</th>
+                            <th style="font-size:medium;">Model</th>
+                            <th style="font-size:medium;">Device Type</th>
+                            <th style="font-size:medium;">Total Power (Watt)</th>
+                            <th style="font-size:medium;">Total BTU</th>
+                            <th style="font-size:medium;">Total Power Cable</th>
+                            <th style="font-size:medium;">Power Socket Type</th>
+                            <th style="font-size:medium;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td>{{.ID}}</td>
-                            <td>{{.SerialNumber}}</td>
-                            <td>{{.DeviceMakeModel}}</td>
-                            <td>{{.Model}}</td>
-                            <td>{{.DeviceType}}</td>
-                            <td>{{.TotalPowerWatt}}</td>
-                            <td>{{.TotalBTU}}</td>
-                            <td>{{.TotalPowerCable}}</td>
-                            <td>{{.PowerSocketType}}</td>
-                            <td>
+                            <td style="font-size:small;">{{.ID}}</td>
+                            <td style="font-size:small;">{{.SerialNumber}}</td>
+                            <td style="font-size:small;">{{.DeviceMakeModel}}</td>
+                            <td style="font-size:small;">{{.Model}}</td>
+                            <td style="font-size:small;">{{.DeviceType}}</td>
+                            <td style="font-size:small;">{{.TotalPowerWatt}}</td>
+                            <td style="font-size:small;">{{.TotalBTU}}</td>
+                            <td style="font-size:small;">{{.TotalPowerCable}}</td>
+                            <td style="font-size:small;">{{.PowerSocketType}}</td>
+                            <td style="font-size:small;">
                                 <button class="delete-button" data-id="{{.ID}}">Delete</button>
                                 <button class="update-button" data-id="{{.ID}}">Update</button>
                             </td>

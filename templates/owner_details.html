@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
-    <style>
+    <!-- <style>
         body {
             background: linear-gradient(45deg, #FFF5E0, #CEDEBD, #FAF0E6, #AEC3AE);
             background-size: 800% 1800%;
@@ -100,6 +100,127 @@
             vertical-align: middle;
             /* Vertically center content */
         }
+    </style> -->
+    <style>
+        body {
+            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
+            background-size: 800% 1800%;
+            animation: gradient 120s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the alpha (0.5) for the desired level of transparency */
+            color: #F5F5DC;
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
+            background-size: 800% 1800%;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Custom CSS for the content */
+        .content {
+            margin-left: 0;
+            padding: 30px;
+        }
+
+        /* Add border and margin to table headers */
+        table th {
+            border: 1px solid #062b36;
+            margin: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        label {
+            color: #ffffff;
+        }
+
+        input {
+            background-color: #DDF7E3;
+            color: #000000;
+        }
+
+        .modal-title {
+            color: #ffffff;
+        }
+
+        .modal-content {
+            background-color: #025464;
+        }
+
+        .delete-button {
+            background-color: #D80032;
+            color: #F1EFEF;
+            border-radius: 10px;
+        }
+
+        .update-button {
+            background-color: #008170;
+            color: #F1EFEF;
+            border-radius: 20px;
+        }
+
+        .nav-btn {
+            background-color: #219C90;
+            color: #F1EFEF;
+            border-radius: 20px;
+        }
+
+
+        .custom-table {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        .custom-table th {
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #FEFFAC;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+            vertical-align: middle;
+        }
+
+        tbody {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        tr {
+            border-width: 1px;
+            border-color: #FFF6DC;
+        }
+
+        .custom-table td {
+            border-width: 1px;
+            border-color: #FFF6DC;
+            color: #ffffff;
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+        }
     </style>
 </head>
 
@@ -138,10 +259,11 @@
             </div>
         </div>
     </div>
-    <div class="container mb-2 mt-2 d-flex justify-content-center">
+    <div class="container mb-5 mt-5 d-flex justify-content-center">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-success" data-toggle="modal" data-target="#createEntryModal">
+                <button id="newEntryButton" class="btn btn-outline-info" data-toggle="modal"
+                    data-target="#createEntryModal">
                     Create New Entry
                 </button>
             </div>
@@ -243,33 +365,35 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Serial Number</th>
-                            <th>Device Make & Model</th>
-                            <th>Model</th>
-                            <th>PO Number</th>
-                            <th>PO Order Date</th>
-                            <th>EOSL Date</th>
-                            <th>AMC Start Date</th>
-                            <th>AMC End Date</th>
-                            <th>Device Owner</th>
-                            <th>Action</th>
+                            <th style="font-size:medium;color: #FEFFAC;">ID</th>
+                            <th style="font-size:medium;">Serial Number</th>
+                            <th style="font-size:medium;">Device Make</th>
+                            <th style="font-size:medium;">Device Model</th>
+                            <th style="font-size:medium;">PO Number</th>
+                            <th style="font-size:medium;">PO Order Date</th>
+                            <th style="font-size:medium;">EOSL Date</th>
+                            <th style="font-size:medium;">AMC Start Date</th>
+                            <th style="font-size:medium;">AMC End Date</th>
+                            <th style="font-size:medium;">Device Owner</th>
+                            <th style="font-size:medium;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td>{{.ID}}</td>
-                            <td>{{.SerialNumber}}</td>
-                            <td>{{.DeviceMakeModel}}</td>
-                            <td>{{.Model}}</td>
-                            <td>{{.PONumber}}</td>
-                            <td>{{.POOrderDate}}</td>
-                            <td>{{.EOSLDate}}</td>
-                            <td>{{.AMCStartDate}}</td>
-                            <td>{{.AMCEndDate}}</td>
-                            <td>{{.DeviceOwner}}</td>
-                            <td>
+                            <td style="font-size:small;">{{.ID}}</td>
+                            <td style="font-size:small;">{{.SerialNumber}}</td>
+                            <td style="font-size:small;">{{.DeviceMakeModel}}</td>
+                            <td style="font-size:small;">{{.Model}}</td>
+                            <td style="font-size:small;">{{.PONumber}}</td>
+                            <!-- Modify the relevant table cell (e.g., POOrderDate, EOSLDate, AMCStartDate, AMCEndDate) -->
+                            <td class="date-cell" style="font-size:small">{{.POOrderDate.Format "02/01/2006"}}</td>
+                            <td class="date-cell" style="font-size:small">{{.EOSLDate.Format "02/01/2006"}}</td>
+                            <td class="date-cell" style="font-size:small">{{.AMCStartDate.Format "02/01/2006"}}</td>
+                            <td class="date-cell" style="font-size:small">{{.AMCEndDate.Format "02/01/2006"}}</td>
+
+                            <td style="font-size:small;">{{.DeviceOwner}}</td>
+                            <td style="font-size:small;">
                                 <button class="delete-button" data-id="{{.ID}}">Delete</button>
                                 <button class="update-button" data-id="{{.ID}}">Update</button>
                             </td>
@@ -283,7 +407,37 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <!-- Add this script at the end of your HTML, just before the closing </body> tag -->
     <script>
+        // Function to format a date as "DD/MM/YYYY"
+        function formatDate(inputDate) {
+            const parts = inputDate.split('-');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const month = parts[1];
+                const day = parts[2];
+                return `${day}/${month}/${year}`;
+            }
+            return inputDate; // Return the original date if the format is invalid
+        }
+
+        // Format the date fields when the page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateCells = document.querySelectorAll(".date-cell");
+
+            dateCells.forEach(cell => {
+                const rawDate = cell.textContent;
+                const formattedDate = formatDate(rawDate);
+                cell.textContent = formattedDate;
+            });
+        });
+    </script>
+
+    <script>
+
+
+
+
 
         // Delay the row animation when the page loads
         const tableRows = document.querySelectorAll(".row-transition");
@@ -391,6 +545,8 @@
         });
 
     </script>
+
+
 </body>
 
 </html>
