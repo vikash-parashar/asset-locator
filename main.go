@@ -6,6 +6,7 @@ import (
 
 	"go-server/db"
 	"go-server/handlers"
+	"go-server/middleware"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -38,31 +39,36 @@ func main() {
 
 	r.LoadHTMLGlob("templates/*.html")
 
-	r.GET("/", handlers.Dashboard)
+	r.GET("/health-check", handlers.HealthCheck)
 
-	//TODO: Get Handlers
-	r.GET("/api/v1/location-details", handlers.GetLocationDetails(db))
-	r.GET("/api/v1/owner-details", handlers.GetOwnerDetails(db))
-	r.GET("/api/v1/power-details", handlers.GetPowerDetails(db))
-	r.GET("/api/v1/fiber-details", handlers.GetFiberDetails(db))
+	r.GET("/", handlers.RenderHomepage)
 
-	//TODO: Post Handlers
-	r.POST("/api/v1/location-details", handlers.CreateNewLocationDetails(db))
-	r.POST("/api/v1/owner-details", handlers.CreateNewOwnerDetails(db))
-	r.POST("/api/v1/power-details", handlers.CreateNewPowerDetails(db))
-	r.POST("/api/v1/fiber-details", handlers.CreateNewFiberDetails(db))
+	r.GET("/register", handlers.RenderRegisterUser)
+	r.GET("/login", handlers.RenderLoginUser)
 
-	//TODO: Delete Handlers
-	r.DELETE("/api/v1/fiber-details/:id", handlers.DeleteDeviceEthernetFiberDetail(db))
-	r.DELETE("/api/v1/power-details/:id", handlers.DeleteDevicePowerDetail(db))
-	r.DELETE("/api/v1/owner-details/:id", handlers.DeleteDeviceAMCOwnerDetail(db))
-	r.DELETE("/api/v1/location-details/:id", handlers.DeleteDeviceLocationDetail(db))
+	r.POST("/register", handlers.RegisterUser(db))
+	r.POST("/login", handlers.LoginUser(db))
+	//protected routes
+	r.GET("/home", middleware.AuthMiddleware("admin", "general"), handlers.Dashboard(db))
+	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
+	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
+	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
+	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
 
-	//TODO: Update Handlers
-	r.PUT("/api/v1/location-details/:id", handlers.UpdateDeviceLocationDetail(db))
-	r.PUT("/api/v1/owner-details/:id", handlers.UpdateDeviceAMCOwnerDetail(db))
-	r.PUT("/api/v1/power-details/:id", handlers.UpdateDevicePowerDetail(db))
-	r.PUT("/api/v1/fiber-details/:id", handlers.UpdateDeviceEthernetFiberDetail(db))
+	r.POST("/api/v1/location-details", middleware.AuthMiddleware("admin"), handlers.CreateNewLocationDetails(db))
+	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
+	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
+	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
+
+	r.PUT("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceLocationDetail(db))
+	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
+	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
+	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
+
+	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
+	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
+	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
+	r.DELETE("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
 
 	log.Fatalln(r.Run(":" + port))
 }

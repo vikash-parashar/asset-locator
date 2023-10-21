@@ -2,116 +2,51 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login or Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
+
     <style>
         body {
             background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
-            background-size: 800% 1800%;
-            animation: gradient 120s infinite;
+            background-size: 2000% 2000%;
+            animation: gradient 10s infinite;
             background-color: rgba(0, 0, 0, 0.5);
             /* Adjust the alpha (0.5) for the desired level of transparency */
-            color: #F5F5DC;
-            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
-            justify-content: center;
-        }
-
-        .navbar {
-            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
-            background-size: 800% 1800%;
-            animation: gradient 5s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
+            color: #FF8551;
             font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
 
         @keyframes gradient {
             0% {
-                background-position: 0% 50%;
+                background-position: 20% 50%;
             }
 
             50% {
-                background-position: 100% 50%;
+                background-position: 50% 50%;
             }
 
             100% {
-                background-position: 0% 50%;
+                background-position: 10% 50%;
             }
-
         }
-
-        /* Custom CSS for the content */
-        .content {
-            margin-left: 0;
-            padding: 50px;
-        }
-
-        .nav-btn {
-            background-color: #219C90;
-            color: #F1EFEF;
-            border-radius: 10px;
-
+        a{
+            color: aliceblue;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn-outline-info">Locations
-                        </button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn btn-outline-info">Owners/AMC</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn btn-outline-info">Power</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn btn-outline-info">Ethernet/Fiber</button></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container text-center mt-5">
+        <h1>Welcome to Our Website</h1>
+        <p>Please choose an option to proceed:</p>
 
-    <div class="container mt-5"
-        style="background: linear-gradient(45deg, #d8d841, #2d7963, #7A316F, #7b44eb); background-size: 800% 800%;">
-        <div class="row">
-            <div class="col">
-                <div class="content">
-                    <h2>Welcome to Device Management Portal</h2>
-                    <p class="mt-5">Are you ready to streamline your device management processes?
-                        <br>Our Device Management Portal provides comprehensive solutions for organizing, tracking, and
-                        optimizing your IT infrastructure.
-                        <br>From device locations to maintenance and power consumption, our platform offers a
-                        centralized hub to manage it all.
-                        <br>Explore our robust features, effortlessly update records, and enhance your operational
-                        efficiency.
-                        <br>Join us in simplifying device management and take control of your IT assets like never
-                        before.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <button class="btn btn-primary m-3" id="login-button"><a href="http://localhost:8080/login">Login</a></button>
+        <button class="btn btn-success m-3" id="register-button"><a href="http://localhost:8080/register">Register</a></button>
     </div>
 
-
-    <!-- Bootstrap JS (jQuery and Popper.js required) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

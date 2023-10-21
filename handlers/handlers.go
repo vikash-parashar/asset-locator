@@ -3,6 +3,7 @@ package handlers
 import (
 	"go-server/db"
 	"go-server/models"
+	"go-server/utils"
 	"log"
 	"net/http"
 	"strconv"
@@ -11,9 +12,108 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Dashboard(c *gin.Context) {
+func HealthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "application is running"})
+}
 
+func RenderHomepage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
+}
+
+func Dashboard(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.HTML(http.StatusOK, "dashboard.html", nil)
+	}
+}
+
+func RenderLoginUser(c *gin.Context) {
+
+	c.HTML(http.StatusOK, "login.html", nil)
+}
+
+func RenderRegisterUser(c *gin.Context) {
+
+	c.HTML(http.StatusOK, "register.html", nil)
+}
+
+// RegisterUser handles the registration of a new user.
+func RegisterUser(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Retrieve form data
+		firstName := c.PostForm("first_name")
+		lastName := c.PostForm("last_name")
+		email := c.PostForm("email")
+		password := c.PostForm("password")
+		role := c.PostForm("role")
+		username := c.PostForm("username")
+
+		// Check if the user already exists with the provided username or email
+		if _, err := db.GetUserByUsername(username); err == nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "user already exists with this username"})
+			return
+		}
+		if _, err := db.GetUserByEmailID(email); err == nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "user already exists with this email"})
+			return
+		}
+
+		// Hash the password
+		hashedPassword, err := utils.HashPassword(password)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "failed to hash password"})
+			return
+		}
+
+		// Create a new user with the hashed password
+		newUser := models.User{
+			FirstName: firstName,
+			LastName:  lastName,
+			Email:     email,
+			Role:      role,
+			Password:  hashedPassword, // Store the hashed password
+			Username:  username,
+		}
+
+		// Register the user in the database
+		if err := db.RegisterUser(&newUser); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "failed to register user"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"status": "success", "message": "you are now registered"})
+	}
+}
+
+// LoginUser handles the user login and returns a JWT token upon successful login.
+func LoginUser(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Retrieve form data
+		username := c.PostForm("username")
+		password := c.PostForm("password")
+
+		// Check if the user exists in the database
+		user, err := db.GetUserByUsername(username)
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "User not found"})
+			return
+		}
+
+		// Verify the password
+		if !utils.VerifyPassword(password, user.Password) {
+			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Incorrect password"})
+			return
+		}
+
+		// Generate a JWT token
+		token, err := utils.GenerateJWTToken(user)
+		if err != nil {
+			log.Println("failed to generate JWT token")
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate JWT token"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
+	}
 }
 
 // GetLocationDetails handles the GET request to retrieve location details.
