@@ -51,7 +51,10 @@
 <body>
     <div class="container">
         <h1>Register</h1>
-        <div id="error-message" style="color: red;"></div> <!-- Error message container -->
+        <div id="error-message" style="color: red;"></div>
+        <div id="success-message" class="alert alert-success" style="display: none;">
+            Registration was successful! Redirecting to login page...
+        </div>
         <form id="register-form">
             <div class="form-group">
                 <label for="first_name">First Name</label>
@@ -95,10 +98,10 @@
         document.addEventListener("DOMContentLoaded", function () {
             const registerForm = document.getElementById("register-form");
             const errorMessage = document.getElementById("error-message");
+            const successMessage = document.getElementById("success-message");
 
             registerForm.addEventListener("submit", function (event) {
                 event.preventDefault();
-
                 const firstName = document.getElementById("first_name").value;
                 const lastName = document.getElementById("last_name").value;
                 const username = document.getElementById("username").value;
@@ -122,15 +125,25 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.status === "success") {
-                            // If registration is successful, redirect the user to the login page
-                            window.location.href = "http://localhost:8080/login";
+                            // If registration is successful, show the success message
+                            successMessage.style.display = "block";
+                            errorMessage.style.display = "none";
+
+                            // Hide the success message after 1 second and redirect
+                            setTimeout(function () {
+                                window.location.href = "http://localhost:8080/login";
+                            }, 1000);
                         } else {
                             // If there is an error, display the error message to the user
                             errorMessage.textContent = data.message;
+                            errorMessage.style.display = "block";
+                            successMessage.style.display = "none";
                         }
                     })
                     .catch((error) => {
                         errorMessage.textContent = "An error occurred while registering.";
+                        errorMessage.style.display = "block";
+                        successMessage.style.display = "none";
                     });
             });
         });
