@@ -46,7 +46,7 @@ func main() {
 	r.GET("/register", handlers.RenderRegisterUser)
 	r.GET("/login", handlers.RenderLoginUser)
 
-	r.POST("/register", handlers.RegisterUser(db))
+	r.POST("/signup", handlers.RegisterUser(db))
 	r.POST("/login", handlers.LoginUser(db))
 	//protected routes
 	r.GET("/home", middleware.AuthMiddleware("admin", "general"), handlers.Dashboard(db))
