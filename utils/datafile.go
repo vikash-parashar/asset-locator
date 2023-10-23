@@ -21,7 +21,7 @@ func GeneratePDFFile(data interface{}) error {
 // TODO:
 
 // GenerateExcelFile generates an Excel file from the provided data and returns the Excel file object.
-func GenerateExcelFile(data interface{}) (*excelize.File, error) {
+func GenerateExcelFile(data []interface{}) (*excelize.File, error) {
 	// Create a new Excel file
 	xlsx := excelize.NewFile()
 
