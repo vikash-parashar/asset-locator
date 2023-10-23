@@ -8,6 +8,7 @@ import (
 	"go-server/handlers"
 	"go-server/middleware"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -36,7 +37,8 @@ func main() {
 	defer db.Close()
 
 	r := gin.Default()
-
+	// Enable CORS for all origins, allowing all HTTP methods and headers.
+	r.Use(cors.Default())
 	r.LoadHTMLGlob("templates/*.html")
 
 	r.GET("/health-check", handlers.HealthCheck)
@@ -51,29 +53,39 @@ func main() {
 	r.POST("/logout", handlers.Logout())
 	//protected routes
 
-	// r.GET("/api/v1/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GeneratePDFFile(db))
-	// r.GET("/api/v1/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GenerateExcelFile(db))
-
 	r.GET("/api/v1/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
+
+	// TODO: LOCATION
 	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
-	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
-	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
-	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
-
 	r.POST("/api/v1/location-details", middleware.AuthMiddleware("admin"), handlers.CreateNewLocationDetails(db))
-	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
-	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
-	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
-
 	r.PUT("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceLocationDetail(db))
-	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
-	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
-	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
-
-	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
-	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
-	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
 	r.DELETE("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
+	// r.GET("/api/v1/location-details/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GenerateLocationDataPDF(db))
+	r.GET("/api/v1/location-details/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GenerateLocationDataExcel(db))
+
+	// TODO: OWNER
+	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
+	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
+	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
+	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
+	// r.GET("/api/v1/owner-details/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GenerateOwnerDataPDF(db))
+	r.GET("/api/v1/owner-details/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GenerateOwnerDataExcel(db))
+
+	// TODO: POWER
+	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
+	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
+	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
+	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
+	// r.GET("/api/v1/power-details/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GeneratePowerDataPDF(db))
+	r.GET("/api/v1/power-details/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GeneratePowerDataExcel(db))
+
+	// TODO: FIBER
+	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
+	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
+	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
+	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
+	// r.GET("/api/v1/fiber-details/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GenerateFiberDataPDF(db))
+	r.GET("/api/v1/fiber-details/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GenerateFiberDataExcel(db))
 
 	log.Fatalln(r.Run(":" + port))
 }

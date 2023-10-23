@@ -176,9 +176,9 @@
                     data-target="#createEntryModal">
                     Add Data
                 </button>
-                <a href="http://localhost:8080/api/v1/generate-pdf-file?page=2" class="btn btn-primary">Download PDF</a>
-                <a href="http://localhost:8080/api/v1/generate-excel-file?page=2" class="btn btn-primary">Download
-                    Excel</a>
+                <a href="http://localhost:8080/api/v1/location-details/generate-pdf" class="btn btn-primary">Download
+                    PDF</a>
+                <a href="#" id="downloadExcelButton" class="btn btn-primary">Download Excel</a>
             </div>
         </div>
     </div>
@@ -498,7 +498,49 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
     </script>
+    <script>
+        // Add a click event listener to the button
+        document.getElementById("downloadExcelButton").addEventListener("click", function () {
+            // Define the API endpoint URL
+            const apiUrl = "http://localhost:8080/api/v1/fiber-details/generate-excel";
 
+            // Send an HTTP GET request to the API
+            fetch(apiUrl, {
+                method: "GET"
+            })
+                .then(response => {
+                    // Check if the response is successful (status code 200)
+                    if (response.status === 200) {
+                        // Convert the response to a blob (assuming the API returns the Excel file)
+                        return response.blob();
+                    } else {
+                        // Handle the error here, e.g., display an error message
+                        console.error("Failed to download Excel file");
+                    }
+                })
+                .then(blob => {
+                    // Create a temporary URL for the blob
+                    const url = window.URL.createObjectURL(blob);
+
+                    // Create an invisible anchor element to trigger the download
+                    const a = document.createElement("a");
+                    a.style.display = "none";
+                    a.href = url;
+                    a.download = "excel_file.xlsx"; // Specify the file name
+
+                    // Trigger a click event on the anchor element to initiate the download
+                    document.body.appendChild(a);
+                    a.click();
+
+                    // Clean up by removing the anchor element and revoking the blob URL
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error("An error occurred:", error);
+                });
+        });
+    </script>
 </body>
 
 </html>
