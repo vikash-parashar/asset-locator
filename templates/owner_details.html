@@ -191,9 +191,9 @@
                 </button>
             </div>
             <div class="col">
-                <a href="http://localhost:8080/api/v1/owner-details/generate-pdf" class="btn btn-primary">Download PDF</a>
-                <a href="http://localhost:8080/api/v1/owner-details/generate-excel" class="btn btn-primary">Download
-                    Excel</a>
+                <a href="http://localhost:8080/api/v1/owner-details/generate-pdf" class="btn btn-primary">Download
+                    PDF</a>
+                <button id="downloadButton">Download Excel</button>
             </div>
         </div>
     </div>
@@ -515,7 +515,26 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
     </script>
-
+    <script>
+        document.getElementById("downloadButton").addEventListener("click", function () {
+            // Make an AJAX request to your backend API endpoint that generates and serves the Excel file.
+            fetch('http://localhost:8080/api/v1/owner-details/generate-excel', {
+                method: 'GET',
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    // Create a temporary link and trigger the download.
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'data.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                });
+        });
+    </script>
 </body>
 
 </html>
