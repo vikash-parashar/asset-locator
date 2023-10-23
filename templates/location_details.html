@@ -40,6 +40,21 @@
             }
         }
 
+        /* Improved Navbar Styling */
+        .navbar {
+            padding: 10px;
+        }
+
+        .nav-btn {
+            background-color: #219C90;
+            color: #F1EFEF;
+            border-radius: 20px;
+        }
+
+        .navbar-collapse {
+            margin-left: auto;
+        }
+
         /* Custom CSS for the content */
         .content {
             margin-left: 0;
@@ -115,7 +130,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
                             class="nav-btn btn-outline-info">Home</button></a>
@@ -133,12 +148,14 @@
                             class="nav-btn btn-outline-info">Fiber Details</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn">Logout</button></a>
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -160,7 +177,8 @@
                     Add Data
                 </button>
                 <a href="http://localhost:8080/api/v1/generate-pdf-file?page=2" class="btn btn-primary">Download PDF</a>
-                <a href="http://localhost:8080/api/v1/generate-excel-file?page=2" class="btn btn-primary">Download Excel</a>
+                <a href="http://localhost:8080/api/v1/generate-excel-file?page=2" class="btn btn-primary">Download
+                    Excel</a>
             </div>
         </div>
     </div>
@@ -178,12 +196,6 @@
                 <div class="modal-body">
                     <form id="entryForm">
                         <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <input type="text" class="form-control" id="id" name="id">
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="serialNumber">Serial Number</label>

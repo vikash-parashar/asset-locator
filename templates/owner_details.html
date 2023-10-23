@@ -94,10 +94,20 @@
             border-radius: 20px;
         }
 
+
+        /* Improved Navbar Styling */
+        .navbar {
+            padding: 10px;
+        }
+
         .nav-btn {
             background-color: #219C90;
             color: #F1EFEF;
             border-radius: 20px;
+        }
+
+        .navbar-collapse {
+            margin-left: auto;
         }
 
         .container {
@@ -106,8 +116,9 @@
         }
 
         .btn {
-            font-size: 16px;
-            /* Increased button font size for better readability */
+            font-size: 1rem;
+            border-radius: 20px;
+            margin-right: 10px;
         }
 
         /* Improved table styling */
@@ -130,7 +141,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -138,29 +149,30 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button class="nav-btn btn">Home</button></a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
+                            class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn">Location Details</button></a>
+                            class="nav-btn btn-outline-info">Location Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn btn">Owners Details</button></a>
+                            class="nav-btn btn-outline-info">Owners Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn btn">Fiber Details</button></a>
+                            class="nav-btn btn-outline-info">Fiber Details</button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn btn">Power Details</button></a>
+                            class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="nav-btn btn">Logout</button></a>
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -180,7 +192,8 @@
             </div>
             <div class="col">
                 <a href="http://localhost:8080/api/v1/generate-pdf-file?page=3" class="btn btn-primary">Download PDF</a>
-                <a href="http://localhost:8080/api/v1/generate-excel-file?page=3" class="btn btn-primary">Download Excel</a>
+                <a href="http://localhost:8080/api/v1/generate-excel-file?page=3" class="btn btn-primary">Download
+                    Excel</a>
             </div>
         </div>
     </div>
@@ -198,12 +211,6 @@
                 <div class="modal-body">
                     <form id="entryForm">
                         <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <input type="text" class="form-control" id="id" name="id">
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="serialNumber">Serial Number</label>

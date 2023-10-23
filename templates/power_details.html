@@ -9,141 +9,133 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
-        /* Improve Typography */
         body {
-            font-family: 'Arial', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
-            /* Dark text for better readability */
+            background: linear-gradient(45deg, #132043, #1F4172, #04364A, #001524);
+            background-size: 800% 1800%;
+            animation: gradient 120s infinite;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Improved background transparency */
+            color: #ffffff;
+            /* Improved text color */
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
         }
+
+        .navbar {
+            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
+            background-size: 800% 1800%;
+            animation: gradient 5s infinite;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Improved background transparency */
+            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Custom CSS for the content */
+        .content {
+            margin-left: 0;
+            padding: 30px;
+        }
+
+        /* Add border and margin to table headers */
+        table th {
+            border: 1px solid #062b36;
+            margin: 5px;
+            padding: 10px;
+            /* Increased padding for better spacing */
+            text-align: center;
+            /* Center-align text in header and data cells */
+            vertical-align: middle;
+            /* Vertically center content */
+            color: #FFFAD7;
+            /* Improved text color */
+            background-color: #025464;
+            /* Header background color */
+        }
+
+        label {
+            color: #ffffff;
+        }
+
+        input {
+            background-color: #DDF7E3;
+            color: #000000;
+        }
+
+        .modal-title {
+            color: #ffffff;
+        }
+
+        .modal-content {
+            background-color: #025464;
+        }
+
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
+            border-radius: 10px;
         }
 
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
-        }
-
-        /* Navbar Styling */
-        .navbar {
-            background: #1F4172;
-            /* Dark blue background */
-            padding: 15px;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px 20px;
-            color: #fff;
-        }
-
-        .navbar-nav .nav-link:hover {
-            background-color: #1F4172;
-            /* Hover color same as the background */
-            color: #FF8551;
-        }
-
-        .navbar-nav .nav-link.active {
-            background-color: #1F4172;
-            color: #FF8551;
-        }
-
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            background-color: #1F4172;
-            /* Dark blue header background */
-            color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* Buttons */
-        .btn {
-            background-color: #FF8551;
-            /* Orange button background */
-            color: #fff;
-            border: none;
             border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        .btn:hover {
-            background-color: #FF6A30;
-            /* Slightly darker orange on hover */
+
+        /* Improved Navbar Styling */
+        .navbar {
+            padding: 10px;
         }
 
-        .btn-outline-info {
-            background-color: transparent;
-            border: 2px solid #219C90;
-            color: #219C90;
-        }
-
-        .btn-outline-info:hover {
+        .nav-btn {
             background-color: #219C90;
-            color: #fff;
+            color: #F1EFEF;
+            border-radius: 20px;
         }
 
-        /* Table Styling */
-        table {
-            border-collapse: collapse;
-            width: 100%;
+        .navbar-collapse {
+            margin-left: auto;
         }
 
-        th,
-        td {
-            border: 1px solid #062b36;
+        .container {
+            margin-top: 20px;
+            /* Improved top margin for containers */
+        }
+
+        .btn {
+            font-size: 1rem;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        /* Improved table styling */
+        .custom-table {
+            border: 1px solid #FFF6DC;
+        }
+
+        .custom-table th {
             padding: 10px;
             text-align: center;
+            vertical-align: middle;
         }
 
-        th {
-            background-color: #1F4172;
-            color: #fff;
-        }
-
-        td {
-            background-color: #025464;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #04364A;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #001524;
-        }
-
-        /* Modal Styling */
-        .modal-title {
-            color: #333;
-            /* Darker text in the modal */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            /* White modal background */
-            color: #333;
-            /* Dark text in the modal */
-        }
-
-        .modal-footer {
-            background-color: #fff;
-        }
-
-        .modal-footer .btn {
-            background-color: #FF8551;
-            color: #fff;
-            border-radius: 20px;
-        }
-
-        .modal-footer .btn:hover {
-            background-color: #FF6A30;
+        .custom-table td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -155,7 +147,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
                             class="nav-btn btn-outline-info">Home</button></a>
@@ -173,12 +165,14 @@
                             class="nav-btn btn-outline-info">Fiber Details</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn">Logout</button></a>
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -220,12 +214,6 @@
                 <div class="modal-body">
                     <form id="entryForm">
                         <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <input type="text" class="form-control" id="id" name="id">
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="serialNumber">Serial Number</label>

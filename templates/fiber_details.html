@@ -42,8 +42,7 @@
 
         /* Custom CSS for the content */
         .content {
-            margin-left: 0;
-            padding: 30px;
+            margin: 20px;
         }
 
         /* Improved Navbar Styling */
@@ -67,22 +66,21 @@
             color: #fff;
         }
 
-        /* Improved Buttons Styling */
         .btn {
-            margin: 5px;
-            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 20px;
+            margin-right: 10px;
         }
 
         /* Custom Table Styling */
         .custom-table th {
             padding: 10px;
-            margin: 5px;
         }
 
         .custom-table td {
             padding: 10px;
-            margin: 5px;
         }
+
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
@@ -91,6 +89,10 @@
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
+        }
+
+        .modal-dialog {
+            max-width: 80%;
         }
     </style>
 </head>
@@ -120,7 +122,7 @@
                             class="nav-btn btn-outline-info">Fiber Details</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
             </ul>
@@ -133,14 +135,12 @@
         </div>
     </nav>
 
-    <div class="container mt-4 text-center">
-        <h1 style="color: #fff;">Device Ethernet Fiber Details</h1>
-    </div>
-
-    <div class="container mb-4 mt-4 d-flex justify-content-center">
+    <!-- Add Data Button -->
+    <div class="container mb-4 mt-4 d-flex justify-content-between">
         <div class="row">
             <div class="col">
-                <button id="newEntryButton" class="btn btn-info">Add Data</button>
+                <button id="newEntryButton" class="btn btn-info" data-toggle="modal" data-target="#createEntryModal">Add
+                    Data</button>
             </div>
             <div class="col">
                 <a href="http://localhost:8080/api/v1/generate-pdf-file?page=1" class="btn btn-primary">Download PDF</a>
@@ -148,6 +148,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">

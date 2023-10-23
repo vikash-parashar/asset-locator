@@ -125,67 +125,67 @@ func RenderRegisterUser(c *gin.Context) {
 // }
 
 // Define the GeneratePDFFile middleware
-func GeneratePDFFile(db *db.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Get the page parameter from the URL (e.g., /generate-pdf?page=1)
-		page := c.DefaultQuery("page", "")
+// func GeneratePDFFile(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		// Get the page parameter from the URL (e.g., /generate-pdf?page=1)
+// 		page := c.DefaultQuery("page", "")
 
-		var data interface{}
-		var err error
+// 		var data interface{}
+// 		var err error
 
-		switch page {
-		case "1":
-			data, err = db.FetchDataFromTable1()
-		case "2":
-			data, err = db.FetchDataFromTable2()
-		case "3":
-			data, err = db.FetchDataFromTable3()
-		case "4":
-			data, err = db.FetchDataFromTable4()
-		// Add more cases for other pages
-		default:
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid page parameter"})
-			return
-		}
+// 		switch page {
+// 		case "1":
+// 			data, err = db.FetchDataFromTable1()
+// 		case "2":
+// 			data, err = db.FetchDataFromTable2()
+// 		case "3":
+// 			data, err = db.FetchDataFromTable3()
+// 		case "4":
+// 			data, err = db.FetchDataFromTable4()
+// 		// Add more cases for other pages
+// 		default:
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid page parameter"})
+// 			return
+// 		}
 
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to get data."})
-			return
-		}
+// 		if err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to get data."})
+// 			return
+// 		}
 
-		// Generate the PDF
-		err := utils.GeneratePDFFile(data)
+// 		// Generate the PDF
+// 		err := utils.GeneratePDFFile(data)
 
-		// Create a file to save the generated PDF
-		pdfPath := "/path/to/output.pdf"
-		err = pdf.
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save PDF."})
-			return
-		}
+// 		// Create a file to save the generated PDF
+// 		pdfPath := "/path/to/output.pdf"
+// 		err = pdf.
+// 		if err != nil {
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save PDF."})
+// 			return
+// 		}
 
-		// Serve the generated PDF to the user
-		c.File(pdfPath)
-	}
-}
+// 		// Serve the generated PDF to the user
+// 		c.File(pdfPath)
+// 	}
+// }
 
-// TODO:
-func GenerateExcelFile(db *db.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Fetch the data from the PostgreSQL database
-		// data := fetchDataFromDatabase()
-		var data interface{}
-		// Generate the PDF
-		err := utils.GenerateExcelFile(data)
-		if err != nil {
-			http.Error(c.Writer, "Error generating PDF", http.StatusInternalServerError)
-			return
-		}
+// // TODO:
+// func GenerateExcelFile(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		// Fetch the data from the PostgreSQL database
+// 		// data := fetchDataFromDatabase()
+// 		var data interface{}
+// 		// Generate the PDF
+// 		err := utils.GenerateExcelFile(data)
+// 		if err != nil {
+// 			http.Error(c.Writer, "Error generating PDF", http.StatusInternalServerError)
+// 			return
+// 		}
 
-		// Serve the generated PDF to the user
-		http.ServeFile(c.Writer, c.Request, "output.xls")
-	}
-}
+// 		// Serve the generated PDF to the user
+// 		http.ServeFile(c.Writer, c.Request, "output.xls")
+// 	}
+// }
 
 // RegisterUser handles the registration of a new user.
 func SignUp(db *db.DB) gin.HandlerFunc {
