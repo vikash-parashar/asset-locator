@@ -381,7 +381,7 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 }
 
 // FetchDataFromTable1 retrieves data from table 1.
-func (db *DB) FetchDataFromTable1() ([]*models.DeviceAMCOwnerDetail, error) {
+func (db *DB) FetchDataFromDeviceOwner() ([]*models.DeviceAMCOwnerDetail, error) {
 	query := "SELECT * FROM device_amc_owner"
 	rows, err := db.Query(query)
 	if err != nil {
@@ -405,7 +405,7 @@ func (db *DB) FetchDataFromTable1() ([]*models.DeviceAMCOwnerDetail, error) {
 }
 
 // FetchDataFromTable2 retrieves data from table 2.
-func (db *DB) FetchDataFromTable2() ([]*models.DeviceEthernetFiberDetail, error) {
+func (db *DB) FetchDataFromDeviceFiber() ([]*models.DeviceEthernetFiberDetail, error) {
 	query := "SELECT * FROM device_ethernet_fiber"
 	rows, err := db.Query(query)
 	if err != nil {
@@ -429,7 +429,7 @@ func (db *DB) FetchDataFromTable2() ([]*models.DeviceEthernetFiberDetail, error)
 }
 
 // FetchDataFromTable3 retrieves data from table 3.
-func (db *DB) FetchDataFromTable3() ([]*models.DeviceLocationDetail, error) {
+func (db *DB) FetchDataFromDeviceLocation() ([]*models.DeviceLocationDetail, error) {
 	query := "SELECT * FROM device_location"
 	rows, err := db.Query(query)
 	if err != nil {
@@ -453,7 +453,7 @@ func (db *DB) FetchDataFromTable3() ([]*models.DeviceLocationDetail, error) {
 }
 
 // FetchDataFromTable4 retrieves data from table 4.
-func (db *DB) FetchDataFromTable4() ([]*models.DevicePowerDetail, error) {
+func (db *DB) FetchDataFromDevicePower() ([]*models.DevicePowerDetail, error) {
 	query := "SELECT * FROM device_power"
 	rows, err := db.Query(query)
 	if err != nil {

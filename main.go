@@ -52,25 +52,34 @@ func main() {
 	//protected routes
 
 	r.GET("/api/v1/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
+
 	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
-	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
-	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
-	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
-
 	r.POST("/api/v1/location-details", middleware.AuthMiddleware("admin"), handlers.CreateNewLocationDetails(db))
-	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
-	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
-	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
-
 	r.PUT("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceLocationDetail(db))
-	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
-	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
-	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
-
-	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
-	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
-	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
 	r.DELETE("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
+	// r.GET("/api/v1/location-details/pdf", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
+	// r.GET("/api/v1/location-details/excel", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
+
+	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
+	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
+	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
+	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
+	// r.GET("/api/v1/owner-details/pdf", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
+	// r.DELETE("/api/v1/owner-details/excel", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
+
+	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
+	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
+	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
+	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
+	// r.GET("/api/v1/power-details/pdf", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
+	// r.GET("/api/v1/power-details/excel", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
+
+	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
+	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
+	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
+	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
+	r.GET("/api/v1/fiber-details/pdf", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
+	r.GET("/api/v1/fiber-details/excel", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
 
 	log.Fatalln(r.Run(":" + port))
 }
