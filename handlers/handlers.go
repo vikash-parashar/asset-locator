@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"go-server/db"
 	"go-server/models"
 	"go-server/utils"
@@ -10,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jung-kurt/gofpdf"
 	"github.com/tealeg/xlsx"
 )
 
@@ -807,5 +809,254 @@ func DownloadDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 			log.Fatal(err)
 			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
 		}
+	}
+}
+
+func DownloadDeviceLocationDetailPDF(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceLocationDetail data
+		rows, err := db.Query("SELECT * FROM device_location")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new PDF document
+		pdf := gofpdf.New("P", "mm", "A4", "")
+		pdf.AddPage()
+
+		// Set font and text size
+		pdf.SetFont("Arial", "", 12)
+
+		// Add table headers
+		headers := []string{"ID", "Serial Number", "Device Make Model", "Model", "Device Type", "Data Center", "Region", "DC Location", "Device Location", "Device Row Number", "Device Rack Number", "Device RU Number"}
+		for _, header := range headers {
+			pdf.CellFormat(40, 10, header, "1", 0, "C", false, 0, "")
+		}
+		pdf.Ln(-1)
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DeviceLocationDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+
+			data := []string{
+				fmt.Sprint(device.ID),
+				device.SerialNumber,
+				device.DeviceMakeModel,
+				device.Model,
+				device.DeviceType,
+				device.DataCenter,
+				device.Region,
+				device.DCLocation,
+				device.DeviceLocation,
+				fmt.Sprint(device.DeviceRowNumber),
+				fmt.Sprint(device.DeviceRackNumber),
+				device.DeviceRUNumber,
+			}
+
+			for _, str := range data {
+				pdf.CellFormat(40, 10, str, "1", 0, "C", false, 0, "")
+			}
+			pdf.Ln(-1)
+		}
+
+		// Create the PDF file
+		pdf.Output(c.Writer)
+
+		// Set response headers
+		c.Header("Content-Type", "application/pdf")
+		c.Header("Content-Disposition", "attachment; filename=DeviceLocationDetails.pdf")
+	}
+}
+
+// DownloadDevicePowerDetailAsPDF exports DevicePowerDetail data as a PDF file.
+func DownloadDevicePowerDetailPDF(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DevicePowerDetail data
+		rows, err := db.Query("SELECT * FROM device_power")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new PDF document
+		pdf := gofpdf.New("P", "mm", "A4", "")
+		pdf.AddPage()
+
+		// Set font and text size
+		pdf.SetFont("Arial", "", 12)
+
+		// Add table headers
+		headers := []string{"ID", "Serial Number", "Device Make Model", "Model", "Device Type", "Total Power Watt", "Total BTU", "Total Power Cable", "Power Socket Type"}
+		for _, header := range headers {
+			pdf.CellFormat(40, 10, header, "1", 0, "C", false, 0, "")
+		}
+		pdf.Ln(-1)
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DevicePowerDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+
+			data := []string{
+				fmt.Sprint(device.ID),
+				device.SerialNumber,
+				device.DeviceMakeModel,
+				device.Model,
+				device.DeviceType,
+				fmt.Sprint(device.TotalPowerWatt),
+				fmt.Sprint(device.TotalBTU),
+				fmt.Sprint(device.TotalPowerCable),
+				device.PowerSocketType,
+			}
+
+			for _, str := range data {
+				pdf.CellFormat(40, 10, str, "1", 0, "C", false, 0, "")
+			}
+			pdf.Ln(-1)
+		}
+
+		// Create the PDF file
+		pdf.Output(c.Writer)
+
+		// Set response headers
+		c.Header("Content-Type", "application/pdf")
+		c.Header("Content-Disposition", "attachment; filename=DevicePowerDetails.pdf")
+	}
+}
+
+func DownloadDeviceEthernetFiberDetailPDF(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceEthernetFiberDetail data
+		rows, err := db.Query("SELECT * FROM device_ethernet_fiber")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new PDF document
+		pdf := gofpdf.New("P", "mm", "A4", "")
+		pdf.AddPage()
+
+		// Set font and text size
+		pdf.SetFont("Arial", "", 12)
+
+		// Add table headers
+		headers := []string{"ID", "Serial Number", "Device Make Model", "Model", "Device Type", "Device Physical Port", "Device Port Type", "Device Port MAC/WWN", "Connected Device Port"}
+		for _, header := range headers {
+			pdf.CellFormat(40, 10, header, "1", 0, "C", false, 0, "")
+		}
+		pdf.Ln(-1)
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DeviceEthernetFiberDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+
+			data := []string{
+				fmt.Sprint(device.ID),
+				device.SerialNumber,
+				device.DeviceMakeModel,
+				device.Model,
+				device.DeviceType,
+				device.DevicePhysicalPort,
+				device.DevicePortType,
+				device.DevicePortMACWWN,
+				device.ConnectedDevicePort,
+			}
+
+			for _, str := range data {
+				pdf.CellFormat(40, 10, str, "1", 0, "C", false, 0, "")
+			}
+			pdf.Ln(-1)
+		}
+
+		// Create the PDF file
+		pdf.Output(c.Writer)
+
+		// Set response headers
+		c.Header("Content-Type", "application/pdf")
+		c.Header("Content-Disposition", "attachment; filename=DeviceEthernetFiberDetails.pdf")
+	}
+}
+
+func DownloadDeviceAMCOwnerDetailPDF(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceAMCOwnerDetail data
+		rows, err := db.Query("SELECT * FROM device_amc_owner")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new PDF document
+		pdf := gofpdf.New("P", "mm", "A4", "")
+		pdf.AddPage()
+
+		// Set font and text size
+		pdf.SetFont("Arial", "", 12)
+
+		// Add table headers
+		headers := []string{"ID", "Serial Number", "Device Make Model", "Model", "PO Number", "PO Order Date", "EOSL Date", "AMC Start Date", "AMC End Date", "Device Owner"}
+		for _, header := range headers {
+			pdf.CellFormat(40, 10, header, "1", 0, "C", false, 0, "")
+		}
+		pdf.Ln(-1)
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DeviceAMCOwnerDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+
+			data := []string{
+				fmt.Sprint(device.ID),
+				device.SerialNumber,
+				device.DeviceMakeModel,
+				device.Model,
+				device.PONumber,
+				device.POOrderDate.Format("2006-01-02"),
+				device.EOSLDate.Format("2006-01-02"),
+				device.AMCStartDate.Format("2006-01-02"),
+				device.AMCEndDate.Format("2006-01-02"),
+				device.DeviceOwner,
+			}
+
+			for _, str := range data {
+				pdf.CellFormat(40, 10, str, "1", 0, "C", false, 0, "")
+			}
+			pdf.Ln(-1)
+		}
+
+		// Create the PDF file
+		pdf.Output(c.Writer)
+
+		// Set response headers
+		c.Header("Content-Type", "application/pdf")
+		c.Header("Content-Disposition", "attachment; filename=DeviceAMCOwnerDetails.pdf")
 	}
 }
