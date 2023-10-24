@@ -31,7 +31,7 @@ func GetSecretKey() {
 
 func GenerateJWTToken(user *models.User) (string, error) {
 	claims := Claims{
-		UserID:   user.ID,
+		UserID:   user.Id,
 		Username: user.Username,
 		UserRole: user.Role,
 		StandardClaims: jwt.StandardClaims{

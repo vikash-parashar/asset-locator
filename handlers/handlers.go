@@ -205,7 +205,7 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 
 		// Assign the values to the DeviceLocationDetail struct
 		data = models.DeviceLocationDetail{
-			ID:               id,
+			Id:               id,
 			SerialNumber:     serialNumber,
 			DeviceMakeModel:  deviceMakeModel,
 			Model:            model,
@@ -257,7 +257,7 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 
 		// Assign the values to the DeviceAMCOwnerDetail struct
 		data = models.DeviceAMCOwnerDetail{
-			ID:              id,
+			Id:              id,
 			SerialNumber:    serialNumber,
 			DeviceMakeModel: deviceMakeModel,
 			Model:           model,
@@ -303,7 +303,7 @@ func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 
 		// Assign the values to the DevicePowerDetail struct
 		data = models.DevicePowerDetail{
-			ID:              id,
+			Id:              id,
 			SerialNumber:    serialNumber,
 			DeviceMakeModel: deviceMakeModel,
 			Model:           model,
@@ -345,7 +345,7 @@ func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 
 		// Assign the values to the DeviceEthernetFiberDetail struct
 		data = models.DeviceEthernetFiberDetail{
-			ID:                  id,
+			Id:                  id,
 			SerialNumber:        serialNumber,
 			DeviceMakeModel:     deviceMakeModel,
 			Model:               model,
@@ -579,13 +579,13 @@ func DownloadDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DevicePowerDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 			dataRow := sheet.AddRow()
-			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetInt(device.Id)
 			dataRow.AddCell().SetString(device.SerialNumber)
 			dataRow.AddCell().SetString(device.DeviceMakeModel)
 			dataRow.AddCell().SetString(device.Model)
@@ -642,13 +642,13 @@ func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database (similar to the DevicePowerDetail function)
 		for rows.Next() {
 			var device models.DeviceEthernetFiberDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 			dataRow := sheet.AddRow()
-			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetInt(device.Id)
 			dataRow.AddCell().SetString(device.SerialNumber)
 			dataRow.AddCell().SetString(device.DeviceMakeModel)
 			dataRow.AddCell().SetString(device.Model)
@@ -706,13 +706,13 @@ func DownloadDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DeviceAMCOwnerDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 			dataRow := sheet.AddRow()
-			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetInt(device.Id)
 			dataRow.AddCell().SetString(device.SerialNumber)
 			dataRow.AddCell().SetString(device.DeviceMakeModel)
 			dataRow.AddCell().SetString(device.Model)
@@ -773,13 +773,13 @@ func DownloadDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DeviceLocationDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 			dataRow := sheet.AddRow()
-			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetInt(device.Id)
 			dataRow.AddCell().SetString(device.SerialNumber)
 			dataRow.AddCell().SetString(device.DeviceMakeModel)
 			dataRow.AddCell().SetString(device.Model)
@@ -832,14 +832,14 @@ func DownloadDeviceLocationDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DeviceLocationDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 
 			data := []string{
-				fmt.Sprint(device.ID),
+				fmt.Sprint(device.Id),
 				device.SerialNumber,
 				device.DeviceMakeModel,
 				device.Model,
@@ -897,14 +897,14 @@ func DownloadDevicePowerDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DevicePowerDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 
 			data := []string{
-				fmt.Sprint(device.ID),
+				fmt.Sprint(device.Id),
 				device.SerialNumber,
 				device.DeviceMakeModel,
 				device.Model,
@@ -958,14 +958,14 @@ func DownloadDeviceEthernetFiberDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DeviceEthernetFiberDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 
 			data := []string{
-				fmt.Sprint(device.ID),
+				fmt.Sprint(device.Id),
 				device.SerialNumber,
 				device.DeviceMakeModel,
 				device.Model,
@@ -1019,14 +1019,14 @@ func DownloadDeviceAMCOwnerDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Add data rows from the database
 		for rows.Next() {
 			var device models.DeviceAMCOwnerDetail
-			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
+			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
 				log.Fatal(err)
 				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
 				return
 			}
 
 			data := []string{
-				fmt.Sprint(device.ID),
+				fmt.Sprint(device.Id),
 				device.SerialNumber,
 				device.DeviceMakeModel,
 				device.Model,
