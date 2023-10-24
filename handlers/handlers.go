@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tealeg/xlsx"
 )
 
 func HealthCheck(c *gin.Context) {
@@ -546,5 +547,265 @@ func DeleteDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail deleted successfully"})
+	}
+}
+
+// DeleteDevicePowerDetailHandler deletes a DevicePowerDetail record based on its ID.
+func DownloadDevicePowerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		rows, err := db.Query("SELECT * FROM device_power")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new Excel file
+		file := xlsx.NewFile()
+		sheet, err := file.AddSheet("DevicePowerDetails")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to create Excel sheet", http.StatusInternalServerError)
+			return
+		}
+
+		// Add header row
+		headerRow := sheet.AddRow()
+		headerRow.AddCell().SetString("ID")
+		headerRow.AddCell().SetString("Serial Number")
+		headerRow.AddCell().SetString("Device Make Model")
+		headerRow.AddCell().SetString("Model")
+		headerRow.AddCell().SetString("Device Type")
+		headerRow.AddCell().SetString("Total Power Watt")
+		headerRow.AddCell().SetString("Total BTU")
+		headerRow.AddCell().SetString("Total Power Cable")
+		headerRow.AddCell().SetString("Power Socket Type")
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DevicePowerDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.TotalPowerWatt, &device.TotalBTU, &device.TotalPowerCable, &device.PowerSocketType); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+			dataRow := sheet.AddRow()
+			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetString(device.SerialNumber)
+			dataRow.AddCell().SetString(device.DeviceMakeModel)
+			dataRow.AddCell().SetString(device.Model)
+			dataRow.AddCell().SetString(device.DeviceType)
+			dataRow.AddCell().SetInt(device.TotalPowerWatt)
+			dataRow.AddCell().SetFloat(device.TotalBTU)
+			dataRow.AddCell().SetInt(device.TotalPowerCable)
+			dataRow.AddCell().SetString(device.PowerSocketType)
+		}
+
+		// Save the Excel file to the response
+		c.Writer.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		c.Writer.Header().Set("Content-Disposition", "attachment; filename=DevicePowerDetails.xlsx")
+		err = file.Write(c.Writer)
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
+		}
+	}
+}
+
+func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceEthernetFiberDetail data (similar to the DevicePowerDetail function)
+		rows, err := db.Query("SELECT * FROM device_ethernet_fiber")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new Excel file
+		file := xlsx.NewFile()
+		sheet, err := file.AddSheet("DeviceEthernetFiberDetails")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to create Excel sheet", http.StatusInternalServerError)
+			return
+		}
+
+		// Add header row (similar to the DevicePowerDetail function)
+		headerRow := sheet.AddRow()
+		headerRow.AddCell().SetString("ID")
+		headerRow.AddCell().SetString("Serial Number")
+		headerRow.AddCell().SetString("Device Make Model")
+		headerRow.AddCell().SetString("Model")
+		headerRow.AddCell().SetString("Device Type")
+		headerRow.AddCell().SetString("Device Physical Port")
+		headerRow.AddCell().SetString("Device Port Type")
+		headerRow.AddCell().SetString("Device Port MAC/WWN")
+		headerRow.AddCell().SetString("Connected Device Port")
+
+		// Add data rows from the database (similar to the DevicePowerDetail function)
+		for rows.Next() {
+			var device models.DeviceEthernetFiberDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+			dataRow := sheet.AddRow()
+			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetString(device.SerialNumber)
+			dataRow.AddCell().SetString(device.DeviceMakeModel)
+			dataRow.AddCell().SetString(device.Model)
+			dataRow.AddCell().SetString(device.DeviceType)
+			dataRow.AddCell().SetString(device.DevicePhysicalPort)
+			dataRow.AddCell().SetString(device.DevicePortType)
+			dataRow.AddCell().SetString(device.DevicePortMACWWN)
+			dataRow.AddCell().SetString(device.ConnectedDevicePort)
+		}
+
+		// Save the Excel file to the response (similar to the DevicePowerDetail function)
+		c.Writer.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		c.Writer.Header().Set("Content-Disposition", "attachment; filename=DeviceEthernetFiberDetails.xlsx")
+		err = file.Write(c.Writer)
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
+		}
+	}
+}
+
+func DownloadDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceAMCOwnerDetail data
+		rows, err := db.Query("SELECT * FROM device_amc_owner")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new Excel file
+		file := xlsx.NewFile()
+		sheet, err := file.AddSheet("DeviceAMCOwnerDetails")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to create Excel sheet", http.StatusInternalServerError)
+			return
+		}
+
+		// Add header row
+		headerRow := sheet.AddRow()
+		headerRow.AddCell().SetString("ID")
+		headerRow.AddCell().SetString("Serial Number")
+		headerRow.AddCell().SetString("Device Make Model")
+		headerRow.AddCell().SetString("Model")
+		headerRow.AddCell().SetString("PO Number")
+		headerRow.AddCell().SetString("PO Order Date")
+		headerRow.AddCell().SetString("EOSL Date")
+		headerRow.AddCell().SetString("AMC Start Date")
+		headerRow.AddCell().SetString("AMC End Date")
+		headerRow.AddCell().SetString("Device Owner")
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DeviceAMCOwnerDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.PONumber, &device.POOrderDate, &device.EOSLDate, &device.AMCStartDate, &device.AMCEndDate, &device.DeviceOwner); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+			dataRow := sheet.AddRow()
+			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetString(device.SerialNumber)
+			dataRow.AddCell().SetString(device.DeviceMakeModel)
+			dataRow.AddCell().SetString(device.Model)
+			dataRow.AddCell().SetString(device.PONumber)
+			dataRow.AddCell().SetDate(device.POOrderDate)
+			dataRow.AddCell().SetDate(device.EOSLDate)
+			dataRow.AddCell().SetDate(device.AMCStartDate)
+			dataRow.AddCell().SetDate(device.AMCEndDate)
+			dataRow.AddCell().SetString(device.DeviceOwner)
+		}
+
+		// Save the Excel file to the response
+		c.Writer.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		c.Writer.Header().Set("Content-Disposition", "attachment; filename=DeviceAMCOwnerDetails.xlsx")
+		err = file.Write(c.Writer)
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
+		}
+	}
+}
+
+func DownloadDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Query the database for DeviceLocationDetail data
+		rows, err := db.Query("SELECT * FROM device_location")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to query the database", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Create a new Excel file
+		file := xlsx.NewFile()
+		sheet, err := file.AddSheet("DeviceLocationDetails")
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to create Excel sheet", http.StatusInternalServerError)
+			return
+		}
+
+		// Add header row
+		headerRow := sheet.AddRow()
+		headerRow.AddCell().SetString("ID")
+		headerRow.AddCell().SetString("Serial Number")
+		headerRow.AddCell().SetString("Device Make Model")
+		headerRow.AddCell().SetString("Model")
+		headerRow.AddCell().SetString("Device Type")
+		headerRow.AddCell().SetString("Data Center")
+		headerRow.AddCell().SetString("Region")
+		headerRow.AddCell().SetString("DC Location")
+		headerRow.AddCell().SetString("Device Location")
+		headerRow.AddCell().SetString("Device Row Number")
+		headerRow.AddCell().SetString("Device Rack Number")
+		headerRow.AddCell().SetString("Device RU Number")
+
+		// Add data rows from the database
+		for rows.Next() {
+			var device models.DeviceLocationDetail
+			if err := rows.Scan(&device.ID, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DataCenter, &device.Region, &device.DCLocation, &device.DeviceLocation, &device.DeviceRowNumber, &device.DeviceRackNumber, &device.DeviceRUNumber); err != nil {
+				log.Fatal(err)
+				http.Error(c.Writer, "Failed to scan database row", http.StatusInternalServerError)
+				return
+			}
+			dataRow := sheet.AddRow()
+			dataRow.AddCell().SetInt(device.ID)
+			dataRow.AddCell().SetString(device.SerialNumber)
+			dataRow.AddCell().SetString(device.DeviceMakeModel)
+			dataRow.AddCell().SetString(device.Model)
+			dataRow.AddCell().SetString(device.DeviceType)
+			dataRow.AddCell().SetString(device.DataCenter)
+			dataRow.AddCell().SetString(device.Region)
+			dataRow.AddCell().SetString(device.DCLocation)
+			dataRow.AddCell().SetString(device.DeviceLocation)
+			dataRow.AddCell().SetInt(device.DeviceRowNumber)
+			dataRow.AddCell().SetInt(device.DeviceRackNumber)
+			dataRow.AddCell().SetString(device.DeviceRUNumber)
+		}
+
+		// Save the Excel file to the response
+		c.Writer.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		c.Writer.Header().Set("Content-Disposition", "attachment; filename=DeviceLocationDetails.xlsx")
+		err = file.Write(c.Writer)
+		if err != nil {
+			log.Fatal(err)
+			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
+		}
 	}
 }
