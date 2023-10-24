@@ -43,9 +43,6 @@ func main() {
 
 	r.GET("/", handlers.RenderIndexPage)
 
-	r.GET("/signup", handlers.RenderRegisterUser)
-	r.GET("/login", handlers.RenderLoginUser)
-
 	r.POST("/signup", handlers.SignUp(db))
 	r.POST("/login", handlers.Login(db))
 	r.POST("/logout", handlers.Logout())

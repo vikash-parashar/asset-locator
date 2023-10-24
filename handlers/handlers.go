@@ -25,16 +25,8 @@ func RenderIndexPage(c *gin.Context) {
 
 func RenderHomePage(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home.html", nil)
+		c.HTML(http.StatusOK, "homepage.html", nil)
 	}
-}
-
-func RenderLoginUser(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.html", nil)
-}
-
-func RenderRegisterUser(c *gin.Context) {
-	c.HTML(http.StatusOK, "register.html", nil)
 }
 
 // RegisterUser handles the registration of a new user.
