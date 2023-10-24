@@ -9,147 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
-        /* Improve Typography */
-        body {
-           
-            font-size: 16px;
-            line-height: 1.6;
-            /* Dark text for better readability */
-        }
-
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
+            border-radius: 10px;
         }
 
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
-        }
-
-        /* Navbar Styling */
-        .navbar {
-            background: #1F4172;
-            /* Dark blue background */
-            padding: 15px;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px 20px;
-            color: #fff;
-        }
-
-        .navbar-nav .nav-link:hover {
-            background-color: #1F4172;
-            /* Hover color same as the background */
-            color: #FF8551;
-        }
-
-        .navbar-nav .nav-link.active {
-            background-color: #1F4172;
-            color: #FF8551;
-        }
-
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            background-color: #1F4172;
-            /* Dark blue header background */
-            color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* Buttons */
-        .btn {
-            background-color: #FF8551;
-            /* Orange button background */
-            color: #fff;
-            border: none;
             border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #FF6A30;
-            /* Slightly darker orange on hover */
-        }
-
-        .btn-outline-info {
-            background-color: transparent;
-            border: 2px solid #219C90;
-            color: #219C90;
-        }
-
-        .btn-outline-info:hover {
-            background-color: #219C90;
-            color: #fff;
-        }
-
-        /* Table Styling */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid #062b36;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #1F4172;
-            color: #fff;
-        }
-
-        td {
-            background-color: #025464;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #04364A;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #001524;
-        }
-
-        /* Modal Styling */
-        .modal-title {
-            color: #333;
-            /* Darker text in the modal */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            /* White modal background */
-            color: #333;
-            /* Dark text in the modal */
-        }
-
-        .modal-footer {
-            background-color: #fff;
-        }
-
-        .modal-footer .btn {
-            background-color: #FF8551;
-            color: #fff;
-            border-radius: 20px;
-        }
-
-        .modal-footer .btn:hover {
-            background-color: #FF6A30;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
+    <nav class="navbar navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -176,9 +51,11 @@
                     <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn">Logout</button></a>
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -301,10 +178,10 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th style="font-size:medium;color: #FEFFAC;">ID</th>
-                            <th style="font-size:medium;">Serial Number</th>
-                            <th style="font-size:medium;">Device Make & Model</th>
-                            <th style="font-size:medium;">Model</th>
+                            <th style="font-size:medium;">S No.</th>
+                            <th style="font-size:medium;">Device Serial Number</th>
+                            <th style="font-size:medium;">Device Make</th>
+                            <th style="font-size:medium;">Device Model</th>
                             <th style="font-size:medium;">Device Type</th>
                             <th style="font-size:medium;">Total Power (Watt)</th>
                             <th style="font-size:medium;">Total BTU</th>
@@ -316,7 +193,7 @@
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.ID}}</td>
+                            <td style="font-size:small;">{{.Id}}</td>
                             <td style="font-size:small;">{{.SerialNumber}}</td>
                             <td style="font-size:small;">{{.DeviceMakeModel}}</td>
                             <td style="font-size:small;">{{.Model}}</td>

@@ -8,53 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
-    <style>
-       
-
-        .navbar {
-            background: linear-gradient(45deg, #C70039, #12486B, #35A29F, #2E4374);
-            background-size: 800% 1800%;
-            animation: gradient 5s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
-            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-
-        }
-
-        /* Custom CSS for the content */
-        .content {
-            margin-left: 0;
-            padding: 50px;
-        }
-
-        /* Improved Navbar Styling */
-        .navbar {
-            padding: 10px;
-        }
-
-        .nav-btn {
-            background-color: #219C90;
-            color: #F1EFEF;
-            border-radius: 10px;
-        }
-
-        .navbar-nav {
-            margin-left: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -88,7 +41,8 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout">Logout</a>
+                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>

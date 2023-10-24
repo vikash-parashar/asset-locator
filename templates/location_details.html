@@ -9,98 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
-        .navbar {
-            background: linear-gradient(45deg, #2E4374, #35A29F, #C70039, #12486B);
-            background-size: 800% 1800%;
-            animation: gradient 5s infinite;
-            background-color: rgba(0, 0, 0, 0.5);
-            font-family: 'Josefin Sans', 'Tilt Neon', sans-serif;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Custom CSS for the content */
-        .content {
-            margin-left: 0;
-            padding: 30px;
-        }
-
-        .btn {
-            font-size: 1rem;
-            border-radius: 20px;
-            margin-right: 10px;
-        }
-
-        .modal-title {
-            color: #FFFAD7;
-        }
-
-        .modal-content {
-            background-color: #025464;
-        }
-
         .delete-button {
             background-color: #D80032;
             color: #F1EFEF;
+            border-radius: 10px;
         }
 
         .update-button {
             background-color: #008170;
             color: #F1EFEF;
-        }
-
-        .nav-btn {
-            background-color: #219C90;
-            color: #F1EFEF;
-        }
-
-        .custom-table {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        .custom-table th {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #FFFAD7;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        tbody {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        tr {
-            border-width: 1px;
-            border-color: #FFF6DC;
-        }
-
-        .custom-table td {
-            border-width: 1px;
-            border-color: #FFF6DC;
-            color: #FFFAD7;
-            text-align: center;
-            vertical-align: middle;
+            border-radius: 20px;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
+    <nav class="navbar navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -127,9 +51,11 @@
                     <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
                             class="nav-btn btn-outline-info">Power Details</button></a>
                 </li>
-                <li class="nav-item ml-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn">Logout</button></a>
+                            class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -269,10 +195,10 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th style="font-size:medium;color: #FEFFAC;">ID</th>
-                            <th style="font-size:medium;">Serial Number</th>
-                            <th style="font-size:medium;">Device Make & Model</th>
-                            <th style="font-size:medium;">Model</th>
+                            <th style="font-size:medium;">S No.</th>
+                            <th style="font-size:medium;">Device Serial Number</th>
+                            <th style="font-size:medium;">Device Make</th>
+                            <th style="font-size:medium;">Device Model</th>
                             <th style="font-size:medium;">Device Type</th>
                             <th style="font-size:medium;">Data Center</th>
                             <th style="font-size:medium;">Region</th>
@@ -287,7 +213,7 @@
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.ID}}</td>
+                            <td style="font-size:small;">{{.Id}}</td>
                             <td style="font-size:small;">{{.SerialNumber}}</td>
                             <td style="font-size:small;">{{.DeviceMakeModel}}</td>
                             <td style="font-size:small;">{{.Model}}</td>
