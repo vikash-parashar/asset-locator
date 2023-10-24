@@ -43,6 +43,8 @@ func AuthMiddleware(roles ...string) gin.HandlerFunc {
 		cookie, err := c.Request.Cookie("jwt-token")
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			// If JWT is not present, redirect to the "/" path
+			c.Redirect(http.StatusFound, "/")
 			c.Abort()
 			return
 		}

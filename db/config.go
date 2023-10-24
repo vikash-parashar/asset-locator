@@ -63,7 +63,7 @@ func (db *DB) GetAllDevicePowerDetail() ([]models.DevicePowerDetail, error) {
 	var results []models.DevicePowerDetail
 	for rows.Next() {
 		var data models.DevicePowerDetail
-		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
 		if err != nil {
 			log.Printf("Error scanning DevicePowerDetail: %v", err)
 			return nil, err
@@ -101,7 +101,7 @@ func (db *DB) GetAllDeviceEthernetFiberDetail() ([]models.DeviceEthernetFiberDet
 	var results []models.DeviceEthernetFiberDetail
 	for rows.Next() {
 		var data models.DeviceEthernetFiberDetail
-		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
 		if err != nil {
 			log.Printf("Error scanning DeviceEthernetFiberDetail: %v", err)
 			return nil, err
@@ -139,7 +139,7 @@ func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error
 	var results []models.DeviceAMCOwnerDetail
 	for rows.Next() {
 		var data models.DeviceAMCOwnerDetail
-		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
 		if err != nil {
 			log.Printf("Error scanning DeviceAMCOwnerDetail: %v", err)
 			return nil, err
@@ -177,7 +177,7 @@ func (db *DB) GetAllDeviceLocationDetail() ([]models.DeviceLocationDetail, error
 	var results []models.DeviceLocationDetail
 	for rows.Next() {
 		var data models.DeviceLocationDetail
-		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
 		if err != nil {
 			log.Printf("Error scanning DeviceLocationDetail: %v", err)
 			return nil, err
@@ -297,7 +297,7 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 		WHERE email = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+	err := db.QueryRow(query, email).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by email: %v", err)
 		return nil, err
@@ -312,7 +312,7 @@ func (db *DB) GetUserByUsername(username string) (*models.User, error) {
 		WHERE username = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, username).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+	err := db.QueryRow(query, username).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by username: %v", err)
 		return nil, err
@@ -327,7 +327,7 @@ func (db *DB) RegisterUser(user *models.User) error {
 		VALUES ($1, $2, $3, $4, $5, $6)
 		RETURNING id
 	`
-	err := db.QueryRow(query, user.FirstName, user.LastName, user.Username, user.Email, user.Password, user.Role).Scan(&user.ID)
+	err := db.QueryRow(query, user.FirstName, user.LastName, user.Username, user.Email, user.Password, user.Role).Scan(&user.Id)
 	if err != nil {
 		log.Printf("Error registering user: %v", err)
 		return err
@@ -366,7 +366,7 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 	users := make([]*models.User, 0)
 	for rows.Next() {
 		user := &models.User{}
-		err := rows.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+		err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
 		if err != nil {
 			log.Printf("Error scanning user rows: %v", err)
 			return nil, err
@@ -378,4 +378,100 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 		return nil, err
 	}
 	return users, nil
+}
+
+// FetchDataFromTable1 retrieves data from table 1.
+func (db *DB) FetchDataFromDeviceOwner() ([]*models.DeviceAMCOwnerDetail, error) {
+	query := "SELECT * FROM device_amc_owner"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 1: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceAMCOwnerDetail
+	for rows.Next() {
+		var data models.DeviceAMCOwnerDetail
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
+		if err != nil {
+			log.Printf("Error scanning data from table 1: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable2 retrieves data from table 2.
+func (db *DB) FetchDataFromDeviceFiber() ([]*models.DeviceEthernetFiberDetail, error) {
+	query := "SELECT * FROM device_ethernet_fiber"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 2: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceEthernetFiberDetail
+	for rows.Next() {
+		var data models.DeviceEthernetFiberDetail
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+		if err != nil {
+			log.Printf("Error scanning data from table 2: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable3 retrieves data from table 3.
+func (db *DB) FetchDataFromDeviceLocation() ([]*models.DeviceLocationDetail, error) {
+	query := "SELECT * FROM device_location"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 3: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceLocationDetail
+	for rows.Next() {
+		var data models.DeviceLocationDetail
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
+		if err != nil {
+			log.Printf("Error scanning data from table 3: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable4 retrieves data from table 4.
+func (db *DB) FetchDataFromDevicePower() ([]*models.DevicePowerDetail, error) {
+	query := "SELECT * FROM device_power"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 4: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DevicePowerDetail
+	for rows.Next() {
+		var data models.DevicePowerDetail
+		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
+		if err != nil {
+			log.Printf("Error scanning data from table 4: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
 }

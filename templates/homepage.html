@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #FFFD8C;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
+                            class="nav-btn btn-outline-info">Home</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
+                            class="nav-btn btn-outline-info">Location Details</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
+                            class="nav-btn btn-outline-info">Owners Details</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Fiber Details</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
+                            class="nav-btn btn-outline-info">Power Details</button></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
+                            class="btn btn-danger">Logout</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="content">
+                    <h2>Welcome to Device Management Portal</h2>
+                    <p class="mt-5">Are you ready to streamline your device management processes?
+                        <br>Our Device Management Portal provides comprehensive solutions for organizing, tracking, and
+                        optimizing your IT infrastructure.
+                        <br>From device locations to maintenance and power consumption, our platform offers a
+                        centralized hub to manage it all.
+                        <br>Explore our robust features, effortlessly update records, and enhance your operational
+                        efficiency.
+                        <br>Join us in simplifying device management and take control of your IT assets like never
+                        before.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (jQuery and Popper.js required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Function to handle logout
+        function handleLogout() {
+            fetch("/logout", {
+                method: "POST",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.href = "/"; // Redirect to the login page
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("An error occurred while logging out.");
+                });
+        }
+
+        // Attach the handleLogout function to the logout button's click event
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.addEventListener("click", handleLogout);
+    </script>
+</body>
+
+</html>
