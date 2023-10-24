@@ -32,9 +32,6 @@ type DevicePowerDetail struct {
 	TotalBTU        float64 `json:"total_btu"`
 	TotalPowerCable int     `json:"total_power_cable"`
 	PowerSocketType string  `json:"power_socket_type"`
-	Created_At      string  `json:"created_at"`
-	UpdatedAt       string  `json:"updated_at"`
-	DeletedAt       string  `json:"deleted_at"`
 }
 
 type DeviceEthernetFiberDetail struct {
@@ -47,9 +44,6 @@ type DeviceEthernetFiberDetail struct {
 	DevicePortType      string `json:"device_port_type"`
 	DevicePortMACWWN    string `json:"device_port_macwwn"`
 	ConnectedDevicePort string `json:"connected_device_port"`
-	Created_At          string `json:"created_at"`
-	UpdatedAt           string `json:"updated_at"`
-	DeletedAt           string `json:"deleted_at"`
 }
 
 type DeviceAMCOwnerDetail struct {
@@ -63,9 +57,6 @@ type DeviceAMCOwnerDetail struct {
 	AMCStartDate    time.Time `json:"amc_start_date"`
 	AMCEndDate      time.Time `json:"amc_end_date"`
 	DeviceOwner     string    `json:"device_owner"`
-	Created_At      string    `json:"created_at"`
-	UpdatedAt       string    `json:"updated_at"`
-	DeletedAt       string    `json:"deleted_at"`
 }
 
 type DeviceLocationDetail struct {
@@ -81,7 +72,4 @@ type DeviceLocationDetail struct {
 	DeviceRowNumber  int    `json:"device_row_number"`
 	DeviceRackNumber int    `json:"device_rack_number"`
 	DeviceRUNumber   string `json:"device_ru_number"`
-	Created_At       string `json:"created_at"`
-	UpdatedAt        string `json:"updated_at"`
-	DeletedAt        string `json:"deleted_at"`
 }

@@ -380,8 +380,98 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 	return users, nil
 }
 
-// TODO:s
-func (db *DB) FetchDataFromTable1() ([]*models.DeviceAMCOwnerDetail, error)      { return nil, nil }
-func (db *DB) FetchDataFromTable2() ([]*models.DeviceEthernetFiberDetail, error) { return nil, nil }
-func (db *DB) FetchDataFromTable3() ([]*models.DeviceLocationDetail, error)      { return nil, nil }
-func (db *DB) FetchDataFromTable4() ([]*models.DevicePowerDetail, error)         { return nil, nil }
+// FetchDataFromTable1 retrieves data from table 1.
+func (db *DB) FetchDataFromTable1() ([]*models.DeviceAMCOwnerDetail, error) {
+	query := "SELECT * FROM device_amc_owner"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 1: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceAMCOwnerDetail
+	for rows.Next() {
+		var data models.DeviceAMCOwnerDetail
+		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
+		if err != nil {
+			log.Printf("Error scanning data from table 1: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable2 retrieves data from table 2.
+func (db *DB) FetchDataFromTable2() ([]*models.DeviceEthernetFiberDetail, error) {
+	query := "SELECT * FROM device_ethernet_fiber"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 2: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceEthernetFiberDetail
+	for rows.Next() {
+		var data models.DeviceEthernetFiberDetail
+		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+		if err != nil {
+			log.Printf("Error scanning data from table 2: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable3 retrieves data from table 3.
+func (db *DB) FetchDataFromTable3() ([]*models.DeviceLocationDetail, error) {
+	query := "SELECT * FROM device_location"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 3: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DeviceLocationDetail
+	for rows.Next() {
+		var data models.DeviceLocationDetail
+		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
+		if err != nil {
+			log.Printf("Error scanning data from table 3: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}
+
+// FetchDataFromTable4 retrieves data from table 4.
+func (db *DB) FetchDataFromTable4() ([]*models.DevicePowerDetail, error) {
+	query := "SELECT * FROM device_power"
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Printf("Error fetching data from table 4: %v", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []*models.DevicePowerDetail
+	for rows.Next() {
+		var data models.DevicePowerDetail
+		err := rows.Scan(&data.ID, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
+		if err != nil {
+			log.Printf("Error scanning data from table 4: %v", err)
+			return nil, err
+		}
+		results = append(results, &data)
+	}
+
+	return results, nil
+}

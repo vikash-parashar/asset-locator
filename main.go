@@ -51,9 +51,6 @@ func main() {
 	r.POST("/logout", handlers.Logout())
 	//protected routes
 
-	r.GET("/api/v1/generate-pdf", middleware.AuthMiddleware("admin", "general"), handlers.GeneratePDFFile(db))
-	r.GET("/api/v1/generate-excel", middleware.AuthMiddleware("admin", "general"), handlers.GenerateExcelFile(db))
-
 	r.GET("/api/v1/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
 	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
 	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
