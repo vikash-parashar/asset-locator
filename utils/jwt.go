@@ -3,6 +3,8 @@
 package utils
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"go-server/models"
 	"net/http"
 	"os"
@@ -31,7 +33,7 @@ func GetSecretKey() {
 
 func GenerateJWTToken(user *models.User) (string, error) {
 	claims := Claims{
-		UserId:    user.Id,
+		UserId:    int(user.ID),
 		UserEmail: user.Email,
 		UserRole:  user.Role,
 		StandardClaims: jwt.StandardClaims{
@@ -77,4 +79,25 @@ func VerifyJWTToken(tokenString string) (Claims, bool) {
 		return claims, false
 	}
 	return claims, token.Valid
+}
+
+// GeneratePasswordResetToken generates a password reset token for a user.
+func GeneratePasswordResetToken(user *models.User) (string, error) {
+	// Create a unique token based on user email and a timestamp
+	tokenData := user.Email + time.Now().String()
+
+	// Generate a random 32-byte string for additional security
+	randomBytes := make([]byte, 32)
+	_, err := rand.Read(randomBytes)
+	if err != nil {
+		return "", err
+	}
+
+	// Combine the token data and random bytes
+	combinedData := append([]byte(tokenData), randomBytes...)
+
+	// Encode the combined data as a base64 string
+	token := base64.URLEncoding.EncodeToString(combinedData)
+
+	return token, nil
 }

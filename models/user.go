@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 const (
 	UserRoleAdmin   = "admin"
 	UserRoleGeneral = "general"
@@ -25,11 +27,14 @@ const (
 )
 
 type User struct {
-	Id        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Phone     string `json:"phone"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
-	Role      string `json:"role"`
+	ID               uint      `gorm:"primaryKey" json:"id"`
+	FirstName        string    `json:"first_name"`
+	LastName         string    `json:"last_name"`
+	Email            string    `gorm:"unique" json:"email"`
+	Password         string    `json:"password"`
+	Role             string    `json:"role"`
+	ResetToken       string    `json:"reset_token"`
+	ResetTokenExpiry time.Time `json:"reset_token_expiry"`
+	CreatedAt        time.Time `json:"created_at"`
+	UpdatedAt        time.Time `json:"updated_at"`
 }

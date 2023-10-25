@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
         .delete-button {
             background-color: #D80032;
@@ -54,8 +56,20 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn btn-danger">Logout</button></a>
+                    <div class="nav-link dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> <!-- User icon -->
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <p class="dropdown-item">First Name: John</p> <!-- Replace with actual user information -->
+                            <p class="dropdown-item">Last Name: Doe</p> <!-- Replace with actual user information -->
+                            <p class="dropdown-item">Email: john.doe@example.com</p>
+                            <!-- Replace with actual user information -->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" id="logout-button" href="http://localhost:8080/logout">Logout</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
