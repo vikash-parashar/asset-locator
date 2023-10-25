@@ -1,5 +1,3 @@
-// db.go
-
 package db
 
 import (

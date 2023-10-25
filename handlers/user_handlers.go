@@ -67,7 +67,8 @@ func Login(db *db.DB) gin.HandlerFunc {
 		// Check if the user exists in the database
 		user, err := db.GetUserByEmailID(loginRequest.Email)
 		if err != nil {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "message": "User not found"})
+			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Incorrect email or password"})
+
 			return
 		}
 

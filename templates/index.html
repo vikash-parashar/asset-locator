@@ -355,87 +355,75 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const registerForm = document.getElementById("register-form");
 
-                registerForm.addEventListener("submit", function (event) {
+                registerForm.addEventListener("submit", async function (event) {
                     event.preventDefault();
-                    const firstName = document.getElementById("first_name").value;
-                    const lastName = document.getElementById("last_name").value;
-                    const phone = document.getElementById("phone").value;
-                    const email = document.getElementById("email").value;
-                    const password = document.getElementById("password").value;
-                    // const role = document.getElementById("role").value;
+                    try {
+                        const firstName = document.getElementById("first_name").value;
+                        const lastName = document.getElementById("last_name").value;
+                        const phone = document.getElementById("phone").value;
+                        const email = document.getElementById("email").value;
+                        const password = document.getElementById("password").value;
 
-                    // Send a POST request to the backend API (You need to specify the correct URL)
-                    fetch("http://localhost:8080/signup", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            first_name: firstName,
-                            last_name: lastName,
-                            phone: phone,
-                            email: email,
-                            password: password,
-                            // role:role,
-                            // Include the selected role in the request if needed
-                        }),
-                        headers: {
-                            "Content-Type": "application/json", // Use JSON content type
-                        },
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.status === "success") {
-                                notify("success", response.message)
-
-                                // Hide the success message after 1 second and redirect
-                                setTimeout(function () {
-                                    window.location.href = "/";
-                                }, 1000);
-                            } else {
-                                notify("warning", "something is wrong , please try again")
-                            }
-                        })
-                        .catch((error) => {
-                            notify("error", error.message)
+                        const response = await fetch("/signup", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                first_name: firstName,
+                                last_name: lastName,
+                                phone: phone,
+                                email: email,
+                                password: password,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
                         });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            notify("success", "Registration successful. You can now log in.");
+                        } else {
+                            notify("warning", data.message || "Something went wrong. Please try again.");
+                        }
+                    } catch (error) {
+                        notify("error", "An error occurred. Please try again later.");
+                    }
                 });
             });
 
             document.addEventListener("DOMContentLoaded", function () {
                 const loginForm = document.getElementById("login-form");
 
-                loginForm.addEventListener("submit", function (event) {
+                loginForm.addEventListener("submit", async function (event) {
                     event.preventDefault();
+                    try {
+                        const email = document.getElementById("login-email").value;
+                        const password = document.getElementById("login-password").value;
 
-                    const email = document.getElementById("login-email").value;
-                    const password = document.getElementById("login-password").value;
-
-                    // Send a POST request to the backend API (You need to specify the correct URL)
-                    fetch("http://localhost:8080/login", {
-                        method: "POST",
-                        body: new URLSearchParams({ email, password }),
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.success) {
-                                // If login is successful, show the success message
-                                notify("success", response.message)
-
-                                // Hide the success message after 1 second and redirect
-                                setTimeout(function () {
-                                    window.location.href = "http://localhost:8080/api/v1/homepage";
-                                }, 1000);
-                            } else {
-                                // If there is an error, display the error message to the user
-                                notify("warning", response.message)
-                            }
-                        })
-                        .catch((error) => {
-                            notify("success", error.message)
+                        const response = await fetch("/login", {
+                            method: "POST",
+                            body: new URLSearchParams({ email, password }),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
                         });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            notify("success", "Login successful. Redirecting...");
+                            setTimeout(() => {
+                                window.location.href = "http://localhost:8080/api/v1/homepage";
+                            }, 1000);
+                        } else {
+                            notify("warning", data.message || "Login failed. Please check your credentials.");
+                        }
+                    } catch (error) {
+                        notify("error", "An error occurred. Please try again later.");
+                    }
                 });
             });
+
         </script>
 </body>
 
