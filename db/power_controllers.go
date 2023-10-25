@@ -69,7 +69,7 @@ func (db *DB) DeleteDevicePowerDetail(id int) error {
 	return nil
 }
 
-// FetchDataFromTable4 retrieves data from table 4.
+// FetchDataFromDevicePower retrieves data from table 4.
 func (db *DB) FetchDataFromDevicePower() ([]*models.DevicePowerDetail, error) {
 	query := "SELECT * FROM device_power"
 	rows, err := db.Query(query)

@@ -5,12 +5,12 @@ import (
 	"log"
 )
 
-// CreateDeviceAMCOwnerDetail creates a new record in the DeviceAMCOwnerDetail table.
+// CreateDeviceAMCOwnerDetail creates a new record in the device_amc_owner table.
 func (db *DB) CreateDeviceAMCOwnerDetail(data *models.DeviceAMCOwnerDetail) error {
 	query := `
-		INSERT INTO device_amc_owner (serial_number, device_make_model, model, po_number, po_order_date, eosl_date, amc_start_date, amc_end_date, device_owner)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-	`
+        INSERT INTO device_amc_owner (serial_number, device_make_model, model, po_number, po_order_date, eosl_date, amc_start_date, amc_end_date, device_owner)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
 	if err != nil {
 		log.Printf("Error creating DeviceAMCOwnerDetail: %v", err)
@@ -19,7 +19,7 @@ func (db *DB) CreateDeviceAMCOwnerDetail(data *models.DeviceAMCOwnerDetail) erro
 	return nil
 }
 
-// GetAllDeviceAMCOwnerDetail retrieves all records from the DeviceAMCOwnerDetail table.
+// GetAllDeviceAMCOwnerDetail retrieves all records from the device_amc_owner table.
 func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error) {
 	query := "SELECT * FROM device_amc_owner"
 	rows, err := db.Query(query)
