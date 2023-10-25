@@ -55,8 +55,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn btn-danger">Logout</button></a>
+                    <a class="nav-link" id="logout-button"><button class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -389,24 +388,30 @@
             fetch("/logout", {
                 method: "POST",
             })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     if (data.success) {
-                        notify(1, data.message); (data.message);
-                        window.location.href = "/"; // Redirect to the login page
+                        notify(1, data.message);
+                        window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        notify(2, response.message);
+                        notify(2, data.message);
                     }
                 })
-                .catch((error) => {
-                    console.error("An error occurred while logging out.");
-                    notify(3, error.message);
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
     </script>
 
 </body>

@@ -67,7 +67,7 @@
                             <p class="dropdown-item">Email: john.doe@example.com</p>
                             <!-- Replace with actual user information -->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" id="logout-button" href="http://localhost:8080/logout">Logout</a>
+                            <a class="dropdown-item" id="logout-button">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -335,24 +335,30 @@
             fetch("/logout", {
                 method: "POST",
             })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     if (data.success) {
-                        notify(1, data.message)
+                        notify(1, data.message);
                         window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        notify(2, data.message)
+                        notify(2, data.message);
                     }
                 })
-                .catch((error) => {
-                    console.error("An error occurred while logging out.");
-                    notify(3, "An error occurred while logging out.")
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
     </script>
 </body>
 

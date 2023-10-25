@@ -55,8 +55,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn btn-danger">Logout</button></a>
+                    <a class="nav-link" id="logout-button"><button class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -254,14 +253,14 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        notify(1,response.message);
+                        notify(1, response.message);
                         location.reload(); // Reload the page
                     } else {
-                        notify(2,error.message);
+                        notify(2, error.message);
                     }
                 })
                 .catch(error => {
-                    notify(3,error.message);
+                    notify(3, error.message);
                     alert("An error occurred. Please try again.");
                 });
         }
@@ -276,12 +275,12 @@
                         alert("Success: Record Updated Successfully.");
                         location.reload(); // Reload the page
                     } else {
-                        notify(2,response.message);
+                        notify(2, response.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    notify(3,error.message);
+                    notify(3, error.message);
                 });
         }
 
@@ -323,10 +322,10 @@
                     if (data.success) {
                         console.log(xhr.responseText);
 
-                        notify(1,data.message);
+                        notify(1, data.message);
                         location.reload();
                     } else {
-                        notify(3,error.message);
+                        notify(3, error.message);
                     }
                 }
             };
@@ -366,24 +365,30 @@
             fetch("/logout", {
                 method: "POST",
             })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     if (data.success) {
-                        notify(1,data.message);
-                        window.location.href = "/"; // Redirect to the login page
+                        notify(1, data.message);
+                        window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        notify(2,data.message);
+                        notify(2, data.message);
                     }
                 })
-                .catch((error) => {
-                    notify(3,error.message)
-                    console.error("An error occurred while logging out.");
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
     </script>
 
 
