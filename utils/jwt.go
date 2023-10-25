@@ -5,6 +5,7 @@ package utils
 import (
 	"crypto/rand"
 	"encoding/base64"
+	"fmt"
 	"go-server/models"
 	"net/http"
 	"os"
@@ -31,6 +32,7 @@ func GetSecretKey() {
 	jwtSecret = os.Getenv("JWT_SECRET")
 }
 
+// GenerateJWTToken generates a JWT token for a user.
 func GenerateJWTToken(user *models.User) (string, error) {
 	claims := Claims{
 		UserId:    int(user.ID),
@@ -44,39 +46,42 @@ func GenerateJWTToken(user *models.User) (string, error) {
 	return token.SignedString([]byte(jwtSecret))
 }
 
+// ValidateJWTToken validates a JWT token and returns the token object.
 func ValidateJWTToken(tokenString string) (*jwt.Token, error) {
 	return jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return jwtSecret, nil
+		return []byte(jwtSecret), nil
 	})
 }
 
-func ExtractClaims(r *http.Request) (jwt.MapClaims, bool) {
+// ExtractClaims extracts JWT claims from an HTTP request.
+func ExtractClaims(r *http.Request) (Claims, bool) {
 	tokenString := r.Header.Get("Authorization")
 	if tokenString == "" {
-		return nil, false
+		return Claims{}, false
 	}
 	tokenString = tokenString[len("Bearer "):]
 
 	token, err := ValidateJWTToken(tokenString)
 	if err != nil || !token.Valid {
-		return nil, false
+		return Claims{}, false
 	}
 
-	claims, ok := token.Claims.(jwt.MapClaims)
+	claims, ok := token.Claims.(Claims)
 	if !ok {
-		return nil, false
+		return Claims{}, false
 	}
 
 	return claims, true
 }
 
+// VerifyJWTToken validates and verifies a JWT token and returns the claims and a boolean indicating validity.
 func VerifyJWTToken(tokenString string) (Claims, bool) {
 	claims := Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(jwtSecret), nil
 	})
 	if err != nil {
-		return claims, false
+		return Claims{}, false
 	}
 	return claims, token.Valid
 }
@@ -84,7 +89,7 @@ func VerifyJWTToken(tokenString string) (Claims, bool) {
 // GeneratePasswordResetToken generates a password reset token for a user.
 func GeneratePasswordResetToken(user *models.User) (string, error) {
 	// Create a unique token based on user email and a timestamp
-	tokenData := user.Email + time.Now().String()
+	tokenData := fmt.Sprintf("%s:%d", user.Email, time.Now().Unix())
 
 	// Generate a random 32-byte string for additional security
 	randomBytes := make([]byte, 32)
@@ -102,7 +107,7 @@ func GeneratePasswordResetToken(user *models.User) (string, error) {
 	return token, nil
 }
 
-// isTokenExpired checks if a reset token has expired.
+// IsTokenExpired checks if a reset token has expired.
 func IsTokenExpired(tokenExpiry time.Time) bool {
 	// You can define an expiration duration, e.g., 1 hour.
 	expirationDuration := 1 * time.Hour

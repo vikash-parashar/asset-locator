@@ -61,10 +61,13 @@ func CreateDatabaseTables(db *sql.DB) error {
 			id SERIAL PRIMARY KEY,
 			first_name VARCHAR(255) NOT NULL,
 			last_name VARCHAR(255) NOT NULL,
-			phone VARCHAR(255) NOT NULL,  -- Changed from 'username'
 			email VARCHAR(255) UNIQUE NOT NULL,
-			password VARCHAR(60) NOT NULL,
-			role VARCHAR(255)
+			password VARCHAR(255) NOT NULL,
+			role VARCHAR(255),
+			reset_token VARCHAR(255),
+			reset_token_expiry TIMESTAMPTZ,
+			created_at TIMESTAMPTZ DEFAULT NOW(),
+			updated_at TIMESTAMPTZ DEFAULT NOW()
 		);
 		
 	`

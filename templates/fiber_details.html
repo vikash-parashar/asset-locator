@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <style>
         .delete-button {
             background-color: #D80032;
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage"><button
                             class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
@@ -56,20 +56,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <div class="nav-link dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i> <!-- User icon -->
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="userDropdown">
-                            <p class="dropdown-item">First Name: John</p> <!-- Replace with actual user information -->
-                            <p class="dropdown-item">Last Name: Doe</p> <!-- Replace with actual user information -->
-                            <p class="dropdown-item">Email: john.doe@example.com</p>
-                            <!-- Replace with actual user information -->
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" id="logout-button" href="http://localhost:8080/logout">Logout</a>
-                        </div>
-                    </div>
+                    <a class="nav-link" id="logout-button"><button class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -165,7 +152,7 @@
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.Id}}</td>
+                            <td style="font-size:small;">{{.ID}}</td>
                             <td style="font-size:small;">{{.SerialNumber}}</td>
                             <td style="font-size:small;">{{.DeviceMakeModel}}</td>
                             <td style="font-size:small;">{{.Model}}</td>
@@ -190,10 +177,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
-
-
+    <script src="https://unpkg.com/notie"></script>
     <script>
+        function notify(type, msg) {
+            notie.alert({
+                type: type,
+                text: msg,
+                position: 'top'
+            })
+        }
 
 
         // Delay the row animation when the page loads
@@ -227,10 +219,10 @@
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         console.log(xhr.responseText);
-                        alert("Success: Entry Added Successfully.");
+                        notify(1, data.message)
                         location.reload();
                     } else {
-                        alert("Error: Entry not added. Please try again.");
+                        notify(3, response.message)
                     }
                 }
             };
@@ -239,28 +231,29 @@
             // Close the modal
             $("#createEntryModal").modal("hide");
         });
+
         // Function to send a DELETE request
         function deleteRecord(id) {
-            fetch(`/api/v1/fiber-details/${id}`, {
+            fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
                 method: 'DELETE',
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Deleted Successfully.");
+                        notify(1, data.message)
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not deleted. Please try again.");
+                        notify(3, " Record not deleted. Please try again.");
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message)
                 });
         }
 
         // Function to send a PUT request
         function updateRecord(id) {
-            fetch(`/api/v1/fiber-details/${id}`, {
+            fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
                 method: 'PUT',
             })
                 .then(response => {
@@ -268,12 +261,12 @@
                         alert("Success: Record Updated Successfully.");
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not updated. Please try again.");
+                        notify(3, "Error: Record not updated. Please try again.");
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, "An error occurred. Please try again.");
                 });
         }
 
@@ -299,8 +292,6 @@
             });
         });
 
-    </script>
-    <script>
         document.getElementById("downloadDataButton").addEventListener("click", function () {
             // Create a function to download data as PDF
             function downloadAsPDF() {
@@ -325,30 +316,36 @@
                 downloadAsXLSX();
             }
         });
-    </script>
-    <script>
+
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
                 method: "POST",
             })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     if (data.success) {
-                        alert(data.message);
+                        notify(1, data.message);
                         window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        alert(data.message);
+                        notify(2, data.message);
                     }
                 })
-                .catch((error) => {
-                    console.error("An error occurred while logging out.");
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
     </script>
 </body>
 

@@ -18,7 +18,7 @@ func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		data, err := db.GetAllDeviceLocationDetail()
 		if err != nil {
-			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch data"})
 			return
 		}
 		c.HTML(http.StatusOK, "location_details.html", data)
@@ -44,9 +44,21 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 		deviceRUNumber := c.PostForm("device_ru_number")
 
 		// Parse and cast the string values to their respective types
-		id, _ := strconv.Atoi(idStr)
-		deviceRowNumber, _ := strconv.Atoi(deviceRowNumberStr)
-		deviceRackNumber, _ := strconv.Atoi(deviceRackNumberStr)
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+		deviceRowNumber, err := strconv.Atoi(deviceRowNumberStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid device_row_number"})
+			return
+		}
+		deviceRackNumber, err := strconv.Atoi(deviceRackNumberStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid device_rack_number"})
+			return
+		}
 
 		// Assign the values to the DeviceLocationDetail struct
 		data = models.DeviceLocationDetail{
@@ -65,13 +77,10 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.CreateDeviceLocationDetail(&data); err != nil {
-			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create DeviceLocationDetail"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"success": true,
-			"message": "Entry Added Successfully"},
-		)
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Entry Added Successfully"})
 	}
 }
 

@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <style>
         .delete-button {
             background-color: #D80032;
@@ -32,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/home"><button
+                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage"><button
                             class="nav-btn btn-outline-info">Home</button></a>
                 </li>
                 <li class="nav-item">
@@ -54,8 +55,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout-button" href="http://localhost:8080/logout"><button
-                            class="btn btn-danger">Logout</button></a>
+                    <a class="nav-link" id="logout-button"><button class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
         </div>
@@ -213,7 +213,7 @@
                     <tbody id="deviceDetails">
                         {{range .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.Id}}</td>
+                            <td style="font-size:small;">{{.ID}}</td>
                             <td style="font-size:small;">{{.SerialNumber}}</td>
                             <td style="font-size:small;">{{.DeviceMakeModel}}</td>
                             <td style="font-size:small;">{{.Model}}</td>
@@ -241,8 +241,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
+    <!-- notie  notify(1,data.message);s -->
+    <script src="https://unpkg.com/notie"></script>
     <script>
+        function notify(type, msg) {
+            notie.alert({
+                type: type,
+                text: msg,
+                position: 'top'
+            })
+        }
 
 
         // Delay the row animation when the page loads
@@ -266,15 +274,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Deleted Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not deleted. Please try again.");
+                        notify(2, response.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -285,15 +293,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Updated Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not updated. Please try again.");
+                        notify(2, response.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -337,10 +345,10 @@
                     console.log(xhr.responseText);
 
                     if (data.success) {
-                        alert("Success: Entry added successfully.");
+                        notify(1, data.message);
                         location.reload();
                     } else {
-                        alert("Error: Entry not added. Please try again.");
+                        notify(3, response.message);
                     }
                 }
             };
@@ -350,9 +358,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-    </script>
-
-    <script>
         document.getElementById("downloadDataButton").addEventListener("click", function () {
             // Create a function to download data as PDF
             function downloadAsPDF() {
@@ -377,31 +382,36 @@
                 downloadAsXLSX();
             }
         });
-    </script>
 
-    <script>
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
                 method: "POST",
             })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     if (data.success) {
-                        alert(data.message);
-                        window.location.href = "/"; // Redirect to the login page
+                        notify(1, data.message);
+                        window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        alert(data.message);
+                        notify(2, data.message);
                     }
                 })
-                .catch((error) => {
-                    console.error("An error occurred while logging out.");
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
     </script>
 
 </body>
