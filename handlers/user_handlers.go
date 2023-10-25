@@ -3,6 +3,7 @@
 package handlers
 
 import (
+	"fmt"
 	"go-server/db"
 	"go-server/models"
 	"go-server/utils"
@@ -16,23 +17,41 @@ import (
 // SignUp handles the registration of a new user.
 func SignUp(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse form data into a User struct
-		var newUser models.User
-		newUser.FirstName = c.PostForm("first_name")
-		newUser.LastName = c.PostForm("last_name")
-		newUser.Phone = c.PostForm("phone")
-		newUser.Email = c.PostForm("email")
-		newUser.Password = c.PostForm("password")
-		newUser.Role = "general" // You can set the role as needed
+		// Parse request body into a User struct
+		// Replace the struct for form data binding
+		var signupRequest struct {
+			FirstName string `json:"first_name" binding:"required"`
+			LastName  string `json:"last_name" binding:"required"`
+			Phone     string `json:"phone" binding:"required"`
+			Email     string `json:"email" binding:"required"`
+			Password  string `json:"password" binding:"required"`
+		}
 
-		// Check if the user already exists with this email
-		_, err := db.GetUserByEmailID(newUser.Email)
-		if err == nil {
-			log.Println(err)
-			c.JSON(http.StatusConflict, gin.H{"status": "error", "message": "User already exists with this email"})
+		if err := c.ShouldBindJSON(&signupRequest); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid form data"})
 			return
 		}
 
+		// Check if the user already exists (by email or any other unique identifier)
+		_, err := db.GetUserByEmailID(signupRequest.Email)
+		if err == nil {
+			c.JSON(http.StatusConflict, gin.H{"success": false, "message": "User with this email already exists"})
+			return
+		}
+		// Create a new user
+		newUser := &models.User{
+			FirstName: signupRequest.FirstName,
+			LastName:  signupRequest.LastName,
+			Phone:     signupRequest.Phone,
+			Email:     signupRequest.Email,
+			Password:  signupRequest.Password,
+		}
+
+		if newUser.Email == "gowithvikash@gmail.com" {
+			newUser.Role = "admin"
+		} else {
+			newUser.Role = "general"
+		}
 		// Hash the password
 		hashedPassword, err := utils.HashPassword(newUser.Password)
 		if err != nil {
@@ -42,14 +61,13 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 		}
 		newUser.Password = hashedPassword
 
-		// Register the user in the database
-		if err := db.RegisterUser(&newUser); err != nil {
-			log.Println(err)
-			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to register user"})
+		err = db.RegisterUser(newUser)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to create user"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"status": "success", "message": "You are now registered"})
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "User registered successfully"})
 	}
 }
 
@@ -57,12 +75,17 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 func Login(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Parse request body into a User struct
+		// Parse request body into a User struct
 		var loginRequest struct {
-			Email    string `json:"email" binding:"required"`
-			Password string `json:"password" binding:"required"`
+			Email    string `form:"email" binding:"required"`
+			Password string `form:"password" binding:"required"`
 		}
-		loginRequest.Email = c.PostForm("email")
-		loginRequest.Password = c.PostForm("password")
+		if err := c.ShouldBind(&loginRequest); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid form data"})
+			return
+		}
+
+		fmt.Println(loginRequest)
 
 		// Check if the user exists in the database
 		user, err := db.GetUserByEmailID(loginRequest.Email)

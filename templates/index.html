@@ -292,11 +292,13 @@
                         <div class="input-boxes">
                             <div class="input-box">
                                 <i class="fas fa-envelope"></i>
-                                <input id="login-email" type="text" placeholder="Enter your email" required>
+                                <input id="login-email" name="email" type="text" placeholder="Enter your email"
+                                    required>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-lock"></i>
-                                <input id="login-password" type="password" placeholder="Enter your password" required>
+                                <input id="login-password" name="password" type="password"
+                                    placeholder="Enter your password" required>
                             </div>
                             <div><a href="/forget-password-page">Forgot password?</a></div>
                             <div class="button input-box">
@@ -311,27 +313,31 @@
                 <!-- ... (Your existing HTML code) ... -->
                 <div class="signup-form">
                     <div class="title">Signup</div>
-                    <form id="register-form" action="#">
+                    <form id="register-form" action="#"> <!-- Change the form action to the signup route -->
                         <div class="input-boxes">
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
-                                <input id="first_name" type="text" placeholder="Enter your first name" required>
+                                <input id="first_name" name="first_name" type="text" placeholder="Enter your first name"
+                                    required>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
-                                <input id="last_name" type="text" placeholder="Enter your last name" required>
+                                <input id="last_name" name="last_name" type="text" placeholder="Enter your last name"
+                                    required>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
-                                <input id="phone" type="text" placeholder="Enter your phone" required>
+                                <input id="phone" name="phone" type="text" placeholder="Enter your phone" required>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-envelope"></i>
-                                <input id="email" type="text" placeholder="Enter your email" required>
+                                <input id="register-email" name="email" type="text" placeholder="Enter your email"
+                                    required>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-lock"></i>
-                                <input id="password" type="password" placeholder="Enter your password" required>
+                                <input id="register-password" name="password" type="password"
+                                    placeholder="Enter your password" required>
                             </div>
                             <div class="button input-box">
                                 <input id="register-submit" type="submit" value="Submit">
@@ -340,10 +346,13 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
         <script src="https://unpkg.com/notie"></script>
+        <!-- ... (Your HTML code) ... -->
+
         <script>
             function notify(type, msg) {
                 notie.alert({
@@ -352,6 +361,7 @@
                     position: 'top'
                 })
             }
+
             document.addEventListener("DOMContentLoaded", function () {
                 const registerForm = document.getElementById("register-form");
 
@@ -361,8 +371,8 @@
                         const firstName = document.getElementById("first_name").value;
                         const lastName = document.getElementById("last_name").value;
                         const phone = document.getElementById("phone").value;
-                        const email = document.getElementById("email").value;
-                        const password = document.getElementById("password").value;
+                        const email = document.getElementById("register-email").value;
+                        const password = document.getElementById("register-password").value;
 
                         const response = await fetch("/signup", {
                             method: "POST",
@@ -378,14 +388,15 @@
                             },
                         });
 
-                        const data = await response.json();
-
-                        if (response.ok) {
-                            notify("success", "Registration successful. You can now log in.");
-                        } else {
+                        if (!response.ok) {
+                            const data = await response.json();
+                            console.error("Signup error:", data);
                             notify("warning", data.message || "Something went wrong. Please try again.");
+                        } else {
+                            notify("success", "Registration successful. You can now log in.");
                         }
                     } catch (error) {
+                        console.error("Signup error:", error);
                         notify("error", "An error occurred. Please try again later.");
                     }
                 });
@@ -400,31 +411,37 @@
                         const email = document.getElementById("login-email").value;
                         const password = document.getElementById("login-password").value;
 
+                        const formData = new FormData(); // Create a new FormData object
+                        formData.append("email", email);
+                        formData.append("password", password);
+
                         const response = await fetch("/login", {
                             method: "POST",
-                            body: new URLSearchParams({ email, password }),
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
+                            body: formData, // Send the form data
                         });
 
-                        const data = await response.json();
-
-                        if (response.ok) {
+                        if (!response.ok) {
+                            const data = await response.json();
+                            console.error("Login error:", data);
+                            notify("warning", data.message || "Login failed. Please check your credentials.");
+                        } else {
                             notify("success", "Login successful. Redirecting...");
                             setTimeout(() => {
                                 window.location.href = "http://localhost:8080/api/v1/homepage";
                             }, 1000);
-                        } else {
-                            notify("warning", data.message || "Login failed. Please check your credentials.");
                         }
                     } catch (error) {
+                        console.error("Login error:", error);
                         notify("error", "An error occurred. Please try again later.");
                     }
                 });
             });
 
         </script>
+</body>
+
+</html>
+
 </body>
 
 </html>
