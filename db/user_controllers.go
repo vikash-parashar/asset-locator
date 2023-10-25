@@ -1,7 +1,10 @@
 package db
 
 import (
+	"database/sql"
+	"errors"
 	"go-server/models"
+	"go-server/utils"
 	"log"
 )
 
@@ -107,4 +110,48 @@ func (db *DB) UpdateUser(user *models.User) error {
 		return err
 	}
 	return nil
+}
+
+// SetResetToken sets the reset token for a user in the database.
+func (db *DB) SetResetToken(userID int, resetToken string) error {
+	// Assuming you have a "users" table with a "reset_token" column.
+	_, err := db.Exec("UPDATE users SET reset_token = ? WHERE id = ?", resetToken, userID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// ClearResetToken clears the reset token for a user in the database.
+func (db *DB) ClearResetToken(userID int) error {
+	// Assuming you have a "users" table with a "reset_token" column.
+	_, err := db.Exec("UPDATE users SET reset_token = NULL WHERE id = ?", userID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// VerifyResetToken verifies the reset token for a user.
+func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
+	query := `
+    SELECT id, email, reset_token
+    FROM users
+    WHERE reset_token = $1
+`
+	user := &models.User{}
+	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.Email, &user.ResetToken)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("Reset token not found")
+		}
+		return nil, err
+	}
+
+	// Check if the reset token has expired (optional)
+	if utils.IsTokenExpired(user.ResetTokenExpiry) {
+		return nil, errors.New("Reset token has expired")
+	}
+
+	return user, nil
 }

@@ -107,69 +107,74 @@ func Logout() gin.HandlerFunc {
 	}
 }
 
-// ForgetPassword handles the "forget password" feature.
-func ForgetPassword(db *db.DB) gin.HandlerFunc {
+// ForgotPasswordHandler handles the process of resetting a user's forgotten password.
+func ForgotPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Retrieve form data (assuming you use the user's email for password reset)
+		// Retrieve email address from the user input
 		email := c.PostForm("email")
 
-		// Check if the user with the provided email exists in the database
+		// Check if the user exists in the database
 		user, err := db.GetUserByEmailID(email)
 		if err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"success": false, "message": "User not found"})
 			return
 		}
 
-		// Generate a password reset token (you can implement this function)
-		_, err = utils.GeneratePasswordResetToken(user)
+		// Generate a unique reset token and set an expiration time for it (e.g., 1 hour)
+		resetToken, err := utils.GeneratePasswordResetToken(user)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate password reset token"})
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate reset token"})
 			return
 		}
 
-		// Send the password reset link to the user (you can implement this function)
-		// You might want to send an email with a link that includes the resetToken
-		// and leads the user to a reset password page.
+		// Save the reset token in the database associated with the user's account
+		if err := db.SetResetToken(int(user.ID), resetToken); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to save reset token"})
+			return
+		}
 
-		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Password reset instructions sent to your email"})
+		// Send an email to the user with a link to reset their password
+		err = utils.SendResetPasswordEmail(user.Email, resetToken)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to send reset email"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Reset instructions sent to your email"})
 	}
 }
 
-// ResetPassword handles the password reset feature.
+// ResetPasswordHandler handles the user's password reset by verifying the reset token.
 func ResetPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// Retrieve reset token and new password from the user input
 		resetToken := c.PostForm("reset_token")
 		newPassword := c.PostForm("new_password")
 
-		// Check if the token exists in your database
-		user, err := db.GetUserByResetToken(resetToken)
+		// Verify the reset token
+		user, err := db.VerifyResetToken(resetToken)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Invalid or expired reset token"})
 			return
 		}
 
-		// Check if the token has expired (you should store an expiration time in your database)
-		if time.Now().After(user.ResetTokenExpiry) {
-			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Reset token has expired"})
-			return
-		}
-
-		// Reset token is valid; update the user's password with the new password
+		// Hash the new password
 		hashedPassword, err := utils.HashPassword(newPassword)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to hash the new password"})
 			return
 		}
 
+		// Update the user's password in the database
 		user.Password = hashedPassword
+		if err := db.UpdateUserPassword(int(user.ID), hashedPassword); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to update the password"})
+			return
+		}
 
-		// Clear the reset token and its expiration time after a successful reset
-		user.ResetToken = ""
-		user.ResetTokenExpiry = time.Time{}
-
-		// Update the user in the database
-		if err := db.UpdateUser(user); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to update the user's password"})
+		// Clear the reset token from the database
+		if err := db.ClearResetToken(int(user.ID)); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to clear the reset token"})
 			return
 		}
 
