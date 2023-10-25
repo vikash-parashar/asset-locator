@@ -249,7 +249,7 @@
         });
         // Function to send a DELETE request
         function deleteRecord(id) {
-            fetch(`/api/v1/fiber-details/${id}`, {
+            fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
                 method: 'DELETE',
             })
                 .then(response => {
@@ -268,7 +268,7 @@
 
         // Function to send a PUT request
         function updateRecord(id) {
-            fetch(`/api/v1/fiber-details/${id}`, {
+            fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
                 method: 'PUT',
             })
                 .then(response => {
