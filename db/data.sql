@@ -1,4 +1,5 @@
--- Create the users tableCREATE TABLE IF NOT EXISTS users (
+-- Create the users table
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -103,3 +104,11 @@ VALUES
     ('456xyz789', 'Cisco NEXUS-93108', 'NEXUS-93108', 'Switch', 'ETH2', 'Network/Fiber', '00:09:0F:AA:00:07', 'Nexus 92108/ ETH1/15'),
     ('234KLM567', 'Brocade 6520', '6520', 'SAN Switch', 'Port1', 'SAN/Fiber', '50:02:77:a4:10:0c:4a:22', 'SAN-2 6520 / Port10'),
     ('234KLM567', 'Brocade 6520', '6520', 'SAN Switch', 'Port2', 'SAN/Fiber', '50:02:77:a4:10:0c:4b:20', 'SAN-1 6520 / Port18');
+
+
+
+drop table device_power;
+drop table users;
+drop table device_ethernet_fiber;
+drop table device_location;
+drop table device_amc_owner;
