@@ -29,58 +29,64 @@ func main() {
 	dbName := os.Getenv("DB_NAME")
 
 	// Initialize the database connection
-	db, err := db.NewDB(dbHost, dbPort, dbUser, dbPassword, dbName)
+	dbConn, err := db.NewDB(dbHost, dbPort, dbUser, dbPassword, dbName)
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)
 	}
-	defer db.Close()
+	defer dbConn.Close()
 
 	r := gin.Default()
 
+	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
+	// Unprotected routes
 	r.GET("/health-check", handlers.HealthCheck)
-
 	r.GET("/", handlers.RenderIndexPage)
 	r.GET("/forget-password-page", handlers.RenderForgotPasswordPage)
-
-	r.POST("/signup", handlers.SignUp(db))
-	r.POST("/login", handlers.Login(db))
+	r.POST("/signup", handlers.SignUp(dbConn))
+	r.POST("/login", handlers.Login(dbConn))
 	r.POST("/logout", handlers.Logout())
-	r.POST("/forget-password", handlers.ForgotPassword(db))
-	r.POST("/reset-password", handlers.ResetPassword(db))
+	r.POST("/forget-password", handlers.ForgotPassword(dbConn))
+	r.POST("/reset-password", handlers.ResetPassword(dbConn))
 
-	//protected routes
+	// Protected routes
+	protected := r.Group("/api/v1", middleware.AuthMiddleware("admin", "general"))
 
-	r.GET("/api/v1/home", middleware.AuthMiddleware("admin", "general"), handlers.RenderHomePage(db))
+	// Homepage
+	protected.GET("/homepage", handlers.RenderHomePage(dbConn))
 
-	r.GET("/api/v1/location-details", middleware.AuthMiddleware("admin", "general"), handlers.GetLocationDetails(db))
-	r.POST("/api/v1/location-details", middleware.AuthMiddleware("admin"), handlers.CreateNewLocationDetails(db))
-	r.PUT("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceLocationDetail(db))
-	r.DELETE("/api/v1/location-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceLocationDetail(db))
-	r.GET("/api/v1/location-details/pdf", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceLocationDetailPDF(db))
-	r.GET("/api/v1/location-details/excel", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceLocationDetail(db))
+	// Location Details
+	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))
+	protected.POST("/location-details", handlers.CreateNewLocationDetails(dbConn))
+	protected.PUT("/location-details/:id", handlers.UpdateDeviceLocationDetail(dbConn))
+	protected.DELETE("/location-details/:id", handlers.DeleteDeviceLocationDetail(dbConn))
+	protected.GET("/location-details/pdf", handlers.DownloadDeviceLocationDetailPDF(dbConn))
+	protected.GET("/location-details/excel", handlers.DownloadDeviceLocationDetail(dbConn))
 
-	r.GET("/api/v1/owner-details", middleware.AuthMiddleware("admin", "general"), handlers.GetOwnerDetails(db))
-	r.POST("/api/v1/owner-details", middleware.AuthMiddleware("admin"), handlers.CreateNewOwnerDetails(db))
-	r.PUT("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceAMCOwnerDetail(db))
-	r.DELETE("/api/v1/owner-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceAMCOwnerDetail(db))
-	r.GET("/api/v1/owner-details/pdf", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceAMCOwnerDetailPDF(db))
-	r.GET("/api/v1/owner-details/excel", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceAMCOwnerDetail(db))
+	// Owner Details
+	protected.GET("/owner-details", handlers.GetOwnerDetails(dbConn))
+	protected.POST("/owner-details", handlers.CreateNewOwnerDetails(dbConn))
+	protected.PUT("/owner-details/:id", handlers.UpdateDeviceAMCOwnerDetail(dbConn))
+	protected.DELETE("/owner-details/:id", handlers.DeleteDeviceAMCOwnerDetail(dbConn))
+	protected.GET("/owner-details/pdf", handlers.DownloadDeviceAMCOwnerDetailPDF(dbConn))
+	protected.GET("/owner-details/excel", handlers.DownloadDeviceAMCOwnerDetail(dbConn))
 
-	r.GET("/api/v1/power-details", middleware.AuthMiddleware("admin", "general"), handlers.GetPowerDetails(db))
-	r.POST("/api/v1/power-details", middleware.AuthMiddleware("admin"), handlers.CreateNewPowerDetails(db))
-	r.PUT("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDevicePowerDetail(db))
-	r.DELETE("/api/v1/power-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDevicePowerDetail(db))
-	r.GET("/api/v1/power-details/pdf", middleware.AuthMiddleware("admin"), handlers.DownloadDevicePowerDetailPDF(db))
-	r.GET("/api/v1/power-details/excel", middleware.AuthMiddleware("admin"), handlers.DownloadDevicePowerDetail(db))
+	// Power Details
+	protected.GET("/power-details", handlers.GetPowerDetails(dbConn))
+	protected.POST("/power-details", handlers.CreateNewPowerDetails(dbConn))
+	protected.PUT("/power-details/:id", handlers.UpdateDevicePowerDetail(dbConn))
+	protected.DELETE("/power-details/:id", handlers.DeleteDevicePowerDetail(dbConn))
+	protected.GET("/power-details/pdf", handlers.DownloadDevicePowerDetailPDF(dbConn))
+	protected.GET("/power-details/excel", handlers.DownloadDevicePowerDetail(dbConn))
 
-	r.GET("/api/v1/fiber-details", middleware.AuthMiddleware("admin", "general"), handlers.GetFiberDetails(db))
-	r.POST("/api/v1/fiber-details", middleware.AuthMiddleware("admin"), handlers.CreateNewFiberDetails(db))
-	r.PUT("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.UpdateDeviceEthernetFiberDetail(db))
-	r.DELETE("/api/v1/fiber-details/:id", middleware.AuthMiddleware("admin"), handlers.DeleteDeviceEthernetFiberDetail(db))
-	r.GET("/api/v1/fiber-details/pdf", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceEthernetFiberDetailPDF(db))
-	r.GET("/api/v1/fiber-details/excel", middleware.AuthMiddleware("admin"), handlers.DownloadDeviceEthernetFiberDetail(db))
+	// Fiber Details
+	protected.GET("/fiber-details", handlers.GetFiberDetails(dbConn))
+	protected.POST("/fiber-details", handlers.CreateNewFiberDetails(dbConn))
+	protected.PUT("/fiber-details/:id", handlers.UpdateDeviceEthernetFiberDetail(dbConn))
+	protected.DELETE("/fiber-details/:id", handlers.DeleteDeviceEthernetFiberDetail(dbConn))
+	protected.GET("/fiber-details/pdf", handlers.DownloadDeviceEthernetFiberDetailPDF(dbConn))
+	protected.GET("/fiber-details/excel", handlers.DownloadDeviceEthernetFiberDetail(dbConn))
 
-	log.Fatalln(r.Run(":" + port))
+	log.Fatal(r.Run(":" + port))
 }

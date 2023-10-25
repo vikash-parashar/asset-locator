@@ -1,10 +1,14 @@
+// handlers.go
+
 package handlers
 
 import (
 	"go-server/db"
 	"go-server/models"
 	"go-server/utils"
+	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,15 +16,19 @@ import (
 // SignUp handles the registration of a new user.
 func SignUp(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse request body into a User struct
+		// Parse form data into a User struct
 		var newUser models.User
-		if err := c.ShouldBindJSON(&newUser); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid input data"})
-			return
-		}
+		newUser.FirstName = c.PostForm("first_name")
+		newUser.LastName = c.PostForm("last_name")
+		newUser.Phone = c.PostForm("phone")
+		newUser.Email = c.PostForm("email")
+		newUser.Password = c.PostForm("password")
+		newUser.Role = "general" // You can set the role as needed
 
 		// Check if the user already exists with this email
-		if _, err := db.GetUserByEmailID(newUser.Email); err == nil {
+		_, err := db.GetUserByEmailID(newUser.Email)
+		if err == nil {
+			log.Println(err)
 			c.JSON(http.StatusConflict, gin.H{"status": "error", "message": "User already exists with this email"})
 			return
 		}
@@ -28,6 +36,7 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 		// Hash the password
 		hashedPassword, err := utils.HashPassword(newUser.Password)
 		if err != nil {
+			log.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to hash password"})
 			return
 		}
@@ -35,6 +44,7 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 
 		// Register the user in the database
 		if err := db.RegisterUser(&newUser); err != nil {
+			log.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to register user"})
 			return
 		}
@@ -51,15 +61,13 @@ func Login(db *db.DB) gin.HandlerFunc {
 			Email    string `json:"email" binding:"required"`
 			Password string `json:"password" binding:"required"`
 		}
-		if err := c.ShouldBindJSON(&loginRequest); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid input data"})
-			return
-		}
+		loginRequest.Email = c.PostForm("email")
+		loginRequest.Password = c.PostForm("password")
 
 		// Check if the user exists in the database
 		user, err := db.GetUserByEmailID(loginRequest.Email)
 		if err != nil {
-			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "User not found"})
+			c.JSON(http.StatusNotFound, gin.H{"success": false, "message": "User not found"})
 			return
 		}
 
@@ -76,10 +84,12 @@ func Login(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
-		// Set the JWT token in a cookie
-		c.SetSameSite(http.SameSiteNoneMode)
-		c.SetCookie("jwt-token", token, 3600, "/", "", false, true)
-
+		cookie := http.Cookie{
+			Name:    "jwt-token",
+			Value:   token,
+			Expires: time.Now().Add(5 * time.Minute),
+		}
+		http.SetCookie(c.Writer, &cookie)
 		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
 	}
 }

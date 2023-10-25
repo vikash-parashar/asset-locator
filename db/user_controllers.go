@@ -1,3 +1,5 @@
+// db.go
+
 package db
 
 import (
@@ -17,6 +19,9 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	user := &models.User{}
 	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Password, &user.Role)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("user not found")
+		}
 		log.Printf("Error fetching user by email: %v", err)
 		return nil, err
 	}
@@ -25,8 +30,8 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 
 func (db *DB) RegisterUser(user *models.User) error {
 	query := `
-        INSERT INTO users (first_name, last_name,phone, email, password, role)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO users (first_name, last_name, phone, email, password, role)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id
     `
 	err := db.QueryRow(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role).Scan(&user.ID)
@@ -91,6 +96,9 @@ func (db *DB) GetUserByResetToken(resetToken string) (*models.User, error) {
 	user := &models.User{}
 	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Password, &user.Role)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("user not found by reset token")
+		}
 		log.Printf("Error fetching user by reset token: %v", err)
 		return nil, err
 	}
@@ -155,6 +163,7 @@ func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("reset token not found")
 		}
+		log.Printf("Error fetching user by reset token: %v", err)
 		return nil, err
 	}
 
