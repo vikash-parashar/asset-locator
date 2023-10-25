@@ -14,7 +14,9 @@ func HealthCheck(c *gin.Context) {
 func RenderIndexPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
 }
-
+func RenderForgotPasswordPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "forgot_password.html", nil)
+}
 func RenderHomePage(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.HTML(http.StatusOK, "homepage.html", nil)

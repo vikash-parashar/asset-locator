@@ -42,6 +42,7 @@ func main() {
 	r.GET("/health-check", handlers.HealthCheck)
 
 	r.GET("/", handlers.RenderIndexPage)
+	r.GET("/forget-password-page", handlers.RenderForgotPasswordPage)
 
 	r.POST("/signup", handlers.SignUp(db))
 	r.POST("/login", handlers.Login(db))
