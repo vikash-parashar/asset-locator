@@ -47,7 +47,7 @@ func main() {
 	r.POST("/signup", handlers.SignUp(db))
 	r.POST("/login", handlers.Login(db))
 	r.POST("/logout", handlers.Logout())
-	r.POST("/forget-password", handlers.ForgetPassword(db))
+	r.POST("/forget-password", handlers.ForgotPassword(db))
 	r.POST("/reset-password", handlers.ResetPassword(db))
 
 	//protected routes

@@ -101,3 +101,16 @@ func GeneratePasswordResetToken(user *models.User) (string, error) {
 
 	return token, nil
 }
+
+// isTokenExpired checks if a reset token has expired.
+func IsTokenExpired(tokenExpiry time.Time) bool {
+	// You can define an expiration duration, e.g., 1 hour.
+	expirationDuration := 1 * time.Hour
+
+	// Calculate the expiration time by subtracting the duration from the current time.
+	expirationTime := time.Now().Add(-expirationDuration)
+
+	// Compare the token's expiry time with the calculated expiration time.
+	// If the token's expiry time is before the calculated time, it's expired.
+	return tokenExpiry.Before(expirationTime)
+}
