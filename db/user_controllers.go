@@ -8,7 +8,6 @@ import (
 	"log"
 )
 
-// GetUserByEmailID retrieves a user by their email address.
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	query := `
         SELECT id, first_name, last_name, email, password, role
@@ -24,14 +23,13 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	return user, nil
 }
 
-// RegisterUser creates a new user record in the database.
 func (db *DB) RegisterUser(user *models.User) error {
 	query := `
-        INSERT INTO users (first_name, last_name, email, password, role)
+        INSERT INTO users (first_name, last_name,phone, email, password, role)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING id
     `
-	err := db.QueryRow(query, user.FirstName, user.LastName, user.Email, user.Password, user.Role).Scan(&user.ID)
+	err := db.QueryRow(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role).Scan(&user.ID)
 	if err != nil {
 		log.Printf("Error registering user: %v", err)
 		return err
@@ -39,7 +37,6 @@ func (db *DB) RegisterUser(user *models.User) error {
 	return nil
 }
 
-// UpdateUserPassword updates a user's password by their ID.
 func (db *DB) UpdateUserPassword(userID int, newPassword string) error {
 	query := `
         UPDATE users
