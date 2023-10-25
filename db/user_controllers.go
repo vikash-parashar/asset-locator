@@ -11,7 +11,8 @@ import (
 // GetUserByEmailID retrieves a user by their email address.
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	query := `
-        SELECT * FROM users
+        SELECT id, first_name, last_name, email, password, role
+        FROM users
         WHERE email = $1
     `
 	user := &models.User{}
@@ -56,7 +57,8 @@ func (db *DB) UpdateUserPassword(userID int, newPassword string) error {
 // GetAllUsers retrieves all active user records.
 func (db *DB) GetAllUsers() ([]*models.User, error) {
 	query := `
-        SELECT * FROM users
+        SELECT id, first_name, last_name, email, password, role
+        FROM users
     `
 	rows, err := db.Query(query)
 	if err != nil {
@@ -85,7 +87,8 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 // GetUserByResetToken retrieves a user by their reset token.
 func (db *DB) GetUserByResetToken(resetToken string) (*models.User, error) {
 	query := `
-        SELECT * FROM users
+        SELECT id, first_name, last_name, email, password, role
+        FROM users
         WHERE reset_token = $1
     `
 	user := &models.User{}
@@ -114,9 +117,14 @@ func (db *DB) UpdateUser(user *models.User) error {
 
 // SetResetToken sets the reset token for a user in the database.
 func (db *DB) SetResetToken(userID int, resetToken string) error {
-	// Assuming you have a "users" table with a "reset_token" column.
-	_, err := db.Exec("UPDATE users SET reset_token = ? WHERE id = ?", resetToken, userID)
+	query := `
+        UPDATE users
+        SET reset_token = $1
+        WHERE id = $2
+    `
+	_, err := db.Exec(query, resetToken, userID)
 	if err != nil {
+		log.Printf("Error setting reset token: %v", err)
 		return err
 	}
 	return nil
@@ -124,9 +132,14 @@ func (db *DB) SetResetToken(userID int, resetToken string) error {
 
 // ClearResetToken clears the reset token for a user in the database.
 func (db *DB) ClearResetToken(userID int) error {
-	// Assuming you have a "users" table with a "reset_token" column.
-	_, err := db.Exec("UPDATE users SET reset_token = NULL WHERE id = ?", userID)
+	query := `
+        UPDATE users
+        SET reset_token = NULL
+        WHERE id = $1
+    `
+	_, err := db.Exec(query, userID)
 	if err != nil {
+		log.Printf("Error clearing reset token: %v", err)
 		return err
 	}
 	return nil
@@ -135,22 +148,22 @@ func (db *DB) ClearResetToken(userID int) error {
 // VerifyResetToken verifies the reset token for a user.
 func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 	query := `
-    SELECT id, email, reset_token
-    FROM users
-    WHERE reset_token = $1
-`
+        SELECT id, email, reset_token
+        FROM users
+        WHERE reset_token = $1
+    `
 	user := &models.User{}
 	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.Email, &user.ResetToken)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("Reset token not found")
+			return nil, errors.New("reset token not found")
 		}
 		return nil, err
 	}
 
 	// Check if the reset token has expired (optional)
 	if utils.IsTokenExpired(user.ResetTokenExpiry) {
-		return nil, errors.New("Reset token has expired")
+		return nil, errors.New("reset token has expired")
 	}
 
 	return user, nil
