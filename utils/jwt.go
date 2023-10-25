@@ -19,9 +19,9 @@ func init() {
 
 // Claims represents the JWT claims.
 type Claims struct {
-	UserID   int    `json:"user_id"`
-	Username string `json:"username"`
-	UserRole string `json:"user_role"`
+	UserId    int    `json:"user_id"`
+	UserEmail string `json:"user_email"`
+	UserRole  string `json:"user_role"`
 	jwt.StandardClaims
 }
 
@@ -31,9 +31,9 @@ func GetSecretKey() {
 
 func GenerateJWTToken(user *models.User) (string, error) {
 	claims := Claims{
-		UserID:   user.Id,
-		Username: user.Username,
-		UserRole: user.Role,
+		UserId:    user.Id,
+		UserEmail: user.Email,
+		UserRole:  user.Role,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
 		},

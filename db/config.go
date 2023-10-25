@@ -297,7 +297,7 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 		WHERE email = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, email).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+	err := db.QueryRow(query, email).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by email: %v", err)
 		return nil, err
@@ -312,7 +312,7 @@ func (db *DB) GetUserByUsername(username string) (*models.User, error) {
 		WHERE username = $1
 	`
 	user := &models.User{}
-	err := db.QueryRow(query, username).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+	err := db.QueryRow(query, username).Scan(&user.Id, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		log.Printf("Error fetching user by username: %v", err)
 		return nil, err
@@ -327,7 +327,7 @@ func (db *DB) RegisterUser(user *models.User) error {
 		VALUES ($1, $2, $3, $4, $5, $6)
 		RETURNING id
 	`
-	err := db.QueryRow(query, user.FirstName, user.LastName, user.Username, user.Email, user.Password, user.Role).Scan(&user.Id)
+	err := db.QueryRow(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role).Scan(&user.Id)
 	if err != nil {
 		log.Printf("Error registering user: %v", err)
 		return err
@@ -366,7 +366,7 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 	users := make([]*models.User, 0)
 	for rows.Next() {
 		user := &models.User{}
-		err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Username, &user.Email, &user.Password, &user.Role)
+		err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Password, &user.Role)
 		if err != nil {
 			log.Printf("Error scanning user rows: %v", err)
 			return nil, err
