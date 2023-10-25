@@ -30,7 +30,8 @@ type User struct {
 	ID               uint      `gorm:"primaryKey" json:"id"`
 	FirstName        string    `json:"first_name"`
 	LastName         string    `json:"last_name"`
-	Email            string    `gorm:"unique" json:"email"`
+	Phone            string    `json:"phone"`
+	Email            string    `json:"email"`
 	Password         string    `json:"password"`
 	Role             string    `json:"role"`
 	ResetToken       string    `json:"reset_token"`
