@@ -394,6 +394,9 @@
                             notify("warning", data.message || "Something went wrong. Please try again.");
                         } else {
                             notify("success", "Registration successful. You can now log in.");
+                            setTimeout(() => {
+                                window.location.href = "http://localhost:8080";
+                            }, 2000);
                         }
                     } catch (error) {
                         console.error("Signup error:", error);
@@ -428,7 +431,7 @@
                             notify("success", "Login successful. Redirecting...");
                             setTimeout(() => {
                                 window.location.href = "http://localhost:8080/api/v1/homepage";
-                            }, 1000);
+                            }, 2000);
                         }
                     } catch (error) {
                         console.error("Login error:", error);
