@@ -56,6 +56,17 @@ func CreateDatabaseTables(db *sql.DB) error {
 			device_port_macwwn TEXT,
 			connected_device_port TEXT
 		);
+		
+		CREATE TABLE IF NOT EXISTS users (
+			id SERIAL PRIMARY KEY,
+			first_name VARCHAR(255) NOT NULL,
+			last_name VARCHAR(255) NOT NULL,
+			phone VARCHAR(255) NOT NULL,  -- Changed from 'username'
+			email VARCHAR(255) UNIQUE NOT NULL,
+			password VARCHAR(60) NOT NULL,
+			role VARCHAR(255)
+		);
+		
 	`
 	res, err := db.Exec(createTables)
 	if err != nil {

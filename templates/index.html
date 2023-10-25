@@ -21,7 +21,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #CDFAD5;
+            background: #9EB384;
             padding: 30px;
         }
 
@@ -29,7 +29,7 @@
             position: relative;
             max-width: 850px;
             width: 100%;
-            background: #fff;
+            background: #CEDEBD;
             padding: 40px 30px;
             perspective: 2700px;
         }
@@ -70,7 +70,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            background: #F6FDC3;
+            background: #A7D397;
             opacity: 1;
             z-index: 12;
         }
@@ -104,7 +104,7 @@
         .cover .text .text-2 {
             font-size: 26px;
             font-weight: 600;
-            color: #fff;
+            color: #CEDEBD;
             text-align: center;
         }
 
@@ -116,7 +116,7 @@
         .container .forms {
             height: 100%;
             width: 100%;
-            background: #fff;
+            background: #CEDEBD;
         }
 
         .container .form-content {
@@ -144,7 +144,7 @@
             bottom: 0;
             height: 3px;
             width: 25px;
-            background: #7d2ae8;
+            background: #FFF5E0;
         }
 
         .forms .signup-form .title:before {
@@ -178,12 +178,12 @@
 
         .form-content .input-box input:focus,
         .form-content .input-box input:valid {
-            border-color: #7d2ae8;
+            border-color: #FFF5E0;
         }
 
         .form-content .input-box i {
             position: absolute;
-            color: #7d2ae8;
+            color: #FFF5E0;
             font-size: 17px;
         }
 
@@ -208,19 +208,20 @@
 
         .forms .form-content .button input {
             color: #fff;
-            background: #7d2ae8;
+            background: #1450A3;
             border-radius: 6px;
             padding: 0;
             cursor: pointer;
             transition: all 0.4s ease;
+            width: 160px;
         }
 
         .forms .form-content .button input:hover {
-            background: #5b13b9;
+            background: #4F709C;
         }
 
         .forms .form-content label {
-            color: #5b13b9;
+            color: #4F709C;
             cursor: pointer;
         }
 
@@ -340,7 +341,15 @@
                     <div id="error-message" style="color: red; display: none;"></div>
                     <div id="success-message" style="color: green; display: none;">Registration Success...</div>
                 </div>
-
+                <!-- Password Reset Form -->
+                <div id="password-reset-form" style="display: none;">
+                    <div class="title">Password Reset</div>
+                    <form id="reset-form">
+                        <label for="reset-email">Enter your email to reset your password:</label>
+                        <input type="email" id="reset-email" required>
+                        <button type="submit">Reset Password</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -439,6 +448,48 @@
                         errorMessage.textContent = "An error occurred while logging in.";
                         errorMessage.style.display = "block";
                         successMessage.style.display = "none";
+                    });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const forgotPasswordLink = document.getElementById("forgot-password-link");
+            const passwordResetForm = document.getElementById("password-reset-form");
+            const resetEmailInput = document.getElementById("reset-email");
+
+            forgotPasswordLink.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                // Hide other forms and show the password reset form
+                document.querySelector('.login-form').style.display = 'none';
+                document.querySelector('.signup-form').style.display = 'none';
+                passwordResetForm.style.display = 'block';
+            });
+
+            const resetForm = document.getElementById("reset-form");
+
+            resetForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const email = resetEmailInput.value;
+
+                // Send a request to the server to initiate the password reset process
+                fetch("/forgot-password", {
+                    method: "POST",
+                    body: new URLSearchParams({ email }),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.status === "success") {
+                            alert("A password reset email has been sent to your email address.");
+                        } else {
+                            alert("Failed to initiate password reset. Please try again later.");
+                        }
+                    })
+                    .catch((error) => {
+                        alert("An error occurred while initiating password reset.");
                     });
             });
         });

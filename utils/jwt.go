@@ -3,6 +3,8 @@
 package utils
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"go-server/models"
 	"net/http"
 	"os"
@@ -19,9 +21,9 @@ func init() {
 
 // Claims represents the JWT claims.
 type Claims struct {
-	UserID   int    `json:"user_id"`
-	Username string `json:"username"`
-	UserRole string `json:"user_role"`
+	UserId    int    `json:"user_id"`
+	UserEmail string `json:"user_email"`
+	UserRole  string `json:"user_role"`
 	jwt.StandardClaims
 }
 
@@ -31,9 +33,9 @@ func GetSecretKey() {
 
 func GenerateJWTToken(user *models.User) (string, error) {
 	claims := Claims{
-		UserID:   user.Id,
-		Username: user.Username,
-		UserRole: user.Role,
+		UserId:    int(user.ID),
+		UserEmail: user.Email,
+		UserRole:  user.Role,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
 		},
@@ -77,4 +79,25 @@ func VerifyJWTToken(tokenString string) (Claims, bool) {
 		return claims, false
 	}
 	return claims, token.Valid
+}
+
+// GeneratePasswordResetToken generates a password reset token for a user.
+func GeneratePasswordResetToken(user *models.User) (string, error) {
+	// Create a unique token based on user email and a timestamp
+	tokenData := user.Email + time.Now().String()
+
+	// Generate a random 32-byte string for additional security
+	randomBytes := make([]byte, 32)
+	_, err := rand.Read(randomBytes)
+	if err != nil {
+		return "", err
+	}
+
+	// Combine the token data and random bytes
+	combinedData := append([]byte(tokenData), randomBytes...)
+
+	// Encode the combined data as a base64 string
+	token := base64.URLEncoding.EncodeToString(combinedData)
+
+	return token, nil
 }
