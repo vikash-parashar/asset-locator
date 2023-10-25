@@ -253,9 +253,7 @@
                 cell.textContent = formattedDate;
             });
         });
-    </script>
 
-    <script>
         // Delay the row animation when the page loads
         const tableRows = document.querySelectorAll(".row-transition");
 
@@ -276,15 +274,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Deleted Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not deleted. Please try again.");
+                        notify(2, error.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -295,15 +293,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Updated Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not updated. Please try again.");
+                        notify(2, data.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -348,10 +346,10 @@
                     if (data.success) {
                         console.log(xhr.responseText);
 
-                        alert("Success: Entry added successfully.");
+                        notify(1, data.message);
                         location.reload();
                     } else {
-                        alert("Error: Entry not added. Please try again.");
+                        notify(3, error.message);
                     }
                 }
             };
@@ -361,8 +359,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-    </script>
-    <script>
         document.getElementById("downloadDataButton").addEventListener("click", function () {
             // Create a function to download data as PDF
             function downloadAsPDF() {
@@ -387,8 +383,6 @@
                 downloadAsXLSX();
             }
         });
-    </script>
-    <script>
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -397,14 +391,15 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        alert(data.message);
+                        notify(1, data.message);
                         window.location.href = "/"; // Redirect to the login page
                     } else {
-                        alert(data.message);
+                        notify(2, data.message);
                     }
                 })
                 .catch((error) => {
                     console.error("An error occurred while logging out.");
+                    notify(3, error.message);
                 });
         }
 

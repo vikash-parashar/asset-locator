@@ -190,9 +190,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
-
-    <!-- notie alerts -->
     <script src="https://unpkg.com/notie"></script>
     <script>
         function notify(type, msg) {
@@ -235,10 +232,10 @@
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         console.log(xhr.responseText);
-                        alert("Success: Entry Added Successfully.");
+                        notify(1, data.message)
                         location.reload();
                     } else {
-                        alert("Error: Entry not added. Please try again.");
+                        notify(3, response.message)
                     }
                 }
             };
@@ -247,6 +244,7 @@
             // Close the modal
             $("#createEntryModal").modal("hide");
         });
+
         // Function to send a DELETE request
         function deleteRecord(id) {
             fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
@@ -254,15 +252,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Deleted Successfully.");
+                        notify(1, data.message)
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not deleted. Please try again.");
+                        notify(3, " Record not deleted. Please try again.");
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message)
                 });
         }
 
@@ -276,12 +274,12 @@
                         alert("Success: Record Updated Successfully.");
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not updated. Please try again.");
+                        notify(3, "Error: Record not updated. Please try again.");
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, "An error occurred. Please try again.");
                 });
         }
 
@@ -307,8 +305,6 @@
             });
         });
 
-    </script>
-    <script>
         document.getElementById("downloadDataButton").addEventListener("click", function () {
             // Create a function to download data as PDF
             function downloadAsPDF() {
@@ -333,8 +329,7 @@
                 downloadAsXLSX();
             }
         });
-    </script>
-    <script>
+
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -343,14 +338,15 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        alert(data.message);
+                        notify(1, data.message)
                         window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        alert(data.message);
+                        notify(2, data.message)
                     }
                 })
                 .catch((error) => {
                     console.error("An error occurred while logging out.");
+                    notify(3, "An error occurred while logging out.")
                 });
         }
 

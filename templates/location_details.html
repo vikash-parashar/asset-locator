@@ -242,7 +242,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <!-- notie alerts -->
+    <!-- notie  notify(1,data.message);s -->
     <script src="https://unpkg.com/notie"></script>
     <script>
         function notify(type, msg) {
@@ -275,15 +275,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Deleted Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not deleted. Please try again.");
+                        notify(2, response.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -294,15 +294,15 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        alert("Success: Record Updated Successfully.");
+                        notify(1, data.message);
                         location.reload(); // Reload the page
                     } else {
-                        alert("Error: Record not updated. Please try again.");
+                        notify(2, response.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
+                    notify(3, error.message);
                 });
         }
 
@@ -346,10 +346,10 @@
                     console.log(xhr.responseText);
 
                     if (data.success) {
-                        alert("Success: Entry added successfully.");
+                        notify(1, data.message);
                         location.reload();
                     } else {
-                        alert("Error: Entry not added. Please try again.");
+                        notify(3, response.message);
                     }
                 }
             };
@@ -359,9 +359,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-    </script>
-
-    <script>
         document.getElementById("downloadDataButton").addEventListener("click", function () {
             // Create a function to download data as PDF
             function downloadAsPDF() {
@@ -386,9 +383,7 @@
                 downloadAsXLSX();
             }
         });
-    </script>
 
-    <script>
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -397,14 +392,15 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        alert(data.message);
+                        notify(1, data.message); (data.message);
                         window.location.href = "/"; // Redirect to the login page
                     } else {
-                        alert(data.message);
+                        notify(2, response.message);
                     }
                 })
                 .catch((error) => {
                     console.error("An error occurred while logging out.");
+                    notify(3, error.message);
                 });
         }
 
