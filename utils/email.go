@@ -44,7 +44,9 @@ func SendResetPasswordEmail(recipientEmail, resetToken string) error {
 
 	// Send the email.
 	if err := d.DialAndSend(m); err != nil {
+		log.Println("Failed to send email:", err)
 		return err
 	}
+
 	return nil
 }
