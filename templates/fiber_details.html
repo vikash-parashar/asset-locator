@@ -11,54 +11,115 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <style>
-        .delete-button {
-            background-color: #D80032;
-            color: #F1EFEF;
-            border-radius: 10px;
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Tilt+Neon&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+
+        #cname {
+            font-family: 'Jost', sans-serif;
+            font-style: normal;
+            font-size: medium;
+            color: black;
         }
 
-        .update-button {
-            background-color: #008170;
-            color: #F1EFEF;
-            border-radius: 20px;
+        a {
+            font-family: 'Josefin Sans', sans-serif;
+            font-style: normal;
+            font-size: medium;
+            color: black;
+        }
+
+        /* Add custom CSS styles here */
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 1px 20px;
+        }
+
+        .nav-item .nav-link {
+            color: #4cb7e9;
+        }
+
+        .nav-link:hover {
+            background-color: #ffffff;
+        }
+
+        .dropdown-menu {
+            min-width: 300px;
+            height: 45vh;
+            background-color: #033025c0;
+        }
+
+
+
+        .dropdown-item-text {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-top: 20px;
+            font-size: 15px;
+            color: aliceblue;
+        }
+
+        img {
+            height: 35px;
+            width: 35px;
+        }
+
+        .footer {
+            margin-top: 82.9vh;
+            padding: 15px 0;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        #navbarNav {
+            margin-left: 130px;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage"><button
-                            class="nav-btn btn-outline-info">Home</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details"><button
-                            class="nav-btn btn-outline-info">Location Details</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details"><button
-                            class="nav-btn btn-outline-info">Owners Details</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details"><button
-                            class="nav-btn btn-outline-info">Fiber Details</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details"><button
-                            class="nav-btn btn-outline-info">Power Details</button></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" id="logout-button"><button class="btn btn-danger">Logout</button></a>
-                </li>
-            </ul>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./static/images/asset.png" alt="Asset Locator Logo" width="30" height="30"> Asset Locator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location Details</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Update your HTML to include placeholders for user details -->
+            <div class="nav-item" id="userDropdownContainer">
+                <a class="nav-link" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="../static/images/usericon.png" alt="profile">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <p class="dropdown-item-text">First Name : <span id="firstNamePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Last Name : <span id="lastNamePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Phone : <span id="phonePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Email : <span id="emailPlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Role : <span id="rolePlaceholder">Loading...</span></p>
+                    <div class="text-center">
+                        <button class="btn btn-danger ml-2"><a href="/logout">Logout</a></button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -173,10 +234,29 @@
         </div>
     </div>
 
+
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    &copy; 2023 Your Company. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
     <script>
         function notify(type, msg) {
@@ -346,6 +426,31 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
 
+
+        // Function to fetch and display user details
+        function fetchCurrentUserDetails() {
+            $.ajax({
+                url: '/get-current-user',
+                type: 'GET',
+                success: function (data) {
+                    // Assuming the API response contains user details
+                    // Update the placeholders in the dropdown menu
+                    $('#firstNamePlaceholder').text(data.firstName);
+                    $('#lastNamePlaceholder').text(data.lastName);
+                    $('#phonePlaceholder').text(data.phone);
+                    $('#emailPlaceholder').text(data.email);
+                    $('#rolePlaceholder').text(data.role);
+                },
+                error: function (error) {
+                    console.log('Error fetching user details:', error);
+                }
+            });
+        }
+
+        // Add an event listener to fetch user details when the page loads
+        $(document).ready(function () {
+            fetchCurrentUserDetails();
+        });
     </script>
 </body>
 

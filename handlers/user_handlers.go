@@ -214,3 +214,40 @@ func ResetPassword(db *db.DB) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Password reset successful"})
 	}
 }
+
+func GetCurrentUser(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Retrieve the JWT token from the cookie
+		cookie, err := c.Request.Cookie("jwt-token")
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
+		token := cookie.Value
+
+		claims, valid := utils.VerifyJWTToken(token)
+		if !valid {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
+		// Extract the user email from the claims
+		userEmail := claims.UserEmail
+
+		// Retrieve the user based on the user email from the database
+		user, err := db.GetUserByEmailID(userEmail)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Error retrieving user"})
+			c.Abort()
+			return
+		}
+
+		// Send the user information in the response
+		c.JSON(http.StatusOK, gin.H{
+			"user": user,
+		})
+	}
+}

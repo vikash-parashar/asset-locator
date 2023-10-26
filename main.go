@@ -56,6 +56,9 @@ func main() {
 	// Homepage
 	protected.GET("/homepage", handlers.RenderHomePage(dbConn))
 
+	// User
+	protected.GET("/get-current-user", handlers.GetCurrentUser(dbConn))
+
 	// Location Details
 	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))
 	protected.POST("/location-details", handlers.CreateNewLocationDetails(dbConn))
