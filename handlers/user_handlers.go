@@ -154,14 +154,13 @@ func ForgotPassword(db *db.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate reset token"})
 			return
 		}
-
 		// Save the reset token in the database associated with the user's account
 		if err := db.SetResetToken(int(user.ID), resetToken); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to save reset token"})
 			return
 		}
 
-		// Send an email to the user with a link to reset their password
+		// Send an email to the user with the reset URL
 		err = utils.SendResetPasswordEmail(user.Email, resetToken)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to send reset email"})
@@ -174,13 +173,17 @@ func ForgotPassword(db *db.DB) gin.HandlerFunc {
 
 func ResetPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Extract the reset token from the URL query parameter
-		resetToken := c.DefaultQuery("token", "")
+		resetToken := c.Query("token")
+
+		log.Printf("Reset token: %s", resetToken)
+		// Rest of your code
+
 		if resetToken == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Reset token is missing"})
 			return
 		}
 
+		log.Println(resetToken)
 		// Parse the new password from the request body
 		var resetRequest struct {
 			NewPassword string `json:"new_password" binding:"required"`
@@ -255,4 +258,8 @@ func GetCurrentUser(db *db.DB) gin.HandlerFunc {
 			"user": user,
 		})
 	}
+}
+
+func RenderResetPasswordPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "reset_password.html", gin.H{})
 }
