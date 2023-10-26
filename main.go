@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"os"
 
@@ -37,6 +38,14 @@ func main() {
 
 	r := gin.Default()
 
+	// Serve static files from the "static" directory
+	r.Static("/static", "./static")
+	//  Define a custom template function
+	r.SetFuncMap(template.FuncMap{
+		"add1": func(i int) int {
+			return i + 1
+		},
+	})
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
@@ -55,6 +64,9 @@ func main() {
 
 	// Homepage
 	protected.GET("/homepage", handlers.RenderHomePage(dbConn))
+
+	// User
+	protected.GET("/get-current-user", handlers.GetCurrentUser(dbConn))
 
 	// Location Details
 	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))
