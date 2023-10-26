@@ -79,7 +79,7 @@ func SendResetPasswordEmail(recipientEmail, resetToken string) error {
 		"Subject: Password Reset Request\r\n" +
 		"\r\n" +
 		"To reset your password, click on the following link: " +
-		"https://example.com/reset-password?token=" + resetToken
+		"http://localhost:8080/reset-password?token=" + resetToken
 
 	_, err = wc.Write([]byte(message))
 	if err != nil {
