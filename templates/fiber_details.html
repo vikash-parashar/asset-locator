@@ -214,7 +214,8 @@
                     <tbody id="deviceDetails">
                         {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size: small;">{{$index + 1}}</td>
+                            {{ $count := add $index 1 }}
+                            <td style="font-size: small;">{{ $count }}</td>
                             <td style="font-size: small;">{{.SerialNumber}}</td>
                             <td style="font-size: small;">{{.DeviceMakeModel}}</td>
                             <td style="font-size: small;">{{.Model}}</td>
@@ -230,8 +231,8 @@
                         </tr>
                         {{end}}
                     </tbody>
-
                 </table>
+
             </div>
         </div>
     </div>

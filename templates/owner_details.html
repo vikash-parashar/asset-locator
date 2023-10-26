@@ -258,10 +258,10 @@
                             <td style="font-size: small;">{{.Model}}</td>
                             <td style="font-size: small;">{{.PONumber}}</td>
                             <!-- Modify the relevant table cell (e.g., POOrderDate, EOSLDate, AMCStartDate, AMCEndDate) -->
-                            <td class="date-cell" style="font-size: small">{{.POOrderDate.Format "02/01/2006"}}</td>
-                            <td class="date-cell" style="font-size: small">{{.EOSLDate.Format "02/01/2006"}}</td>
-                            <td class="date-cell" style="font-size: small">{{.AMCStartDate.Format "02/01/2006"}}</td>
-                            <td class="date-cell" style="font-size: small">{{.AMCEndDate.Format "02/01/2006"}}</td>
+                            <td class="date-cell" style="font-size: small;">{{.POOrderDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{.EOSLDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{.AMCStartDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{.AMCEndDate}}</td>
                             <td style="font-size: small;">{{.DeviceOwner}}</td>
                             <td style="font-size: small;">
                                 <button class="delete-button" data-id="{{.Id}}">Delete</button>
@@ -270,8 +270,8 @@
                         </tr>
                         {{end}}
                     </tbody>
-                    
                 </table>
+
             </div>
         </div>
     </div>
