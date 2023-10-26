@@ -52,10 +52,11 @@ func main() {
 	// Unprotected routes
 	r.GET("/health-check", handlers.HealthCheck)
 	r.GET("/", handlers.RenderIndexPage)
-	r.GET("/forget-password-page", handlers.RenderForgotPasswordPage)
 	r.POST("/signup", handlers.SignUp(dbConn))
 	r.POST("/login", handlers.Login(dbConn))
 	r.POST("/logout", handlers.Logout())
+	r.GET("/forget-password-page", handlers.RenderForgotPasswordPage)
+	r.GET("/reset-password", handlers.RenderResetPasswordPage)
 	r.POST("/forget-password", handlers.ForgotPassword(dbConn))
 	r.POST("/reset-password", handlers.ResetPassword(dbConn))
 
