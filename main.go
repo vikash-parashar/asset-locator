@@ -101,4 +101,5 @@ func main() {
 	protected.GET("/fiber-details/excel", handlers.DownloadDeviceEthernetFiberDetail(dbConn))
 
 	log.Fatal(r.Run(":" + port))
+
 }
