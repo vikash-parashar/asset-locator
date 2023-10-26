@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"os"
 
@@ -36,8 +37,15 @@ func main() {
 	defer dbConn.Close()
 
 	r := gin.Default()
+
 	// Serve static files from the "static" directory
 	r.Static("/static", "./static")
+	//  Define a custom template function
+	r.SetFuncMap(template.FuncMap{
+		"add1": func(i int) int {
+			return i + 1
+		},
+	})
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
