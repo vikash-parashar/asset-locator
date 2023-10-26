@@ -237,37 +237,39 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th style="font-size:medium;">S No.</th>
-                            <th style="font-size:medium;">Device Serial Number</th>
-                            <th style="font-size:medium;">Device Make</th>
-                            <th style="font-size:medium;">Device Model</th>
-                            <th style="font-size:medium;">Device Type</th>
-                            <th style="font-size:medium;">Total Power (Watt)</th>
-                            <th style="font-size:medium;">Total BTU</th>
-                            <th style="font-size:medium;">Total Power Cable</th>
-                            <th style="font-size:medium;">Power Socket Type</th>
-                            <th style="font-size:medium;">Action</th>
+                            <th style="font-size: medium;">Count</th>
+                            <th style="font-size: medium;">Device Serial Number</th>
+                            <th style="font-size: medium;">Device Make</th>
+                            <th style="font-size: medium;">Device Model</th>
+                            <th style="font-size: medium;">Device Type</th>
+                            <th style="font-size: medium;">Total Power (Watt)</th>
+                            <th style="font-size: medium;">Total BTU</th>
+                            <th style="font-size: medium;">Total Power Cable</th>
+                            <th style="font-size: medium;">Power Socket Type</th>
+                            <th style="font-size: medium;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
-                        {{range .}}
+                        {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.Id}}</td>
-                            <td style="font-size:small;">{{.SerialNumber}}</td>
-                            <td style="font-size:small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size:small;">{{.Model}}</td>
-                            <td style="font-size:small;">{{.DeviceType}}</td>
-                            <td style="font-size:small;">{{.TotalPowerWatt}}</td>
-                            <td style="font-size:small;">{{.TotalBTU}}</td>
-                            <td style="font-size:small;">{{.TotalPowerCable}}</td>
-                            <td style="font-size:small;">{{.PowerSocketType}}</td>
-                            <td style="font-size:small;">
-                                <button class="delete-button" data-id="{{.ID}}">Delete</button>
-                                <button class="update-button" data-id="{{.ID}}">Update</button>
+                            <td style="font-size: small;">{{$index + 1}}</td>
+                            <td style="font-size: small;">{{.SerialNumber}}</td>
+                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{.Model}}</td>
+                            <td style="font-size: small;">{{.DeviceType}}</td>
+                            <td style="font-size: small;">{{.TotalPowerWatt}}</td>
+                            <td style="font-size: small;">{{.TotalBTU}}</td>
+                            <td style="font-size: small;">{{.TotalPowerCable}}</td>
+                            <td style="font-size: small;">{{.PowerSocketType}}</td>
+                            <td style="font-size: small;">
+                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
                     </tbody>
+                </table>
+
                 </table>
             </div>
         </div>

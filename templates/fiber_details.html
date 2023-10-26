@@ -199,37 +199,38 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th style="font-size:medium;">S No.</th>
-                            <th style="font-size:medium;">Device Serial Number</th>
-                            <th style="font-size:medium;">Device Make</th>
-                            <th style="font-size:medium;">Device Model</th>
-                            <th style="font-size:medium;">Device Type</th>
-                            <th style="font-size:medium;">Device Physical Port</th>
-                            <th style="font-size:medium;">Device Port Type</th>
-                            <th style="font-size:medium;">Device Port MAC/WWN</th>
-                            <th style="font-size:medium;">Connected Device Port</th>
-                            <th style="font-size:medium;">Action</th>
+                            <th style="font-size: medium;">Count</th>
+                            <th style="font-size: medium;">Device Serial Number</th>
+                            <th style="font-size: medium;">Device Make</th>
+                            <th style="font-size: medium;">Device Model</th>
+                            <th style="font-size: medium;">Device Type</th>
+                            <th style="font-size: medium;">Device Physical Port</th>
+                            <th style="font-size: medium;">Device Port Type</th>
+                            <th style="font-size: medium;">Device Port MAC/WWN</th>
+                            <th style="font-size: medium;">Connected Device Port</th>
+                            <th style="font-size: medium;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
-                        {{range .}}
+                        {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size:small;">{{.Id}}</td>
-                            <td style="font-size:small;">{{.SerialNumber}}</td>
-                            <td style="font-size:small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size:small;">{{.Model}}</td>
-                            <td style="font-size:small;">{{.DeviceType}}</td>
-                            <td style="font-size:small;">{{.DevicePhysicalPort}}</td>
-                            <td style="font-size:small;">{{.DevicePortType}}</td>
-                            <td style="font-size:small;">{{.DevicePortMACWWN}}</td>
-                            <td style="font-size:small;">{{.ConnectedDevicePort}}</td>
-                            <td style="font-size:small;">
-                                <button class="delete-button" data-id="{{.ID}}">Delete</button>
-                                <button class="update-button" data-id="{{.ID}}">Update</button>
+                            <td style="font-size: small;">{{$index + 1}}</td>
+                            <td style="font-size: small;">{{.SerialNumber}}</td>
+                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{.Model}}</td>
+                            <td style="font-size: small;">{{.DeviceType}}</td>
+                            <td style="font-size: small;">{{.DevicePhysicalPort}}</td>
+                            <td style="font-size: small;">{{.DevicePortType}}</td>
+                            <td style="font-size: small;">{{.DevicePortMACWWN}}</td>
+                            <td style="font-size: small;">{{.ConnectedDevicePort}}</td>
+                            <td style="font-size: small;">
+                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
                     </tbody>
+
                 </table>
             </div>
         </div>
