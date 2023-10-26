@@ -36,7 +36,8 @@ func main() {
 	defer dbConn.Close()
 
 	r := gin.Default()
-
+	// Serve static files from the "static" directory
+	r.Static("/static", "./static")
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
