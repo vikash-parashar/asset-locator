@@ -21,6 +21,7 @@ func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 			return
 		}
 		c.HTML(http.StatusOK, "fiber_details.html", gin.H{"data": data})
+
 	}
 }
 

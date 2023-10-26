@@ -212,21 +212,20 @@
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
-                        {{range $index, $record := .}}
+                        {{range $index, $record := .data}}
                         <tr class="row-transition">
-                            {{ $count := add $index 1 }}
-                            <td style="font-size: small;">{{ $count }}</td>
-                            <td style="font-size: small;">{{.SerialNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{.Model}}</td>
-                            <td style="font-size: small;">{{.DeviceType}}</td>
-                            <td style="font-size: small;">{{.DevicePhysicalPort}}</td>
-                            <td style="font-size: small;">{{.DevicePortType}}</td>
-                            <td style="font-size: small;">{{.DevicePortMACWWN}}</td>
-                            <td style="font-size: small;">{{.ConnectedDevicePort}}</td>
+                            <td style="font-size: small;">{{$index}}</td>
+                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{$record.Model}}</td>
+                            <td style="font-size: small;">{{$record.DeviceType}}</td>
+                            <td style="font-size: small;">{{$record.DevicePhysicalPort}}</td>
+                            <td style="font-size: small;">{{$record.DevicePortType}}</td>
+                            <td style="font-size: small;">{{$record.DevicePortMACWWN}}</td>
+                            <td style="font-size: small;">{{$record.ConnectedDevicePort}}</td>
                             <td style="font-size: small;">
-                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{.Id}}">Update</button>
+                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
