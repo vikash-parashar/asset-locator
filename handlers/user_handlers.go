@@ -172,12 +172,17 @@ func ForgotPassword(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// ResetPassword handles the user's password reset by verifying the reset token.
 func ResetPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse request body into a struct
+		// Extract the reset token from the URL query parameter
+		resetToken := c.DefaultQuery("token", "")
+		if resetToken == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Reset token is missing"})
+			return
+		}
+
+		// Parse the new password from the request body
 		var resetRequest struct {
-			ResetToken  string `json:"reset_token" binding:"required"`
 			NewPassword string `json:"new_password" binding:"required"`
 		}
 		if err := c.ShouldBindJSON(&resetRequest); err != nil {
@@ -186,7 +191,7 @@ func ResetPassword(db *db.DB) gin.HandlerFunc {
 		}
 
 		// Verify the reset token
-		user, err := db.VerifyResetToken(resetRequest.ResetToken)
+		user, err := db.VerifyResetToken(resetToken)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Invalid or expired reset token"})
 			return
