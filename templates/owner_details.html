@@ -27,20 +27,18 @@
             color: black;
         }
 
-        
-        /* Add custom CSS styles here */
-        .navbar-brand img {
-            margin-right: 10px;
-            border-radius: 50%;
-            /* Set border-radius to 50% to create a circular shape */
-        }
-
         .navbar-nav .nav-link {
             padding: 1px 20px;
         }
 
-        .nav-item .nav-link {
-            color: #4cb7e9;
+        /* Styles for Navbar */
+        .navbar-brand img {
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 1px 20px;
         }
 
         .nav-link:hover {
@@ -48,18 +46,16 @@
         }
 
         .dropdown-menu {
-            min-width: 300px;
-            height: 45vh;
-            background-color: #033025c0;
+            min-width: 250px;
+            height: 47vh;
+            background-color: #232D3F;
         }
-
-
 
         .dropdown-item-text {
             font-family: 'Josefin Sans', sans-serif;
             margin-top: 20px;
             font-size: 15px;
-            color: aliceblue;
+            color: #CE5A67;
         }
 
         img {
@@ -84,7 +80,7 @@
         }
 
         .update-button {
-            background-color: green;
+            background-color: #219C90;
             color: white;
         }
     </style>
@@ -251,7 +247,7 @@
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
-                            <th style="font-size: medium;">Count</th>
+                            <th style="font-size: medium;">S No.</th>
                             <th style="font-size: medium;">Device Serial Number</th>
                             <th style="font-size: medium;">Device Make</th>
                             <th style="font-size: medium;">Device Model</th>
@@ -316,6 +312,41 @@
                 position: 'top'
             })
         }
+
+        // Function to fetch and display user details when the page loads
+        function fetchCurrentUserDetails() {
+            fetch('/api/v1/get-current-user', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Assuming the API response contains user details
+
+                    // Update the placeholders in the dropdown menu
+                    document.getElementById('firstNamePlaceholder').textContent = data.first_name;
+                    document.getElementById('lastNamePlaceholder').textContent = data.last_name;
+                    document.getElementById('phonePlaceholder').textContent = data.phone;
+                    document.getElementById('emailPlaceholder').textContent = data.email;
+                    document.getElementById('rolePlaceholder').textContent = data.role;
+                })
+
+                .catch(error => {
+                    console.error('Error fetching user details:', error);
+                });
+        }
+
+        // Add an event listener to fetch user details when the page loads
+        document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
         // Function to format a date as "DD/MM/YYYY"
         function formatDate(inputDate) {
             const parts = inputDate.split('-');
@@ -497,30 +528,6 @@
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
-        // Function to fetch and display user details
-        function fetchCurrentUserDetails() {
-            $.ajax({
-                url: '/get-current-user',
-                type: 'GET',
-                success: function (data) {
-                    // Assuming the API response contains user details
-                    // Update the placeholders in the dropdown menu
-                    $('#firstNamePlaceholder').text(data.firstName);
-                    $('#lastNamePlaceholder').text(data.lastName);
-                    $('#phonePlaceholder').text(data.phone);
-                    $('#emailPlaceholder').text(data.email);
-                    $('#rolePlaceholder').text(data.role);
-                },
-                error: function (error) {
-                    console.log('Error fetching user details:', error);
-                }
-            });
-        }
-
-        // Add an event listener to fetch user details when the page loads
-        $(document).ready(function () {
-            fetchCurrentUserDetails();
-        });
     </script>
 
 </body>

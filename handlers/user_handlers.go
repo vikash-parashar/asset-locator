@@ -111,7 +111,7 @@ func Login(db *db.DB) gin.HandlerFunc {
 		cookie := http.Cookie{
 			Name:    "jwt-token",
 			Value:   token,
-			Expires: time.Now().Add(5 * time.Minute),
+			Expires: time.Now().Add(60 * time.Minute),
 		}
 		http.SetCookie(c.Writer, &cookie)
 		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
