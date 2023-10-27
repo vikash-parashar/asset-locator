@@ -111,7 +111,7 @@ func Login(db *db.DB) gin.HandlerFunc {
 		cookie := http.Cookie{
 			Name:    "jwt-token",
 			Value:   token,
-			Expires: time.Now().Add(5 * time.Minute),
+			Expires: time.Now().Add(60 * time.Minute),
 		}
 		http.SetCookie(c.Writer, &cookie)
 		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
@@ -121,10 +121,18 @@ func Login(db *db.DB) gin.HandlerFunc {
 // Logout handles the user logout by clearing the JWT token cookie.
 func Logout() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Clear the JWT token cookie
-		c.SetSameSite(http.SameSiteNoneMode)
-		c.SetCookie("jwt-token", "", -1, "/", "", false, true)
-
+		// Clear the JWT token cookie by setting its expiration to a past time
+		cookie := http.Cookie{
+			Name:     "jwt-token",
+			Value:    "",              // Clear the cookie value
+			Expires:  time.Unix(0, 0), // Set the expiration time to Unix epoch (1970-01-01 00:00:00 UTC)
+			Path:     "/",
+			SameSite: http.SameSiteNoneMode,
+			HttpOnly: true,
+			Secure:   true, // Set this to true if you're using HTTPS
+		}
+		http.SetCookie(c.Writer, &cookie)
+		c.Redirect(http.StatusPermanentRedirect, "/")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Logout successful"})
 	}
 }
