@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #9EB384;
+            background: #132043;
             padding: 30px;
         }
 
@@ -31,7 +31,7 @@
             position: relative;
             max-width: 850px;
             width: 100%;
-            background: #CEDEBD;
+            background: #1F4172;
             padding: 40px 30px;
             perspective: 2700px;
         }
@@ -43,9 +43,9 @@
             height: 100%;
             width: 50%;
             z-index: 98;
-            transition: all 1s ease;
+            transition: all 1s ease-in-out;
             transform-origin: left;
-            transform-style: preserve-3d;
+            transform-style: initial;
         }
 
         .container #flip:checked~.cover {
@@ -72,7 +72,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            background: #A7D397;
+            /* background: #A7D397; */
             opacity: 1;
             z-index: 12;
         }
@@ -106,7 +106,7 @@
         .cover .text .text-2 {
             font-size: 26px;
             font-weight: 600;
-            color: #CEDEBD;
+            color: #1F4172;
             text-align: center;
         }
 
@@ -118,7 +118,7 @@
         .container .forms {
             height: 100%;
             width: 100%;
-            background: #CEDEBD;
+            background: #1F4172;
         }
 
         .container .form-content {
@@ -134,9 +134,9 @@
 
         .forms .form-content .title {
             position: relative;
-            font-size: 24px;
+            font-size: 50px;
             font-weight: 500;
-            color: #333;
+            color: #A6F6FF;
         }
 
         .forms .form-content .title:before {
@@ -144,9 +144,6 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            height: 3px;
-            width: 25px;
-            background: #FFF5E0;
         }
 
         .forms .signup-form .title:before {
@@ -192,7 +189,7 @@
         .forms .form-content .text {
             font-size: 14px;
             font-weight: 500;
-            color: #333;
+            color: #F1B4BB;
         }
 
         .forms .form-content .text a {
@@ -275,14 +272,11 @@
         <input type="checkbox" id="flip">
         <div class="cover">
             <div class="front">
-                <img src="../static/images/logo5.jpg" alt="logo">
+                <img src="../static/images/logo3.png" alt="logo">
             </div>
             <div class="back">
                 <img class="backImg" src="../static/images/logo3.png" alt="asset locator logo">
-                <div class="text">
-                    <span class="text-1">Complete miles of journey <br> with one step</span>
-                    <span class="text-2">Let's get started</span>
-                </div>
+
             </div>
         </div>
         <div class="forms">
