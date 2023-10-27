@@ -7,3 +7,7 @@ App Overview :
 
 Copyrights to  :
 [Linkedin Profile Link](https://www.linkedin.com/in/vikash-parashar-3152471ba/)
+
+
+# Current Issue With Logout Button
+![Alt text]Issue with Logout Button(image.png)
