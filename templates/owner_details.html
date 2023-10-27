@@ -377,14 +377,12 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Assuming the API response contains user details
-
                     // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').textContent = data.first_name;
-                    document.getElementById('lastNamePlaceholder').textContent = data.last_name;
-                    document.getElementById('phonePlaceholder').textContent = data.phone;
-                    document.getElementById('emailPlaceholder').textContent = data.email;
-                    document.getElementById('rolePlaceholder').textContent = data.role;
+                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
+                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
+                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
+                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
+                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
                 })
 
                 .catch(error => {

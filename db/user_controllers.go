@@ -10,12 +10,12 @@ import (
 
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	query := `
-        SELECT id, first_name, last_name, email, password, role
+        SELECT id, first_name, last_name,phone, email, role
         FROM users
         WHERE email = $1
     `
 	user := &models.User{}
-	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Password, &user.Role)
+	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Role)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user not found")

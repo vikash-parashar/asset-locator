@@ -179,8 +179,7 @@
     <div class="container mt-2 mb-2">
         <div class="row align-items-start">
             <div class="col-10">
-                <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal"
-                    data-target="#createEntryModal">
+                <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal" data-target="#createEntryModal">
                     New
                 </button>
             </div>
@@ -192,8 +191,7 @@
                             <a href="http://localhost:8080/api/v1/location-details/excel"
                                 class="btn btn-sm xls">Excel</a>
 
-                            <a href="http://localhost:8080/api/v1/location-details/pdf"
-                                class="btn btn-sm pdf">PDF</a>
+                            <a href="http://localhost:8080/api/v1/location-details/pdf" class="btn btn-sm pdf">PDF</a>
 
                         </div>
                     </div>
@@ -405,14 +403,12 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Assuming the API response contains user details
-
                     // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').textContent = data.first_name;
-                    document.getElementById('lastNamePlaceholder').textContent = data.last_name;
-                    document.getElementById('phonePlaceholder').textContent = data.phone;
-                    document.getElementById('emailPlaceholder').textContent = data.email;
-                    document.getElementById('rolePlaceholder').textContent = data.role;
+                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
+                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
+                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
+                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
+                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
                 })
 
                 .catch(error => {

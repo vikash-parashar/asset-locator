@@ -159,6 +159,8 @@
             </div>
         </div>
     </footer>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -191,12 +193,12 @@
                 .then(data => {
                     // Assuming the API response contains user details
 
-                    // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').textContent = data.first_name;
-                    document.getElementById('lastNamePlaceholder').textContent = data.last_name;
-                    document.getElementById('phonePlaceholder').textContent = data.phone;
-                    document.getElementById('emailPlaceholder').textContent = data.email;
-                    document.getElementById('rolePlaceholder').textContent = data.role;
+                                     // Update the placeholders in the dropdown menu
+                                     document.getElementById('firstNamePlaceholder').innerHTML= data.user.first_name;
+                    document.getElementById('lastNamePlaceholder').innerHTML= data.user.last_name;
+                    document.getElementById('phonePlaceholder').innerHTML= data.user.phone;
+                    document.getElementById('emailPlaceholder').innerHTML= data.user.email;
+                    document.getElementById('rolePlaceholder').innerHTML= data.user.role;
                 })
 
                 .catch(error => {
