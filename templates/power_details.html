@@ -159,8 +159,9 @@
                     <p class="dropdown-item-text">Email : <span id="emailPlaceholder"></span></p>
                     <p class="dropdown-item-text">Role : <span id="rolePlaceholder"></span></p>
                     <div class="text-center">
-                        <a class="btn btn-danger ml-2" href="/logout">Logout</a>
+                        <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
+
                 </div>
             </div>
 
@@ -520,7 +521,7 @@
 
         // Function to handle logout
         function handleLogout() {
-            fetch("/logout", {
+            fetch("http://localhost:8080/logout", {
                 method: "POST",
             })
                 .then(response => {
@@ -528,12 +529,11 @@
                         throw new Error("Network response was not ok");
                     }
                     return response.json();
-
                 })
                 .then(data => {
                     if (data.success) {
                         notify(1, data.message);
-                        window.location.href = "http://localhost:8080"; // Redirect to the login page
+                        window.location.href = "/"; // Redirect to the root path
                     } else {
                         notify(2, data.message);
                     }
