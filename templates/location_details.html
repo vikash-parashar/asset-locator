@@ -161,7 +161,7 @@
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -200,6 +200,27 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <div class="container mt-2">
+        <div class="row align-items-start">
+            <div class="col-12">
+                <input type="text" id="filterInput" placeholder="Search...">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -313,7 +334,7 @@
             <div class="col">
                 <table class="table table-hover custom-table">
                     <thead>
-                        <tr>
+                        <tr class="row-transition table-row">
                             <th style="font-size: medium;">S No.</th>
                             <th style="font-size: medium;">Serial Number</th>
                             <th style="font-size: medium;">Make</th>
@@ -580,6 +601,30 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
 
+    </script>
+    <script>
+        // Function to filter the table rows based on user input
+        function filterTable() {
+            // Get the user input from the filter input field
+            const filterInput = document.getElementById('filterInput');
+            const filterValue = filterInput.value.toLowerCase();
+
+            // Get all the table rows with the class "table-row"
+            const tableRows = document.querySelectorAll('.table-row');
+
+            // Loop through the rows and hide/show based on the filter value
+            tableRows.forEach(row => {
+                const rowData = row.innerText.toLowerCase();
+                if (rowData.includes(filterValue)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Attach the filterTable function to the input field's input event
+        document.getElementById('filterInput').addEventListener('input', filterTable);
     </script>
 
 </body>
