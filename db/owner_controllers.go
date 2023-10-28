@@ -1,8 +1,9 @@
 package db
 
 import (
-	"go-server/models"
 	"log"
+
+	"github.com/vikash-parashar/asset-locator/models"
 )
 
 // CreateDeviceAMCOwnerDetail creates a new record in the device_amc_owner table.

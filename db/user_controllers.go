@@ -3,19 +3,20 @@ package db
 import (
 	"database/sql"
 	"errors"
-	"go-server/models"
-	"go-server/utils"
+	"github.com/vikash-parashar/asset-locator/models"
+	"github.com/vikash-parashar/asset-locator/utils"
 	"log"
 )
 
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
+	log.Println(email)
 	query := `
-        SELECT id, first_name, last_name,phone, email, role
+        SELECT id, first_name, last_name,phone, email, password,role
         FROM users
         WHERE email = $1
     `
 	user := &models.User{}
-	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Role)
+	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Password, &user.Role)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user not found")
@@ -23,6 +24,7 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 		log.Printf("Error fetching user by email: %v", err)
 		return nil, err
 	}
+	log.Println("User From DB : ", user)
 	return user, nil
 }
 

@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"go-server/db"
 	"net/http"
+
+	"github.com/vikash-parashar/asset-locator/db"
 
 	"github.com/gin-gonic/gin"
 )

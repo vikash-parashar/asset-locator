@@ -2,11 +2,12 @@ package handlers
 
 import (
 	"fmt"
-	"go-server/db"
-	"go-server/models"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jung-kurt/gofpdf"

@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"go-server/db"
-	"go-server/handlers"
-	"go-server/middleware"
+	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/handlers"
+	"github.com/vikash-parashar/asset-locator/middleware"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"

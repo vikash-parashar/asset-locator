@@ -1,8 +1,9 @@
 package db
 
 import (
-	"go-server/models"
 	"log"
+
+	"github.com/vikash-parashar/asset-locator/models"
 )
 
 // CreateDeviceEthernetFiberDetail creates a new record in the DeviceEthernetFiberDetail table.

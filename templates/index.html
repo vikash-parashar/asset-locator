@@ -345,9 +345,10 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/notie"></script>
-        <!-- ... (Your HTML code) ... -->
-
         <script>
             function notify(type, msg) {
                 notie.alert({
@@ -359,10 +360,12 @@
 
             document.addEventListener("DOMContentLoaded", function () {
                 const registerForm = document.getElementById("register-form");
+                const loginForm = document.getElementById("login-form");
 
                 registerForm.addEventListener("submit", async function (event) {
                     event.preventDefault();
                     try {
+
                         const firstName = document.getElementById("first_name").value;
                         const lastName = document.getElementById("last_name").value;
                         const phone = document.getElementById("phone").value;
@@ -393,15 +396,12 @@
                                 window.location.href = "http://localhost:8080";
                             }, 2000);
                         }
+
                     } catch (error) {
                         console.error("Signup error:", error);
                         notify("error", "An error occurred. Please try again later.");
                     }
                 });
-            });
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const loginForm = document.getElementById("login-form");
 
                 loginForm.addEventListener("submit", async function (event) {
                     event.preventDefault();
@@ -434,6 +434,7 @@
                     }
                 });
             });
+
 
         </script>
 </body>
