@@ -124,6 +124,7 @@
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -209,7 +210,6 @@
         // Add an event listener to fetch user details when the page loads
         document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
 
-
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -224,7 +224,7 @@
                 .then(data => {
                     if (data.success) {
                         notify(1, data.message);
-                        window.location.href = "http://localhost:8080"; // Redirect to the login page
+                        window.location.href = "/"; // Redirect to the root path
                     } else {
                         notify(2, data.message);
                     }

@@ -162,8 +162,9 @@
                     <p class="dropdown-item-text">Email : <span id="emailPlaceholder"></span></p>
                     <p class="dropdown-item-text">Role : <span id="rolePlaceholder"></span></p>
                     <div class="text-center">
-                        <a class="btn btn-danger ml-2" href="/logout">Logout</a>
+                        <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
+
                 </div>
             </div>
 
@@ -189,7 +190,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-
                             <a href="http://localhost:8080/api/v1/fiber-details/excel" class="btn btn-sm xls">Excel</a>
 
                             <a href="http://localhost:8080/api/v1/fiber-details/pdf" class="btn btn-sm pdf">PDF</a>
@@ -345,11 +345,11 @@
                     // Assuming the API response contains user details
 
                     // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').innerHTML= data.user.first_name;
-                    document.getElementById('lastNamePlaceholder').innerHTML= data.user.last_name;
-                    document.getElementById('phonePlaceholder').innerHTML= data.user.phone;
-                    document.getElementById('emailPlaceholder').innerHTML= data.user.email;
-                    document.getElementById('rolePlaceholder').innerHTML= data.user.role;
+                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
+                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
+                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
+                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
+                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
 
                 })
 
@@ -505,7 +505,7 @@
                 .then(data => {
                     if (data.success) {
                         notify(1, data.message);
-                        window.location.href = "http://localhost:8080"; // Redirect to the login page
+                        window.location.href = "/"; // Redirect to the root path
                     } else {
                         notify(2, data.message);
                     }
