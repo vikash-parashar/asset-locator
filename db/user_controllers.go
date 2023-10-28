@@ -3,8 +3,8 @@ package db
 import (
 	"database/sql"
 	"errors"
-	"go-server/models"
-	"go-server/utils"
+	"github.com/vikash-parashar/asset-locator/models"
+	"github.com/vikash-parashar/asset-locator/utils"
 	"log"
 )
 

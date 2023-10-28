@@ -3,8 +3,9 @@
 package middleware
 
 import (
-	"go-server/utils"
 	"net/http"
+
+	"github.com/vikash-parashar/asset-locator/utils"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"

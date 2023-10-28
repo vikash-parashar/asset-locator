@@ -1,8 +1,9 @@
 package db
 
 import (
-	"go-server/models"
 	"log"
+
+	"github.com/vikash-parashar/asset-locator/models"
 )
 
 // CreateDeviceLocationDetail creates a new record in the DeviceLocationDetail table.
