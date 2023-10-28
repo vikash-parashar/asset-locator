@@ -1,8 +1,9 @@
 package db
 
 import (
-	"go-server/models"
 	"log"
+
+	"github.com/vikash-parashar/asset-locator/models"
 )
 
 // CreateDevicePowerDetail creates a new record in the DevicePowerDetail table.

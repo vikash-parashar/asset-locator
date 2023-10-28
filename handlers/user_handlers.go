@@ -4,12 +4,13 @@ package handlers
 
 import (
 	"fmt"
-	"go-server/db"
-	"go-server/models"
-	"go-server/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/models"
+	"github.com/vikash-parashar/asset-locator/utils"
 
 	"github.com/gin-gonic/gin"
 )

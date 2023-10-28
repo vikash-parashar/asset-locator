@@ -6,10 +6,11 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
-	"go-server/models"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/dgrijalva/jwt-go"
 )
