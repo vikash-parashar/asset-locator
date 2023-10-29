@@ -324,6 +324,9 @@
                 position: 'top'
             })
         }
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
 
         // Function to fetch and display user details when the page loads
         function fetchCurrentUserDetails() {
@@ -342,15 +345,11 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Assuming the API response contains user details
-
-                    // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
-                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
-                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
-                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
-                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
-
+                    document.getElementById('firstNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.first_name);
+                    document.getElementById('lastNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.last_name);
+                    document.getElementById('phonePlaceholder').innerHTML = capitalizeFirstLetter(data.user.phone);
+                    document.getElementById('emailPlaceholder').innerHTML = capitalizeFirstLetter(data.user.email);
+                    document.getElementById('rolePlaceholder').innerHTML = capitalizeFirstLetter(data.user.role);
                 })
 
                 .catch(error => {
@@ -491,8 +490,8 @@
             }
         });
 
-        // Function to handle logout
-        function handleLogout() {
+       // Function to handle logout
+       function handleLogout() {
             fetch("/logout", {
                 method: "POST",
             })
@@ -519,6 +518,7 @@
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
 
     </script>
 </body>

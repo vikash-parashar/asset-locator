@@ -161,7 +161,6 @@
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
-
                 </div>
             </div>
 
@@ -356,6 +355,9 @@
                 position: 'top'
             })
         }
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
 
         // Function to fetch and display user details when the page loads
         function fetchCurrentUserDetails() {
@@ -374,12 +376,11 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
-                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
-                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
-                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
-                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
+                    document.getElementById('firstNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.first_name);
+                    document.getElementById('lastNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.last_name);
+                    document.getElementById('phonePlaceholder').innerHTML = capitalizeFirstLetter(data.user.phone);
+                    document.getElementById('emailPlaceholder').innerHTML = capitalizeFirstLetter(data.user.email);
+                    document.getElementById('rolePlaceholder').innerHTML = capitalizeFirstLetter(data.user.role);
                 })
 
                 .catch(error => {
@@ -518,10 +519,9 @@
                 downloadAsXLSX();
             }
         });
-
         // Function to handle logout
         function handleLogout() {
-            fetch("http://localhost:8080/logout", {
+            fetch("/logout", {
                 method: "POST",
             })
                 .then(response => {

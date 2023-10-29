@@ -161,7 +161,7 @@
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -200,6 +200,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -313,7 +315,7 @@
             <div class="col">
                 <table class="table table-hover custom-table">
                     <thead>
-                        <tr>
+                        <tr class="row-transition table-row">
                             <th style="font-size: medium;">S No.</th>
                             <th style="font-size: medium;">Serial Number</th>
                             <th style="font-size: medium;">Make</th>
@@ -386,6 +388,9 @@
                 position: 'top'
             })
         }
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
 
         // Function to fetch and display user details when the page loads
         function fetchCurrentUserDetails() {
@@ -404,12 +409,11 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Update the placeholders in the dropdown menu
-                    document.getElementById('firstNamePlaceholder').innerHTML = data.user.first_name;
-                    document.getElementById('lastNamePlaceholder').innerHTML = data.user.last_name;
-                    document.getElementById('phonePlaceholder').innerHTML = data.user.phone;
-                    document.getElementById('emailPlaceholder').innerHTML = data.user.email;
-                    document.getElementById('rolePlaceholder').innerHTML = data.user.role;
+                    document.getElementById('firstNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.first_name);
+                    document.getElementById('lastNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.last_name);
+                    document.getElementById('phonePlaceholder').innerHTML = capitalizeFirstLetter(data.user.phone);
+                    document.getElementById('emailPlaceholder').innerHTML = capitalizeFirstLetter(data.user.email);
+                    document.getElementById('rolePlaceholder').innerHTML = capitalizeFirstLetter(data.user.role);
                 })
 
                 .catch(error => {
@@ -579,6 +583,7 @@
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
+
 
     </script>
 
