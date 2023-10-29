@@ -59,6 +59,8 @@ func main() {
 	r.GET("/reset-password", handlers.RenderResetPasswordPage)
 	r.POST("/forget-password", handlers.ForgotPassword(dbConn))
 	r.POST("/reset-password", handlers.ResetPassword(dbConn))
+	// r.POST("/send-otp", handlers.SendOTP(dbConn))
+	// r.POST("/verify-otp", handlers.VerifyOTP(dbConn))
 
 	// Protected routes
 	protected := r.Group("/api/v1", middleware.AuthMiddleware("admin", "general"))

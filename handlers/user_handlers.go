@@ -272,3 +272,33 @@ func GetCurrentUser(db *db.DB) gin.HandlerFunc {
 func RenderResetPasswordPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "reset_password.html", gin.H{})
 }
+
+// func SendOTP(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// Return a success response
+//  c.JSON(http.StatusOK, gin.H{
+// 	"message": "OTP sent successfully",
+// })
+// 	}
+// }
+// func VerifyOTP(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// Retrieve the entered OTP from the request
+//  enteredOTP := c.PostForm("otp")
+
+// Retrieve the stored OTP and user information from your database based on email
+
+// Perform OTP verification
+//  if storedOTP == enteredOTP {
+// 	 // OTP is valid
+// 	 c.JSON(http.StatusOK, gin.H{
+// 		 "message": "OTP verified successfully",
+// 	 })
+//  } else {
+// 	 // Invalid OTP
+// 	 c.JSON(http.StatusBadRequest, gin.H{
+// 		 "message": "Invalid OTP",
+// 	 })
+//  }
+// 	}
+// }

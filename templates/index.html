@@ -90,7 +90,8 @@
             object-fit: cover;
             z-index: 10;
         }
-        a{
+
+        a {
             color: #a8c4c7;
         }
 
@@ -267,7 +268,6 @@
         .notie-container {
             box-shadow: none;
         }
-        
     </style>
 </head>
 
@@ -347,100 +347,147 @@
                     </form>
 
                 </div>
+                <!-- OTP Entry Popup -->
+                <!-- <div id="otp-popup" class="popup">
+                    <h2>Enter OTP</h2>
+                    <input type="text" id="otp" placeholder="OTP" required>
+                    <button id="verify-otp-btn">Verify OTP</button>
+                </div> -->
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/notie"></script>
-        <script>
-            function notify(type, msg) {
-                notie.alert({
-                    type: type,
-                    text: msg,
-                    position: 'top'
-                })
-            }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
+    <script>
+        function notify(type, msg) {
+            notie.alert({
+                type: type,
+                text: msg,
+                position: 'top'
+            })
+        }
 
-            document.addEventListener("DOMContentLoaded", function () {
-                const registerForm = document.getElementById("register-form");
-                const loginForm = document.getElementById("login-form");
+        document.addEventListener("DOMContentLoaded", function () {
+            const registerForm = document.getElementById("register-form");
+            const loginForm = document.getElementById("login-form");
 
-                registerForm.addEventListener("submit", async function (event) {
-                    event.preventDefault();
-                    try {
+            registerForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+                try {
 
-                        const firstName = document.getElementById("first_name").value;
-                        const lastName = document.getElementById("last_name").value;
-                        const phone = document.getElementById("phone").value;
-                        const email = document.getElementById("register-email").value;
-                        const password = document.getElementById("register-password").value;
+                    const firstName = document.getElementById("first_name").value;
+                    const lastName = document.getElementById("last_name").value;
+                    const phone = document.getElementById("phone").value;
+                    const email = document.getElementById("register-email").value;
+                    const password = document.getElementById("register-password").value;
 
-                        const response = await fetch("/signup", {
-                            method: "POST",
-                            body: JSON.stringify({
-                                first_name: firstName,
-                                last_name: lastName,
-                                phone: phone,
-                                email: email,
-                                password: password,
-                            }),
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        });
+                    const response = await fetch("/signup", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            first_name: firstName,
+                            last_name: lastName,
+                            phone: phone,
+                            email: email,
+                            password: password,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
 
-                        if (!response.ok) {
-                            const data = await response.json();
-                            console.error("Signup error:", data);
-                            notify("warning", data.message || "Something went wrong. Please try again.");
-                        } else {
-                            notify("success", "Registration successful. You can now log in.");
-                            setTimeout(() => {
-                                window.location.href = "http://localhost:8080";
-                            }, 2000);
-                        }
-
-                    } catch (error) {
-                        console.error("Signup error:", error);
-                        notify("error", "An error occurred. Please try again later.");
+                    if (!response.ok) {
+                        const data = await response.json();
+                        console.error("Signup error:", data);
+                        notify("warning", data.message || "Something went wrong. Please try again.");
+                    } else {
+                        notify("success", "Registration successful. You can now log in.");
+                        setTimeout(() => {
+                            window.location.href = "http://localhost:8080";
+                        }, 2000);
                     }
-                });
 
-                loginForm.addEventListener("submit", async function (event) {
-                    event.preventDefault();
-                    try {
-                        const email = document.getElementById("login-email").value;
-                        const password = document.getElementById("login-password").value;
-
-                        const formData = new FormData(); // Create a new FormData object
-                        formData.append("email", email);
-                        formData.append("password", password);
-
-                        const response = await fetch("/login", {
-                            method: "POST",
-                            body: formData, // Send the form data
-                        });
-
-                        if (!response.ok) {
-                            const data = await response.json();
-                            console.error("Login error:", data);
-                            notify("warning", data.message || "Login failed. Please check your credentials.");
-                        } else {
-                            notify("success", "Login successful. Redirecting...");
-                            setTimeout(() => {
-                                window.location.href = "http://localhost:8080/api/v1/homepage";
-                            }, 2000);
-                        }
-                    } catch (error) {
-                        console.error("Login error:", error);
-                        notify("error", "An error occurred. Please try again later.");
-                    }
-                });
+                } catch (error) {
+                    console.error("Signup error:", error);
+                    notify("error", "An error occurred. Please try again later.");
+                }
             });
 
+            loginForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+                try {
+                    const email = document.getElementById("login-email").value;
+                    const password = document.getElementById("login-password").value;
 
-        </script>
+                    const formData = new FormData(); // Create a new FormData object
+                    formData.append("email", email);
+                    formData.append("password", password);
+
+                    const response = await fetch("/login", {
+                        method: "POST",
+                        body: formData, // Send the form data
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        console.error("Login error:", data);
+                        notify("warning", data.message || "Login failed. Please check your credentials.");
+                    } else {
+                        notify("success", "Login successful. Redirecting...");
+                        setTimeout(() => {
+                            window.location.href = "http://localhost:8080/api/v1/homepage";
+                        }, 2000);
+                    }
+                } catch (error) {
+                    console.error("Login error:", error);
+                    notify("error", "An error occurred. Please try again later.");
+                }
+            });
+        });
+    </script>
+    <!-- <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Your existing frontend code
+        
+                    // Event listener for "Verify OTP" button
+                    const verifyOTPBtn = document.getElementById("verify-otp-btn");
+                    verifyOTPBtn.addEventListener("click", async function () {
+                        const enteredOTP = document.getElementById("otp").value;
+                        if (!enteredOTP) {
+                            alert("Please enter the OTP.");
+                            return;
+                        }
+        
+                        try {
+                            const response = await fetch("/verify-otp", {
+                                method: "POST",
+                                body: JSON.stringify({ email, enteredOTP }),
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                            });
+        
+                            if (response.ok) {
+                                alert("OTP verified successfully. You can now proceed.");
+                                // Redirect to the user's dashboard or perform other actions.
+                            } else {
+                                const data = await response.json();
+                                alert(data.message || "Invalid OTP. Please try again.");
+                            }
+                        } catch (error) {
+                            console.error("OTP verification error:", error);
+                            alert("An error occurred. Please try again later.");
+                        }
+                    });
+                });
+        
+                // Function to show the OTP popup
+                function showOTPPopup() {
+                    const otpPopup = document.getElementById("otp-popup");
+                    otpPopup.style.display = "block";
+                }
+            </script> -->
 </body>
 
 </html>
