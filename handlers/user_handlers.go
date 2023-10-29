@@ -163,8 +163,10 @@ func ForgotPassword(db *db.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to generate reset token"})
 			return
 		}
+
+		expiryTime := time.Now().Add(1 * time.Hour)
 		// Save the reset token in the database associated with the user's account
-		if err := db.SetResetToken(int(user.ID), resetToken); err != nil {
+		if err := db.SetResetToken(int(user.ID), resetToken, expiryTime); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to save reset token"})
 			return
 		}
@@ -185,8 +187,6 @@ func ResetPassword(db *db.DB) gin.HandlerFunc {
 		resetToken := c.Query("token")
 
 		log.Printf("Reset token: %s", resetToken)
-		// Rest of your code
-
 		if resetToken == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Reset token is missing"})
 			return

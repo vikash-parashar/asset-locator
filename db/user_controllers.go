@@ -3,9 +3,11 @@ package db
 import (
 	"database/sql"
 	"errors"
+	"log"
+	"time"
+
 	"github.com/vikash-parashar/asset-locator/models"
 	"github.com/vikash-parashar/asset-locator/utils"
-	"log"
 )
 
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
@@ -121,13 +123,28 @@ func (db *DB) UpdateUser(user *models.User) error {
 }
 
 // SetResetToken sets the reset token for a user in the database.
-func (db *DB) SetResetToken(userID int, resetToken string) error {
+// func (db *DB) SetResetToken(userID int, resetToken string) error {
+// 	query := `
+//         UPDATE users
+//         SET reset_token = $1
+//         WHERE id = $2
+//     `
+// 	_, err := db.Exec(query, resetToken, userID)
+// 	if err != nil {
+// 		log.Printf("Error setting reset token: %v", err)
+// 		return err
+// 	}
+// 	return nil
+// }
+
+// SetResetToken sets the reset token and reset token expiry for a user in the database.
+func (db *DB) SetResetToken(userID int, resetToken string, expiryTime time.Time) error {
 	query := `
         UPDATE users
-        SET reset_token = $1
-        WHERE id = $2
+        SET reset_token = $1, reset_token_expiry = $2
+        WHERE id = $3
     `
-	_, err := db.Exec(query, resetToken, userID)
+	_, err := db.Exec(query, resetToken, expiryTime, userID)
 	if err != nil {
 		log.Printf("Error setting reset token: %v", err)
 		return err
@@ -153,12 +170,12 @@ func (db *DB) ClearResetToken(userID int) error {
 // VerifyResetToken verifies the reset token for a user.
 func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 	query := `
-        SELECT id, email, reset_token
+        SELECT id, first_name, email, reset_token,reset_token_expiry
         FROM users
         WHERE reset_token = $1
     `
 	user := &models.User{}
-	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.Email, &user.ResetToken)
+	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.FirstName, &user.Email, &user.ResetToken, &user.ResetTokenExpiry)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("reset token not found")
@@ -166,7 +183,11 @@ func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 		log.Printf("Error fetching user by reset token: %v", err)
 		return nil, err
 	}
-
+	log.Println("user from db for password reset token : ")
+	log.Println("getting user from token")
+	log.Println(user.ResetToken)
+	log.Println(user.FirstName)
+	log.Println(user.Email)
 	// Check if the reset token has expired (optional)
 	if utils.IsTokenExpired(user.ResetTokenExpiry) {
 		return nil, errors.New("reset token has expired")
