@@ -88,9 +88,36 @@ func VerifyJWTToken(tokenString string) (Claims, bool) {
 }
 
 // GeneratePasswordResetToken generates a password reset token for a user.
+// func GeneratePasswordResetToken(user *models.User) (string, error) {
+// 	// Create a unique token based on user email and a timestamp
+// 	tokenData := fmt.Sprintf("%s:%d", user.Email, time.Now().Unix())
+
+// 	// Generate a random 32-byte string for additional security
+// 	randomBytes := make([]byte, 32)
+// 	_, err := rand.Read(randomBytes)
+// 	if err != nil {
+// 		return "", err
+// 	}
+
+// 	// Combine the token data and random bytes
+// 	combinedData := append([]byte(tokenData), randomBytes...)
+
+// 	// Encode the combined data as a base64 string
+// 	token := base64.URLEncoding.EncodeToString(combinedData)
+
+// 	return token, nil
+// }
+
+// GeneratePasswordResetToken generates a password reset token for a user.
 func GeneratePasswordResetToken(user *models.User) (string, error) {
 	// Create a unique token based on user email and a timestamp
 	tokenData := fmt.Sprintf("%s:%d", user.Email, time.Now().Unix())
+
+	// Set the reset_token_expiry to some time in the future, e.g., 1 hour from now
+	expiryTime := time.Now().Add(1 * time.Hour)
+
+	// Include the expiry time in the token data
+	tokenData = fmt.Sprintf("%s:%d", tokenData, expiryTime.Unix())
 
 	// Generate a random 32-byte string for additional security
 	randomBytes := make([]byte, 32)

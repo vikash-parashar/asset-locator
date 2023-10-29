@@ -13,6 +13,34 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Tilt+Neon&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt&display=swap');
+
+        tbody {
+            color: #141E46;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Jost', sans-serif;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        thead {
+            color: #12486B;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Jost', sans-serif;
+            font-family: 'Prompt', sans-serif;
+        }
+
+
+
+        body {
+            background-image: url('/static/images/back2.jpg');
+            background-size: cover;
+            /* Adjust the background size as needed */
+            background-position: center;
+            /* Adjust the background position as needed */
+            background-attachment: fixed;
+            /* If you want a fixed background */
+        }
 
         /* Add New Data button */
         .new {
@@ -25,12 +53,20 @@
 
         /* Download Data as PDF button */
         .pdf {
-            background-color: #1abc9c;
+            background-color: #af3e3e;
             /* Use a green color for this button */
             color: #fff;
             /* Text color (white) */
             /* You can add more styling as needed. */
+            margin-left: 20px;
         }
+
+        .table {
+            background-color: #F5FCCD;
+            color: #FDF0F0;
+        }
+
+
 
         /* Download Data as Excel button */
         .xls {
@@ -41,21 +77,18 @@
             /* You can add more styling as needed. */
         }
 
-        #cname {
-            font-family: 'Jost', sans-serif;
-            font-style: normal;
-            font-size: medium;
-            color: black;
-        }
 
         a {
             font-family: 'Josefin Sans', sans-serif;
             font-style: normal;
             font-size: medium;
-            color: black;
+            color: rgb(212, 26, 26);
         }
 
-
+        .nav-link {
+            border-radius: 10%;
+            margin-left: 20px;
+        }
 
         /* Styles for Navbar */
         .navbar-brand img {
@@ -78,8 +111,8 @@
         }
 
         .dropdown-menu {
-            min-width: 250px;
-            height: 47vh;
+            min-width: 300px;
+            height: 90vh;
             background-color: #232D3F;
         }
 
@@ -91,7 +124,11 @@
             font-family: 'Josefin Sans', sans-serif;
             margin-top: 20px;
             font-size: 15px;
-            color: #CE5A67;
+            color: #56a0d1;
+        }
+
+        span {
+            color: #e2e9ee;
         }
 
         img {
@@ -139,13 +176,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/power-details">Power</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/owner-details">Owner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                        <a class="nav-link btn-info btn-sm"
+                            href="http://localhost:8080/api/v1/location-details">Location</a>
                     </li>
                 </ul>
             </div>
@@ -162,7 +200,7 @@
                     <p class="dropdown-item-text">Email : <span id="emailPlaceholder"></span></p>
                     <p class="dropdown-item-text">Role : <span id="rolePlaceholder"></span></p>
                     <div class="text-center">
-                        <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
+                        <button class="btn btn-danger ml-2" id="logout-button">Logout</button>
                     </div>
 
                 </div>
@@ -174,7 +212,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center">
-                <h3>Device Ethernet Fiber Details</h3>
+                <h3 style="color: #aebec9;">Device Ethernet Fiber Details</h3>
             </div>
         </div>
     </div>
@@ -313,7 +351,9 @@
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
     <script>
@@ -324,6 +364,7 @@
                 position: 'top'
             })
         }
+
         function capitalizeFirstLetter(str) {
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
@@ -489,37 +530,30 @@
                 downloadAsXLSX();
             }
         });
-
-       // Function to handle logout
-       function handleLogout() {
+    </script>
+    <script>
+        // Function to handle logout
+        function handleLogout() {
             fetch("/logout", {
                 method: "POST",
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(data => {
+                .then((response) => response.json())
+                .then((data) => {
                     if (data.success) {
-                        notify(1, data.message);
-                        window.location.href = "/"; // Redirect to the root path
+                        alert(data.message);
+                        window.location.href = "http://localhost:8080"; // Redirect to the login page
                     } else {
-                        notify(2, data.message);
+                        alert(data.message);
                     }
                 })
-                .catch(error => {
-                    console.error("An error occurred while logging out:", error);
-                    notify(3, "An error occurred while logging out.");
+                .catch((error) => {
+                    console.error("An error occurred while logging out.");
                 });
         }
 
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
-
-
     </script>
 </body>
 
