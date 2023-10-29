@@ -13,9 +13,27 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Tilt+Neon&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt&display=swap');
+
+        tbody {
+            color: #141E46;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Jost', sans-serif;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        thead {
+            color: #12486B;
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Jost', sans-serif;
+            font-family: 'Prompt', sans-serif;
+        }
+
+
 
         body {
-            background-image: url('/static/images/back1.jpg');
+            background-image: url('/static/images/back2.jpg');
             background-size: cover;
             /* Adjust the background size as needed */
             background-position: center;
@@ -35,12 +53,20 @@
 
         /* Download Data as PDF button */
         .pdf {
-            background-color: #1abc9c;
+            background-color: #af3e3e;
             /* Use a green color for this button */
             color: #fff;
             /* Text color (white) */
             /* You can add more styling as needed. */
+            margin-left: 20px;
         }
+
+        .table {
+            background-color: #F5FCCD;
+            color: #FDF0F0;
+        }
+
+
 
         /* Download Data as Excel button */
         .xls {
@@ -51,21 +77,18 @@
             /* You can add more styling as needed. */
         }
 
-        #cname {
-            font-family: 'Jost', sans-serif;
-            font-style: normal;
-            font-size: medium;
-            color: black;
-        }
 
         a {
             font-family: 'Josefin Sans', sans-serif;
             font-style: normal;
             font-size: medium;
-            color: black;
+            color: rgb(212, 26, 26);
         }
 
-
+        .nav-link {
+            border-radius: 10%;
+            margin-left: 20px;
+        }
 
         /* Styles for Navbar */
         .navbar-brand img {
@@ -101,7 +124,11 @@
             font-family: 'Josefin Sans', sans-serif;
             margin-top: 20px;
             font-size: 15px;
-            color: #CE5A67;
+            color: #56a0d1;
+        }
+
+        span {
+            color: #e2e9ee;
         }
 
         img {
@@ -149,13 +176,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/power-details">Power</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/owner-details">Owner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                        <a class="nav-link btn-info btn-sm"
+                            href="http://localhost:8080/api/v1/location-details">Location</a>
                     </li>
                 </ul>
             </div>
@@ -184,7 +212,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center">
-                <h3>Device Ethernet Fiber Details</h3>
+                <h3 style="color: #aebec9;">Device Ethernet Fiber Details</h3>
             </div>
         </div>
     </div>

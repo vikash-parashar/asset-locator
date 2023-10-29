@@ -15,19 +15,38 @@
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
 
         body {
-            background-image: url('/static/images/back1.jpg');
+            background-image: url('/static/images/back2.jpg');
             background-size: cover;
             /* Adjust the background size as needed */
             background-position: center;
             /* Adjust the background position as needed */
             background-attachment: fixed;
             /* If you want a fixed background */
+            color: #aebec9;
+        }
+
+        .table {
+            background-color: #F5FCCD;
+            color: #FDF0F0;
+        }
+
+        thead {
+            color: #12486B;
+        }
+
+        tbody {
+            color: #141E46;
         }
 
         /* Styles for Navbar */
         .navbar-brand img {
             margin-right: 10px;
             border-radius: 50%;
+        }
+
+        .nav-link {
+            border-radius: 10%;
+            margin-left: 20px;
         }
 
         .navbar-nav .nav-link {
@@ -58,7 +77,11 @@
             font-family: 'Josefin Sans', sans-serif;
             margin-top: 20px;
             font-size: 15px;
-            color: #CE5A67;
+            color: #56a0d1;
+        }
+
+        span {
+            color: #e2e9ee;
         }
 
         img {
@@ -87,7 +110,7 @@
             font-family: 'Josefin Sans', sans-serif;
             font-style: normal;
             font-size: medium;
-            color: black;
+            color: rgb(212, 26, 26);
         }
     </style>
 </head>
@@ -106,16 +129,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/power-details">Power</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/owner-details">Owner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                        <a class="nav-link btn-info btn-sm"
+                            href="http://localhost:8080/api/v1/location-details">Location</a>
                     </li>
                 </ul>
             </div>
