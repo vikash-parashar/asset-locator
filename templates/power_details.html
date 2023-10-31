@@ -31,15 +31,7 @@
             font-family: 'Prompt', sans-serif;
         }
 
-        body {
-            background-image: url('/static/images/back2.jpg');
-            background-size: cover;
-            /* Adjust the background size as needed */
-            background-position: center;
-            /* Adjust the background position as needed */
-            background-attachment: fixed;
-            /* If you want a fixed background */
-        }
+
 
         /* Add New Data button */
         .new {
@@ -160,6 +152,11 @@
             background-color: #219C90;
             color: white;
         }
+
+        .filter-data {
+            color: #219C90;
+            background-color: #141E46;
+        }
     </style>
 </head>
 
@@ -210,6 +207,29 @@
         <div class="row">
             <div class="col mt-5">
                 <h3 style="color: #aebec9;">Device Power Details</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container filter-data">
+        <div class="row">
+            <div class="col">
+                <h3>Filter Data : </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Device Serial Number</label>
+                <input type="text" id="serialNumberFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Make</label>
+                <input type="text" id="makeFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Model</label>
+                <input type="text" id="modelFilter">
             </div>
         </div>
     </div>
@@ -838,6 +858,34 @@
         });
 
     </script>
+    <script>
+        function filterTable() {
+            var serialNumberFilter = document.getElementById("serialNumberFilter").value.toLowerCase();
+            var makeFilter = document.getElementById("makeFilter").value.toLowerCase();
+            var modelFilter = document.getElementById("modelFilter").value.toLowerCase();
+
+            var rows = document.querySelectorAll("#deviceDetails tr.row-transition");
+
+            rows.forEach(function (row) {
+                var serialNumber = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                var make = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
+                var model = row.querySelector("td:nth-child(4)").textContent.toLowerCase();
+
+                if (serialNumber.includes(serialNumberFilter) &&
+                    make.includes(makeFilter) &&
+                    model.includes(modelFilter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        document.getElementById("serialNumberFilter").addEventListener("input", filterTable);
+        document.getElementById("makeFilter").addEventListener("input", filterTable);
+        document.getElementById("modelFilter").addEventListener("input", filterTable);
+    </script>
+
 </body>
 
 </html>
