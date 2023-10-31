@@ -19,6 +19,7 @@
         }
 
         body {
+            background: linear-gradient(to right, #cf3d6e, #6c757d);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -360,6 +361,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
+
+
+    <!-- handle login and signup -->
     <script>
         function notify(type, msg) {
             notie.alert({
@@ -446,48 +450,7 @@
             });
         });
     </script>
-    <!-- <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    // Your existing frontend code
-        
-                    // Event listener for "Verify OTP" button
-                    const verifyOTPBtn = document.getElementById("verify-otp-btn");
-                    verifyOTPBtn.addEventListener("click", async function () {
-                        const enteredOTP = document.getElementById("otp").value;
-                        if (!enteredOTP) {
-                            alert("Please enter the OTP.");
-                            return;
-                        }
-        
-                        try {
-                            const response = await fetch("/verify-otp", {
-                                method: "POST",
-                                body: JSON.stringify({ email, enteredOTP }),
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                            });
-        
-                            if (response.ok) {
-                                alert("OTP verified successfully. You can now proceed.");
-                                // Redirect to the user's dashboard or perform other actions.
-                            } else {
-                                const data = await response.json();
-                                alert(data.message || "Invalid OTP. Please try again.");
-                            }
-                        } catch (error) {
-                            console.error("OTP verification error:", error);
-                            alert("An error occurred. Please try again later.");
-                        }
-                    });
-                });
-        
-                // Function to show the OTP popup
-                function showOTPPopup() {
-                    const otpPopup = document.getElementById("otp-popup");
-                    otpPopup.style.display = "block";
-                }
-            </script> -->
+
 </body>
 
 </html>

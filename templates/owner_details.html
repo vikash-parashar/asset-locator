@@ -3,204 +3,222 @@
 
 <head>
     <title>Owner</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-minimal@5/minimal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Raleway&display=swap" rel="stylesheet">
+    <!-- navbar css -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Tilt+Neon&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt:wght@300&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Prompt&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
 
-        tbody {
-            color: #141E46;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Jost', sans-serif;
-            font-family: 'Prompt', sans-serif;
+        /* Custom styling for the navbar */
+        .navbar-custom {
+            background: linear-gradient(to right, #cf3d6e, #6c757d);
+            /* Gradient background color */
         }
 
-        thead {
-            color: #12486B;
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Jost', sans-serif;
-            font-family: 'Prompt', sans-serif;
+        .navbar-custom .navbar-brand {
+            color: #d85151;
+            /* Text color for the company name */
         }
 
-
-        /* Add New Data button */
-        .new {
-            background-color: #3498db;
-            /* Use a blue color for this button */
-            color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed, such as padding, border, and hover effects. */
+        .navbar-custom .nav-link {
+            color: #0ee2e9;
+            font-family: 'Kalam', cursive;
+            font-family: 'Raleway', sans-serif;
+            /* Text color for the navigation links */
         }
 
-        /* Download Data as PDF button */
-        .pdf {
-            background-color: #af3e3e;
-            /* Use a green color for this button */
-            color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed. */
-            margin-left: 20px;
+        .navbar-custom .nav-link:hover {
+            color: #c78125;
+            /* Text color for the navigation links on hover */
         }
 
-        /* Download Data as Excel button */
-        .xls {
-            background-color: #f1c40f;
-            /* Use a yellow color for this button */
-            color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed. */
-        }
-
-        #cname {
-            font-family: 'Jost', sans-serif;
-            font-style: normal;
-            font-size: medium;
-            color: black;
-        }
-
-        a {
-            font-family: 'Josefin Sans', sans-serif;
-            font-style: normal;
-            font-size: medium;
-            color: rgb(212, 26, 26);
-        }
-
-        .nav-link {
-            border-radius: 10%;
-            margin-left: 20px;
-        }
-
-        /* Styles for Navbar */
-        .navbar-brand img {
-            margin-right: 10px;
-            border-radius: 50%;
-        }
-
-        .table {
-            background-color: #F5FCCD;
-            color: #FDF0F0;
-        }
-
-
-        .navbar-nav .nav-link {
-            padding: 1px 20px;
-            transition: background-color 0.3s;
-            /* Add a smooth transition effect for the background color change */
-        }
-
-        /* Apply the red background color on hover */
-        .navbar-nav .nav-link:hover {
-            background-color: #FF0000;
-            /* Red background color when hovering */
-            color: #fff;
-            /* Text color on hover (white) */
-        }
-
+        /* Custom styling for the dropdown menu */
         .dropdown-menu {
-            min-width: 300px;
-            height: 90vh;
-            background-color: #232D3F;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 1px 20px;
+            margin-top: 20px;
+            background: linear-gradient(to right, #212325, #2e1c7c79);
+            width: auto;
+            /* margin-right: -15px; */
+            /* Gradient background color */
         }
 
         .dropdown-item-text {
-            font-family: 'Josefin Sans', sans-serif;
-            margin-top: 20px;
-            font-size: 15px;
-            color: #56a0d1;
+            color: #f38b5a;
+            font-size: small;
+            /* Text color for the dropdown text */
         }
 
-        span {
-            color: #e2e9ee;
+        .dropdown-item-text span {
+            color: #f8f8f8;
+            font-size: small;
+            /* Text color for the data spans */
+            text-align: center;
+        }
+
+        .dropdown-menu::before {
+            content: none;
+            /* Hide the dropdown arrow icon */
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            /* Adjust padding as needed */
+        }
+
+        .btn-danger {
+            background-color: #d61023c2;
+            /* Background color for the Logout button */
+            border: none;
+            /* Remove the button border */
+        }
+
+        .btn-danger:hover {
+            background-color: #e21220;
+            /* Background color for the Logout button on hover */
         }
 
         img {
-            height: 35px;
-            width: 35px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+
+
         }
 
-        .footer {
-            margin-top: 82.9vh;
-            padding: 15px 0;
-            font-family: 'Josefin Sans', sans-serif;
+        /* Custom styling for the toggle button */
+        .navbar-toggler-icon {
+            color: #cf3765;
+            /* Text color */
+            font-size: 18px;
+            /* Font size */
+            padding: 0 50px;
+            /* Add some spacing around the text */
         }
 
-        #navbarNav {
-            margin-left: 130px;
+        h1 {
+            margin-top: 200px;
+            font-family: 'Kalam', cursive;
+
         }
 
-        #navbarNav {
-            margin-left: 130px;
-        }
-
-        .delete-button {
-            background-color: red;
-            color: white;
-        }
-
-        .update-button {
-            background-color: #219C90;
-            color: white;
+        .profile {
+            height: 30px;
+            width: 30px;
         }
     </style>
+
+
+
+    <!-- Custom styling for the filter section  -->
+    <style>
+        .container {
+            background-color: #f8f9fa;
+            /* Background color */
+            border-radius: 5px;
+            /* Rounded corners */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Box shadow for a subtle lift */
+        }
+
+        h3 {
+            color: #007bff;
+            /* Title color */
+        }
+
+        label {
+            font-weight: bold;
+            /* Bold labels */
+        }
+
+        .form-control {
+            border: 2px solid #007bff;
+            /* Input border color */
+            border-radius: 5px;
+            /* Rounded input corners */
+        }
+
+        .form-control:focus {
+            border-color: #0056b3;
+            /* Input border color on focus */
+            box-shadow: none;
+            /* Remove the default box shadow on focus */
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            /* Button background color */
+            border: none;
+            /* Remove button border */
+            border-radius: 5px;
+            /* Rounded button corners */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            /* Button background color on hover */
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="/api/v1/homepage">
-                <img src="/static/images/logo3.png" alt="Logo" width="30" height="30"> Asset Locator</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/power-details">Power</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-info btn-sm" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-info btn-sm"
-                            href="http://localhost:8080/api/v1/location-details">Location</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Update your HTML to include placeholders for user details -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
+            <img src="/static/images/logo3.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">Menu</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto justify-content-center">
+                <!-- <li class="nav-item">
+                    <a class="nav-link disabled" href="http://localhost:8080/api/v1/homepage">Home</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true"
+                        href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                </li>
+
+            </ul>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img src="/static/images/usericon.png" alt="profile">
+                    <img class="profile" src="/static/images/usericon.png" alt="profile">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <p class="dropdown-item-text">First Name : <span id="firstNamePlaceholder"></span></p>
-                    <p class="dropdown-item-text">Last Name : <span id="lastNamePlaceholder"></span></p>
-                    <p class="dropdown-item-text">Phone : <span id="phonePlaceholder"></span></p>
-                    <p class="dropdown-item-text">Email : <span id="emailPlaceholder"></span></p>
-                    <p class="dropdown-item-text">Role : <span id="rolePlaceholder"></span></p>
+                    <h6 class="dropdown-item-text">NAME : <span class="text-center" id="firstNamePlaceholder"></span>
+                    </h6>
+                    <!-- <p class="dropdown-item-text">NAME  : <span id="firstNamePlaceholder"></span> <span
+                                id="lastNamePlaceholder"></span></p> -->
+                    <h6 class="dropdown-item-text">PHONE : <span class="text-center" id="phonePlaceholder"></span></h6>
+                    <!-- <p class="dropdown-item-text">EMAIL : <span id="emailPlaceholder"></span></p> -->
+                    <h6 class="dropdown-item-text">ROLE : <span class="text-center" id="rolePlaceholder"></span></h6>
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
+
+
+
+
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center">
@@ -211,25 +229,27 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h3>Filter Data : </h3>
+        <h3 class="mt-4">Filter Data</h3>
+        <form>
+            <div class="form-row mt-3">
+                <div class="col-md-4 form-group">
+                    <label for="serialNumberFilter">Device Serial Number</label>
+                    <input type="text" class="form-control" id="serialNumberFilter">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="makeFilter">Device Make</label>
+                    <input type="text" class="form-control" id="makeFilter">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="modelFilter">Device Model</label>
+                    <input type="text" class="form-control" id="modelFilter">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="">Device Serial Number</label>
-                <input type="text" id="serialNumberFilter">
+            <div class="text-center mt-3">
+                <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
+
             </div>
-            <div class="col">
-                <label for="">Device Make</label>
-                <input type="text" id="makeFilter">
-            </div>
-            <div class="col">
-                <label for="">Device Model</label>
-                <input type="text" id="modelFilter">
-            </div>
-        </div>
+        </form>
     </div>
 
     <div class="container mt-2 mb-2">
@@ -472,6 +492,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+    <!-- handle delete data -->
     <script>
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -536,7 +558,7 @@
         });
     </script>
 
-    <!-- Add this script to your HTML -->
+    <!-- handle update data -->
     <script>
         const updateButtons = document.querySelectorAll(".update-button");
         updateButtons.forEach(button => {
@@ -660,52 +682,8 @@
         }
     </script>
 
-
-
+    <!-- handle fetch data -->
     <script>
-        function notify(type, msg) {
-            notie.alert({
-                type: type,
-                text: msg,
-                position: 'top'
-            })
-        }
-        function capitalizeFirstLetter(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        }
-
-        // Function to fetch and display user details when the page loads
-        function fetchCurrentUserDetails() {
-            fetch('/api/v1/get-current-user', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    console.log(response)
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById('firstNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.first_name);
-                    document.getElementById('lastNamePlaceholder').innerHTML = capitalizeFirstLetter(data.user.last_name);
-                    document.getElementById('phonePlaceholder').innerHTML = capitalizeFirstLetter(data.user.phone);
-                    document.getElementById('emailPlaceholder').innerHTML = capitalizeFirstLetter(data.user.email);
-                    document.getElementById('rolePlaceholder').innerHTML = capitalizeFirstLetter(data.user.role);
-                })
-
-                .catch(error => {
-                    console.error('Error fetching user details:', error);
-                });
-        }
-
-        // Add an event listener to fetch user details when the page loads
-        document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
-        // Function to format a date as "DD/MM/YYYY"
         function formatDate(inputDate) {
             const parts = inputDate.split('-');
             if (parts.length === 3) {
@@ -716,8 +694,10 @@
             }
             return inputDate; // Return the original date if the format is invalid
         }
+    </script>
 
-        // Format the date fields when the page loads
+    <!-- handle add new data -->
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const dateCells = document.querySelectorAll(".date-cell");
 
@@ -770,37 +750,9 @@
 
             $("#createEntryModal").modal("hide");
         });
-
-        // Function to handle logout
-        function handleLogout() {
-            fetch("/logout", {
-                method: "POST",
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        notify(1, data.message);
-                        window.location.href = "/"; // Redirect to the root path
-                    } else {
-                        notify(2, data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("An error occurred while logging out:", error);
-                    notify(3, "An error occurred while logging out.");
-                });
-        }
-
-        // Attach the handleLogout function to the logout button's click event
-        const logoutButton = document.getElementById("logout-button");
-        logoutButton.addEventListener("click", handleLogout);
-
     </script>
+
+    <!-- handle download data -->
     <script>
         document.getElementById("downloadPDFButton").addEventListener("click", function () {
             // Show a dialog to let the user choose PDF or XLSX
@@ -868,8 +820,8 @@
 
     </script>
 
+    <!-- handle filter data table -->
     <script>
-        // Function to filter the table rows based on user input
         function filterTable() {
             var serialNumberFilter = document.getElementById("serialNumberFilter").value.toLowerCase();
             var makeFilter = document.getElementById("makeFilter").value.toLowerCase();
@@ -889,15 +841,94 @@
                 } else {
                     row.style.display = "none";
                 }
-            });
+            })
         }
 
-        // Add event listeners to the input fields
-        document.getElementById("serialNumberFilter").addEventListener("input", filterTable);
-        document.getElementById("makeFilter").addEventListener("input", filterTable);
-        document.getElementById("modelFilter").addEventListener("input", filterTable);
+        // Add an event listener to the "Apply Filter" button
+        document.getElementById("applyFilterButton").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            filterTable(); // Apply the filter
+        });
     </script>
 
+    <!-- get current user details -->
+    <script>
+        function notify(type, msg) {
+            notie.alert({
+                type: type,
+                text: msg,
+                position: 'top'
+            })
+        }
+        function capitalize(str) {
+            return str.slice(0).toUpperCase();
+        }
+
+
+        // Function to fetch and display user details when the page loads
+        function fetchCurrentUserDetails() {
+            fetch('/api/v1/get-current-user', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('firstNamePlaceholder').innerHTML = capitalize(data.user.first_name);
+                    // document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
+                    document.getElementById('phonePlaceholder').innerHTML = capitalize(data.user.phone);
+                    // document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
+                    document.getElementById('rolePlaceholder').innerHTML = capitalize(data.user.role);
+                })
+
+                .catch(error => {
+                    console.error('Error fetching user details:', error);
+                });
+        }
+
+        // Add an event listener to fetch user details when the page loads
+        document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
+    </script>
+
+    <!-- handle logout -->
+    <script>
+        // Function to handle logout
+        function handleLogout() {
+            fetch("/logout", {
+                method: "POST",
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        notify(1, data.message);
+                        window.location.href = "/"; // Redirect to the root path
+                    } else {
+                        notify(2, data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
+                });
+        }
+
+        // Attach the handleLogout function to the logout button's click event
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.addEventListener("click", handleLogout);
+    </script>
 </body>
 
 </html>

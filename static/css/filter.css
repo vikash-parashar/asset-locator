@@ -1,0 +1,49 @@
+/* Custom styling for the filter section   */
+
+.container {
+    background-color: #f8f9fa;
+    /* Background color */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Box shadow for a subtle lift */
+}
+
+h3 {
+    color: #007bff;
+    /* Title color */
+}
+
+label {
+    font-weight: bold;
+    /* Bold labels */
+}
+
+.form-control {
+    border: 2px solid #007bff;
+    /* Input border color */
+    border-radius: 5px;
+    /* Rounded input corners */
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    /* Input border color on focus */
+    box-shadow: none;
+    /* Remove the default box shadow on focus */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    /* Button background color */
+    border: none;
+    /* Remove button border */
+    border-radius: 5px;
+    /* Rounded button corners */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    /* Button background color on hover */
+}
