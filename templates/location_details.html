@@ -230,18 +230,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-
-                            <a href="http://localhost:8080/api/v1/location-details/excel"
-                                class="btn btn-sm xls">Excel</a>
-
-                            <a href="http://localhost:8080/api/v1/location-details/pdf" class="btn btn-sm pdf">PDF</a>
-
+                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
+                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 
@@ -352,6 +349,83 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for updating data -->
+                    <form id="updateForm">
+                        <input type="hidden" id="updateId" name="id" value="">
+                        <div class="form-group">
+                            <label for="updateSerialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceMakeModel">Device Make/Model:</label>
+                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateModel">Model:</label>
+                            <input type="text" class="form-control" id="updateModel" name="model" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updateDeviceType" name="device_type" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDataCenter">Data Center:</label>
+                            <input type="text" class="form-control" id="updateDataCenter" name="data_center" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateRegion">Region:</label>
+                            <input type="text" class="form-control" id="updateRegion" name="region" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDCLocation">DC Location:</label>
+                            <input type="text" class="form-control" id="updateDCLocation" name="dc_location" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceLocation">Device Location:</label>
+                            <input type="text" class="form-control" id="updateDeviceLocation" name="device_location"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceRowNumber">Row Number:</label>
+                            <input type="number" class="form-control" id="updateDeviceRowNumber"
+                                name="device_row_number" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceRackNumber">Rack Number:</label>
+                            <input type="number" class="form-control" id="updateDeviceRackNumber"
+                                name="device_rack_number" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceRUNumber">RU Number:</label>
+                            <input type="text" class="form-control" id="updateDeviceRUNumber" name="device_ru_number"
+                                value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -377,20 +451,20 @@
                         {{range $index, $record := .}}
                         <tr class="row-transition">
                             <td style="font-size: small;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{.SerialNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{.Model}}</td>
-                            <td style="font-size: small;">{{.DeviceType}}</td>
-                            <td style="font-size: small;">{{.DataCenter}}</td>
-                            <td style="font-size: small;">{{.Region}}</td>
-                            <td style="font-size: small;">{{.DCLocation}}</td>
-                            <td style="font-size: small;">{{.DeviceLocation}}</td>
-                            <td style="font-size: small;">{{.DeviceRowNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceRackNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceRUNumber}}</td>
+                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{$record.Model}}</td>
+                            <td style="font-size: small;">{{$record.DeviceType}}</td>
+                            <td style="font-size: small;">{{$record.DataCenter}}</td>
+                            <td style="font-size: small;">{{$record.Region}}</td>
+                            <td style="font-size: small;">{{$record.DCLocation}}</td>
+                            <td style="font-size: small;">{{$record.DeviceLocation}}</td>
+                            <td style="font-size: small;">{{$record.DeviceRowNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceRackNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceRUNumber}}</td>
                             <td style="font-size: small;">
-                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{.Id}}">Update</button>
+                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
@@ -493,7 +567,7 @@
 
 
     </script>
-    <!-- For Update Record -->
+
     <script>
         const updateButtons = document.querySelectorAll(".update-button");
 
@@ -509,7 +583,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Call the updateRecord function after confirmation
-                    updateRecord(id);
+                    openUpdateModal(id);
                 } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(
                         'Cancelled',
@@ -527,10 +601,61 @@
             });
         });
 
-        // Function to send a PUT request
-        function updateRecord(id) {
-            fetch(`http://localhost:8080/api/v1/location-details/${id}`, {
+        function openUpdateModal(id) {
+            // Pre-fill the modal with existing data based on the ID (you'll need to implement this)
+            const existingData = {}; // Replace with actual data retrieval based on the ID
+
+            // Populate the modal input fields with existing data
+            document.getElementById("updateId").value = existingData.id || "";
+            document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
+            document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
+            document.getElementById("updateModel").value = existingData.model || "";
+            document.getElementById("updateDeviceType").value = existingData.device_type || "";
+            document.getElementById("updateDataCenter").value = existingData.data_center || "";
+            document.getElementById("updateRegion").value = existingData.region || "";
+            document.getElementById("updateDCLocation").value = existingData.dc_location || "";
+            document.getElementById("updateDeviceLocation").value = existingData.device_location || "";
+            document.getElementById("updateDeviceRowNumber").value = existingData.device_row_number || "";
+            document.getElementById("updateDeviceRackNumber").value = existingData.device_rack_number || "";
+            document.getElementById("updateDeviceRUNumber").value = existingData.device_ru_number || "";
+
+            // Show the modal
+            $('#updateModal').modal('show');
+        }
+
+        // Add a click event listener to the "Update" button in the modal
+        document.getElementById("updateSubmit").addEventListener("click", function () {
+            // Get the updated data from the modal fields
+            const updatedData = {
+                id: document.getElementById("updateId").value,
+                serial_number: document.getElementById("updateSerialNumber").value,
+                device_make_model: document.getElementById("updateDeviceMakeModel").value,
+                model: document.getElementById("updateModel").value,
+                device_type: document.getElementById("updateDeviceType").value,
+                data_center: document.getElementById("updateDataCenter").value,
+                region: document.getElementById("updateRegion").value,
+                dc_location: document.getElementById("updateDCLocation").value,
+                device_location: document.getElementById("updateDeviceLocation").value,
+                device_row_number: document.getElementById("updateDeviceRowNumber").value,
+                device_rack_number: document.getElementById("updateDeviceRackNumber").value,
+                device_ru_number: document.getElementById("updateDeviceRUNumber").value,
+            };
+
+            // Print the updated data to the console
+            console.log("Updated Data:", updatedData);
+
+            // Send a request to update the data with the backend API (you'll need to implement this)
+            updateRecord(updatedData);
+        });
+
+        // Function to send a PUT request to update the data
+        function updateRecord(data) {
+            fetch(`http://localhost:8080/api/v1/location-details/${data.id}`, {
                 method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             })
                 .then(response => {
                     if (response.status === 200) {
@@ -573,8 +698,10 @@
                     });
                 });
         }
-
     </script>
+
+
+
     <script>
         function notify(type, msg) {
             notie.alert({
@@ -663,31 +790,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-        document.getElementById("downloadDataButton").addEventListener("click", function () {
-            // Create a function to download data as PDF
-            function downloadAsPDF() {
-                var doc = new jsPDF();
-                doc.text("Your PDF Content Here", 10, 10); // Replace with your content
-                doc.save("data.pdf");
-            }
-
-            // Create a function to download data as XLSX
-            function downloadAsXLSX() {
-                var data = [ /* Your data in the required format */];
-                var ws = XLSX.utils.json_to_sheet(data);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Data");
-                XLSX.writeFile(wb, "data.xlsx");
-            }
-
-            // Show a dialog to let the user choose PDF or XLSX
-            if (confirm("Download as PDF?")) {
-                downloadAsPDF();
-            } else {
-                downloadAsXLSX();
-            }
-        });
-
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -716,10 +818,75 @@
         // Attach the handleLogout function to the logout button's click event
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
-
-
     </script>
 
+    <!-- for download data -->
+    <script>
+        document.getElementById("downloadPDFButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as PDF?")) {
+                // Make a request to the PDF download API
+                fetch("/api/v1/fiber-details/pdf")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the PDF data
+                        const blob = new Blob([data], { type: "application/pdf" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.pdf";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download PDF:", error);
+                    });
+            }
+        });
+
+        document.getElementById("downloadXLSXButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as XLSX?")) {
+                // Make a request to the XLSX download API
+                fetch("/api/v1/fiber-details/excel")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the XLSX data
+                        const blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.xlsx";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download XLSX:", error);
+                    });
+            }
+        });
+
+    </script>
 </body>
 
 </html>

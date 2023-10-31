@@ -167,7 +167,6 @@
 
 <body>
     <!-- Navbar -->
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="/api/v1/homepage">
@@ -231,16 +230,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <a href="http://localhost:8080/api/v1/fiber-details/excel" class="btn btn-sm xls">Excel</a>
-
-                            <a href="http://localhost:8080/api/v1/fiber-details/pdf" class="btn btn-sm pdf">PDF</a>
-
+                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
+                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -290,6 +288,65 @@
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for Updating Data -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for updating data -->
+                    <form id="updateForm">
+                        <input type="hidden" id="updateId" name="id">
+                        <div class="form-group">
+                            <label for="updateSerialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceMakeModel">Device Make/Model:</label>
+                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateModel">Model:</label>
+                            <input type="text" class="form-control" id="updateModel" name="model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDevicePhysicalPort">Physical Port:</label>
+                            <input type="text" class="form-control" id="updateDevicePhysicalPort"
+                                name="device_physical_port">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDevicePortType">Port Type:</label>
+                            <input type="text" class="form-control" id="updateDevicePortType" name="device_port_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDevicePortMACWWN">MAC/WWN Port:</label>
+                            <input type="text" class="form-control" id="updateDevicePortMACWWN"
+                                name="device_port_macwwn">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateConnectedDevicePort">Connected Port:</label>
+                            <input type="text" class="form-control" id="updateConnectedDevicePort"
+                                name="connected_device_port">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
                 </div>
             </div>
         </div>
@@ -374,7 +431,6 @@
         })
         // Add event listeners to the buttons
         const deleteButtons = document.querySelectorAll(".delete-button");
-
         function showDeleteConfirmation(id) {
             swalWithBootstrapButtons.fire({
                 title: 'Are you sure?',
@@ -428,88 +484,6 @@
 
 
 
-
-    </script>
-    <!-- For Update Record -->
-    <script>
-        const updateButtons = document.querySelectorAll(".update-button");
-
-        function showUpdateConfirmation(id) {
-            swalWithBootstrapButtons.fire({
-                title: 'Update Record',
-                text: 'Are you sure you want to update this record?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, update it',
-                cancelButtonText: 'No, cancel',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Call the updateRecord function after confirmation
-                    updateRecord(id);
-                } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your record is not updated',
-                        'error'
-                    );
-                }
-            });
-        }
-
-        updateButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
-                showUpdateConfirmation(id);
-            });
-        });
-
-        // Function to send a PUT request
-        function updateRecord(id) {
-            fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
-                method: 'PUT',
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Record Updated Successfully',
-                            icon: 'success',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
-                            },
-                            buttonsStyling: false,
-                        }).then(() => {
-                            location.reload(); // Reload the page
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Record not updated. Please try again.',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
-                            },
-                            buttonsStyling: false,
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'An error occurred. Please try again.',
-                        icon: 'error',
-                        customClass: {
-                            confirmButton: 'btn btn-success',
-                            cancelButton: 'btn btn-danger',
-                        },
-                        buttonsStyling: false,
-                    });
-                });
-        }
 
     </script>
 
@@ -603,31 +577,75 @@
             $("#createEntryModal").modal("hide");
         });
 
-        document.getElementById("downloadDataButton").addEventListener("click", function () {
-            // Create a function to download data as PDF
-            function downloadAsPDF() {
-                var doc = new jsPDF();
-                doc.text("Your PDF Content Here", 10, 10); // Replace with your content
-                doc.save("data.pdf");
-            }
+    </script>
 
-            // Create a function to download data as XLSX
-            function downloadAsXLSX() {
-                var data = [ /* Your data in the required format */];
-                var ws = XLSX.utils.json_to_sheet(data);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Data");
-                XLSX.writeFile(wb, "data.xlsx");
-            }
-
+    <script>
+        document.getElementById("downloadPDFButton").addEventListener("click", function () {
             // Show a dialog to let the user choose PDF or XLSX
             if (confirm("Download as PDF?")) {
-                downloadAsPDF();
-            } else {
-                downloadAsXLSX();
+                // Make a request to the PDF download API
+                fetch("/api/v1/fiber-details/pdf")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the PDF data
+                        const blob = new Blob([data], { type: "application/pdf" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.pdf";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download PDF:", error);
+                    });
             }
         });
+
+        document.getElementById("downloadXLSXButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as XLSX?")) {
+                // Make a request to the XLSX download API
+                fetch("/api/v1/fiber-details/excel")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the XLSX data
+                        const blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.xlsx";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download XLSX:", error);
+                    });
+            }
+        });
+
     </script>
+
     <script>
         // Function to handle logout
         function handleLogout() {
@@ -652,6 +670,122 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
     </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const updateButtons = document.querySelectorAll(".update-button");
+            updateButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const id = this.getAttribute("data-id");
+                    openUpdateModal(id);
+                });
+            });
+
+            // Function to open the update modal and pre-fill with existing data
+            function openUpdateModal(id) {
+                // Replace the following line with actual data retrieval from your backend API
+                fetch(`http://localhost:8080/api/v1/fiber-details/${id}`)
+                    .then(response => response.json())
+                    .then(existingData => {
+                        // Pre-fill the modal form with existing data
+                        document.getElementById("updateId").value = existingData.id || "";
+                        document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
+                        document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
+                        document.getElementById("updateModel").value = existingData.model || "";
+                        document.getElementById("updateDeviceType").value = existingData.device_type || "";
+                        document.getElementById("updateDataCenter").value = existingData.data_center || "";
+                        document.getElementById("updateRegion").value = existingData.region || "";
+                        document.getElementById("updateDCLocation").value = existingData.dc_location || "";
+                        document.getElementById("updateDeviceLocation").value = existingData.device_location || "";
+                        document.getElementById("updateDeviceRowNumber").value = existingData.device_row_number || "";
+                        document.getElementById("updateDeviceRackNumber").value = existingData.device_rack_number || "";
+                        document.getElementById("updateDeviceRUNumber").value = existingData.device_ru_number || "";
+
+                        // Show the modal
+                        const updateModal = new bootstrap.Modal(document.getElementById("updateModal"));
+                        updateModal.show();
+
+                        // Add a click event listener to the "Update" button in the modal
+                        document.getElementById("updateSubmit").addEventListener("click", function () {
+                            const newData = {
+                                id: document.getElementById("updateId").value,
+                                serial_number: document.getElementById("updateSerialNumber").value,
+                                device_make_model: document.getElementById("updateDeviceMakeModel").value,
+                                model: document.getElementById("updateModel").value,
+                                device_type: document.getElementById("updateDeviceType").value,
+                                data_center: document.getElementById("updateDataCenter").value,
+                                region: document.getElementById("updateRegion").value,
+                                dc_location: document.getElementById("updateDCLocation").value,
+                                device_location: document.getElementById("updateDeviceLocation").value,
+                                device_row_number: document.getElementById("updateDeviceRowNumber").value,
+                                device_rack_number: document.getElementById("updateDeviceRackNumber").value,
+                                device_ru_number: document.getElementById("updateDeviceRUNumber").value,
+                            };
+
+                            // Print the updated data to the console
+                            console.log("Updated Data:", newData);
+
+                            // Send a request to update the data with the backend API
+                            fetch(`http://localhost:8080/api/v1/fiber-details/${newData.id}`, {
+                                method: 'PUT',
+                                body: JSON.stringify(newData),
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                                .then(response => {
+                                    if (response.status === 200) {
+                                        Swal.fire({
+                                            title: 'Success',
+                                            text: 'Record Updated Successfully',
+                                            icon: 'success',
+                                            customClass: {
+                                                confirmButton: 'btn btn-success',
+                                                cancelButton: 'btn btn-danger',
+                                            },
+                                            buttonsStyling: false,
+                                        }).then(() => {
+                                            location.reload(); // Reload the page
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: 'Record not updated. Please try again.',
+                                            icon: 'error',
+                                            customClass: {
+                                                confirmButton: 'btn btn-success',
+                                                cancelButton: 'btn btn-danger',
+                                            },
+                                            buttonsStyling: false,
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'An error occurred. Please try again.',
+                                        icon: 'error',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                            cancelButton: 'btn btn-danger',
+                                        },
+                                        buttonsStyling: false,
+                                    });
+                                });
+
+                            
+                                
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

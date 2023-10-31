@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/vikash-parashar/asset-locator/models"
@@ -42,6 +44,34 @@ func (db *DB) GetAllDeviceEthernetFiberDetail() ([]models.DeviceEthernetFiberDet
 	}
 
 	return results, nil
+}
+
+// Your GetFiberDetailByID function
+func (db *DB) GetFiberDetailByID(id int) (models.DeviceEthernetFiberDetail, error) {
+	var fiberDetail models.DeviceEthernetFiberDetail
+	query := `
+        SELECT * FROM device_ethernet_fiber WHERE id = $1
+    `
+	err := db.QueryRow(query, id).Scan(
+		&fiberDetail.Id,
+		&fiberDetail.SerialNumber,
+		&fiberDetail.DeviceMakeModel,
+		&fiberDetail.Model,
+		&fiberDetail.DeviceType,
+		&fiberDetail.DevicePhysicalPort,
+		&fiberDetail.DevicePortType,
+		&fiberDetail.DevicePortMACWWN,
+		&fiberDetail.ConnectedDevicePort,
+	)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			// Return a custom error when the fiber detail is not found
+			return fiberDetail, fmt.Errorf("fiber detail with ID %d not found", id)
+		}
+		log.Printf("Error retrieving FiberDetail: %v", err)
+		return fiberDetail, err
+	}
+	return fiberDetail, nil
 }
 
 func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
