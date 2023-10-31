@@ -26,6 +26,25 @@ func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
+func GetFiberDetailByID(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		fiberDetail, err := db.GetFiberDetailByID(id)
+		if err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Fiber detail not found"})
+			return
+		}
+
+		c.JSON(http.StatusOK, fiberDetail)
+	}
+}
+
 func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceEthernetFiberDetail

@@ -31,15 +31,6 @@
             font-family: 'Prompt', sans-serif;
         }
 
-        body {
-            background-image: url('/static/images/back2.jpg');
-            background-size: cover;
-            /* Adjust the background size as needed */
-            background-position: center;
-            /* Adjust the background position as needed */
-            background-attachment: fixed;
-            /* If you want a fixed background */
-        }
 
         /* Add New Data button */
         .new {
@@ -219,6 +210,28 @@
     </div>
 
 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Filter Data : </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Device Serial Number</label>
+                <input type="text" id="serialNumberFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Make</label>
+                <input type="text" id="makeFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Model</label>
+                <input type="text" id="modelFilter">
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-2 mb-2">
         <div class="row align-items-start">
             <div class="col-10">
@@ -230,17 +243,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-
-                            <a href="http://localhost:8080/api/v1/owner-details/excel" class="btn btn-sm xls">Excel</a>
-
-                            <a href="http://localhost:8080/api/v1/owner-details/pdf" class="btn btn-sm pdf">PDF</a>
-
+                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
+                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -331,6 +342,72 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for Updating Data (for DeviceAMCOwnerDetail) -->
+    <div class="modal fade" id="updateAMCOwnerModal" tabindex="-1" role="dialog"
+        aria-labelledby="updateAMCOwnerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAMCOwnerModalLabel">Update Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for updating data -->
+                    <form id="updateAMCOwnerForm">
+                        <input type="hidden" id="updateAMCOwnerId" name="id">
+                        <div class="form-group">
+                            <label for="updateAMCOwnerSerialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateAMCOwnerSerialNumber"
+                                name="serial_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerDeviceMakeModel">Device Make/Model:</label>
+                            <input type="text" class="form-control" id="updateAMCOwnerDeviceMakeModel"
+                                name="device_make_model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerModel">Model:</label>
+                            <input type="text" class="form-control" id="updateAMCOwnerModel" name="model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerPONumber">PO Number:</label>
+                            <input type="text" class="form-control" id="updateAMCOwnerPONumber" name="po_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerPOOrderDate">PO Order Date:</label>
+                            <input type="date" class="form-control" id="updateAMCOwnerPOOrderDate" name="po_order_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerEOSLDate">EOSL Date:</label>
+                            <input type="date" class="form-control" id="updateAMCOwnerEOSLDate" name="eosl_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerAMCStartDate">AMC Start Date:</label>
+                            <input type="date" class="form-control" id="updateAMCOwnerAMCStartDate"
+                                name="amc_start_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerAMCEndDate">AMC End Date:</label>
+                            <input type="date" class="form-control" id="updateAMCOwnerAMCEndDate" name="amc_end_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateAMCOwnerDeviceOwner">Device Owner:</label>
+                            <input type="text" class="form-control" id="updateAMCOwnerDeviceOwner" name="device_owner">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateAMCOwnerSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -354,19 +431,19 @@
                         {{range $index, $record := .}}
                         <tr class="row-transition">
                             <td style="font-size: small;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{.SerialNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{.Model}}</td>
-                            <td style="font-size: small;">{{.PONumber}}</td>
+                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{$record.Model}}</td>
+                            <td style="font-size: small;">{{$record.PONumber}}</td>
                             <!-- Modify the relevant table cell (e.g., POOrderDate, EOSLDate, AMCStartDate, AMCEndDate) -->
-                            <td class="date-cell" style="font-size: small;">{{.POOrderDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{.EOSLDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{.AMCStartDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{.AMCEndDate}}</td>
-                            <td style="font-size: small;">{{.DeviceOwner}}</td>
+                            <td class="date-cell" style="font-size: small;">{{$record.POOrderDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{$record.EOSLDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{$record.AMCStartDate}}</td>
+                            <td class="date-cell" style="font-size: small;">{{$record.AMCEndDate}}</td>
+                            <td style="font-size: small;">{{$record.DeviceOwner}}</td>
                             <td style="font-size: small;">
-                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{.Id}}">Update</button>
+                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
@@ -458,77 +535,120 @@
             });
         });
     </script>
-    <!-- For Update Record -->
+
+    <!-- Add this script to your HTML -->
     <script>
         const updateButtons = document.querySelectorAll(".update-button");
-
-        function showUpdateConfirmation(id) {
-            swalWithBootstrapButtons.fire({
-                title: 'Update Record',
-                text: 'Are you sure you want to update this record?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, update it',
-                cancelButtonText: 'No, cancel',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Call the updateRecord function after confirmation
-                    updateRecord(id);
-                } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your record is not updated',
-                        'error'
-                    );
-                }
-            });
-        }
-
         updateButtons.forEach(button => {
             button.addEventListener("click", function () {
                 const id = this.getAttribute("data-id");
-                showUpdateConfirmation(id);
+                openUpdateModal(id);
             });
         });
+        console.log("Fetching data for ID:", id);
+        // Function to open the update modal and pre-fill with existing data
+        function openUpdateModal(id) {
+            // Send a request to fetch the existing data based on the ID
+            fetch(`http://localhost:8080/api/v1/owner-details/${id}`)
+                .then(response => response.json())
+                .then(existingData => {
+                    // Pre-fill the modal form with existing data
+                    document.getElementById("updateId").value = existingData.id || "";
+                    document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
+                    document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
+                    document.getElementById("updateModel").value = existingData.model || "";
+                    document.getElementById("updateDeviceType").value = existingData.device_type || "";
+                    document.getElementById("updateDataCenter").value = existingData.data_center || "";
+                    document.getElementById("updateRegion").value = existingData.region || "";
+                    document.getElementById("updateDCLocation").value = existingData.dc_location || "";
+                    document.getElementById("updateDeviceLocation").value = existingData.device_location || "";
+                    document.getElementById("updateDeviceRowNumber").value = existingData.device_row_number || "";
+                    document.getElementById("updateDeviceRackNumber").value = existingData.device_rack_number || "";
+                    document.getElementById("updateDeviceRUNumber").value = existingData.device_ru_number || "";
 
-        // Function to send a PUT request
-        function updateRecord(id) {
-            fetch(`http://localhost:8080/api/v1/owner-details/${id}`, {
-                method: 'PUT',
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Record Updated Successfully',
-                            icon: 'success',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
+                    // Show the modal
+                    const updateModal = new bootstrap.Modal(document.getElementById("updateModal"));
+                    updateModal.show();
+
+                    // Add a click event listener to the "Update" button in the modal
+                    document.getElementById("updateSubmit").addEventListener("click", function () {
+                        const newData = {
+                            id: document.getElementById("updateId").value,
+                            serial_number: document.getElementById("updateSerialNumber").value,
+                            device_make_model: document.getElementById("updateDeviceMakeModel").value,
+                            model: document.getElementById("updateModel").value,
+                            device_type: document.getElementById("updateDeviceType").value,
+                            data_center: document.getElementById("updateDataCenter").value,
+                            region: document.getElementById("updateRegion").value,
+                            dc_location: document.getElementById("updateDCLocation").value,
+                            device_location: document.getElementById("updateDeviceLocation").value,
+                            device_row_number: document.getElementById("updateDeviceRowNumber").value,
+                            device_rack_number: document.getElementById("updateDeviceRackNumber").value,
+                            device_ru_number: document.getElementById("updateDeviceRUNumber").value,
+                        };
+
+                        // Print the updated data to the console
+                        console.log("Updated Data:", newData);
+
+                        // Send a request to update the data with the backend API
+                        fetch(`http://localhost:8080/api/v1/owner-details/${newData.id}`, {
+                            method: 'PUT',
+                            body: JSON.stringify(newData),
+                            headers: {
+                                'Content-Type': 'application/json',
                             },
-                            buttonsStyling: false,
-                        }).then(() => {
-                            location.reload(); // Reload the page
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Record not updated. Please try again.',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
-                            },
-                            buttonsStyling: false,
-                        });
-                    }
+                        })
+                            .then(response => {
+                                if (response.status === 200) {
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: 'Record Updated Successfully',
+                                        icon: 'success',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                            cancelButton: 'btn btn-danger',
+                                        },
+                                        buttonsStyling: false,
+                                    }).then(() => {
+                                        location.reload(); // Reload the page
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'Record not updated. Please try again.',
+                                        icon: 'error',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                            cancelButton: 'btn btn-danger',
+                                        },
+                                        buttonsStyling: false,
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'An error occurred while fetching data. Please try again.',
+                                    icon: 'error',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success',
+                                        cancelButton: 'btn btn-danger',
+                                    },
+                                    buttonsStyling: false,
+                                });
+                            });
+
+
+                        // Close the modal
+                        updateModal.hide();
+                    });
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     Swal.fire({
                         title: 'Error',
-                        text: 'An error occurred. Please try again.',
+                        text: 'An error occurred while fetching data. Please try again.',
                         icon: 'error',
                         customClass: {
                             confirmButton: 'btn btn-success',
@@ -538,8 +658,10 @@
                     });
                 });
         }
-
     </script>
+
+
+
     <script>
         function notify(type, msg) {
             notie.alert({
@@ -649,30 +771,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-        document.getElementById("downloadDataButton").addEventListener("click", function () {
-            // Create a function to download data as PDF
-            function downloadAsPDF() {
-                var doc = new jsPDF();
-                doc.text("Your PDF Content Here", 10, 10); // Replace with your content
-                doc.save("data.pdf");
-            }
-
-            // Create a function to download data as XLSX
-            function downloadAsXLSX() {
-                var data = [ /* Your data in the required format */];
-                var ws = XLSX.utils.json_to_sheet(data);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Data");
-                XLSX.writeFile(wb, "data.xlsx");
-            }
-
-            // Show a dialog to let the user choose PDF or XLSX
-            if (confirm("Download as PDF?")) {
-                downloadAsPDF();
-            } else {
-                downloadAsXLSX();
-            }
-        });
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -702,6 +800,102 @@
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", handleLogout);
 
+    </script>
+    <script>
+        document.getElementById("downloadPDFButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as PDF?")) {
+                // Make a request to the PDF download API
+                fetch("/api/v1/fiber-details/pdf")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the PDF data
+                        const blob = new Blob([data], { type: "application/pdf" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.pdf";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download PDF:", error);
+                    });
+            }
+        });
+
+        document.getElementById("downloadXLSXButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as XLSX?")) {
+                // Make a request to the XLSX download API
+                fetch("/api/v1/fiber-details/excel")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the XLSX data
+                        const blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.xlsx";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download XLSX:", error);
+                    });
+            }
+        });
+
+    </script>
+
+    <script>
+        // Function to filter the table rows based on user input
+        function filterTable() {
+            var serialNumberFilter = document.getElementById("serialNumberFilter").value.toLowerCase();
+            var makeFilter = document.getElementById("makeFilter").value.toLowerCase();
+            var modelFilter = document.getElementById("modelFilter").value.toLowerCase();
+
+            var rows = document.querySelectorAll("#deviceDetails tr.row-transition");
+
+            rows.forEach(function (row) {
+                var serialNumber = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                var make = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
+                var model = row.querySelector("td:nth-child(4)").textContent.toLowerCase();
+
+                if (serialNumber.includes(serialNumberFilter) &&
+                    make.includes(makeFilter) &&
+                    model.includes(modelFilter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        // Add event listeners to the input fields
+        document.getElementById("serialNumberFilter").addEventListener("input", filterTable);
+        document.getElementById("makeFilter").addEventListener("input", filterTable);
+        document.getElementById("modelFilter").addEventListener("input", filterTable);
     </script>
 
 </body>

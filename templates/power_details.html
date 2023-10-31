@@ -31,15 +31,7 @@
             font-family: 'Prompt', sans-serif;
         }
 
-        body {
-            background-image: url('/static/images/back2.jpg');
-            background-size: cover;
-            /* Adjust the background size as needed */
-            background-position: center;
-            /* Adjust the background position as needed */
-            background-attachment: fixed;
-            /* If you want a fixed background */
-        }
+
 
         /* Add New Data button */
         .new {
@@ -160,6 +152,11 @@
             background-color: #219C90;
             color: white;
         }
+
+        .filter-data {
+            color: #219C90;
+            background-color: #141E46;
+        }
     </style>
 </head>
 
@@ -215,10 +212,33 @@
     </div>
 
 
+    <div class="container filter-data">
+        <div class="row">
+            <div class="col">
+                <h3>Filter Data : </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Device Serial Number</label>
+                <input type="text" id="serialNumberFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Make</label>
+                <input type="text" id="makeFilter">
+            </div>
+            <div class="col">
+                <label for="">Device Model</label>
+                <input type="text" id="modelFilter">
+            </div>
+        </div>
+    </div>
+
+
     <div class="container mt-2 mb-2">
         <div class="row align-items-start">
             <div class="col-10">
-                <button id="newEntryButton" class="btn new btn-sm" data-toggle="modal" data-target="#createEntryModal">
+                <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal" data-target="#createEntryModal">
                     New
                 </button>
             </div>
@@ -226,17 +246,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-
-                            <a href="http://localhost:8080/api/v1/power-details/excel" class="btn btn-sm xls">Excel</a>
-
-                            <a href="http://localhost:8080/api/v1/power-details/pdf" class="btn btn-sm pdf">PDF</a>
-
+                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
+                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -326,6 +344,64 @@
         </div>
     </div>
 
+    <!-- Modal for Updating Data -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for updating data -->
+                    <form id="updateForm">
+                        <input type="hidden" id="updateId" name="id">
+                        <div class="form-group">
+                            <label for="updateSerialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceMakeModel">Device Make/Model:</label>
+                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateModel">Model:</label>
+                            <input type text="text" class="form-control" id="updateModel" name="model">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateDeviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTotalPowerWatt">Total Power Watt:</label>
+                            <input type="text" class="form-control" id="updateTotalPowerWatt" name="total_power_watt">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTotalBTU">Total BTU:</label>
+                            <input type="text" class="form-control" id="updateTotalBTU" name="total_btu">
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTotalPowerCable">Total Power Cable:</label>
+                            <input type="text" class="form-control" id="updateTotalPowerCable" name="total_power_cable">
+                        </div>
+                        <div class="form-group">
+                            <label for="updatePowerSocketType">Power Socket Type:</label>
+                            <input type="text" class="form-control" id="updatePowerSocketType" name="power_socket_type">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -349,17 +425,17 @@
                         {{range $index, $record := .}}
                         <tr class="row-transition">
                             <td style="font-size: small;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{.SerialNumber}}</td>
-                            <td style="font-size: small;">{{.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{.Model}}</td>
-                            <td style="font-size: small;">{{.DeviceType}}</td>
-                            <td style="font-size: small;">{{.TotalPowerWatt}}</td>
-                            <td style="font-size: small;">{{.TotalBTU}}</td>
-                            <td style="font-size: small;">{{.TotalPowerCable}}</td>
-                            <td style="font-size: small;">{{.PowerSocketType}}</td>
+                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{$record.Model}}</td>
+                            <td style="font-size: small;">{{$record.DeviceType}}</td>
+                            <td style="font-size: small;">{{$record.TotalPowerWatt}}</td>
+                            <td style="font-size: small;">{{$record.TotalBTU}}</td>
+                            <td style="font-size: small;">{{$record.TotalPowerCable}}</td>
+                            <td style="font-size: small;">{{$record.PowerSocketType}}</td>
                             <td style="font-size: small;">
-                                <button class="delete-button" data-id="{{.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{.Id}}">Update</button>
+                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>
                         </tr>
                         {{end}}
@@ -451,7 +527,9 @@
             });
         });
     </script>
-    <!-- For Update Record -->
+
+
+    <!-- Add this script to your HTML -->
     <script>
         const updateButtons = document.querySelectorAll(".update-button");
 
@@ -485,43 +563,102 @@
             });
         });
 
-        // Function to send a PUT request
+        // Function to fetch existing data, pre-fill the modal, and send a PUT request
         function updateRecord(id) {
-            fetch(`http://localhost:8080/api/v1/power-details/${id}`, {
-                method: 'PUT',
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Record Updated Successfully',
-                            icon: 'success',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
+            // Send a request to fetch the existing data based on the ID
+            fetch(`http://localhost:8080/api/v1/power-details/${id}`)
+                .then(response => response.json())
+                .then(existingData => {
+                    // Pre-fill the modal form with existing data
+                    document.getElementById("updateId").value = existingData.id || "";
+                    document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
+                    document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
+                    document.getElementById("updateModel").value = existingData.model || "";
+                    document.getElementById("updateDeviceType").value = existingData.device_type || "";
+                    document.getElementById("updateTotalPowerWatt").value = existingData.total_power_watt || "";
+                    document.getElementById("updateTotalBTU").value = existingData.total_btu || "";
+                    document.getElementById("updateTotalPowerCable").value = existingData.total_power_cable || "";
+                    document.getElementById("updatePowerSocketType").value = existingData.power_socket_type || "";
+
+                    // Show the modal
+                    const updateModal = new bootstrap.Modal(document.getElementById("updateModal"));
+                    updateModal.show();
+
+                    // Add a click event listener to the "Update" button in the modal
+                    document.getElementById("updateSubmit").addEventListener("click", function () {
+                        const newData = {
+                            id: document.getElementById("updateId").value,
+                            serial_number: document.getElementById("updateSerialNumber").value,
+                            device_make_model: document.getElementById("updateDeviceMakeModel").value,
+                            model: document.getElementById("updateModel").value,
+                            device_type: document.getElementById("updateDeviceType").value,
+                            total_power_watt: document.getElementById("updateTotalPowerWatt").value,
+                            total_btu: document.getElementById("updateTotalBTU").value,
+                            total_power_cable: document.getElementById("updateTotalPowerCable").value,
+                            power_socket_type: document.getElementById("updatePowerSocketType").value,
+                        };
+
+                        // Print the updated data to the console
+                        console.log("Updated Data:", newData);
+
+                        // Send a request to update the data with the backend API
+                        fetch(`http://localhost:8080/api/v1/power-details/${newData.id}`, {
+                            method: 'PUT',
+                            body: JSON.stringify(newData),
+                            headers: {
+                                'Content-Type': 'application/json',
                             },
-                            buttonsStyling: false,
-                        }).then(() => {
-                            location.reload(); // Reload the page
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Record not updated. Please try again.',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'btn btn-success',
-                                cancelButton: 'btn btn-danger',
-                            },
-                            buttonsStyling: false,
-                        });
-                    }
+                        })
+                            .then(response => {
+                                if (response.status === 200) {
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: 'Record Updated Successfully',
+                                        icon: 'success',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                            cancelButton: 'btn btn-danger',
+                                        },
+                                        buttonsStyling: false,
+                                    }).then(() => {
+                                        location.reload(); // Reload the page
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'Record not updated. Please try again.',
+                                        icon: 'error',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                            cancelButton: 'btn btn-danger',
+                                        },
+                                        buttonsStyling: false,
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'An error occurred. Please try again.',
+                                    icon: 'error',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success',
+                                        cancelButton: 'btn btn-danger',
+                                    },
+                                    buttonsStyling: false,
+                                });
+                            });
+
+                        // Close the modal
+                        updateModal.hide();
+                    });
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     Swal.fire({
                         title: 'Error',
-                        text: 'An error occurred. Please try again.',
+                        text: 'An error occurred while fetching data. Please try again.',
                         icon: 'error',
                         customClass: {
                             confirmButton: 'btn btn-success',
@@ -531,8 +668,11 @@
                     });
                 });
         }
-
     </script>
+
+
+
+
     <script>
         function notify(type, msg) {
             notie.alert({
@@ -621,30 +761,6 @@
             $("#createEntryModal").modal("hide");
         });
 
-        document.getElementById("downloadDataButton").addEventListener("click", function () {
-            // Create a function to download data as PDF
-            function downloadAsPDF() {
-                var doc = new jsPDF();
-                doc.text("Your PDF Content Here", 10, 10); // Replace with your content
-                doc.save("data.pdf");
-            }
-
-            // Create a function to download data as XLSX
-            function downloadAsXLSX() {
-                var data = [ /* Your data in the required format */];
-                var ws = XLSX.utils.json_to_sheet(data);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Data");
-                XLSX.writeFile(wb, "data.xlsx");
-            }
-
-            // Show a dialog to let the user choose PDF or XLSX
-            if (confirm("Download as PDF?")) {
-                downloadAsPDF();
-            } else {
-                downloadAsXLSX();
-            }
-        });
         // Function to handle logout
         function handleLogout() {
             fetch("/logout", {
@@ -676,6 +792,99 @@
 
     </script>
 
+    <script>
+        document.getElementById("downloadPDFButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as PDF?")) {
+                // Make a request to the PDF download API
+                fetch("/api/v1/fiber-details/pdf")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the PDF data
+                        const blob = new Blob([data], { type: "application/pdf" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.pdf";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download PDF:", error);
+                    });
+            }
+        });
+
+        document.getElementById("downloadXLSXButton").addEventListener("click", function () {
+            // Show a dialog to let the user choose PDF or XLSX
+            if (confirm("Download as XLSX?")) {
+                // Make a request to the XLSX download API
+                fetch("/api/v1/fiber-details/excel")
+                    .then(response => response.blob())
+                    .then(data => {
+                        // Create a Blob containing the XLSX data
+                        const blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
+                        // Create a URL for the Blob
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Create an invisible anchor element to trigger the download
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+                        a.download = "DeviceEthernetFiberDetails.xlsx";
+
+                        // Trigger the download
+                        document.body.appendChild(a);
+                        a.click();
+
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error("Failed to download XLSX:", error);
+                    });
+            }
+        });
+
+    </script>
+    <script>
+        function filterTable() {
+            var serialNumberFilter = document.getElementById("serialNumberFilter").value.toLowerCase();
+            var makeFilter = document.getElementById("makeFilter").value.toLowerCase();
+            var modelFilter = document.getElementById("modelFilter").value.toLowerCase();
+
+            var rows = document.querySelectorAll("#deviceDetails tr.row-transition");
+
+            rows.forEach(function (row) {
+                var serialNumber = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                var make = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
+                var model = row.querySelector("td:nth-child(4)").textContent.toLowerCase();
+
+                if (serialNumber.includes(serialNumberFilter) &&
+                    make.includes(makeFilter) &&
+                    model.includes(modelFilter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        document.getElementById("serialNumberFilter").addEventListener("input", filterTable);
+        document.getElementById("makeFilter").addEventListener("input", filterTable);
+        document.getElementById("modelFilter").addEventListener("input", filterTable);
+    </script>
 
 </body>
 

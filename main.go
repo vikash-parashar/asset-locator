@@ -74,6 +74,7 @@ func main() {
 
 	// Location Details
 	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))
+	// protected.GET("/location-details/:id", handlers.GetLocationDetailsByID(dbConn))
 	protected.POST("/location-details", handlers.CreateNewLocationDetails(dbConn))
 	protected.PUT("/location-details/:id", handlers.UpdateDeviceLocationDetail(dbConn))
 	protected.DELETE("/location-details/:id", handlers.DeleteDeviceLocationDetail(dbConn))
@@ -82,6 +83,7 @@ func main() {
 
 	// Owner Details
 	protected.GET("/owner-details", handlers.GetOwnerDetails(dbConn))
+	// protected.GET("/owner-details/:id", handlers.GetOwnerDetailsByID(dbConn))
 	protected.POST("/owner-details", handlers.CreateNewOwnerDetails(dbConn))
 	protected.PUT("/owner-details/:id", handlers.UpdateDeviceAMCOwnerDetail(dbConn))
 	protected.DELETE("/owner-details/:id", handlers.DeleteDeviceAMCOwnerDetail(dbConn))
@@ -90,6 +92,7 @@ func main() {
 
 	// Power Details
 	protected.GET("/power-details", handlers.GetPowerDetails(dbConn))
+	// protected.GET("/power-details/:id", handlers.GetPowerDetailsByID(dbConn))
 	protected.POST("/power-details", handlers.CreateNewPowerDetails(dbConn))
 	protected.PUT("/power-details/:id", handlers.UpdateDevicePowerDetail(dbConn))
 	protected.DELETE("/power-details/:id", handlers.DeleteDevicePowerDetail(dbConn))
@@ -98,6 +101,7 @@ func main() {
 
 	// Fiber Details
 	protected.GET("/fiber-details", handlers.GetFiberDetails(dbConn))
+	protected.GET("/fiber-details/:id", handlers.GetFiberDetailByID(dbConn))
 	protected.POST("/fiber-details", handlers.CreateNewFiberDetails(dbConn))
 	protected.PUT("/fiber-details/:id", handlers.UpdateDeviceEthernetFiberDetail(dbConn))
 	protected.DELETE("/fiber-details/:id", handlers.DeleteDeviceEthernetFiberDetail(dbConn))
