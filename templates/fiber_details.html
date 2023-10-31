@@ -9,8 +9,199 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/nav.css">
-    <link rel="stylesheet" href="/static/css/filter.css">
+   
+    <!-- filter navbar buttons related css only -->
+   <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+        /* Custom styling for the navbar */
+        .navbar-custom {
+            background: linear-gradient(to right, #cf3d6e, #6c757d);
+            /* Gradient background color */
+        }
+
+        .navbar-custom .navbar-brand {
+            color: #d85151;
+            /* Text color for the company name */
+        }
+
+        .navbar-custom .nav-link {
+            color: #0ee2e9;
+            font-family: 'Kalam', cursive;
+            font-family: 'Raleway', sans-serif;
+            /* Text color for the navigation links */
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #c78125;
+            /* Text color for the navigation links on hover */
+        }
+
+        /* Custom styling for the dropdown menu */
+        .dropdown-menu {
+            margin-top: 20px;
+            background: linear-gradient(to right, #212325, #2e1c7c79);
+            width: auto;
+            /* margin-right: -15px; */
+            /* Gradient background color */
+        }
+
+        .dropdown-item-text {
+            color: #f38b5a;
+            font-size: small;
+            /* Text color for the dropdown text */
+        }
+
+        .dropdown-item-text span {
+            color: #f8f8f8;
+            font-size: small;
+            /* Text color for the data spans */
+            text-align: center;
+        }
+
+        .dropdown-menu::before {
+            content: none;
+            /* Hide the dropdown arrow icon */
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            /* Adjust padding as needed */
+        }
+
+        .btn-danger {
+            background-color: #d61023c2;
+            /* Background color for the Logout button */
+            border: none;
+            /* Remove the button border */
+        }
+
+        .btn-danger:hover {
+            background-color: #e21220;
+            /* Background color for the Logout button on hover */
+        }
+
+        img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+
+
+        }
+
+        /* Custom styling for the toggle button */
+        .navbar-toggler-icon {
+            color: #cf3765;
+            /* Text color */
+            font-size: 18px;
+            /* Font size */
+            padding: 0 50px;
+            /* Add some spacing around the text */
+        }
+
+        h1 {
+            margin-top: 200px;
+            font-family: 'Kalam', cursive;
+
+        }
+
+        .profile {
+            height: 30px;
+            width: 30px;
+        }
+
+
+
+        /* Custom styling for the filter section   */
+
+        .container {
+            background-color: #f8f9fa;
+            /* Background color */
+            border-radius: 5px;
+            /* Rounded corners */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Box shadow for a subtle lift */
+        }
+
+        h3 {
+            color: #007bff;
+            /* Title color */
+        }
+
+        label {
+            font-weight: bold;
+            /* Bold labels */
+        }
+
+        .form-control {
+            border: 2px solid #007bff;
+            /* Input border color */
+            border-radius: 5px;
+            /* Rounded input corners */
+        }
+
+        .form-control:focus {
+            border-color: #0056b3;
+            /* Input border color on focus */
+            box-shadow: none;
+            /* Remove the default box shadow on focus */
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            /* Button background color */
+            border: none;
+            /* Remove button border */
+            border-radius: 5px;
+            /* Rounded button corners */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            /* Button background color on hover */
+        }
+
+        /* buttons related css for all data pages */
+
+        .delete-button {
+            background-color: red;
+            color: white;
+        }
+
+        .update-button {
+            background-color: #219C90;
+            color: white;
+        }
+
+        /* Download Data as PDF button */
+        .pdf {
+            background-color: #af3e3e;
+            /* Use a green color for this button */
+            color: #fff;
+            /* Text color (white) */
+            /* You can add more styling as needed. */
+            margin-left: 20px;
+        }
+
+        /* Download Data as Excel button */
+        .xls {
+            background-color: #f1c40f;
+            /* Use a yellow color for this button */
+            color: #fff;
+            /* Text color (white) */
+            /* You can add more styling as needed. */
+        }
+
+        /* Add New Data button */
+        .new {
+            background-color: #3498db;
+            /* Use a blue color for this button */
+            color: #fff;
+            /* Text color (white) */
+            /* You can add more styling as needed, such as padding, border, and hover effects. */
+        }
+    </style>
 
 </head>
 
