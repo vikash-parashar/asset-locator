@@ -90,7 +90,10 @@ func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEtherne
         SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, device_physical_port = $6, device_port_type = $7, device_port_mac_address_wwn = $8, connected_device_port = $9
         WHERE id = $1
     `
-	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DevicePhysicalPort, data.DevicePortType, data.DevicePortMACWWN, data.ConnectedDevicePort)
+
+	log.Println("data sent to db to update::")
+	log.Println(data)
+	_, err := db.Exec(query, &id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
 	if err != nil {
 		log.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
 		return err

@@ -372,6 +372,82 @@
         </div>
     </div>
 
+    <!-- update existing data -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Update Device Ethernet Fiber Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm">
+                        <!-- Serial Number -->
+                        <div class="form-group">
+                            <label for="serialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
+                        </div>
+
+                        <!-- Device Make and Model -->
+                        <div class="form-group">
+                            <label for="deviceMakeModel">Device Make and Model:</label>
+                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
+                        </div>
+
+                        <!-- Model -->
+                        <div class="form-group">
+                            <label for="model">Model:</label>
+                            <input type="text" class="form-control" id="updateModel" name="model">
+                        </div>
+
+                        <!-- Device Type -->
+                        <div class="form-group">
+                            <label for="deviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+                        </div>
+
+                        <!-- Device Physical Port -->
+                        <div class="form-group">
+                            <label for="devicePhysicalPort">Device Physical Port:</label>
+                            <input type="text" class="form-control" id="updateDevicePhysicalPort"
+                                name="device_physical_port">
+                        </div>
+
+                        <!-- Device Port Type -->
+                        <div class="form-group">
+                            <label for="devicePortType">Device Port Type:</label>
+                            <input type="text" class="form-control" id="updateDevicePortType" name="device_port_type">
+                        </div>
+
+                        <!-- Device Port MAC/WWN -->
+                        <div class="form-group">
+                            <label for="devicePortMACWWN">Device Port MAC/WWN:</label>
+                            <input type="text" class="form-control" id="updateDevicePortMACWWN"
+                                name="device_port_macwwn">
+                        </div>
+
+                        <!-- Connected Device Port -->
+                        <div class="form-group">
+                            <label for="connectedDevicePort">Connected Device Port:</label>
+                            <input type="text" class="form-control" id="updateConnectedDevicePort"
+                                name="connected_device_port">
+                        </div>
+
+                        <input type="hidden" id="updateId" name="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- data table to display -->
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -424,10 +500,10 @@
     </footer>
 
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <!-- Ensure jQuery and Bootstrap are included -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
@@ -544,6 +620,54 @@
             $("#createEntryModal").modal("hide");
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            // Handle the click event on the "Update" button
+            $(".update-button").on("click", function () {
+                var recordId = $(this).data("id");
+                $("#updateId").val(recordId);
+                $("#updateModal").modal("show");
+            });
+            // Add similar lines for other fields
+
+            // Handle the form submission
+            $("#updateSubmit").on("click", function () {
+                var formData = {};
+                formData.id = $("#updateId").val();
+                formData.serial_number = $("#updateSerialNumber").val();
+                formData.device_make_model = $("#updateDeviceMakeModel").val();
+                formData.model = $("#updateModel").val();
+                formData.device_type = $("#updateDeviceType").val();
+                formData.device_physical_port = $("#updateDevicePhysicalPort").val();
+                formData.device_port_type = $("#updateDevicePortType").val();
+                formData.device_port_macwwn = $("#updateDevicePortMACWWN").val();
+                formData.connected_device_port = $("#updateConnectedDevicePort").val();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/v1/fiber-details/" + formData.id,
+                    contentType: "application/json", // Set the correct content type
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        if (response.success) {
+                            alert("DeviceEthernetFiberDetail updated successfully");
+                            $("#updateModal").modal("hide");
+                            location.reload(); // Reload the page after a successful update
+                        } else {
+                            alert("Failed to update DeviceEthernetFiberDetail");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors here
+                        alert("An error occurred while updating: " + error);
+                    },
+                });
+            });
+        });
+    </script>
+
+
 
     <!-- handle filter data table -->
     <script>
