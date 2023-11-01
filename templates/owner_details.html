@@ -407,6 +407,88 @@
         </div>
     </div>
 
+
+    <!-- modal for update data -->
+    <!-- Update Device AMC Owner Detail Modal -->
+    <div class="modal fade" id="updateAMCOwnerModal" tabindex="-1" role="dialog"
+        aria-labelledby="updateAMCOwnerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAMCOwnerModalLabel">Update Device AMC Owner Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateAMCOwnerForm">
+                        <!-- Serial Number -->
+                        <div class="form-group">
+                            <label for="serialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateAMCSerialNumber" name="serial_number">
+                        </div>
+
+                        <!-- Device Make and Model -->
+                        <div class="form-group">
+                            <label for="deviceMakeModel">Device Make and Model:</label>
+                            <input type="text" class="form-control" id="updateAMCDeviceMakeModel"
+                                name="device_make_model">
+                        </div>
+
+                        <!-- Model -->
+                        <div class="form-group">
+                            <label for="model">Model:</label>
+                            <input type="text" class "form-control" id="updateAMCModel" name="model">
+                        </div>
+
+                        <!-- PO Number -->
+                        <div class="form-group">
+                            <label for="poNumber">PO Number:</label>
+                            <input type="text" class="form-control" id="updateAMCPONumber" name="po_number">
+                        </div>
+
+                        <!-- PO Order Date -->
+                        <div class="form-group">
+                            <label for="poOrderDate">PO Order Date:</label>
+                            <input type="text" class="form-control" id="updateAMCPOOrderDate" name="po_order_date">
+                        </div>
+
+                        <!-- EOSL Date -->
+                        <div class="form-group">
+                            <label for="eoslDate">EOSL Date:</label>
+                            <input type="text" class="form-control" id="updateAMCEOSLDate" name="eosl_date">
+                        </div>
+
+                        <!-- AMC Start Date -->
+                        <div class="form-group">
+                            <label for="amcStartDate">AMC Start Date:</label>
+                            <input type="text" class="form-control" id="updateAMCAMCStartDate" name="amc_start_date">
+                        </div>
+
+                        <!-- AMC End Date -->
+                        <div class="form-group">
+                            <label for="amcEndDate">AMC End Date:</label>
+                            <input type="text" class="form-control" id="updateAMCAMCEndDate" name="amc_end_date">
+                        </div>
+
+                        <!-- Device Owner -->
+                        <div class="form-group">
+                            <label for="deviceOwner">Device Owner:</label>
+                            <input type="text" class="form-control" id="updateAMCDeviceOwner" name="device_owner">
+                        </div>
+
+                        <input type="hidden" id="updateAMCOwnerId" name="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateAMCOwnerSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- data display table -->
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -600,6 +682,55 @@
 
             $("#createEntryModal").modal("hide");
         });
+    </script>
+
+
+    <!-- handle update data -->
+    <script>
+        $(document).ready(function () {
+            // Handle the click event on the "Update" button for AMC Owner
+            $(".update-amc-owner-button").on("click", function () {
+                var recordId = $(this).data("id");
+                $("#updateAMCOwnerId").val(recordId);
+                $("#updateAMCOwnerModal").modal("show");
+            });
+
+            // Handle the form submission for AMC Owner
+            $("#updateAMCOwnerSubmit").on("click", function () {
+                var formData = {};
+                formData.id = $("#updateAMCOwnerId").val();
+                formData.serial_number = $("#updateAMCSerialNumber").val();
+                formData.device_make_model = $("#updateAMCDeviceMakeModel").val();
+                formData.model = $("#updateAMCModel").val();
+                formData.po_number = $("#updateAMCPONumber").val();
+                formData.po_order_date = $("#updateAMCPOOrderDate").val();
+                formData.eosl_date = $("#updateAMCEOSLDate").val();
+                formData.amc_start_date = $("#updateAMCAMCStartDate").val();
+                formData.amc_end_date = $("#updateAMCAMCEndDate").val();
+                formData.device_owner = $("#updateAMCDeviceOwner").val();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/v1/amc-owner-details/" + formData.id,
+                    contentType: "application/json", // Set the correct content type
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Device AMC Owner Detail updated successfully");
+                            $("#updateAMCOwnerModal").modal("hide");
+                            location.reload(); // Reload the page after a successful update
+                        } else {
+                            alert("Failed to update Device AMC Owner Detail");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors here
+                        alert("An error occurred while updating: " + error);
+                    },
+                });
+            });
+        });
+
     </script>
 
     <!-- handle download data -->

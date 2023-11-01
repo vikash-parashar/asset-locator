@@ -85,7 +85,7 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// UpdateDeviceLocationDetailHandler updates a DeviceLocationDetail record based on its ID.
+// UpdateDeviceLocationDetail updates a DeviceLocationDetail record based on its ID.
 func UpdateDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		idStr := c.Param("id")
@@ -95,13 +95,46 @@ func UpdateDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
-		var data models.DeviceLocationDetail
-		if err := c.ShouldBind(&data); err != nil {
+		type RequestData struct {
+			SerialNumber     string `json:"serial_number"`
+			DeviceMakeModel  string `json:"device_make_model"`
+			Model            string `json:"model"`
+			DeviceType       string `json:"device_type"`
+			DataCenter       string `json:"data_center"`
+			Region           string `json:"region"`
+			DCLocation       string `json:"dc_location"`
+			DeviceLocation   string `json:"device_location"`
+			DeviceRowNumber  string `json:"device_row_number"`  //int
+			DeviceRackNumber string `json:"device_rack_number"` //int
+			DeviceRUNumber   string `json:"device_ru_number"`
+		}
+
+		var requestData RequestData
+		if err := c.ShouldBindJSON(&requestData); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
 			return
 		}
 
-		if err := db.UpdateDeviceLocationDetail(id, &data); err != nil {
+		row, _ := strconv.Atoi(requestData.DeviceRowNumber)
+		rack, _ := strconv.Atoi(requestData.DeviceRackNumber)
+
+		
+		updatedData := &models.DeviceLocationDetail{
+			Id:               id,
+			SerialNumber:     requestData.SerialNumber,
+			DeviceMakeModel:  requestData.DeviceMakeModel,
+			Model:            requestData.Model,
+			DeviceType:       requestData.DeviceType,
+			DataCenter:       requestData.DataCenter,
+			Region:           requestData.Region,
+			DCLocation:       requestData.DCLocation,
+			DeviceLocation:   requestData.DeviceLocation,
+			DeviceRowNumber:  row,
+			DeviceRackNumber: rack,
+			DeviceRUNumber:   requestData.DeviceRUNumber,
+		}
+
+		if err := db.UpdateDeviceLocationDetail(id, updatedData); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceLocationDetail"})
 			return
 		}

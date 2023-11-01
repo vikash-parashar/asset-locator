@@ -427,6 +427,100 @@
         </div>
     </div>
 
+    <!-- modal for update data -->
+    <!-- Update Device Location Detail Modal -->
+    <div class="modal fade" id="updateLocationModal" tabindex="-1" role="dialog"
+        aria-labelledby="updateLocationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateLocationModalLabel">Update Device Location Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateLocationForm">
+                        <!-- Serial Number -->
+                        <div class="form-group">
+                            <label for="serialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
+                        </div>
+
+                        <!-- Device Make and Model -->
+                        <div class="form-group">
+                            <label for="deviceMakeModel">Device Make and Model:</label>
+                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
+                        </div>
+
+                        <!-- Model -->
+                        <div class="form-group">
+                            <label for="model">Model:</label>
+                            <input type="text" class="form-control" id="updateModel" name="model">
+                        </div>
+
+                        <!-- Device Type -->
+                        <div class="form-group">
+                            <label for="deviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+                        </div>
+
+                        <!-- Data Center -->
+                        <div class="form-group">
+                            <label for="dataCenter">Data Center:</label>
+                            <input type="text" class="form-control" id="updateDataCenter" name="data_center">
+                        </div>
+
+                        <!-- Region -->
+                        <div class="form-group">
+                            <label for="region">Region:</label>
+                            <input type="text" class="form-control" id="updateRegion" name="region">
+                        </div>
+
+                        <!-- DC Location -->
+                        <div class="form-group">
+                            <label for="dcLocation">DC Location:</label>
+                            <input type="text" class="form-control" id="updateDCLocation" name="dc_location">
+                        </div>
+
+                        <!-- Device Location -->
+                        <div class="form-group">
+                            <label for="deviceLocation">Device Location:</label>
+                            <input type="text" class="form-control" id="updateDeviceLocation" name="device_location">
+                        </div>
+
+                        <!-- Device Row Number -->
+                        <div class="form-group">
+                            <label for="deviceRowNumber">Device Row Number:</label>
+                            <input type="number" class="form-control" id="updateDeviceRowNumber"
+                                name="device_row_number">
+                        </div>
+
+                        <!-- Device Rack Number -->
+                        <div class="form-group">
+                            <label for="deviceRackNumber">Device Rack Number:</label>
+                            <input type="number" class="form-control" id="updateDeviceRackNumber"
+                                name="device_rack_number">
+                        </div>
+
+                        <!-- Device RU Number -->
+                        <div class="form-group">
+                            <label for="deviceRUNumber">Device RU Number:</label>
+                            <input type="text" class="form-control" id="updateDeviceRUNumber" name="device_ru_number">
+                        </div>
+
+                        <input type="hidden" id="updateLocationId" name="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateLocationSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- data table to display -->
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -607,6 +701,58 @@
             $("#createEntryModal").modal("hide");
         });
     </script>
+
+
+    <!-- handle update existing data -->
+    <script>
+        $(document).ready(function () {
+            // Handle the click event on the "Update" button for Location
+            $(".update-location-button").on("click", function () {
+                var recordId = $(this).data("id");
+                $("#updateLocationId").val(recordId);
+                $("#updateLocationModal").modal("show");
+            });
+
+            // Handle the form submission for Location
+            $("#updateLocationSubmit").on("click", function () {
+                var formData = {};
+                formData.id = $("#updateLocationId").val();
+                formData.serial_number = $("#updateSerialNumber").val();
+                formData.device_make_model = $("#updateDeviceMakeModel").val();
+                formData.model = $("#updateModel").val();
+                formData.device_type = $("#updateDeviceType").val();
+                formData.data_center = $("#updateDataCenter").val();
+                formData.region = $("#updateRegion").val();
+                formData.dc_location = $("#updateDCLocation").val();
+                formData.device_location = $("#updateDeviceLocation").val();
+                formData.device_row_number = $("#updateDeviceRowNumber").val();
+                formData.device_rack_number = $("#updateDeviceRackNumber").val();
+                formData.device_ru_number = $("#updateDeviceRUNumber").val();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/v1/location-details/" + formData.id,
+                    contentType: "application/json", // Set the correct content type
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Device Location Detail updated successfully");
+                            $("#updateLocationModal").modal("hide");
+                            location.reload(); // Reload the page after a successful update
+                        } else {
+                            alert("Failed to update Device Location Detail");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors here
+                        alert("An error occurred while updating: " + error);
+                    },
+                });
+            });
+        });
+
+    </script>
+
 
     <!-- filter data table -->
     <script>

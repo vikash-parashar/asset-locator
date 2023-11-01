@@ -90,7 +90,7 @@ func DeleteDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	}
 }
 
-// UpdateDevicePowerDetailHandler updates a DevicePowerDetail record based on its ID.
+// UpdateDevicePowerDetail updates a DevicePowerDetail record based on its ID.
 func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		idStr := c.Param("id")
@@ -100,18 +100,45 @@ func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
-		var data models.DevicePowerDetail
-		if err := c.ShouldBind(&data); err != nil {
+		type RequestData struct {
+			SerialNumber    string `json:"serial_number"`
+			DeviceMakeModel string `json:"device_make_model"`
+			Model           string `json:"model"`
+			DeviceType      string `json:"device_type"`
+			TotalPowerWatt  string `json:"total_power_watt"`
+			TotalBTU        string `json:"total_btu"`
+			TotalPowerCable string `json:"total_power_cable"`
+			PowerSocketType string `json:"power_socket_type"`
+		}
+
+		var requestData RequestData
+		if err := c.ShouldBindJSON(&requestData); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
 			return
 		}
 
-		if err := db.UpdateDevicePowerDetail(id, &data); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DevicePowerDetail"})
+		tpw, _ := strconv.Atoi(requestData.TotalPowerWatt)
+		tpc, _ := strconv.Atoi(requestData.TotalPowerCable)
+		tbtu, _ := strconv.ParseFloat(requestData.TotalBTU, 64)
+
+		updatedData := &models.DevicePowerDetail{
+			Id:              id,
+			SerialNumber:    requestData.SerialNumber,
+			DeviceMakeModel: requestData.DeviceMakeModel,
+			Model:           requestData.Model,
+			DeviceType:      requestData.DeviceType,
+			TotalPowerWatt:  tpw,
+			TotalBTU:        tbtu,
+			TotalPowerCable: tpc,
+			PowerSocketType: requestData.PowerSocketType,
+		}
+
+		if err := db.UpdateDevicePowerDetail(id, updatedData); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Device Power Detail"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DevicePowerDetail updated successfully"})
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device Power Detail updated successfully"})
 	}
 }
 

@@ -404,6 +404,84 @@
         </div>
     </div>
 
+
+    <!-- modal for update data -->
+    <!-- Update Device Power Detail Modal -->
+    <div class="modal fade" id="updatePowerModal" tabindex="-1" role="dialog" aria-labelledby="updatePowerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updatePowerModalLabel">Update Device Power Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updatePowerForm">
+                        <!-- Serial Number -->
+                        <div class="form-group">
+                            <label for="serialNumber">Serial Number:</label>
+                            <input type="text" class="form-control" id="updatePowerSerialNumber" name="serial_number">
+                        </div>
+
+                        <!-- Device Make and Model -->
+                        <div class="form-group">
+                            <label for="deviceMakeModel">Device Make and Model:</label>
+                            <input type="text" class="form-control" id="updatePowerDeviceMakeModel"
+                                name="device_make_model">
+                        </div>
+
+                        <!-- Model -->
+                        <div class="form-group">
+                            <label for="model">Model:</label>
+                            <input type="text" class="form-control" id="updatePowerModel" name="model">
+                        </div>
+
+                        <!-- Device Type -->
+                        <div class="form-group">
+                            <label for="deviceType">Device Type:</label>
+                            <input type="text" class="form-control" id="updatePowerDeviceType" name="device_type">
+                        </div>
+
+                        <!-- Total Power (Watt) -->
+                        <div class="form-group">
+                            <label for="totalPowerWatt">Total Power (Watt):</label>
+                            <input type="number" class="form-control" id="updatePowerTotalPowerWatt"
+                                name="total_power_watt">
+                        </div>
+
+                        <!-- Total BTU -->
+                        <div class="form-group">
+                            <label for="totalBTU">Total BTU:</label>
+                            <input type="number" class="form-control" id="updatePowerTotalBTU" name="total_btu">
+                        </div>
+
+                        <!-- Total Power Cable -->
+                        <div class="form-group">
+                            <label for="totalPowerCable">Total Power Cable:</label>
+                            <input type="number" class="form-control" id="updatePowerTotalPowerCable"
+                                name="total_power_cable">
+                        </div>
+
+                        <!-- Power Socket Type -->
+                        <div class="form-group">
+                            <label for="powerSocketType">Power Socket Type:</label>
+                            <input type="text" class="form-control" id="updatePowerSocketType" name="power_socket_type">
+                        </div>
+
+                        <input type="hidden" id="updatePowerId" name="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updatePowerSubmit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- data  display table-->
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -572,6 +650,54 @@
 
 
             $("#createEntryModal").modal("hide");
+        });
+
+    </script>
+
+
+    <!-- handle update data -->
+    <script>
+        $(document).ready(function () {
+            // Handle the click event on the "Update" button for Power Detail
+            $(".update-power-button").on("click", function () {
+                var recordId = $(this).data("id");
+                $("#updatePowerId").val(recordId);
+                $("#updatePowerModal").modal("show");
+            });
+
+            // Handle the form submission for Power Detail
+            $("#updatePowerSubmit").on("click", function () {
+                var formData = {};
+                formData.id = $("#updatePowerId").val();
+                formData.serial_number = $("#updatePowerSerialNumber").val();
+                formData.device_make_model = $("#updatePowerDeviceMakeModel").val();
+                formData.model = $("#updatePowerModel").val();
+                formData.device_type = $("#updatePowerDeviceType").val();
+                formData.total_power_watt = $("#updatePowerTotalPowerWatt").val();
+                formData.total_btu = $("#updatePowerTotalBTU").val();
+                formData.total_power_cable = $("#updatePowerTotalPowerCable").val();
+                formData.power_socket_type = $("#updatePowerSocketType").val();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/v1/power-details/" + formData.id,
+                    contentType: "application/json", // Set the correct content type
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Device Power Detail updated successfully");
+                            $("#updatePowerModal").modal("hide");
+                            location.reload(); // Reload the page after a successful update
+                        } else {
+                            alert("Failed to update Device Power Detail");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors here
+                        alert("An error occurred while updating: " + error);
+                    },
+                });
+            });
         });
 
     </script>
