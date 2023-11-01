@@ -106,7 +106,7 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		// Define the layout that matches the date format
-		layout := "2006-01-02 15:04:05"
+		layout := "2006-01-02"
 
 		// Parse the date string into a time.Time value
 		pD, err := time.Parse(layout, requestData.POOrderDate)
