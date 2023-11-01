@@ -6,25 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+
     <style>
-        /* login and signup page */
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
-
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Josefin Sans', sans-serif;
         }
 
         body {
-            background: linear-gradient(to right, #cf3d6e, #6c757d);
+            background: linear-gradient(to left, #1b69c2, #4e1f3e);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+            padding: 0px;
+            font-family: 'Ubuntu', sans-serif;
+            font-style: normal;
+            font-size: medium;
+
         }
 
 
@@ -273,6 +276,7 @@
 </head>
 
 <body>
+    <!-- login and singnup form -->
     <div class="container">
         <input type="checkbox" id="flip">
         <div class="cover">
@@ -310,7 +314,6 @@
                     </form>
                 </div>
 
-                <!-- ... (Your existing HTML code) ... -->
                 <div class="signup-form">
                     <div class="title">Signup</div>
                     <form id="register-form" action="#"> <!-- Change the form action to the signup route -->
@@ -351,6 +354,8 @@
             </div>
         </div>
     </div>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

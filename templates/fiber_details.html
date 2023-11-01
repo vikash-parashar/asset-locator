@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Raleway&display=swap" rel="stylesheet">
-   
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+
     <!-- filter navbar buttons related css only -->
-   <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            font-style: normal;
+            font-size: medium;
+        }
 
         /* Custom styling for the navbar */
         .navbar-custom {
@@ -27,8 +31,6 @@
 
         .navbar-custom .nav-link {
             color: #0ee2e9;
-            font-family: 'Kalam', cursive;
-            font-family: 'Raleway', sans-serif;
             /* Text color for the navigation links */
         }
 
@@ -101,7 +103,6 @@
 
         h1 {
             margin-top: 200px;
-            font-family: 'Kalam', cursive;
 
         }
 
@@ -206,6 +207,7 @@
 </head>
 
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
@@ -256,20 +258,16 @@
         </div>
     </nav>
 
-
-
-
-
-
+    <!-- page heading main -->
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center">
-                <h3 style="color: #aebec9;">Device Ethernet Fiber Details</h3>
+                <h3 style="color: #e48537;">Device Ethernet Fiber Details</h3>
             </div>
         </div>
     </div>
 
-
+    <!-- data filter -->
     <div class="container">
         <h3 class="mt-4">Filter Data</h3>
         <form>
@@ -294,31 +292,26 @@
         </form>
     </div>
 
-
-
-
+    <!-- data add/download buttons -->
     <div class="container mt-2 mb-2">
         <div class="row align-items-start">
-            <div class="col-10">
+            <div class="col col-10">
                 <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal" data-target="#createEntryModal">
-                    New
+                    Add New Entry
                 </button>
             </div>
-            <div class="col-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
-                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="col">
+                <button id="downloadPDFButton" class="btn btn-sm pdf">Pdf</button>
+
+            </div>
+            <div class="col">
+                <button id="downloadXLSXButton" class="btn btn-sm xls">Excel</button>
             </div>
         </div>
     </div>
 
-
-    <!-- Modal -->
+    <!-- Modal for add new data -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -370,66 +363,8 @@
             </div>
         </div>
     </div>
-    <!-- Modal for Updating Data -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for updating data -->
-                    <form id="updateForm">
-                        <input type="hidden" id="updateId" name="id">
-                        <div class="form-group">
-                            <label for="updateSerialNumber">Serial Number:</label>
-                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDeviceMakeModel">Device Make/Model:</label>
-                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateModel">Model:</label>
-                            <input type="text" class="form-control" id="updateModel" name="model">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDeviceType">Device Type:</label>
-                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDevicePhysicalPort">Physical Port:</label>
-                            <input type="text" class="form-control" id="updateDevicePhysicalPort"
-                                name="device_physical_port">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDevicePortType">Port Type:</label>
-                            <input type="text" class="form-control" id="updateDevicePortType" name="device_port_type">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDevicePortMACWWN">MAC/WWN Port:</label>
-                            <input type="text" class="form-control" id="updateDevicePortMACWWN"
-                                name="device_port_macwwn">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateConnectedDevicePort">Connected Port:</label>
-                            <input type="text" class="form-control" id="updateConnectedDevicePort"
-                                name="connected_device_port">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    <!-- data table to display -->
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -473,29 +408,22 @@
         </div>
     </div>
 
-
-
     <!-- Footer -->
-    <footer class="footer bg-dark text-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    &copy; 2023 Your Company. All rights reserved.
-                </div>
-            </div>
+    <footer class="footer">
+        <div class="text-center">
+            &copy; 2023 Your Company. All rights reserved.
         </div>
     </footer>
 
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <!-- <script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
 
     <!-- handle Delete Record -->
     <script>
@@ -577,7 +505,6 @@
         <!-- handle add and fetch data -->
     </script>
 
-
     <!-- handle add new data -->
     <script>
         document.getElementById("entryForm").addEventListener("submit", function (e) {
@@ -609,7 +536,6 @@
             $("#createEntryModal").modal("hide");
         });
     </script>
-
 
     <!-- handle filter data table -->
     <script>
@@ -708,122 +634,6 @@
         });
 
     </script>
-
-    <!-- handle update data -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const updateButtons = document.querySelectorAll(".update-button");
-            updateButtons.forEach(button => {
-                button.addEventListener("click", function () {
-                    const id = this.getAttribute("data-id");
-                    openUpdateModal(id);
-                });
-            });
-
-            // Function to open the update modal and pre-fill with existing data
-            function openUpdateModal(id) {
-                // Replace the following line with actual data retrieval from your backend API
-                fetch(`http://localhost:8080/api/v1/fiber-details/${id}`)
-                    .then(response => response.json())
-                    .then(existingData => {
-                        // Pre-fill the modal form with existing data
-                        document.getElementById("updateId").value = existingData.id || "";
-                        document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
-                        document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
-                        document.getElementById("updateModel").value = existingData.model || "";
-                        document.getElementById("updateDeviceType").value = existingData.device_type || "";
-                        document.getElementById("updateDataCenter").value = existingData.data_center || "";
-                        document.getElementById("updateRegion").value = existingData.region || "";
-                        document.getElementById("updateDCLocation").value = existingData.dc_location || "";
-                        document.getElementById("updateDeviceLocation").value = existingData.device_location || "";
-                        document.getElementById("updateDeviceRowNumber").value = existingData.device_row_number || "";
-                        document.getElementById("updateDeviceRackNumber").value = existingData.device_rack_number || "";
-                        document.getElementById("updateDeviceRUNumber").value = existingData.device_ru_number || "";
-
-                        // Show the modal
-                        const updateModal = new bootstrap.Modal(document.getElementById("updateModal"));
-                        updateModal.show();
-
-                        // Add a click event listener to the "Update" button in the modal
-                        document.getElementById("updateSubmit").addEventListener("click", function () {
-                            const newData = {
-                                id: document.getElementById("updateId").value,
-                                serial_number: document.getElementById("updateSerialNumber").value,
-                                device_make_model: document.getElementById("updateDeviceMakeModel").value,
-                                model: document.getElementById("updateModel").value,
-                                device_type: document.getElementById("updateDeviceType").value,
-                                data_center: document.getElementById("updateDataCenter").value,
-                                region: document.getElementById("updateRegion").value,
-                                dc_location: document.getElementById("updateDCLocation").value,
-                                device_location: document.getElementById("updateDeviceLocation").value,
-                                device_row_number: document.getElementById("updateDeviceRowNumber").value,
-                                device_rack_number: document.getElementById("updateDeviceRackNumber").value,
-                                device_ru_number: document.getElementById("updateDeviceRUNumber").value,
-                            };
-
-                            // Print the updated data to the console
-                            console.log("Updated Data:", newData);
-
-                            // Send a request to update the data with the backend API
-                            fetch(`http://localhost:8080/api/v1/fiber-details/${newData.id}`, {
-                                method: 'PUT',
-                                body: JSON.stringify(newData),
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                                .then(response => {
-                                    if (response.status === 200) {
-                                        Swal.fire({
-                                            title: 'Success',
-                                            text: 'Record Updated Successfully',
-                                            icon: 'success',
-                                            customClass: {
-                                                confirmButton: 'btn btn-success',
-                                                cancelButton: 'btn btn-danger',
-                                            },
-                                            buttonsStyling: false,
-                                        }).then(() => {
-                                            location.reload(); // Reload the page
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            title: 'Error',
-                                            text: 'Record not updated. Please try again.',
-                                            icon: 'error',
-                                            customClass: {
-                                                confirmButton: 'btn btn-success',
-                                                cancelButton: 'btn btn-danger',
-                                            },
-                                            buttonsStyling: false,
-                                        });
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    Swal.fire({
-                                        title: 'Error',
-                                        text: 'An error occurred. Please try again.',
-                                        icon: 'error',
-                                        customClass: {
-                                            confirmButton: 'btn btn-success',
-                                            cancelButton: 'btn btn-danger',
-                                        },
-                                        buttonsStyling: false,
-                                    });
-                                });
-
-
-
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            }
-        });
-    </script>
-
 
     <!-- get current user details -->
     <script>

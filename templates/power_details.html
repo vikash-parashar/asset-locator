@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Raleway&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     <!-- filter navbar buttons related css only -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            font-style: normal;
+            font-size: medium;
+        }
 
         /* Custom styling for the navbar */
         .navbar-custom {
@@ -27,8 +30,6 @@
 
         .navbar-custom .nav-link {
             color: #0ee2e9;
-            font-family: 'Kalam', cursive;
-            font-family: 'Raleway', sans-serif;
             /* Text color for the navigation links */
         }
 
@@ -101,7 +102,6 @@
 
         h1 {
             margin-top: 200px;
-            font-family: 'Kalam', cursive;
 
         }
 
@@ -205,6 +205,7 @@
 </head>
 
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
@@ -255,19 +256,16 @@
         </div>
     </nav>
 
-
-
-
-
+    <!-- page heading -->
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col mt-5">
-                <h3 style="color: #aebec9;">Device Power Details</h3>
+                <h3 style="color: #e48537;">Device Power Details</h3>
             </div>
         </div>
     </div>
 
-
+    <!-- filter data -->
     <div class="container">
         <h3 class="mt-4">Filter Data</h3>
         <form>
@@ -287,33 +285,30 @@
             </div>
             <div class="text-center mt-3">
                 <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
-
             </div>
         </form>
     </div>
 
+    <!-- data add/download buttons -->
     <div class="container mt-2 mb-2">
         <div class="row align-items-start">
-            <div class="col-10">
+            <div class="col col-10">
                 <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal" data-target="#createEntryModal">
-                    New
+                    Add New Entry
                 </button>
             </div>
-            <div class="col-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <a id="downloadPDFButton" class="btn btn-sm pdf">Download PDF</a>
-                            <a id="downloadXLSXButton" class="btn btn-sm xls">Download XLSX</a>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="col">
+                <button id="downloadPDFButton" class="btn btn-sm pdf">Pdf</button>
+
+            </div>
+            <div class="col">
+                <button id="downloadXLSXButton" class="btn btn-sm xls">Excel</button>
             </div>
         </div>
     </div>
 
-
-    <!-- Modal -->
+    <!-- Modal for add data-->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -401,64 +396,7 @@
         </div>
     </div>
 
-    <!-- Modal for Updating Data -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for updating data -->
-                    <form id="updateForm">
-                        <input type="hidden" id="updateId" name="id">
-                        <div class="form-group">
-                            <label for="updateSerialNumber">Serial Number:</label>
-                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDeviceMakeModel">Device Make/Model:</label>
-                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateModel">Model:</label>
-                            <input type text="text" class="form-control" id="updateModel" name="model">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateDeviceType">Device Type:</label>
-                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateTotalPowerWatt">Total Power Watt:</label>
-                            <input type="text" class="form-control" id="updateTotalPowerWatt" name="total_power_watt">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateTotalBTU">Total BTU:</label>
-                            <input type="text" class="form-control" id="updateTotalBTU" name="total_btu">
-                        </div>
-                        <div class="form-group">
-                            <label for="updateTotalPowerCable">Total Power Cable:</label>
-                            <input type="text" class="form-control" id="updateTotalPowerCable" name="total_power_cable">
-                        </div>
-                        <div class="form-group">
-                            <label for="updatePowerSocketType">Power Socket Type:</label>
-                            <input type="text" class="form-control" id="updatePowerSocketType" name="power_socket_type">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateSubmit">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    <!-- data  display table-->
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -503,15 +441,10 @@
         </div>
     </div>
 
-
     <!-- Footer -->
-    <footer class="footer bg-dark text-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    &copy; 2023 Your Company. All rights reserved.
-                </div>
-            </div>
+    <footer class="footer">
+        <div class="text-center">
+            &copy; 2023 Your Company. All rights reserved.
         </div>
     </footer>
 
@@ -587,148 +520,6 @@
         });
     </script>
 
-
-    <!-- handle update data -->
-    <script>
-        const updateButtons = document.querySelectorAll(".update-button");
-
-        function showUpdateConfirmation(id) {
-            swalWithBootstrapButtons.fire({
-                title: 'Update Record',
-                text: 'Are you sure you want to update this record?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, update it',
-                cancelButtonText: 'No, cancel',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Call the updateRecord function after confirmation
-                    updateRecord(id);
-                } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your record is not updated',
-                        'error'
-                    );
-                }
-            });
-        }
-
-        updateButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
-                showUpdateConfirmation(id);
-            });
-        });
-
-        // Function to fetch existing data, pre-fill the modal, and send a PUT request
-        function updateRecord(id) {
-            // Send a request to fetch the existing data based on the ID
-            fetch(`http://localhost:8080/api/v1/power-details/${id}`)
-                .then(response => response.json())
-                .then(existingData => {
-                    // Pre-fill the modal form with existing data
-                    document.getElementById("updateId").value = existingData.id || "";
-                    document.getElementById("updateSerialNumber").value = existingData.serial_number || "";
-                    document.getElementById("updateDeviceMakeModel").value = existingData.device_make_model || "";
-                    document.getElementById("updateModel").value = existingData.model || "";
-                    document.getElementById("updateDeviceType").value = existingData.device_type || "";
-                    document.getElementById("updateTotalPowerWatt").value = existingData.total_power_watt || "";
-                    document.getElementById("updateTotalBTU").value = existingData.total_btu || "";
-                    document.getElementById("updateTotalPowerCable").value = existingData.total_power_cable || "";
-                    document.getElementById("updatePowerSocketType").value = existingData.power_socket_type || "";
-
-                    // Show the modal
-                    const updateModal = new bootstrap.Modal(document.getElementById("updateModal"));
-                    updateModal.show();
-
-                    // Add a click event listener to the "Update" button in the modal
-                    document.getElementById("updateSubmit").addEventListener("click", function () {
-                        const newData = {
-                            id: document.getElementById("updateId").value,
-                            serial_number: document.getElementById("updateSerialNumber").value,
-                            device_make_model: document.getElementById("updateDeviceMakeModel").value,
-                            model: document.getElementById("updateModel").value,
-                            device_type: document.getElementById("updateDeviceType").value,
-                            total_power_watt: document.getElementById("updateTotalPowerWatt").value,
-                            total_btu: document.getElementById("updateTotalBTU").value,
-                            total_power_cable: document.getElementById("updateTotalPowerCable").value,
-                            power_socket_type: document.getElementById("updatePowerSocketType").value,
-                        };
-
-                        // Print the updated data to the console
-                        console.log("Updated Data:", newData);
-
-                        // Send a request to update the data with the backend API
-                        fetch(`http://localhost:8080/api/v1/power-details/${newData.id}`, {
-                            method: 'PUT',
-                            body: JSON.stringify(newData),
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                            .then(response => {
-                                if (response.status === 200) {
-                                    Swal.fire({
-                                        title: 'Success',
-                                        text: 'Record Updated Successfully',
-                                        icon: 'success',
-                                        customClass: {
-                                            confirmButton: 'btn btn-success',
-                                            cancelButton: 'btn btn-danger',
-                                        },
-                                        buttonsStyling: false,
-                                    }).then(() => {
-                                        location.reload(); // Reload the page
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        title: 'Error',
-                                        text: 'Record not updated. Please try again.',
-                                        icon: 'error',
-                                        customClass: {
-                                            confirmButton: 'btn btn-success',
-                                            cancelButton: 'btn btn-danger',
-                                        },
-                                        buttonsStyling: false,
-                                    });
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                Swal.fire({
-                                    title: 'Error',
-                                    text: 'An error occurred. Please try again.',
-                                    icon: 'error',
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger',
-                                    },
-                                    buttonsStyling: false,
-                                });
-                            });
-
-                        // Close the modal
-                        updateModal.hide();
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'An error occurred while fetching data. Please try again.',
-                        icon: 'error',
-                        customClass: {
-                            confirmButton: 'btn btn-success',
-                            cancelButton: 'btn btn-danger',
-                        },
-                        buttonsStyling: false,
-                    });
-                });
-        }
-    </script>
-
     <!-- handle fetch data -->
     <script>
         const tableRows = document.querySelectorAll(".row-transition");
@@ -776,7 +567,6 @@
         });
 
     </script>
-
 
     <!-- handle download data -->
     <script>
@@ -845,7 +635,6 @@
         });
     </script>
 
-
     <!-- handle filter data table -->
     <script>
         function filterTable() {
@@ -876,7 +665,6 @@
             filterTable(); // Apply the filter
         });
     </script>
-
 
     <!-- get current user details -->
     <script>
