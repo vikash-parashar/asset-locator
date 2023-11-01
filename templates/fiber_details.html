@@ -506,43 +506,38 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://unpkg.com/notie"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- sweet alerts -->
+    <script>
+        function showToast(icon, title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+        // showToast('success', 'Signed in successfully');
+    </script>
+
+
 
     <!-- handle Delete Record -->
     <script>
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger',
-            },
-            buttonsStyling: false
 
-        })
         // Add event listeners to the buttons
         const deleteButtons = document.querySelectorAll(".delete-button");
-        function showDeleteConfirmation(id) {
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Call the deleteRecord function after confirmation
-                    deleteRecord(id);
-                } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your data is safe :)',
-                        'error'
-                    );
-                }
-            });
-        }
         // Function to send a DELETE request
         function deleteRecord(id) {
             fetch(`http://localhost:8080/api/v1/fiber-details/${id}`, {
@@ -550,24 +545,24 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        return response.json(); // Parse the response JSON
+                        showToast('success', 'Entry deleted Successfully.');
                     } else {
-                        throw new Error("Record not deleted. Please try again.");
+                        showToast('error', 'Try Again !');
                     }
                 })
                 .then(data => {
-                    notify(1, data.message); // Show success alert
+                    showToast("success", data.message) // Show success alert
                     location.reload(); // Reload the page
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    notify(3, error.message); // Show error alert
+                    showToast("error", error.message); // Show error alert
                 });
         }
         deleteButtons.forEach(button => {
             button.addEventListener("click", function () {
                 const id = this.getAttribute("data-id");
-                showDeleteConfirmation(id);
+                deleteRecord(id);
 
             });
         });
@@ -607,10 +602,10 @@
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         console.log(xhr.responseText);
-                        notify(1, data.message)
+                        showToast("success", data.message)
                         location.reload();
                     } else {
-                        notify(3, response.message)
+                        showToast("error", response.message)
                     }
                 }
             };
@@ -653,16 +648,16 @@
                     data: JSON.stringify(formData),
                     success: function (response) {
                         if (response.success) {
-                            alert("DeviceEthernetFiberDetail updated successfully");
+                            showToast("success", "DeviceEthernetFiberDetail updated successfully");
                             $("#updateModal").modal("hide");
                             location.reload(); // Reload the page after a successful update
                         } else {
-                            alert("Failed to update DeviceEthernetFiberDetail");
+                            showToast("error", "Failed to update DeviceEthernetFiberDetail");
                         }
                     },
                     error: function (xhr, status, error) {
                         // Handle errors here
-                        alert("An error occurred while updating: " + error);
+                        showToast("error", "An error occurred while updating: " + error);
                     },
                 });
             });
@@ -771,13 +766,6 @@
 
     <!-- get current user details -->
     <script>
-        function notify(type, msg) {
-            notie.alert({
-                type: type,
-                text: msg,
-                position: 'top'
-            })
-        }
         function capitalize(str) {
             return str.slice(0).toUpperCase();
         }
@@ -831,15 +819,15 @@
                 })
                 .then(data => {
                     if (data.success) {
-                        notify(1, data.message);
+                        showToast("success", "Logout Successfully.");
                         window.location.href = "/"; // Redirect to the root path
                     } else {
-                        notify(2, data.message);
+                        showToast("warning", data.message);
                     }
                 })
                 .catch(error => {
                     console.error("An error occurred while logging out:", error);
-                    notify(3, "An error occurred while logging out.");
+                    showToast("error", "Failed to logout !");
                 });
         }
 

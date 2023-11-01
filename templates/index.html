@@ -363,18 +363,35 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/notie"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+    <!-- sweet alerts -->
+    <script>
+        function showToast(icon, title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+        // showToast('success', 'Signed in successfully');
+    </script>
 
     <!-- handle login and signup -->
     <script>
-        function notify(type, msg) {
-            notie.alert({
-                type: type,
-                text: msg,
-                position: 'top'
-            })
-        }
+
 
         document.addEventListener("DOMContentLoaded", function () {
             const registerForm = document.getElementById("register-form");
@@ -407,9 +424,11 @@
                     if (!response.ok) {
                         const data = await response.json();
                         console.error("Signup error:", data);
-                        notify("warning", data.message || "Something went wrong. Please try again.");
+                        // Example usage:
+                        showToast('error', 'Something Went wrong ! .');
                     } else {
-                        notify("success", "Registration successful. You can now log in.");
+                        // Example usage:
+                        showToast('success', 'Registration Success.');
                         setTimeout(() => {
                             window.location.href = "http://localhost:8080";
                         }, 2000);
@@ -417,7 +436,7 @@
 
                 } catch (error) {
                     console.error("Signup error:", error);
-                    notify("error", "An error occurred. Please try again later.");
+                    showToast('error', 'Try Again.');
                 }
             });
 
@@ -439,16 +458,16 @@
                     if (!response.ok) {
                         const data = await response.json();
                         console.error("Login error:", data);
-                        notify("warning", data.message || "Login failed. Please check your credentials.");
+                        showToast('error', 'login failed !');
                     } else {
-                        notify("success", "Login successful. Redirecting...");
+                        showToast('success', 'Yor Are Now Logged In.');
                         setTimeout(() => {
                             window.location.href = "http://localhost:8080/api/v1/homepage";
                         }, 2000);
                     }
                 } catch (error) {
                     console.error("Login error:", error);
-                    notify("error", "An error occurred. Please try again later.");
+                    showToast('error', 'Try Again.');
                 }
             });
         });
