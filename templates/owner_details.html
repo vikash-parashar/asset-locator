@@ -15,6 +15,7 @@
             font-family: 'Ubuntu', sans-serif;
             font-style: normal;
             font-size: medium;
+            background-color: #B2C8BA;
         }
 
         /* Custom styling for the navbar */
@@ -110,12 +111,13 @@
             width: 30px;
         }
 
-
+        footer {
+            margin-top: 200px;
+        }
 
         /* Custom styling for the filter section   */
-
         .container {
-            background-color: #f8f9fa;
+            background-color: #CDF5FD;
             /* Background color */
             border-radius: 5px;
             /* Rounded corners */
@@ -200,6 +202,11 @@
             color: #fff;
             /* Text color (white) */
             /* You can add more styling as needed, such as padding, border, and hover effects. */
+        }
+
+        th {
+            background-color: #CE5A67;
+            color: #CDF5FD;
         }
     </style>
 
@@ -423,7 +430,7 @@
                     <tbody id="deviceDetails">
                         {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size: small;">{{add1 $index}}</td>
+                            <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
                             <td style="font-size: small;">{{$record.SerialNumber}}</td>
                             <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
                             <td style="font-size: small;">{{$record.Model}}</td>
