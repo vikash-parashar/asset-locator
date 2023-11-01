@@ -580,9 +580,10 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <!-- Ensure jQuery and Bootstrap are included -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
@@ -707,7 +708,7 @@
     <script>
         $(document).ready(function () {
             // Handle the click event on the "Update" button for Location
-            $(".update-location-button").on("click", function () {
+            $(".update-button").on("click", function () {
                 var recordId = $(this).data("id");
                 $("#updateLocationId").val(recordId);
                 $("#updateLocationModal").modal("show");
