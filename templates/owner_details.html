@@ -714,7 +714,7 @@
 
                 $.ajax({
                     type: "PUT",
-                    url: "/api/v1/amc-owner-details/" + formData.id,
+                    url: "/api/v1/owner-details/" + formData.id,
                     contentType: "application/json", // Set the correct content type
                     data: JSON.stringify(formData),
                     success: function (response) {
