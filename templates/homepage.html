@@ -12,8 +12,20 @@
 
     <!-- filter navbar buttons related css only -->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Kalam:wght@700&family=Ubuntu&display=swap');
+
         body {
             font-family: 'Ubuntu', sans-serif;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            width: 50px;
+            clip-path: circle(45%);
+            border-radius: 50%;
+        }
+
+        body {
             font-style: normal;
             font-size: medium;
             background-color: #B2C8BA;
@@ -84,13 +96,6 @@
             /* Background color for the Logout button on hover */
         }
 
-        img {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-
-
-        }
 
         /* Custom styling for the toggle button */
         .navbar-toggler-icon {
@@ -137,7 +142,7 @@
 <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
             <img src="/static/images/logo3.png" alt="Logo">
         </a>
@@ -195,7 +200,22 @@
     </div>
 
     <!-- main content ends here -->
-
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img style="height: 400px; width: 400px;" src="/static/images/back1.jpg" class="d-block w-100" alt="/static/images/back1.jpg">
+          </div>
+          <div class="carousel-item">
+            <img style="height: 400px; width: 400px;" src="/static/images/back2.jpg" class="d-block w-100" alt="/static/images/back1.jpg">
+          </div>
+          <div class="carousel-item">
+            <img style="height: 400px; width: 400px;" src="/static/images/back1.jpg" class="d-block w-100" alt="/static/images/back1.jpg">
+          </div>.
+          <div class="carousel-item">
+            <img style="height: 400px; width: 400px;" src="/static/images/back2.jpg" class="d-block w-100" alt="/static/images/back1.jpg">
+          </div>
+        </div>
+      </div>
     <!-- Footer -->
     <footer class="bg-info text-center text-white">
         <div class="row">

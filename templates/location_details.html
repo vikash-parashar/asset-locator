@@ -6,20 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
-    <!-- filter navbar buttons related css only -->
-
     <style>
-        /* Navbar styles */
-        .navbar {
-            background-color: #3498db;
+        @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Kalam:wght@700&family=Ubuntu&display=swap');
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
         }
 
         .navbar-brand img {
-            max-width: 120px;
+            height: 50px;
+            width: 50px;
+            clip-path: circle(45%);
             border-radius: 50%;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #3498db;
         }
 
         .navbar-toggler-icon {
@@ -86,22 +89,6 @@
             font-weight: bold;
         }
 
-        /* Buttons styles */
-        .btn-primary {
-            background-color: #3498db;
-            border-color: #3498db;
-        }
-
-        .btn-success .update-button {
-            background-color: #27ae60;
-            border-color: #27ae60;
-        }
-
-        .btn-danger .delete-button {
-            background-color: #e74c3c;
-            border-color: #e74c3c;
-        }
-
         /* Modal styles */
         .modal-content {
             border-radius: 10px;
@@ -115,15 +102,35 @@
         }
 
         .custom-table td {
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         /* Footer styles */
         .footer {
             background-color: #333;
-            color: #fff;
+            color: #ffff;
             padding: 20px 0;
         }
+
+        .delete-button {
+            background-color: #db4b5c;
+            color: rgb(255, 255, 255);
+            border-radius: 5%;
+            border-style: hidden;
+            margin: 5px;
+        }
+
+        .update-button {
+            background-color: #42c89b;
+            color: #ffff;
+            border-radius: 5%;
+            border-style: hidden;
+            margin-top: 0;
+            margin: 5px;
+        }
+
+
+        /* Additional styles can be added and customized according to your preferences. */
     </style>
 
 </head>
@@ -131,7 +138,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container">
             <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
                 <img src="/static/images/logo3.png" alt="Logo">
@@ -183,7 +190,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="serialNumberFilter">Device Serial Number</label>
+                    <label for="serialNumberFilter">Serial Number</label>
                     <input type="text" class="form-control" id="serialNumberFilter">
                 </div>
             </div>
@@ -201,19 +208,18 @@
             </div>
         </div>
         <div class="text-center mt-3">
-            <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
+            <button type="submit" id="applyFilterButton" class="btn btn-sm btn-warning">Apply Filter</button>
         </div>
     </div>
 
     <!-- Data Add/Download Buttons -->
     <div class="container mt-3 text-center">
-        <button id="newEntryButton" class="btn btn-primary" data-toggle="modal" data-target="#createEntryModal">Add New
+        <button id="newEntryButton" class="btn btn-sm btn-info" data-toggle="modal" data-target="#createEntryModal">Add
+            New
             Entry</button>
-        <button id="downloadPDFButton" class="btn btn-success">Download PDF</button>
-        <button id="downloadXLSXButton" class="btn btn-success">Download Excel</button>
+        <button id="downloadPDFButton" class="btn btn-sm btn-danger">Download PDF</button>
+        <button id="downloadXLSXButton" class="btn btn-sm btn-primary">Download Excel</button>
     </div>
-
-
 
     <!-- Modal for add data -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -408,54 +414,49 @@
         </div>
     </div>
 
-
-    <!-- Data table to display -->
-    <div class="container data-table">
-        <div class="row">
-            <div class="col">
-                <table class="table table-hover custom-table">
-                    <thead>
-                        <tr class="table-row">
-                            <th>S No.</th>
-                            <th>Serial Number</th>
-                            <th>Make</th>
-                            <th>Model</th>
-                            <th>Type</th>
-                            <th>Data Center</th>
-                            <th>Region</th>
-                            <th>DC Location</th>
-                            <th>Location</th>
-                            <th>Row Number</th>
-                            <th>Rack Number</th>
-                            <th>RU Number</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="deviceDetails">
-                        {{range $index, $record := .}}
-                        <tr class="table-row">
-                            <td>{{add1 $index}}</td>
-                            <td>{{$record.SerialNumber}}</td>
-                            <td>{{$record.DeviceMakeModel}}</td>
-                            <td>{{$record.Model}}</td>
-                            <td>{{$record.DeviceType}}</td>
-                            <td>{{$record.DataCenter}}</td>
-                            <td>{{$record.Region}}</td>
-                            <td>{{$record.DCLocation}}</td>
-                            <td>{{$record.DeviceLocation}}</td>
-                            <td>{{$record.DeviceRowNumber}}</td>
-                            <td>{{$record.DeviceRackNumber}}</td>
-                            <td>{{$record.DeviceRUNumber}}</td>
-                            <td>
-                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
-                            </td>
-                        </tr>
-                        {{end}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <!-- Data Table to Display -->
+    <div class="container mt-3">
+        <table class="table table-hover custom-table">
+            <thead>
+                <tr class="table-row">
+                    <th>S No.</th>
+                    <th>Serial Number</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Data Center</th>
+                    <th>Region</th>
+                    <th>DC Location</th>
+                    <th>Location</th>
+                    <th>Row Number</th>
+                    <th>Rack Number</th>
+                    <th>RU Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="deviceDetails">
+                {{range $index, $record := .}}
+                <tr class="table-row">
+                    <td>{{add1 $index}}</td>
+                    <td>{{$record.SerialNumber}}</td>
+                    <td>{{$record.DeviceMakeModel}}</td>
+                    <td>{{$record.Model}}</td>
+                    <td>{{$record.DeviceType}}</td>
+                    <td>{{$record.DataCenter}}</td>
+                    <td>{{$record.Region}}</td>
+                    <td>{{$record.DCLocation}}</td>
+                    <td>{{$record.DeviceLocation}}</td>
+                    <td>{{$record.DeviceRowNumber}}</td>
+                    <td>{{$record.DeviceRackNumber}}</td>
+                    <td>{{$record.DeviceRUNumber}}</td>
+                    <td>
+                        <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                        <button class="update-button" data-id="{{$record.Id}}">Update</button>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
     </div>
 
     <!-- Footer -->

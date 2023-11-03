@@ -6,25 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
 
     <style>
-        /* Add this to a separate CSS file (styles.css) */
+        @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Kalam:wght@700&family=Ubuntu&display=swap');
 
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
 
-
-        /* Add this to the existing CSS file or create a new one */
+        .navbar-brand img {
+            height: 50px;
+            width: 50px;
+            clip-path: circle(45%);
+            border-radius: 50%;
+        }
 
         /* Navbar styles */
         .navbar {
             background-color: #3498db;
-        }
-
-        .navbar-brand img {
-            max-width: 120px;
-            border-radius: 50%;
         }
 
         .navbar-toggler-icon {
@@ -72,13 +71,6 @@
             border-color: #e74c3c;
         }
 
-        /* Additional styles for the user profile and logo can be added and customized as needed. */
-
-
-
-
-
-
         /* Page Heading styles */
         .page-heading {
             font-size: 2rem;
@@ -98,22 +90,6 @@
             font-weight: bold;
         }
 
-        /* Buttons styles */
-        .btn-primary {
-            background-color: #3498db;
-            border-color: #3498db;
-        }
-
-        .btn-success .update-button {
-            background-color: #27ae60;
-            border-color: #27ae60;
-        }
-
-        .btn-danger .delete-button {
-            background-color: #e74c3c;
-            border-color: #e74c3c;
-        }
-
         /* Modal styles */
         .modal-content {
             border-radius: 10px;
@@ -127,15 +103,32 @@
         }
 
         .custom-table td {
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         /* Footer styles */
         .footer {
             background-color: #333;
-            color: #fff;
+            color: #ffff;
             padding: 20px 0;
         }
+
+       .delete-button{
+        background-color: #db4b5c;
+        color: rgb(255, 255, 255);
+        border-radius: 5%;
+        border-style: hidden;
+        margin: 5px;
+       }
+       .update-button{
+        background-color:#42c89b;
+        color: #ffff;
+        border-radius: 5%;
+        border-style: hidden;
+        margin-top: 0;
+        margin: 5px;
+       }
+                    
 
         /* Additional styles can be added and customized according to your preferences. */
     </style>
@@ -144,7 +137,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container">
             <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
                 <img src="/static/images/logo3.png" alt="Logo">
@@ -195,7 +188,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="serialNumberFilter">Device Serial Number</label>
+                    <label for="serialNumberFilter">Serial Number</label>
                     <input type="text" class="form-control" id="serialNumberFilter">
                 </div>
             </div>
@@ -213,16 +206,17 @@
             </div>
         </div>
         <div class="text-center mt-3">
-            <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
+            <button type="submit" id="applyFilterButton" class="btn btn-sm btn-warning">Apply Filter</button>
         </div>
     </div>
 
     <!-- Data Add/Download Buttons -->
     <div class="container mt-3 text-center">
-        <button id="newEntryButton" class="btn btn-primary" data-toggle="modal" data-target="#createEntryModal">Add New
+        <button id="newEntryButton" class="btn btn-sm btn-info" data-toggle="modal" data-target="#createEntryModal">Add
+            New
             Entry</button>
-        <button id="downloadPDFButton" class="btn btn-success">Download PDF</button>
-        <button id="downloadXLSXButton" class="btn btn-success">Download Excel</button>
+        <button id="downloadPDFButton" class="btn btn-sm btn-danger">Download PDF</button>
+        <button id="downloadXLSXButton" class="btn btn-sm btn-primary">Download Excel</button>
     </div>
 
 
@@ -375,7 +369,7 @@
             <tbody id="deviceDetails">
                 {{range $index, $record := .data}}
                 <tr class="row-transition">
-                    <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
+                    <td style="font-size: medium;">{{add1 $index}}</td>
                     <td style="font-size: small;">{{$record.SerialNumber}}</td>
                     <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
                     <td style="font-size: small;">{{$record.Model}}</td>
@@ -392,7 +386,6 @@
                 {{end}}
             </tbody>
         </table>
-
     </div>
 
     <!-- Footer -->
