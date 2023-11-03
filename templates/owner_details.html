@@ -468,9 +468,26 @@
 
     <!-- handle delete data -->
     <script>
-
         // Add event listeners to the buttons
         const deleteButtons = document.querySelectorAll(".delete-button");
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteRecord(id);
+                    }
+                });
+            });
+        });
 
         // Function to send a DELETE request
         function deleteRecord(id) {
@@ -479,10 +496,9 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        showToast("success", "Delete Success.")
-                        return response.json(); // Parse the response JSON
+                        showToast('success', 'Entry deleted Successfully.');
                     } else {
-                        showToast("error", "Try Again");
+                        showToast('error', 'Try Again!');
                     }
                 })
                 .then(data => {
@@ -494,13 +510,12 @@
                     showToast("error", error.message); // Show error alert
                 });
         }
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
-                deleteRecord(id);
 
-            });
-        });
+        // Helper function to display a toast message
+        function showToast(type, message) {
+            // Implement your toast message display logic here
+            console.log(type, message);
+        }
     </script>
 
     <!-- handle fetch data -->

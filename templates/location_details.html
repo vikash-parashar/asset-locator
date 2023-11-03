@@ -499,39 +499,27 @@
 
     <!-- handle Delete Record -->
     <script>
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger',
-            },
-            buttonsStyling: false
-
-        })
         // Add event listeners to the buttons
         const deleteButtons = document.querySelectorAll(".delete-button");
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
 
-        function showDeleteConfirmation(id) {
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Call the deleteRecord function after confirmation
-                    deleteRecord(id);
-                } else if (result.dismiss === swalWithBootstrapButtons.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your data is safe :)',
-                        'error'
-                    );
-                }
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteRecord(id);
+                    }
+                });
             });
-        }
+        });
+
         // Function to send a DELETE request
         function deleteRecord(id) {
             fetch(`http://localhost:8080/api/v1/location-details/${id}`, {
@@ -539,27 +527,26 @@
             })
                 .then(response => {
                     if (response.status === 200) {
-                        return response.json(); // Parse the response JSON
+                        showToast('success', 'Entry deleted Successfully.');
                     } else {
-                        throw new Error("Record not deleted. Please try again.");
+                        showToast('error', 'Try Again!');
                     }
                 })
                 .then(data => {
-                    notify(1, data.message); // Show success alert
+                    showToast("success", data.message); // Show success alert
                     location.reload(); // Reload the page
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    notify(3, error.message); // Show error alert
+                    showToast("error", error.message); // Show error alert
                 });
         }
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
-                showDeleteConfirmation(id);
 
-            });
-        });
+        // Helper function to display a toast message
+        function showToast(type, message) {
+            // Implement your toast message display logic here
+            console.log(type, message);
+        }
     </script>
 
     <!-- handle get data -->
