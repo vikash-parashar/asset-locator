@@ -460,6 +460,7 @@
                 .then(response => {
                     if (response.status === 200) {
                         showToast('success', 'Entry deleted Successfully.');
+                        location.reload();
                     } else {
                         showToast('error', 'Try Again!');
                     }
@@ -602,6 +603,7 @@
                 }
             })
         }
+
         // Add an event listener to the "Apply Filter" button
         document.getElementById("applyFilterButton").addEventListener("click", function (event) {
             event.preventDefault(); // Prevent the default form submission

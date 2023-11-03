@@ -31,7 +31,6 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 		var data models.DeviceLocationDetail
 
 		// Retrieve form data
-		idStr := c.PostForm("id")
 		serialNumber := c.PostForm("serial_number")
 		deviceMakeModel := c.PostForm("device_make_model")
 		model := c.PostForm("model")
@@ -44,12 +43,6 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 		deviceRackNumberStr := c.PostForm("device_rack_number")
 		deviceRUNumber := c.PostForm("device_ru_number")
 
-		// Parse and cast the string values to their respective types
-		id, err := strconv.Atoi(idStr)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
-			return
-		}
 		deviceRowNumber, err := strconv.Atoi(deviceRowNumberStr)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid device_row_number"})
@@ -63,7 +56,6 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 
 		// Assign the values to the DeviceLocationDetail struct
 		data = models.DeviceLocationDetail{
-			Id:               id,
 			SerialNumber:     serialNumber,
 			DeviceMakeModel:  deviceMakeModel,
 			Model:            model,
@@ -118,7 +110,6 @@ func UpdateDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 		row, _ := strconv.Atoi(requestData.DeviceRowNumber)
 		rack, _ := strconv.Atoi(requestData.DeviceRackNumber)
 
-		
 		updatedData := &models.DeviceLocationDetail{
 			Id:               id,
 			SerialNumber:     requestData.SerialNumber,

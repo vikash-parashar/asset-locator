@@ -528,6 +528,7 @@
                 .then(response => {
                     if (response.status === 200) {
                         showToast('success', 'Entry deleted Successfully.');
+                        location.reload();
                     } else {
                         showToast('error', 'Try Again!');
                     }
@@ -649,7 +650,7 @@
     </script>
 
 
-    <!-- filter data table -->
+    <!-- handle filter data table -->
     <script>
         function filterTable() {
             var serialNumberFilter = document.getElementById("serialNumberFilter").value.toLowerCase();
