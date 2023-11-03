@@ -10,254 +10,174 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
 
-    <!-- filter navbar buttons related css only -->
     <style>
-        body {
-            font-family: 'Ubuntu', sans-serif;
-            font-style: normal;
-            font-size: medium;
-            background-color: #B2C8BA;
+        /* Add this to a separate CSS file (styles.css) */
+
+
+
+        /* Add this to the existing CSS file or create a new one */
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #3498db;
         }
 
-        /* Custom styling for the navbar */
-        .navbar-custom {
-            background: linear-gradient(to right, #cf3d6e, #6c757d);
-            /* Gradient background color */
-        }
-
-        .navbar-custom .navbar-brand {
-            color: #d85151;
-            /* Text color for the company name */
-        }
-
-        .navbar-custom .nav-link {
-            color: #0ee2e9;
-            /* Text color for the navigation links */
-        }
-
-        .navbar-custom .nav-link:hover {
-            color: #c78125;
-            /* Text color for the navigation links on hover */
-        }
-
-        /* Custom styling for the dropdown menu */
-        .dropdown-menu {
-            margin-top: 20px;
-            background: linear-gradient(to right, #212325, #2e1c7c79);
-            width: auto;
-            /* margin-right: -15px; */
-            /* Gradient background color */
-        }
-
-        .dropdown-item-text {
-            color: #f38b5a;
-            font-size: small;
-            /* Text color for the dropdown text */
-        }
-
-        .dropdown-item-text span {
-            color: #f8f8f8;
-            font-size: small;
-            /* Text color for the data spans */
-            text-align: center;
-        }
-
-        .dropdown-menu::before {
-            content: none;
-            /* Hide the dropdown arrow icon */
-        }
-
-        .dropdown-item {
-            padding: 0.5rem 1rem;
-            /* Adjust padding as needed */
-        }
-
-        .btn-danger {
-            background-color: #d61023c2;
-            /* Background color for the Logout button */
-            border: none;
-            /* Remove the button border */
-        }
-
-        .btn-danger:hover {
-            background-color: #e21220;
-            /* Background color for the Logout button on hover */
-        }
-
-        img {
-            height: 50px;
-            width: 50px;
+        .navbar-brand img {
+            max-width: 120px;
             border-radius: 50%;
-
-
         }
 
-        /* Custom styling for the toggle button */
         .navbar-toggler-icon {
-            color: #cf3765;
-            /* Text color */
-            font-size: 18px;
-            /* Font size */
-            padding: 0 50px;
-            /* Add some spacing around the text */
+            background-color: #fff;
         }
 
-        h1 {
-            margin-top: 200px;
-
-        }
-
-        .profile {
-            height: 30px;
-            width: 30px;
-        }
-
-        footer {
-            margin-top: 200px;
-        }
-
-        /* Custom styling for the filter section   */
-
-        .container {
-            background-color: #CDF5FD;
-            /* Background color */
-            border-radius: 5px;
-            /* Rounded corners */
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* Box shadow for a subtle lift */
-        }
-
-        h3 {
-            color: #007bff;
-            /* Title color */
-        }
-
-        label {
-            font-weight: bold;
-            /* Bold labels */
-        }
-
-        .form-control {
-            border: 2px solid #007bff;
-            /* Input border color */
-            border-radius: 5px;
-            /* Rounded input corners */
-        }
-
-        .form-control:focus {
-            border-color: #0056b3;
-            /* Input border color on focus */
-            box-shadow: none;
-            /* Remove the default box shadow on focus */
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            /* Button background color */
-            border: none;
-            /* Remove button border */
-            border-radius: 5px;
-            /* Rounded button corners */
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            /* Button background color on hover */
-        }
-
-        /* buttons related css for all data pages */
-
-        .delete-button {
-            background-color: red;
-            color: white;
-        }
-
-        .update-button {
-            background-color: #219C90;
-            color: white;
-        }
-
-        /* Download Data as PDF button */
-        .pdf {
-            background-color: #af3e3e;
-            /* Use a green color for this button */
+        .navbar-nav .nav-link {
             color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed. */
+            padding: 10px 20px;
+        }
+
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
             margin-left: 20px;
         }
 
-        /* Download Data as Excel button */
-        .xls {
-            background-color: #f1c40f;
-            /* Use a yellow color for this button */
-            color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed. */
+        .user-dropdown .profile {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-right: 5px;
         }
 
-        /* Add New Data button */
-        .new {
+        .user-dropdown a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .user-dropdown .dropdown-menu {
             background-color: #3498db;
-            /* Use a blue color for this button */
+            border: 1px solid #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-dropdown .dropdown-item-text {
             color: #fff;
-            /* Text color (white) */
-            /* You can add more styling as needed, such as padding, border, and hover effects. */
+            margin: 5px 0;
         }
 
-        th {
-            background-color: #CE5A67;
-            color: #CDF5FD;
+        .user-dropdown .dropdown-menu .btn {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
         }
+
+        /* Additional styles for the user profile and logo can be added and customized as needed. */
+
+
+
+
+
+
+        /* Page Heading styles */
+        .page-heading {
+            font-size: 2rem;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Form styles */
+        .filter-form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-form label {
+            font-weight: bold;
+        }
+
+        /* Buttons styles */
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .btn-success .update-button {
+            background-color: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .btn-danger .delete-button {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Table styles */
+        .custom-table th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .custom-table td {
+            font-size: 0.9rem;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        /* Additional styles can be added and customized according to your preferences. */
     </style>
-
 </head>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
-            <img src="/static/images/logo3.png" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">Menu</span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto justify-content-center">
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="http://localhost:8080/api/v1/homepage">Home</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true"
-                        href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
-                </li>
-
-            </ul>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <img class="profile" src="/static/images/usericon.png" alt="profile">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
+                <img src="/static/images/logo3.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-dropdown">
+                <a class="nav-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <img class="profile" src="/static/images/usericon.png" alt="Profile">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <h6 class="dropdown-item-text">NAME : <span class="text-center" id="firstNamePlaceholder"></span>
-                    </h6>
-                    <!-- <p class="dropdown-item-text">NAME  : <span id="firstNamePlaceholder"></span> <span
-                                id="lastNamePlaceholder"></span></p> -->
-                    <h6 class="dropdown-item-text">PHONE : <span class="text-center" id="phonePlaceholder"></span></h6>
-                    <!-- <p class="dropdown-item-text">EMAIL : <span id="emailPlaceholder"></span></p> -->
-                    <h6 class="dropdown-item-text">ROLE : <span class="text-center" id="rolePlaceholder"></span></h6>
+                    <h6 class="dropdown-item-text">NAME: <span id="firstNamePlaceholder"></span></h6>
+                    <h6 class="dropdown-item-text">PHONE: <span id="phonePlaceholder"></span></h6>
+                    <h6 class="dropdown-item-text">ROLE: <span id="rolePlaceholder"></span></h6>
                     <div class="text-center">
                         <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
                     </div>
@@ -265,59 +185,46 @@
             </div>
         </div>
     </nav>
-
-    <!-- page heading main -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col text-center">
-                <h3 style="color: #e48537;">Device Ethernet Fiber Details</h3>
-            </div>
-        </div>
+    <!-- Page Heading -->
+    <div class="container mt-5 text-center">
+        <h1 class="page-heading">Device Ethernet Fiber Details</h1>
     </div>
 
-    <!-- data filter -->
-    <div class="container">
-        <h3 class="mt-4">Filter Data</h3>
-        <form>
-            <div class="form-row mt-3">
-                <div class="col-md-4 form-group">
+    <!-- Data Filter -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="serialNumberFilter">Device Serial Number</label>
                     <input type="text" class="form-control" id="serialNumberFilter">
                 </div>
-                <div class="col-md-4 form-group">
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="makeFilter">Device Make</label>
                     <input type="text" class="form-control" id="makeFilter">
                 </div>
-                <div class="col-md-4 form-group">
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="modelFilter">Device Model</label>
                     <input type="text" class="form-control" id="modelFilter">
                 </div>
             </div>
-            <div class="text-center mt-3">
-                <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
-
-            </div>
-        </form>
-    </div>
-
-    <!-- data add/download buttons -->
-    <div class="container mt-2 mb-2">
-        <div class="row align-items-start">
-            <div class="col col-10">
-                <button id="newEntryButton" class="btn btn-sm new" data-toggle="modal" data-target="#createEntryModal">
-                    Add New Entry
-                </button>
-            </div>
-
-            <div class="col">
-                <button id="downloadPDFButton" class="btn btn-sm pdf">Pdf</button>
-
-            </div>
-            <div class="col">
-                <button id="downloadXLSXButton" class="btn btn-sm xls">Excel</button>
-            </div>
+        </div>
+        <div class="text-center mt-3">
+            <button type="submit" id="applyFilterButton" class="btn btn-primary">Apply Filter</button>
         </div>
     </div>
+
+    <!-- Data Add/Download Buttons -->
+    <div class="container mt-3 text-center">
+        <button id="newEntryButton" class="btn btn-primary" data-toggle="modal" data-target="#createEntryModal">Add New
+            Entry</button>
+        <button id="downloadPDFButton" class="btn btn-success">Download PDF</button>
+        <button id="downloadXLSXButton" class="btn btn-success">Download Excel</button>
+    </div>
+
 
     <!-- Modal for add new data -->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -448,54 +355,50 @@
     </div>
 
 
-    <!-- data table to display -->
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="col">
-                <table class="table table-hover custom-table">
-                    <thead>
-                        <tr>
-                            <th style="font-size: medium;">S No.</th>
-                            <th style="font-size: medium;">Serial Number</th>
-                            <th style="font-size: medium;">Make</th>
-                            <th style="font-size: medium;">Model</th>
-                            <th style="font-size: medium;">Type</th>
-                            <th style="font-size: medium;">Physical Port</th>
-                            <th style="font-size: medium;">Port Type</th>
-                            <th style="font-size: medium;">MAC/WWN Port </th>
-                            <th style="font-size: medium;">Connected Port</th>
-                            <th style="font-size: medium;">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="deviceDetails">
-                        {{range $index, $record := .data}}
-                        <tr class="row-transition">
-                            <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{$record.Model}}</td>
-                            <td style="font-size: small;">{{$record.DeviceType}}</td>
-                            <td style="font-size: small;">{{$record.DevicePhysicalPort}}</td>
-                            <td style="font-size: small;">{{$record.DevicePortType}}</td>
-                            <td style="font-size: small;">{{$record.DevicePortMACWWN}}</td>
-                            <td style="font-size: small;">{{$record.ConnectedDevicePort}}</td>
-                            <td style="font-size: small;">
-                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
-                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
-                            </td>
-                        </tr>
-                        {{end}}
-                    </tbody>
-                </table>
+    <!-- Data Table to Display -->
+    <div class="container mt-3">
+        <table class="table table-hover custom-table">
+            <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Serial Number</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Physical Port</th>
+                    <th>Port Type</th>
+                    <th>MAC/WWN Port</th>
+                    <th>Connected Port</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="deviceDetails">
+                {{range $index, $record := .data}}
+                <tr class="row-transition">
+                    <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
+                    <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                    <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                    <td style="font-size: small;">{{$record.Model}}</td>
+                    <td style="font-size: small;">{{$record.DeviceType}}</td>
+                    <td style="font-size: small;">{{$record.DevicePhysicalPort}}</td>
+                    <td style="font-size: small;">{{$record.DevicePortType}}</td>
+                    <td style="font-size: small;">{{$record.DevicePortMACWWN}}</td>
+                    <td style="font-size: small;">{{$record.ConnectedDevicePort}}</td>
+                    <td style="font-size: small;">
+                        <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                        <button class="update-button" data-id="{{$record.Id}}">Update</button>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
 
-            </div>
-        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="text-center">
-            &copy; 2023 Your Company. All rights reserved.
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2023 TestWebsite.com</p>
         </div>
     </footer>
 
@@ -602,10 +505,10 @@
                     var data = JSON.parse(xhr.responseText);
                     if (data.success) {
                         console.log(xhr.responseText);
-                        showToast("success", data.message)
                         location.reload();
+                        showToast("success", "Data Added Successfully")
                     } else {
-                        showToast("error", response.message)
+                        showToast("error", "Try Again")
                     }
                 }
             };
@@ -813,21 +716,22 @@
             })
                 .then(response => {
                     if (!response.ok) {
+                        showToast("warning", "Try Again !");
                         console.error("Network response was not ok");
                     }
                     return response.json();
                 })
                 .then(data => {
                     if (data.success) {
-                        showToast("success", "Logout Successfully.");
+                        showToast("success", "Logout Success.");
                         window.location.href = "/"; // Redirect to the root path
                     } else {
-                        showToast("warning", data.message);
+                        showToast("warning", "Try Again !");
                     }
                 })
                 .catch(error => {
                     console.error("An error occurred while logging out:", error);
-                    showToast("error", "Failed to logout !");
+                    showToast("error", "Try Again !");
                 });
         }
 
