@@ -1,5 +1,3 @@
-// jwt_util.go
-
 package utils
 
 import (
@@ -86,27 +84,6 @@ func VerifyJWTToken(tokenString string) (Claims, bool) {
 	}
 	return claims, token.Valid
 }
-
-// GeneratePasswordResetToken generates a password reset token for a user.
-// func GeneratePasswordResetToken(user *models.User) (string, error) {
-// 	// Create a unique token based on user email and a timestamp
-// 	tokenData := fmt.Sprintf("%s:%d", user.Email, time.Now().Unix())
-
-// 	// Generate a random 32-byte string for additional security
-// 	randomBytes := make([]byte, 32)
-// 	_, err := rand.Read(randomBytes)
-// 	if err != nil {
-// 		return "", err
-// 	}
-
-// 	// Combine the token data and random bytes
-// 	combinedData := append([]byte(tokenData), randomBytes...)
-
-// 	// Encode the combined data as a base64 string
-// 	token := base64.URLEncoding.EncodeToString(combinedData)
-
-// 	return token, nil
-// }
 
 // GeneratePasswordResetToken generates a password reset token for a user.
 func GeneratePasswordResetToken(user *models.User) (string, error) {
