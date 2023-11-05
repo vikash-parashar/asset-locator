@@ -11,9 +11,17 @@
     <style>
         /* Google Font Link */
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Cairo+Play:wght@500&family=Kalam:wght@700&family=Ubuntu&display=swap');
 
         body {
             font-family: 'Josefin Sans', sans-serif;
+        }
+
+        td {
+            /* font-family: 'Cabin', sans-serif; */
+            font-family: 'Cairo Play', sans-serif;
+            /* font-family: 'Kalam', cursive; */
+            /* font-family: 'Ubuntu', sans-serif; */
         }
 
         .navbar-brand img {
@@ -143,7 +151,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
                 <img src="/static/images/logo3.png" alt="Logo">
@@ -164,7 +172,7 @@
                         <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/owner-details" style="color: black;">Owner</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
