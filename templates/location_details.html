@@ -6,13 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
     <style>
         /* Google Font Link */
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
 
         body {
             font-family: 'Josefin Sans', sans-serif;
-            background-color: #EADBC8;
         }
 
         .navbar-brand img {
@@ -56,26 +57,22 @@
         }
 
         .user-dropdown .dropdown-menu {
-            background: linear-gradient(to right, #445D48, #186F65);
-            border: 2px solid #333;
+            background: linear-gradient(to right, #F5E8B7, #CDFAD5);
+            border: 2px solid #bd7d7d;
             border-radius: 10px;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
             height: 350px;
-            width: 220px;
+            width: 250px;
             padding: 20px;
             color: #fff;
             font-size: 16px;
-            text-align: center;
-        }
-
-        .user-dropdown .dropdown-item-text {
-            color: #fff;
-            margin: 5px 0;
+            text-align: left;
+            margin-top: 3px;
         }
 
         .user-dropdown .dropdown-menu .btn {
             background-color: #e74c3c;
-            border-color: #e74c3c;
+            border-color: #ffffff;
         }
 
         /* Page Heading styles */
@@ -158,7 +155,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/homepage">Home</a>
+                        <a class="nav-link" href="http://localhost:8080/api/v1/homepage">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
@@ -170,7 +167,7 @@
                         <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/location-details">Location</a>
                     </li>
                 </ul>
             </div>
@@ -180,14 +177,16 @@
                     <img class="profile" src="/static/images/usericon.png" alt="Profile">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <h2 style="color: #F9F3CC;">User Profile</h2>
+                    <div>
+                        <h2 style="color: #FF8080;" class="text-center">User Profile</h2>
+                    </div>
                     <hr>
                     <br>
-                    <h6 class="dropdown-item-text" style="color:#FFF2D8;">NAME : <span id="firstNamePlaceholder"
+                    <h6 class="dropdown-item-text" style="color:#04364A;"> NAME : <span id="firstNamePlaceholder"
                             style="color: #001524;"></span></h6>
-                    <h6 class="dropdown-item-text" style="color:#FFF2D8;">PHONE : <span id="phonePlaceholder"
+                    <h6 class="dropdown-item-text" style="color:#04364A;">PHONE : <span id="phonePlaceholder"
                             style="color: #001524;"></span></h6>
-                    <h6 class="dropdown-item-text" style="color:#FFF2D8;">ROLE : <span id="rolePlaceholder"
+                    <h6 class="dropdown-item-text" style="color:#04364A;"> ROLE : <span id="rolePlaceholder"
                             style="color: #001524;"></span></h6>
                     <br>
                     <hr>
@@ -437,7 +436,7 @@
     <div class="container mt-3">
         <table class="table table-hover custom-table">
             <thead>
-                <tr class="table-row">
+                <tr>
                     <th>S No.</th>
                     <th>Serial Number</th>
                     <th>Make</th>
@@ -455,20 +454,20 @@
             </thead>
             <tbody id="deviceDetails">
                 {{range $index, $record := .}}
-                <tr class="table-row">
-                    <td>{{add1 $index}}</td>
-                    <td>{{$record.SerialNumber}}</td>
-                    <td>{{$record.DeviceMakeModel}}</td>
-                    <td>{{$record.Model}}</td>
-                    <td>{{$record.DeviceType}}</td>
-                    <td>{{$record.DataCenter}}</td>
-                    <td>{{$record.Region}}</td>
-                    <td>{{$record.DCLocation}}</td>
-                    <td>{{$record.DeviceLocation}}</td>
-                    <td>{{$record.DeviceRowNumber}}</td>
-                    <td>{{$record.DeviceRackNumber}}</td>
-                    <td>{{$record.DeviceRUNumber}}</td>
-                    <td>
+                <tr class="row-transition">
+                    <td style="font-size: medium;">{{add1 $index}}</td>
+                    <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                    <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                    <td style="font-size: small;">{{$record.Model}}</td>
+                    <td style="font-size: small;">{{$record.DeviceType}}</td>
+                    <td style="font-size: small;">{{$record.DataCenter}}</td>
+                    <td style="font-size: small;">{{$record.Region}}</td>
+                    <td style="font-size: small;">{{$record.DCLocation}}</td>
+                    <td style="font-size: small;">{{$record.DeviceLocation}}</td>
+                    <td style="font-size: small;">{{$record.DeviceRowNumber}}</td>
+                    <td style="font-size: small;">{{$record.DeviceRackNumber}}</td>
+                    <td style="font-size: small;">{{$record.DeviceRUNumber}}</td>
+                    <td style="font-size: small;">
                         <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
                         <button class="update-button" data-id="{{$record.Id}}">Update</button>
                     </td>

@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #EADBC8;
+            background-color: #FF6C22;
             padding: 30px;
         }
 
@@ -31,7 +31,7 @@
             position: relative;
             max-width: 850px;
             width: 100%;
-            background: #DAC0A3;
+            background: #FECDA6;
             padding: 40px 30px;
             perspective: 2700px;
         }
@@ -43,9 +43,9 @@
             height: 100%;
             width: 50%;
             z-index: 98;
-            transition: all 1s ease-in-out;
+            transition: all 0.8s ease-in-out;
             transform-origin: left;
-            transform-style: initial;
+            transform-style:flat;
         }
 
         .container #flip:checked~.cover {
@@ -61,10 +61,10 @@
             width: 100%;
         }
 
-        .cover .back {
+        /* .cover .back {
             transform: rotateY(180deg);
             backface-visibility: hidden;
-        }
+        } */
 
         .container .cover::before,
         .container .cover::after {
@@ -72,7 +72,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            /* background: #A7D397; */
+            background: #164863;
             opacity: 1;
             z-index: 12;
         }
@@ -102,23 +102,11 @@
             justify-content: center;
         }
 
-        .cover .text .text-1,
-        .cover .text .text-2 {
-            font-size: 26px;
-            font-weight: 600;
-            color: #DAC0A3;
-            text-align: center;
-        }
-
-        .cover .text .text-2 {
-            font-size: 15px;
-            font-weight: 500;
-        }
 
         .container .forms {
             height: 100%;
             width: 100%;
-            background: #DAC0A3;
+            background: #FECDA6;
         }
 
         .container .form-content {
@@ -136,7 +124,7 @@
             position: relative;
             font-size: 50px;
             font-weight: 500;
-            color: #102C57;
+            color: #d18547;
         }
 
         .forms .form-content .title:before {
@@ -207,7 +195,7 @@
 
         .forms .form-content .button input {
             color: #fff;
-            background: #1450A3;
+            background: #6ea1e9;
             border-radius: 6px;
             padding: 0;
             cursor: pointer;
@@ -272,10 +260,10 @@
         <input type="checkbox" id="flip">
         <div class="cover">
             <div class="front">
-                <img src="../static/images/logo3.png" alt="logo">
+                <img src="../static/images/logo1.jpg" alt="logo">
             </div>
             <div class="back">
-                <img class="backImg" src="../static/images/logo3.png" alt="asset locator logo">
+                <img class="backImg" src="../static/images/logo1.jpg" alt="asset locator logo">
 
             </div>
         </div>
