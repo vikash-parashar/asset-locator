@@ -6,7 +6,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styling for the offcanvas */
+        .offcanvas {
+            width: 250px;
+            background-color: #04d5f1;
+            /* Background color */
+            color: #fff;
+            /* Text color */
+        }
 
+        .offcanvas-header {
+            background-color: #ece927;
+            /* Header background color */
+            color: #fff;
+            /* Header text color */
+        }
+
+        .offcanvas-body {
+            padding: 20px;
+        }
+
+        .offcanvas-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .btn-close {
+            color: #fff;
+            /* Close button color */
+        }
+
+        /* Add any other custom styles as needed */
+    </style>
     <style>
         /* Google Font Link */
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
@@ -18,7 +50,7 @@
 
         td {
             /* font-family: 'Cabin', sans-serif; */
-            font-family: 'Cairo Play', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             /* font-family: 'Kalam', cursive; */
             /* font-family: 'Ubuntu', sans-serif; */
         }
@@ -150,34 +182,12 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
-                <img src="/static/images/logo3.png" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/homepage">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="http://localhost:8080/api/v1/fiber-details" style="color: black;">Fiber</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg bg-info">
+        <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
+            <img src="/static/images/logo3.png" alt="Logo">
+        </a>
+        <span class="navbar-text mx-auto">Asset Locator - Device Discovery</span>
+        <ul class="navbar-nav ml-auto">
             <div class="user-dropdown">
                 <a class="nav-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -202,8 +212,32 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </ul>
     </nav>
+
+    <!-- offcanvas sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" data-bs-backdrop="false">
+        <div class="offcanvas-body">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" style="
+                    color: #db4b5c;" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Page Heading -->
     <div class="container mt-5 text-center">
@@ -431,6 +465,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Add Bootstrap and jQuery scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+
+
+    <!-- offcanvas script -->
+    <script>
+        $(document).ready(function () {
+            // Initialize the offcanvas component
+            var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasExample'));
+
+            // Track the offcanvas state
+            var offcanvasOpen = false;
+
+            // Function to toggle the offcanvas state
+            function toggleOffcanvas() {
+                offcanvasOpen = !offcanvasOpen;
+                if (offcanvasOpen) {
+                    offcanvas.show();
+                } else {
+                    offcanvas.hide();
+                }
+            }
+
+            // Event listener for mouseenter on the left side of the screen
+            $(document).on('mouseenter', function (event) {
+                if (event.clientX < 50) { // Adjust the value as needed
+                    toggleOffcanvas();
+                }
+            });
+
+            // Event listener for mouseleave on the offcanvas element
+            $('#offcanvasExample').on('mouseleave', function () {
+                toggleOffcanvas();
+            });
+        });
+
+
+    </script>
     <!-- sweet alerts -->
     <script>
         function showToast(icon, title) {
