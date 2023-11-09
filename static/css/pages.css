@@ -1,0 +1,163 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Cairo+Play:wght@500&family=Kalam:wght@700&family=Ubuntu&display=swap');
+
+/* Custom styling for the offcanvas */
+.offcanvas {
+    width: 250px;
+    background-color: #04d5f1;
+    /* Background color */
+    color: #fff;
+    /* Text color */
+}
+
+.offcanvas-header {
+    background-color: #ece927;
+    /* Header background color */
+    color: #fff;
+    /* Header text color */
+}
+
+.offcanvas-body {
+    padding: 20px;
+}
+
+.offcanvas-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-close {
+    color: #fff;
+    /* Close button color */
+}
+
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+td {
+    /* font-family: 'Cabin', sans-serif; */
+    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Kalam', cursive; */
+    /* font-family: 'Ubuntu', sans-serif; */
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: 50px;
+    clip-path: circle(45%);
+    border-radius: 50%;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #3498db;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.user-dropdown .profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 5px;
+}
+
+.user-dropdown a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-dropdown .dropdown-menu {
+    background: linear-gradient(to right, #F5E8B7, #CDFAD5);
+    border: 2px solid #bd7d7d;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    height: 350px;
+    width: 250px;
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    text-align: left;
+    margin-top: 3px;
+}
+
+.user-dropdown .dropdown-menu .btn {
+    background-color: #e74c3c;
+    border-color: #ffffff;
+}
+
+/* Page Heading styles */
+.page-heading {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Form styles */
+.filter-form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-form label {
+    font-weight: bold;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Table styles */
+.custom-table th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.custom-table td {
+    font-size: 1rem;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #ffff;
+    padding: 20px 0;
+}
+
+.delete-button {
+    background-color: #db4b5c;
+    color: rgb(255, 255, 255);
+    border-radius: 5%;
+    border-style: hidden;
+    margin: 5px;
+}
+
+.update-button {
+    background-color: #42c89b;
+    color: #ffff;
+    border-radius: 5%;
+    border-style: hidden;
+    margin-top: 0;
+    margin: 5px;
+}

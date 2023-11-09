@@ -1,0 +1,144 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+
+/* Custom styling for the offcanvas */
+.offcanvas {
+    width: 250px;
+    background-color: #04d5f1;
+    /* Background color */
+    color: #fff;
+    /* Text color */
+}
+
+.offcanvas-header {
+    background-color: #ece927;
+    /* Header background color */
+    color: #fff;
+    /* Header text color */
+}
+
+.offcanvas-body {
+    padding: 20px;
+}
+
+.offcanvas-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-close {
+    color: #fff;
+    /* Close button color */
+}
+
+
+
+
+.navbar-brand img {
+    height: 50px;
+    width: 50px;
+    clip-path: circle(45%);
+    border-radius: 50%;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #3498db;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.user-dropdown .profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 5px;
+}
+
+.user-dropdown a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-dropdown .dropdown-menu {
+    background: linear-gradient(to right, #F5E8B7, #CDFAD5);
+    border: 2px solid #bd7d7d;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    height: 350px;
+    width: 250px;
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    text-align: left;
+    margin-top: 3px;
+}
+
+.user-dropdown .dropdown-menu .btn {
+    background-color: #e74c3c;
+    border-color: #ffffff;
+}
+
+/* Page Heading styles */
+.page-heading {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 20px;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+.content-text {
+    flex: 1;
+    padding: 20px;
+}
+
+.asset-image {
+    max-width: 50%;
+}
+
+.features {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+footer {
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
