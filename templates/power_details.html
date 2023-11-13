@@ -2,90 +2,46 @@
 <html>
 
 <head>
-    <title>Power</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Details</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         /* Google Font Link */
-        @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap");
-        @import url("https://fonts.googleapis.com/css2?family=Cabin&family=Cairo+Play:wght@500&family=Kalam:wght@700&family=Ubuntu&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Cairo+Play:wght@500&family=Kalam:wght@700&family=Ubuntu&display=swap');
 
-        /* Custom styling for the offcanvas */
-        .offcanvas {
-            width: 250px;
-            background-color: #04d5f1;
-            /* Background color */
-            color: #fff;
-            /* Text color */
-        }
-
-        .offcanvas-header {
-            background-color: #ece927;
-            /* Header background color */
-            color: #fff;
-            /* Header text color */
-        }
-
-        .offcanvas-body {
-            padding: 20px;
-        }
-
-        .offcanvas-title {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .btn-close {
-            color: #fff;
-            /* Close button color */
-        }
 
         body {
-            font-family: "Josefin Sans", sans-serif;
-        }
-
-        td {
-            /* font-family: 'Cabin', sans-serif; */
-            font-family: "Times New Roman", Times, serif;
-            /* font-family: 'Kalam', cursive; */
-            /* font-family: 'Ubuntu', sans-serif; */
+            font-family: 'Josefin Sans', sans-serif;
         }
 
         .navbar-brand img {
-            height: 100px;
-            width: 100px;
+            width: 80px;
             clip-path: circle(45%);
             border-radius: 50%;
+            margin-left: 50px;
         }
 
-        /* Navbar styles */
-        .navbar {
-            background-color: #3498db;
-        }
-
-        .navbar-toggler-icon {
-            background-color: #fff;
-        }
-
-        .navbar-nav .nav-link {
+        .navbar-text {
             color: #fff;
-            padding: 10px 20px;
+            font-size: 2rem;
         }
 
         .user-dropdown {
-            position: relative;
+            position: sticky;
+            top: 200px;
             display: inline-block;
             margin-left: 20px;
         }
 
         .user-dropdown .profile {
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 2px solid #fff;
+            border: 2px solid #d3e643;
             margin-right: 5px;
         }
 
@@ -95,13 +51,13 @@
         }
 
         .user-dropdown .dropdown-menu {
-            background: linear-gradient(to right, #f5e8b7, #cdfad5);
-            border: 2px solid #bd7d7d;
+            background-color: #fff;
+            border: 2px solid #c04444;
             border-radius: 10px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 2px 2px 5px rgba(210, 157, 11, 0.768);
             height: 350px;
-            width: 250px;
-            padding: 20px;
+            width: 280px;
+            padding: 10px;
             color: #fff;
             font-size: 16px;
             text-align: left;
@@ -111,6 +67,44 @@
         .user-dropdown .dropdown-menu .btn {
             background-color: #e74c3c;
             border-color: #ffffff;
+        }
+
+        .nav-item {
+            padding: 20px 20px;
+            margin-top: 20px;
+            list-style-type: none;
+        }
+
+        .nav-link {
+            color: white;
+            margin-left: 20px;
+            font-size: 1.5rem;
+        }
+
+        .container-main {
+            display: inline-block;
+            width: 78%;
+            height: 85vh;
+        }
+
+        .container-side {
+            display: inline-block;
+            width: 20%;
+            background-color: rgb(176, 201, 165);
+            height: 85vh;
+            display: inline-block;
+        }
+
+        .off-img {
+            margin-right: 10px;
+            width: 40px;
+        }
+    </style>
+
+    <!-- main content -->
+    <style>
+        td {
+            font-family: "Times New Roman", Times, serif;
         }
 
         /* Page Heading styles */
@@ -148,13 +142,6 @@
             font-size: 1rem;
         }
 
-        /* Footer styles */
-        .footer {
-            background-color: #333;
-            color: #ffff;
-            padding: 20px 0;
-        }
-
         .delete-button {
             background-color: #db4b5c;
             color: rgb(255, 255, 255);
@@ -171,110 +158,196 @@
             margin-top: 0;
             margin: 5px;
         }
-    </style>
 
+        .footer {
+            background-color: #c73434;
+            color: #ffff;
+            padding: 20px 0;
+            width: 100vw;
+        }
+    </style>
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-info">
-        <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
-            <img src="/static/images/logo3.png" alt="Logo">
-        </a>
-        <span class="navbar-text mx-auto">Asset Locator - Device Discovery</span>
-        <ul class="navbar-nav ml-auto">
-            <div class="user-dropdown">
-                <a class="nav-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <img class="profile" src="/static/images/usericon.png" alt="Profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <div>
-                        <h2 style="color: #FF8080;" class="text-center">User Profile</h2>
-                    </div>
-                    <hr>
-                    <br>
-                    <h6 class="dropdown-item-text" style="color:#04364A;"> NAME : <span id="firstNamePlaceholder"
-                            style="color: #001524;"></span></h6>
-                    <h6 class="dropdown-item-text" style="color:#04364A;">PHONE : <span id="phonePlaceholder"
-                            style="color: #001524;"></span></h6>
-                    <h6 class="dropdown-item-text" style="color:#04364A;"> ROLE : <span id="rolePlaceholder"
-                            style="color: #001524;"></span></h6>
-                    <br>
-                    <hr>
-                    <div class="text-center">
-                        <button id="logout-button" class="btn btn-danger ml-2">Logout</button>
+    <!-- top navbar -->
+    <header>
+        <nav class="navbar navbar-expand-md bg-info">
+            <a class="navbar-brand" href="http://localhost:8080/api/v1/homepage">
+                <img src="/static/images/logo3.png" alt="Logo" />
+            </a>
+            <span class="navbar-text mx-auto">Asset Locator - Device Discovery</span>
+            <ul class="navbar-nav ml-auto">
+                <div class="user-dropdown">
+                    <a class="nav-link" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <img class="profile" src="/static/images/man.png" alt="Profile" />
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div>
+                            <h2 style="color: #0a1437" class="text-center">User Profile</h2>
+                        </div>
+                        <hr />
+                        <br />
+                        <h6 class="dropdown-item-text" style="color: #de9b4a">
+                            NAME :
+                            <span id="firstNamePlaceholder" style="color: #75aedc">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text" style="color: #de9b4a">
+                            PHONE : <span id="phonePlaceholder" style="color: #75aedc">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text" style="color: #de9b4a">
+                            ROLE : <span id="rolePlaceholder" style="color: #75aedc">LOADING ...</span>
+                        </h6>
+                        <br />
+                        <hr />
+                        <div class="text-center">
+                            <button id="logout-button" class="btn btn-danger ml-2">
+                                Logout
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- offcanvas sidebar -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" data-bs-backdrop="false">
-        <div class="offcanvas-body">
-            <ul class="navbar-nav ml-auto">
+    <!-- main content -->
+    <main>
+
+        <!-- side navbar -->
+        <div class="container-side">
+            <ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage">Home</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/homepage">
+                        <img class="off-img" src="/static/images/home (1).png" alt="homepage">
+                        Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/location-details">
+                        <img class="off-img" src="/static/images/location-round.png" alt="location-logo">
+                        Location
+
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">
+                        <img class="off-img" src="/static/images/ownership-round.png" alt="owner-logo">
+                        Owner
+
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" style="
-                    color: #db4b5c;" href="http://localhost:8080/api/v1/power-details">Power</a>
+                    <a class="nav-link  disabled" style="color: #ea0d26"
+                        href="http://localhost:8080/api/v1/power-details">
+                        <img class="off-img" src="/static/images/power-round.png" alt="power-logo">
+                        Power
+
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Fiber</a>
+                    <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">
+                        <img class="off-img" src="/static/images/fiber-cable-round.png" alt="fiber-logo">
+                        Fiber
+
+                    </a>
                 </li>
             </ul>
         </div>
-    </div>
 
-    <!-- Page Heading -->
-    <div class="container mt-5 text-center">
-        <h1 class="page-heading">Device Power Details</h1>
-    </div>
+        <!-- main content container -->
+        <div class="container-main">
 
-    <!-- Data Filter -->
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="serialNumberFilter">Serial Number</label>
-                    <input type="text" class="form-control" id="serialNumberFilter">
+            <!-- Page Heading -->
+            <div class="mt-5 text-center">
+                <h1 class="page-heading">Device Power Details</h1>
+            </div>
+
+            <!-- Data Filter -->
+            <div class="mt-5">
+                <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="serialNumberFilter">Serial Number</label>
+                            <input type="text" class="form-control" id="serialNumberFilter" />
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="makeFilter">Device Make</label>
+                            <input type="text" class="form-control" id="makeFilter" />
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="modelFilter">Device Model</label>
+                            <input type="text" class="form-control" id="modelFilter" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+
+                <div class="text-center mt-2">
+                    <button type="submit" id="applyFilterButton" class="btn btn-sm btn-warning">
+                        Apply Filter
+                    </button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="makeFilter">Device Make</label>
-                    <input type="text" class="form-control" id="makeFilter">
-                </div>
+
+            <!-- Data Add/Download Buttons -->
+            <div class="mt-5 text-center">
+                <button id="newEntryButton" class="btn btn-sm btn-info" data-toggle="modal"
+                    data-target="#createEntryModal">Add
+                    New
+                    Entry</button>
+                <button id="downloadPDFButton" class="btn btn-sm btn-danger">Download PDF</button>
+                <button id="downloadXLSXButton" class="btn btn-sm btn-primary">Download Excel</button>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="modelFilter">Device Model</label>
-                    <input type="text" class="form-control" id="modelFilter">
-                </div>
+
+            <!-- Data Table to Display -->
+            <div class="mt-5">
+                <table class="table table-hover custom-table">
+                    <thead>
+                        <tr>
+                            <th style="font-size: medium;">S No.</th>
+                            <th style="font-size: medium;">Serial Number</th>
+                            <th style="font-size: medium;">Make</th>
+                            <th style="font-size: medium;">Model</th>
+                            <th style="font-size: medium;">Type</th>
+                            <th style="font-size: medium;">Total Power(Watt)</th>
+                            <th style="font-size: medium;">Total BTU</th>
+                            <th style="font-size: medium;">Total Cable</th>
+                            <th style="font-size: medium;">Socket Type</th>
+                            <th style="font-size: medium;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deviceDetails">
+                        {{range $index, $record := .}}
+                        <tr class="row-transition">
+                            <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
+                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
+                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
+                            <td style="font-size: small;">{{$record.Model}}</td>
+                            <td style="font-size: small;">{{$record.DeviceType}}</td>
+                            <td style="font-size: small;">{{$record.TotalPowerWatt}}</td>
+                            <td style="font-size: small;">{{$record.TotalBTU}}</td>
+                            <td style="font-size: small;">{{$record.TotalPowerCable}}</td>
+                            <td style="font-size: small;">{{$record.PowerSocketType}}</td>
+                            <td style="font-size: small;">
+                                <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
+                                <button class="update-button" data-id="{{$record.Id}}">Update</button>
+                            </td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
             </div>
+
         </div>
-        <div class="text-center mt-3">
-            <button type="submit" id="applyFilterButton" class="btn btn-sm btn-warning">Apply Filter</button>
-        </div>
-    </div>
-
-    <!-- Data Add/Download Buttons -->
-    <div class="container mt-3 text-center">
-        <button id="newEntryButton" class="btn btn-sm btn-info" data-toggle="modal" data-target="#createEntryModal">Add
-            New
-            Entry</button>
-        <button id="downloadPDFButton" class="btn btn-sm btn-danger">Download PDF</button>
-        <button id="downloadXLSXButton" class="btn btn-sm btn-primary">Download Excel</button>
-    </div>
+    </main>
 
     <!-- Modal for add data-->
     <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
@@ -358,7 +431,6 @@
         </div>
     </div>
 
-
     <!-- modal for update data -->
     <div class="modal fade" id="updatePowerModal" tabindex="-1" role="dialog" aria-labelledby="updatePowerModalLabel"
         aria-hidden="true">
@@ -434,47 +506,6 @@
         </div>
     </div>
 
-
-    <!-- Data Table to Display -->
-    <div class="container mt-3">
-        <table class="table table-hover custom-table">
-            <thead>
-                <tr>
-                    <th style="font-size: medium;">S No.</th>
-                    <th style="font-size: medium;">Serial Number</th>
-                    <th style="font-size: medium;">Make</th>
-                    <th style="font-size: medium;">Model</th>
-                    <th style="font-size: medium;">Type</th>
-                    <th style="font-size: medium;">Total Power(Watt)</th>
-                    <th style="font-size: medium;">Total BTU</th>
-                    <th style="font-size: medium;">Total Cable</th>
-                    <th style="font-size: medium;">Socket Type</th>
-                    <th style="font-size: medium;">Action</th>
-                </tr>
-            </thead>
-            <tbody id="deviceDetails">
-                {{range $index, $record := .}}
-                <tr class="row-transition">
-                    <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
-                    <td style="font-size: small;">{{$record.SerialNumber}}</td>
-                    <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
-                    <td style="font-size: small;">{{$record.Model}}</td>
-                    <td style="font-size: small;">{{$record.DeviceType}}</td>
-                    <td style="font-size: small;">{{$record.TotalPowerWatt}}</td>
-                    <td style="font-size: small;">{{$record.TotalBTU}}</td>
-                    <td style="font-size: small;">{{$record.TotalPowerCable}}</td>
-                    <td style="font-size: small;">{{$record.PowerSocketType}}</td>
-                    <td style="font-size: small;">
-                        <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
-                        <button class="update-button" data-id="{{$record.Id}}">Update</button>
-                    </td>
-                </tr>
-                {{end}}
-            </tbody>
-        </table>
-    </div>
-
-
     <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
@@ -493,6 +524,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
     <script>
 
         $(document).ready(function () {
@@ -853,8 +885,6 @@
 
 
     </script>
-
-
 
 </body>
 
