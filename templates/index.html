@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #ffffff;
+            background-color: #331D2C;
             padding: 30px;
         }
 
@@ -31,7 +31,7 @@
             position: relative;
             max-width: 850px;
             width: 100%;
-            background: #FECDA6;
+            background: #FFFEC4;
             padding: 40px 30px;
             perspective: 2700px;
         }
@@ -61,10 +61,10 @@
             width: 100%;
         }
 
-        /* .cover .back {
-    transform: rotateY(180deg);
-    backface-visibility: hidden;
-} */
+        .cover .back {
+            transform: rotateY(180deg);
+            backface-visibility:visible;
+        }
 
         .container .cover::before,
         .container .cover::after {
@@ -72,7 +72,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            background: #164863;
+            background: #FF8989;
             opacity: 1;
             z-index: 12;
         }
@@ -106,7 +106,7 @@
         .container .forms {
             height: 100%;
             width: 100%;
-            background: #FECDA6;
+            background: #FFFEC4;
         }
 
         .container .form-content {
@@ -124,7 +124,7 @@
             position: relative;
             font-size: 50px;
             font-weight: 500;
-            color: #d18547;
+            color: #1F4172;
         }
 
         .forms .form-content .title:before {
@@ -195,7 +195,7 @@
 
         .forms .form-content .button input {
             color: #fff;
-            background: #6ea1e9;
+            background: #4D3C77;
             border-radius: 6px;
             padding: 0;
             cursor: pointer;
@@ -265,8 +265,7 @@
                 <img src="/static/images/logo1.jpg" alt="logo">
             </div>
             <div class="back">
-                <img class="backImg" src="/static/images/logo1.jpg" alt="asset locator logo">
-
+                <img src="/static/images/logo1.jpg" alt="asset locator logo">
             </div>
         </div>
         <div class="forms">
