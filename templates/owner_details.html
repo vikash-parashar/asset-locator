@@ -104,7 +104,8 @@
     <!-- main content -->
     <style>
         td {
-            font-family: "Times New Roman", Times, serif;
+            font-size: medium;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         /* Page Heading styles */
@@ -269,20 +270,18 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="serialNumberFilter">Serial Number</label>
-                            <input type="text" class="form-control" id="serialNumberFilter" />
+                            <input type="text" class="form-control" id="serialNumberFilter"
+                                placeholder="Serial Number" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="makeFilter">Device Make</label>
-                            <input type="text" class="form-control" id="makeFilter" />
+                            <input type="text" class="form-control" id="makeFilter" placeholder="Device Make" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="modelFilter">Device Model</label>
-                            <input type="text" class="form-control" id="modelFilter" />
+                            <input type="text" class="form-control" id="modelFilter" placeholder="Device Model" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -308,37 +307,37 @@
 
             <!-- Data Table to Display -->
             <div class="mt-5">
-                <table class="table table-hover custom-table">
+                <table class="table table-hover custom-table table-bordered">
                     <thead>
                         <tr>
-                            <th style="font-size: medium;">S No.</th>
-                            <th style="font-size: medium;">Serial Number</th>
-                            <th style="font-size: medium;">Make</th>
-                            <th style="font-size: medium;">Model</th>
-                            <th style="font-size: medium;">PO Number</th>
-                            <th style="font-size: medium;">PO Order Date</th>
-                            <th style="font-size: medium;">EOSL Date</th>
-                            <th style="font-size: medium;">AMC Start Date</th>
-                            <th style="font-size: medium;">AMC End Date</th>
-                            <th style="font-size: medium;">Device Owner</th>
-                            <th style="font-size: medium;">Action</th>
+                            <th>S No.</th>
+                            <th>Serial Number</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>PO Number</th>
+                            <th>PO Order Date</th>
+                            <th>EOSL Date</th>
+                            <th>AMC Start Date</th>
+                            <th>AMC End Date</th>
+                            <th>Device Owner</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
                         {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{$record.Model}}</td>
-                            <td style="font-size: small;">{{$record.PONumber}}</td>
+                            <td>{{add1 $index}}</td>
+                            <td>{{$record.SerialNumber}}</td>
+                            <td>{{$record.DeviceMakeModel}}</td>
+                            <td>{{$record.Model}}</td>
+                            <td>{{$record.PONumber}}</td>
                             <!-- Modify the relevant table cell (e.g., POOrderDate, EOSLDate, AMCStartDate, AMCEndDate) -->
-                            <td class="date-cell" style="font-size: small;">{{$record.POOrderDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{$record.EOSLDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{$record.AMCStartDate}}</td>
-                            <td class="date-cell" style="font-size: small;">{{$record.AMCEndDate}}</td>
-                            <td style="font-size: small;">{{$record.DeviceOwner}}</td>
-                            <td style="font-size: small;">
+                            <td class="date-cell">{{$record.POOrderDate}}</td>
+                            <td class="date-cell">{{$record.EOSLDate}}</td>
+                            <td class="date-cell">{{$record.AMCStartDate}}</td>
+                            <td class="date-cell">{{$record.AMCEndDate}}</td>
+                            <td>{{$record.DeviceOwner}}</td>
+                            <td>
                                 <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
                                 <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>

@@ -104,7 +104,8 @@
     <!-- main content -->
     <style>
         td {
-            font-family: "Times New Roman", Times, serif;
+            font-size: medium;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         /* Page Heading styles */
@@ -269,20 +270,18 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="serialNumberFilter">Serial Number</label>
-                            <input type="text" class="form-control" id="serialNumberFilter" />
+                            <input type="text" class="form-control" id="serialNumberFilter"
+                                placeholder="Serial Number" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="makeFilter">Device Make</label>
-                            <input type="text" class="form-control" id="makeFilter" />
+                            <input type="text" class="form-control" id="makeFilter" placeholder="Device Make" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="modelFilter">Device Model</label>
-                            <input type="text" class="form-control" id="modelFilter" />
+                            <input type="text" class="form-control" id="modelFilter" placeholder="Device Model" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -308,7 +307,7 @@
 
             <!-- Data Table to Display -->
             <div class="mt-5">
-                <table class="table table-hover custom-table">
+                <table class="table table-hover custom-table table-bordered">
                     <thead>
                         <tr>
                             <th>S No.</th>
@@ -329,19 +328,19 @@
                     <tbody id="deviceDetails">
                         {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size: medium;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{$record.Model}}</td>
-                            <td style="font-size: small;">{{$record.DeviceType}}</td>
-                            <td style="font-size: small;">{{$record.DataCenter}}</td>
-                            <td style="font-size: small;">{{$record.Region}}</td>
-                            <td style="font-size: small;">{{$record.DCLocation}}</td>
-                            <td style="font-size: small;">{{$record.DeviceLocation}}</td>
-                            <td style="font-size: small;">{{$record.DeviceRowNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceRackNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceRUNumber}}</td>
-                            <td style="font-size: small;">
+                            <td>{{add1 $index}}</td>
+                            <td>{{$record.SerialNumber}}</td>
+                            <td>{{$record.DeviceMakeModel}}</td>
+                            <td>{{$record.Model}}</td>
+                            <td>{{$record.DeviceType}}</td>
+                            <td>{{$record.DataCenter}}</td>
+                            <td>{{$record.Region}}</td>
+                            <td>{{$record.DCLocation}}</td>
+                            <td>{{$record.DeviceLocation}}</td>
+                            <td>{{$record.DeviceRowNumber}}</td>
+                            <td>{{$record.DeviceRackNumber}}</td>
+                            <td>{{$record.DeviceRUNumber}}</td>
+                            <td>
                                 <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
                                 <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>

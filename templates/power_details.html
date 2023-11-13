@@ -104,7 +104,8 @@
     <!-- main content -->
     <style>
         td {
-            font-family: "Times New Roman", Times, serif;
+            font-size: medium;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         /* Page Heading styles */
@@ -270,20 +271,18 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="serialNumberFilter">Serial Number</label>
-                            <input type="text" class="form-control" id="serialNumberFilter" />
+                            <input type="text" class="form-control" id="serialNumberFilter"
+                                placeholder="Serial Number" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="makeFilter">Device Make</label>
-                            <input type="text" class="form-control" id="makeFilter" />
+                            <input type="text" class="form-control" id="makeFilter" placeholder="Device Make" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="modelFilter">Device Model</label>
-                            <input type="text" class="form-control" id="modelFilter" />
+                            <input type="text" class="form-control" id="modelFilter" placeholder="Device Model" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -308,35 +307,35 @@
             </div>
 
             <!-- Data Table to Display -->
-            <div class="mt-5">
-                <table class="table table-hover custom-table">
+            <div class="mt-5 text-center">
+                <table class="table table-hover custom-table table-bordered">
                     <thead>
                         <tr>
-                            <th style="font-size: medium;">S No.</th>
-                            <th style="font-size: medium;">Serial Number</th>
-                            <th style="font-size: medium;">Make</th>
-                            <th style="font-size: medium;">Model</th>
-                            <th style="font-size: medium;">Type</th>
-                            <th style="font-size: medium;">Total Power(Watt)</th>
-                            <th style="font-size: medium;">Total BTU</th>
-                            <th style="font-size: medium;">Total Cable</th>
-                            <th style="font-size: medium;">Socket Type</th>
-                            <th style="font-size: medium;">Action</th>
+                            <th>S No.</th>
+                            <th>Serial Number</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Total Power(Watt)</th>
+                            <th>Total BTU</th>
+                            <th>Total Cable</th>
+                            <th>Socket Type</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="deviceDetails">
                         {{range $index, $record := .}}
                         <tr class="row-transition">
-                            <td style="font-size: medium; background-color: #F5F7F8;color:#4F4A45;">{{add1 $index}}</td>
-                            <td style="font-size: small;">{{$record.SerialNumber}}</td>
-                            <td style="font-size: small;">{{$record.DeviceMakeModel}}</td>
-                            <td style="font-size: small;">{{$record.Model}}</td>
-                            <td style="font-size: small;">{{$record.DeviceType}}</td>
-                            <td style="font-size: small;">{{$record.TotalPowerWatt}}</td>
-                            <td style="font-size: small;">{{$record.TotalBTU}}</td>
-                            <td style="font-size: small;">{{$record.TotalPowerCable}}</td>
-                            <td style="font-size: small;">{{$record.PowerSocketType}}</td>
-                            <td style="font-size: small;">
+                            <td>{{add1 $index}}</td>
+                            <td>{{$record.SerialNumber}}</td>
+                            <td>{{$record.DeviceMakeModel}}</td>
+                            <td>{{$record.Model}}</td>
+                            <td>{{$record.DeviceType}}</td>
+                            <td>{{$record.TotalPowerWatt}}</td>
+                            <td>{{$record.TotalBTU}}</td>
+                            <td>{{$record.TotalPowerCable}}</td>
+                            <td>{{$record.PowerSocketType}}</td>
+                            <td>
                                 <button class="delete-button" data-id="{{$record.Id}}">Delete</button>
                                 <button class="update-button" data-id="{{$record.Id}}">Update</button>
                             </td>
@@ -819,7 +818,6 @@
         function capitalize(str) {
             return str.slice(0).toUpperCase();
         }
-
 
         // Function to fetch and display user details when the page loads
         function fetchCurrentUserDetails() {
