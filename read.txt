@@ -1,0 +1,114 @@
+User
+is it possible to make request to an external server from my golang app , and when the connection is establised then run a cmd cmd to get data 
+
+like i.e..  
+
+Local Host - Where tool is installed.
+
+Local Host -> Request -> Server  - As request sucessfuly gets established
+
+Solaris / Linux
+
+SSH (22) / RDP (3389)
+
+echo |format - Disk
+hostname  - server name
+
+
+
+is it possible ?
+
+if possible how to implement into my golang web app
+
+ChatGPT
+
+
+
+
+
+
+
+
+
+
+
+Yes, it is definitely possible to make requests to an external server from your Golang web application and run a command on that server once the connection is established. In your case, it seems like you want to establish a connection to a remote server (Solaris/Linux) using SSH and then run specific commands.
+
+You can achieve this in Golang using packages such as golang.org/x/crypto/ssh for SSH connections. Here's a simplified example:
+
+go
+Copy code
+package main
+
+import (
+	"fmt"
+	"golang.org/x/crypto/ssh"
+	"log"
+	"os"
+)
+
+func main() {
+	// Replace these with your own values
+	server := "your-server-address"
+	port := 22
+	user := "your-ssh-username"
+	password := "your-ssh-password"
+
+	// Establish an SSH connection
+	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", server, port), &ssh.ClientConfig{
+		User: user,
+		Auth: []ssh.AuthMethod{
+			ssh.Password(password),
+		},
+	})
+	if err != nil {
+		log.Fatalf("Failed to dial: %s", err)
+	}
+	defer client.Close()
+
+	// Run a command on the remote server
+	session, err := client.NewSession()
+	if err != nil {
+		log.Fatalf("Failed to create session: %s", err)
+	}
+	defer session.Close()
+
+	// Example command: "echo | format - Disk"
+	cmd := "echo | format - Disk"
+	output, err := session.CombinedOutput(cmd)
+	if err != nil {
+		log.Fatalf("Failed to run command: %s", err)
+	}
+
+	fmt.Println("Command output:", string(output))
+}
+This is a basic example, and you might need to modify it based on your specific requirements. Also, note that using a password for SSH authentication in production is generally not recommended. Instead, consider using key-based authentication.
+
+In a web application, you might want to trigger this functionality in response to a specific HTTP request. You can use a web framework like Gorilla Mux or Echo to handle HTTP requests and integrate the SSH functionality as needed. Here's a very basic example using Gorilla Mux:
+
+go
+Copy code
+package main
+
+import (
+	"fmt"
+	"github.com/gorilla/mux"
+	"net/http"
+)
+
+func handleSSHRequest(w http.ResponseWriter, r *http.Request) {
+	// Your SSH connection and command execution logic here
+
+	fmt.Fprintln(w, "SSH command executed successfully")
+}
+
+func main() {
+	r := mux.NewRouter()
+	r.HandleFunc("/run-ssh-command", handleSSHRequest).Methods("GET")
+
+	http.Handle("/", r)
+
+	// Replace "your-listening-address" and "your-listening-port" with your desired values
+	http.ListenAndServe("your-listening-address:your-listening-port", nil)
+}
+This is a basic example, and you'll need to adapt it to fit the structure and requirements of your web application. Additionally, consider adding proper error handling, security measures, and using a more sophisticated framework if your application becomes more complex.
