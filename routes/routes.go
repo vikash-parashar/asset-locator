@@ -12,6 +12,10 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	r.GET("/health-check", handlers.HealthCheck)
 	r.GET("/", handlers.RenderIndexPage)
 	r.POST("/signup", handlers.SignUp(dbConn))
+
+	// r.POST("/about", handlers.About)
+	// r.POST("/help", handlers.Help)
+
 	r.POST("/login", handlers.Login(dbConn))
 	r.POST("/logout", handlers.Logout())
 	r.GET("/forget-password-page", handlers.RenderForgotPasswordPage)
