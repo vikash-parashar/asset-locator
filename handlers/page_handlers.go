@@ -9,7 +9,8 @@ import (
 )
 
 func HealthCheck(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "application is running"})
+	// c.JSON(http.StatusOK, gin.H{"status": "success", "message": "application is running"})
+	c.HTML(http.StatusOK, "healthcheck.html", nil)
 }
 
 func RenderIndexPage(c *gin.Context) {

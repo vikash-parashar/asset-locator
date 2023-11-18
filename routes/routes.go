@@ -25,6 +25,9 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	// Homepage
 	protected.GET("/homepage", handlers.RenderHomePage(dbConn))
 
+	// for fetching disk details from external server
+	protected.GET("/disk-details", handlers.FetchDisks)
+
 	// User
 	protected.GET("/get-current-user", handlers.GetCurrentUser(dbConn))
 

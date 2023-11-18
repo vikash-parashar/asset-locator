@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fireworks</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #FF8F8F;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .firework-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .firework {
+            width: 5px;
+            height: 200px;
+            background-color: #EEF296;
+            border-radius: 5px;
+            position: absolute;
+            opacity: 0;
+            animation: launch 10s forwards;
+        }
+
+        .firework:before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: rgb(32, 168, 50);
+            top: 10px;
+            left: 50%;
+            transform: translateX(-30%);
+            animation: explode 10s forwards;
+        }
+
+        img {
+            height: 100px;
+            width: 100px;
+            border-radius: 70%;
+        }
+
+        .logo {
+            margin-top: 20%;
+            margin-left: 25%;
+        }
+
+        .text {
+            font-family: 'Righteous', sans-serif;
+            color: #860A35;
+            margin-left: 380px;
+        }
+
+        @keyframes launch {
+            0% {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-500px);
+            }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fireworks {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(5deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            75% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        .anm {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-top: 10px;
+            /* animation: rotate 4s infinite; */
+            transform: scaleX(-1);
+        }
+
+        .anm1 {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        /* 
+        @keyframes rotate {
+            0% {
+                transform: scaleX(-1) rotate(0deg);
+            }
+
+            100% {
+                transform: scaleX(-1) rotate(360deg);
+            } 
+        }*/
+    </style>
+</head>
+
+<body>
+    <div class="firework-container">
+        <div class="firework"></div>
+    </div>
+    <div class="container">
+        <div class="logo">
+            <img src="/static/images/logo3.png" alt="brand logo" srcset="" class="mirror">
+        </div>
+        <h1 class="text">Device Discovery</h1>
+        <div class="text">
+            <h2>Application Status : Running . . . . </h2>
+            <span><img src="/static/images/ok.gif" alt="" srcset="" class="anm1"></span>
+            <span><img src="/static/images/running animation.gif" alt="" srcset="" class="anm"></span>
+        </div>
+    </div>
+
+    <script>
+        // Dynamically create and append multiple fireworks
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.querySelector('.firework-container');
+
+            for (let i = 0; i < 100; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = `${Math.random() * 100}vw`;
+
+                // Add a slight delay to create a staggered effect
+                firework.style.animationDelay = `${i * 1}s`;
+
+                container.appendChild(firework);
+            }
+        });
+    </script>
+</body>
+
+</html>
