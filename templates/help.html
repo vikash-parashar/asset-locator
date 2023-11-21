@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <link rel="icon" href="/static/images/favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+    <!-- top navbar css -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Marhey&family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #435585;
+            color: #F5E8C7;
+        }
+
+        nav {
+            background-color: #363062;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            border: solid 1px rgb(113, 113, 65);
+
+        }
+
+        .brand-logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            position: relative;
+            left: 10px;
+        }
+
+        .app-name {
+            font-family: 'Righteous', sans-serif;
+            color: #ffffff;
+            font-size: 2rem;
+        }
+
+        .user-profile {
+            /* font-family: 'Nunito Sans', sans-serif; */
+            font-family: 'Righteous', sans-serif;
+            cursor: pointer;
+        }
+
+        .user-profile img {
+            height: 35px;
+            width: 35px;
+            position: relative;
+            right: 10px;
+            border: solid 1px rgb(113, 113, 65);
+            border-radius: 50%;
+        }
+
+        #dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 10px;
+            top: 80px;
+            display: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media only screen and (max-width: 412px) {
+
+            nav {
+                flex-direction: row;
+                align-items: flex-start;
+                font-weight: bold;
+            }
+
+            .brand-logo,
+            .app-name,
+            .user-profile {
+                /* margin-bottom: 10px; */
+                margin: auto;
+                padding: 15px;
+            }
+
+            #dropdown-content {
+                position: absolute;
+                /* top: 300%; */
+                right: 10px;
+                top: 105px;
+                display: none;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                padding: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .app-name {
+                margin-left: 20px;
+                color: #fffffe;
+                /* font-family: 'Marhey', sans-serif; */
+                font-family: 'Palanquin Dark', sans-serif;
+                font-size: 1.0rem;
+            }
+
+            nav {
+                background-color: #363062;
+                /* border: solid 2px rgb(174, 69, 69); */
+            }
+
+            .brand-logo {
+                margin-left: 0;
+            }
+        }
+    </style>
+
+    <!-- main section css -->
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+
+        main {
+            display: flex;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .left-section {
+            height: 95vh;
+            width: 20vw;
+            background-color: #818FB4;
+            /* display: inline-block; */
+            border: solid 1px rgb(113, 113, 65);
+        }
+
+        .left-div {
+            height: 10em;
+            width: 100%;
+            background-color: #818FB4;
+            /* display: inline-block; */
+            /* overflow-x: scroll; */
+        }
+
+        ul {
+            list-style-type: none;
+            font-family: 'Righteous', sans-serif;
+            padding-left: 10px;
+            margin-top: 100px;
+        }
+
+        li {
+            margin: 50px;
+        }
+
+        .nav-item {
+            list-style-type: none;
+            height: 20%;
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .off-img {
+            margin-right: 20px;
+            width: 40px;
+        }
+
+        .right-section {
+            height: 95vh;
+            width: 80vw;
+            /* background-color: antiquewhite; */
+            /* display: inline-block; */
+            /* overflow: scroll; */
+            justify-content: center;
+        }
+
+        .right-div {
+            height: 100vh;
+            width: 100%;
+            /* background-color: rgb(4, 250, 139); */
+            /* display: inline-block; */
+            justify-content: center;
+        }
+
+        .page-heading {
+            /* margin-top: 100px; */
+            margin: 50px;
+            /* display: inline-block; */
+            /* font-family: 'Righteous', sans-serif; */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h1 {
+            /* padding: 20px; */
+            height: 10%;
+        }
+
+        .buttons {
+            margin: 50px;
+
+        }
+
+
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            height: 5vh;
+            width: 100vw;
+            background-color: #fff;
+        }
+
+        @media only screen and (max-width: 950px) {
+            .nav-item {
+                padding: 30px;
+                margin: 0px 0 0px 0;
+            }
+
+            .nav-link {
+                padding: 0;
+                font-size: 10px;
+            }
+
+            .left-div {
+                background-color: #818FB4;
+            }
+
+            ul {
+                margin: 0;
+            }
+
+            .off-img {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 10px;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            h1 {
+                display: inline-block;
+            }
+        }
+    </style>
+
+    <!-- query form styling -->
+    <style>
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- top navbar -->
+    <header>
+        <nav>
+            <div class="brand-logo">
+                <img src="/static/images/logo3.png" alt="Logo" />
+            </div>
+            <div class="app-name">
+                <!-- Your application name goes here -->
+                Asset Locator - Device Discovery
+            </div>
+            <div class="user-profile">
+                <!-- Your user profile component goes here -->
+                <img class="profile" src="/static/images/man.png" alt="Profile" onclick="toggleDropdown()" />
+                <div id="dropdown-content" style="display: none;">
+                    <div>
+                        <h2 style="color: #4a6be1" class="text-center">User Profile</h2>
+                    </div>
+                    <hr />
+                    <br />
+                    <h6 class="dropdown-item-text" style="color: #de9b4a">
+                        NAME :
+                        <span id="firstNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                    </h6>
+                    <h6 class="dropdown-item-text" style="color: #de9b4a">
+                        PHONE : <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                    </h6>
+                    <h6 class="dropdown-item-text" style="color: #de9b4a">
+                        ROLE : <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                    </h6>
+                    <br />
+                    <hr />
+                    <div class="text-center">
+                        <button id="logout-button" class="btn btn-danger ml-2">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <!-- left side navbar container-->
+        <section class="left-section">
+
+            <!-- left side content -->
+            <div class="left-div">
+                <ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/homepage">
+                            <img class="off-img" src="/static/images/home (1).png" alt="homepage">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">
+                            <img class="off-img" src="/static/images/location-round.png" alt="location-logo">
+                            Location
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">
+                            <img class="off-img" src="/static/images/ownership-round.png" alt="owner-logo">
+                            Owner
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">
+                            <img class="off-img" src="/static/images/power-round.png" alt="power-logo">
+                            Power
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">
+                            <img class="off-img" src="/static/images/fiber-cable-round.png" alt="fiber-logo">
+                            Fiber
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="http://localhost:8080/about">
+                            <img src="/static/images/about.png" alt="" class="off-img">
+                            About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" style="color: #ea0d26" href="http://localhost:8080/help">
+                            <img src="/static/images/contactus.png" alt="" class="off-img">
+                            Get Help
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- right side main content container -->
+        <section class="right-section">
+
+            <!-- right side content -->
+            <div class="right-div">
+                <form id="helpForm">
+                    <h2>Get Help</h2>
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+
+                    <label for="mobile">Mobile:</label>
+                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="query">Query:</label>
+                    <textarea id="query" name="query" rows="4" required></textarea>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2023 TestWebsite.com</p>
+        </div>
+    </footer>
+
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById("helpForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            // You need to add code here to handle form submission, send the data to the backend, and trigger the email.
+            // This can be done using JavaScript (e.g., fetch API) or any JavaScript framework you are using.
+        });
+    </script>
+
+    <!-- user dropdown script -->
+    <script>
+        function toggleDropdown() {
+            var dropdownContent = document.getElementById("dropdown-content");
+            if (dropdownContent.style.display === "none") {
+                dropdownContent.style.display = "block";
+            } else {
+                dropdownContent.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script>
+        // <!-- sweet alerts -->
+
+        function showToast(icon, title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+        // showToast('success', 'Signed in successfully');
+
+
+
+        // <!-- get current user details -->
+
+
+        function capitalize(str) {
+            return str.slice(0).toUpperCase();
+        }
+
+
+        // Function to fetch and display user details when the page loads
+        function fetchCurrentUserDetails() {
+            fetch('/api/v1/get-current-user', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    if (!response.ok) {
+                        console.error("Network response was not ok");
+                        showToast("error", "Try Again !")
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('firstNamePlaceholder').innerHTML = capitalize(data.user.first_name);
+                    // document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
+                    document.getElementById('phonePlaceholder').innerHTML = capitalize(data.user.phone);
+                    // document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
+                    document.getElementById('rolePlaceholder').innerHTML = capitalize(data.user.role);
+                })
+
+                .catch(error => {
+                    showToast("error", "Something went wrong !")
+                    console.error('Error fetching user details:', error);
+                });
+        }
+
+        // Add an event listener to fetch user details when the page loads
+        document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
+
+
+        // <!-- handle logout -->
+        function handleLogout() {
+            fetch("/logout", {
+                method: "POST",
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        showToast("error", "Try Again !")
+                        console.error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        showToast("success", "Logout Success");
+                        window.location.href = "/"; // Redirect to the root path
+                    } else {
+                        showToast("error", "Try Again !");
+                    }
+                })
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    showToast(3, "An error occurred while logging out.");
+                });
+        }
+
+        // Attach the handleLogout function to the logout button's click event
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.addEventListener("click", handleLogout);
+
+    </script>
+</body>
+
+</html>

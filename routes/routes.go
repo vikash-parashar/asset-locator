@@ -9,12 +9,13 @@ import (
 
 func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	// Unprotected routes
-	r.GET("/health-check", handlers.HealthCheck)
 	r.GET("/", handlers.RenderIndexPage)
+	r.GET("/signup", handlers.RenderIndexPage)
+	r.GET("/login", handlers.RenderIndexPage)
+	r.GET("/about", handlers.RenderAboutPage)
+	r.GET("/help", handlers.RenderGetHelpPage)
+	r.GET("/health-check", handlers.HealthCheck)
 	r.POST("/signup", handlers.SignUp(dbConn))
-
-	// r.POST("/about", handlers.About)
-	// r.POST("/help", handlers.Help)
 
 	r.POST("/login", handlers.Login(dbConn))
 	r.POST("/logout", handlers.Logout())

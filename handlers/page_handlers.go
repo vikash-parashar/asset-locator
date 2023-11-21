@@ -19,6 +19,12 @@ func RenderIndexPage(c *gin.Context) {
 func RenderForgotPasswordPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "forgot_password.html", nil)
 }
+func RenderAboutPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "about.html", nil)
+}
+func RenderGetHelpPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "help.html", nil)
+}
 func RenderHomePage(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.HTML(http.StatusOK, "homepage.html", nil)
