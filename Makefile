@@ -30,12 +30,14 @@
 
 # Makefile
 
-# Makefile
-
-.PHONY: run migrate
+.PHONY: run migrate-up migrate-down
 
 run:
 	go run main.go
 
-migrate:
-	go run main.go -migrate
+migrate-up:
+	go run main.go -migrate up
+
+migrate-down:
+	go run main.go -migrate down
+
