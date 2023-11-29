@@ -17,7 +17,15 @@ func loadEnvVariables() {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
 }
+func createTables(d *db.DB) error {
+	content, err := os.ReadFile("schema.sql")
+	if err != nil {
+		return err
+	}
 
+	_, err = d.Exec(string(content))
+	return err
+}
 func main() {
 	loadEnvVariables()
 
@@ -35,6 +43,10 @@ func main() {
 	}
 	defer dbConn.Close()
 
+	// Create tables
+	if err := createTables(dbConn); err != nil {
+		log.Fatalf("Error creating tables: %v", err)
+	}
 	r := gin.Default()
 
 	// Serve static files from the "static" directory
@@ -45,7 +57,7 @@ func main() {
 			return i + 1
 		},
 	})
-	
+
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 	// Set up routes from the routes package

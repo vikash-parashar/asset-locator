@@ -27,3 +27,15 @@
 
 # clean:
 #     @docker-compose down --volumes
+
+# Makefile
+
+# Makefile
+
+.PHONY: run migrate
+
+run:
+	go run main.go
+
+migrate:
+	go run main.go -migrate
