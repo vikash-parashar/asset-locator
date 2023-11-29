@@ -906,7 +906,7 @@
                 formData.device_owner = $("#updateAMCDeviceOwner").val();
 
                 $.ajax({
-                    type: "PUT",
+                    type: "PATCH",
                     url: "/api/v1/owner-details/" + formData.id,
                     contentType: "application/json", // Set the correct content type
                     data: JSON.stringify(formData),

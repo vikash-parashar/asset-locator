@@ -811,7 +811,7 @@
         formData.connected_device_port = $("#updateConnectedDevicePort").val();
 
         $.ajax({
-          type: "PUT",
+          type: "PATCH",
           url: "/api/v1/fiber-details/" + formData.id,
           contentType: "application/json", // Set the correct content type
           data: JSON.stringify(formData),

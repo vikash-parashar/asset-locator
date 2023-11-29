@@ -864,7 +864,7 @@
                 formData.power_socket_type = $("#updatePowerSocketType").val();
 
                 $.ajax({
-                    type: "PUT",
+                    type: "PATCH",
                     url: "/api/v1/power-details/" + formData.id,
                     contentType: "application/json", // Set the correct content type
                     data: JSON.stringify(formData),

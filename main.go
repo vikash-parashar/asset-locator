@@ -45,6 +45,7 @@ func main() {
 			return i + 1
 		},
 	})
+	
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 	// Set up routes from the routes package

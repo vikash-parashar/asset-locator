@@ -39,7 +39,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	// Location Details
 	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))
 	protected.POST("/location-details", handlers.CreateNewLocationDetails(dbConn))
-	protected.PUT("/location-details/:id", handlers.UpdateDeviceLocationDetail(dbConn))
+	protected.PATCH("/location-details/:id", handlers.UpdateDeviceLocationDetail(dbConn))
 	protected.DELETE("/location-details/:id", handlers.DeleteDeviceLocationDetail(dbConn))
 	protected.GET("/location-details/pdf", handlers.DownloadDeviceLocationDetailPDF(dbConn))
 	protected.GET("/location-details/excel", handlers.DownloadDeviceLocationDetail(dbConn))
@@ -47,7 +47,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	// Owner Details
 	protected.GET("/owner-details", handlers.GetOwnerDetails(dbConn))
 	protected.POST("/owner-details", handlers.CreateNewOwnerDetails(dbConn))
-	protected.PUT("/owner-details/:id", handlers.UpdateDeviceAMCOwnerDetail(dbConn))
+	protected.PATCH("/owner-details/:id", handlers.UpdateDeviceAMCOwnerDetail(dbConn))
 	protected.DELETE("/owner-details/:id", handlers.DeleteDeviceAMCOwnerDetail(dbConn))
 	protected.GET("/owner-details/pdf", handlers.DownloadDeviceAMCOwnerDetailPDF(dbConn))
 	protected.GET("/owner-details/excel", handlers.DownloadDeviceAMCOwnerDetail(dbConn))
@@ -55,7 +55,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	// Power Details
 	protected.GET("/power-details", handlers.GetPowerDetails(dbConn))
 	protected.POST("/power-details", handlers.CreateNewPowerDetails(dbConn))
-	protected.PUT("/power-details/:id", handlers.UpdateDevicePowerDetail(dbConn))
+	protected.PATCH("/power-details/:id", handlers.UpdateDevicePowerDetail(dbConn))
 	protected.DELETE("/power-details/:id", handlers.DeleteDevicePowerDetail(dbConn))
 	protected.GET("/power-details/pdf", handlers.DownloadDevicePowerDetailPDF(dbConn))
 	protected.GET("/power-details/excel", handlers.DownloadDevicePowerDetail(dbConn))
@@ -64,7 +64,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	protected.GET("/fiber-details", handlers.GetFiberDetails(dbConn))
 	protected.GET("/fiber-details/:id", handlers.GetFiberDetailByID(dbConn))
 	protected.POST("/fiber-details", handlers.CreateNewFiberDetails(dbConn))
-	protected.PUT("/fiber-details/:id", handlers.UpdateDeviceEthernetFiberDetail(dbConn))
+	protected.PATCH("/fiber-details/:id", handlers.UpdateDeviceEthernetFiberDetail(dbConn))
 	protected.DELETE("/fiber-details/:id", handlers.DeleteDeviceEthernetFiberDetail(dbConn))
 	protected.GET("/fiber-details/pdf", handlers.DownloadDeviceEthernetFiberDetailPDF(dbConn))
 	protected.GET("/fiber-details/excel", handlers.DownloadDeviceEthernetFiberDetail(dbConn))
