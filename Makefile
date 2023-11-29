@@ -9,7 +9,8 @@ export POSTGRES_DB=mydbname
 IMAGE_NAME=myapp
 ACR_NAME=myacr  # Azure Container Registry name
 
-.PHONY: build run db-create db-drop db-insert clean deploy
+.PHONY: build run db-create clean deploy
+# .PHONY: build run db-create db-drop db-insert clean deploy
 
 build:
 	@docker build -t $(IMAGE_NAME) .
@@ -18,13 +19,13 @@ run:
 	@docker-compose up
 
 db-create:
-	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/createTable.sql
+	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/schema.up.sql
 
-db-drop:
-	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/dropTable.sql
+# db-drop:
+# 	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/schema.down.sql
 
-db-insert:
-	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/insertData.sql
+# db-insert:
+# 	@docker-compose run --rm db psql -h db -U $(POSTGRES_USER) -d $(POSTGRES_DB) -a -f db/insertData.sql
 
 clean:
 	@docker-compose down --volumes
