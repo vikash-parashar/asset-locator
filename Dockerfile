@@ -1,17 +1,29 @@
-# Use the official Golang image as the base image
-FROM golang:1.17
+# Stage 1: Build the Go app
+FROM golang:1.21 AS builder
 
-# Set the working directory inside the container
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the necessary files into the container
+# Copy the current directory contents into the container at /app
 COPY . .
 
-# Build the Golang application
-RUN go build -o asset-locator .
+# Build the Go app
+RUN go build -o main .
 
-# Expose the port that your application will run on
+# Stage 2: Create the final image
+FROM postgres:latest
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the compiled Go binary from the builder stage
+COPY --from=builder /app/main .
+
+# Copy the .env file to set environment variables for PostgreSQL
+COPY .env .
+
+# Expose port 8080 to the outside world (for the Go app)
 EXPOSE 8080
 
-# Command to run the executable
-CMD ["./asset-locator"]
+# Command to run the Go executable
+CMD ["./main"]

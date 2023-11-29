@@ -1,3 +1,4 @@
+CREATE DATABASE assetLocator;
 
 CREATE TABLE
     IF NOT EXISTS users (

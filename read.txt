@@ -22,8 +22,11 @@ if possible how to implement into my golang web app
 
 ChatGPT
 
+steps followed for deploy app into azure 
+az login
 
 
+az acr create --resource-group asset-l_group --name demoassetlocator --sku Basic
 
 
 
@@ -112,3 +115,87 @@ func main() {
 	http.ListenAndServe("your-listening-address:your-listening-port", nil)
 }
 This is a basic example, and you'll need to adapt it to fit the structure and requirements of your web application. Additionally, consider adding proper error handling, security measures, and using a more sophisticated framework if your application becomes more complex.
+
+
+
+
+
+
+
+
+$ az acr create --resource-group asset-l_group --name demoassetlocator --sku Basic
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-11-29T10:19:19.289000+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/8d8b2c5c-c49f-4723-b133-9a5bc412cb6f/resourceGroups/asset-l_group/providers/Microsoft.ContainerRegistry/registries/demoassetlocator",
+  "identity": null,
+  "location": "eastus",
+  "loginServer": "demoassetlocator.azurecr.io",
+  "name": "demoassetlocator",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-11-29T10:19:26.369505+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-11-29T10:19:26.369544+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "asset-l_group",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-11-29T10:19:19.289000+00:00",
+    "createdBy": "gowithvikash@gmail.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-11-29T10:19:19.289000+00:00",
+    "lastModifiedBy": "gowithvikash@gmail.com",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+
+# Replace <acr-name> with your desired ACR name
+az acr create --resource-group myResourceGroup --name <acr-name> --sku Basic
+
+
+//TODO:
+
+# Replace 'myResourceGroup' and 'myAciName' with your resource group name and desired ACI name
+az container create --resource-group asset-l_group --name demoassetlocator \
+    --image demoassetlocator.azurecr.io/$(IMAGE_NAME):latest \
+    --cpu 0.5 --memory 1.5Gi --registry-username demoassetlocator --registry-password $(az acr credential show --name demoassetlocator --query passwords[0].value -o tsv) \
+    --ports 80
