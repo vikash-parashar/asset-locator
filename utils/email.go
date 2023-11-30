@@ -6,21 +6,10 @@ import (
 	"net/smtp"
 	"os"
 	"strconv"
-
-	"github.com/joho/godotenv"
 )
-
-// Load .env file to read email settings
-func loadEnv() {
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
-}
 
 // SendResetPasswordEmail sends a reset email to the user using Gmail SMTP.
 func SendResetPasswordEmail(recipientEmail, resetToken string) error {
-	// Load environment variables from .env file
-	loadEnv()
 
 	// Retrieve email settings from environment variables
 	emailUsername := os.Getenv("EMAIL_USERNAME")
@@ -76,9 +65,9 @@ func SendResetPasswordEmail(recipientEmail, resetToken string) error {
 	defer wc.Close()
 
 	message := "To: " + recipientEmail + "\r\n" +
-		"Subject: Password Reset Request\r\n" +
+		"<h2>Subject: Password Reset Request</h2>\r\n" +
 		"\r\n" +
-		"To reset your password, click on the following link: " +
+		"<p>To reset your password, click on the following link:</p>\r\n" +
 		"http://localhost:8080/reset-password?token=" + resetToken
 
 	_, err = wc.Write([]byte(message))

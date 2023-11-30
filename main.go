@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/vikash-parashar/asset-locator/config"
 	"github.com/vikash-parashar/asset-locator/db"
 	"github.com/vikash-parashar/asset-locator/routes"
 
@@ -47,15 +48,11 @@ func runMigration(dbConn *db.DB, migrationType string) error {
 func main() {
 	loadEnvVariables()
 
-	port := os.Getenv("PORT")
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	// Load configuration
+	cfg := config.LoadConfig()
 
 	// Initialize the database connection
-	dbConn, err := db.NewDB(dbHost, dbPort, dbUser, dbPassword, dbName)
+	dbConn, err := db.NewDB(cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName)
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)
 	}
@@ -94,6 +91,6 @@ func main() {
 	// Set up routes from the routes package
 	routes.SetupRoutes(r, dbConn)
 
-	log.Fatal(r.Run(":" + port))
+	log.Fatal(r.Run(":" + cfg.Port))
 
 }
