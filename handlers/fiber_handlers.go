@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
-	"strconv"
+	"strconv" // Update with your actual import path
 
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/gin-gonic/gin"
@@ -15,14 +15,15 @@ import (
 
 func GetFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Fetching fiber details from the database")
 		data, err := db.GetAllDeviceEthernetFiberDetail()
 		if err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println(err)
 			c.HTML(http.StatusOK, "fiber_details.html", gin.H{"data": nil})
 			return
 		}
+		logger.InfoLogger.Println("Fiber details fetched successfully.")
 		c.HTML(http.StatusOK, "fiber_details.html", gin.H{"data": data})
-
 	}
 }
 
@@ -31,16 +32,20 @@ func GetFiberDetailByID(db *db.DB) gin.HandlerFunc {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
 			return
 		}
 
+		logger.InfoLogger.Println("Fetching fiber detail by ID:", id)
 		fiberDetail, err := db.GetFiberDetailByID(id)
 		if err != nil {
+			logger.ErrorLogger.Println("Fiber detail not found:", err)
 			c.JSON(http.StatusNotFound, gin.H{"error": "Fiber detail not found"})
 			return
 		}
 
+		logger.InfoLogger.Println("Fiber detail fetched successfully.")
 		c.JSON(http.StatusOK, fiberDetail)
 	}
 }
@@ -48,6 +53,8 @@ func GetFiberDetailByID(db *db.DB) gin.HandlerFunc {
 func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceEthernetFiberDetail
+
+		logger.InfoLogger.Println("Creating new fiber details")
 
 		// Retrieve form data
 		serialNumber := c.PostForm("serial_number")
@@ -71,11 +78,12 @@ func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.CreateDeviceEthernetFiberDetail(&data); err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println(err)
 			c.JSON(http.StatusOK, gin.H{"success": false, "message": "Failed to create entry"})
 			return
 		}
 
+		logger.InfoLogger.Println("New fiber details created successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Entry Added Successfully"})
 	}
 }
@@ -95,6 +103,7 @@ func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		}
 		var r DeviceEthernetFiberDetail
 		if err := c.BindJSON(&r); err != nil {
+			logger.ErrorLogger.Println("Invalid JSON data:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON data"})
 			return
 		}
@@ -114,10 +123,12 @@ func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.UpdateDeviceEthernetFiberDetail(nid, updatedData); err != nil {
+			logger.ErrorLogger.Println("Failed to update DeviceEthernetFiberDetail:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceEthernetFiberDetail"})
 			return
 		}
 
+		logger.InfoLogger.Println("DeviceEthernetFiberDetail updated successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail updated successfully"})
 	}
 }
@@ -127,24 +138,28 @@ func DeleteDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
 			return
 		}
 
 		if err := db.DeleteDeviceEthernetFiberDetail(id); err != nil {
+			logger.ErrorLogger.Println("Failed to delete DeviceEthernetFiberDetail:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DeviceEthernetFiberDetail"})
 			return
 		}
 
+		logger.InfoLogger.Println("DeviceEthernetFiberDetail deleted successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail deleted successfully"})
 	}
 }
 
 func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading DeviceEthernetFiberDetails as Excel file")
 		rows, err := db.Query("SELECT * FROM device_ethernet_fiber")
 		if err != nil {
-			log.Fatal(err)
+			logger.ErrorLogger.Println("Failed to query the database:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to query the database"})
 			return
 		}
@@ -153,7 +168,7 @@ func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		file := xlsx.NewFile()
 		sheet, err := file.AddSheet("DeviceEthernetFiberDetails")
 		if err != nil {
-			log.Fatal(err)
+			logger.ErrorLogger.Println("Failed to create Excel sheet:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create Excel sheet"})
 			return
 		}
@@ -172,7 +187,7 @@ func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		for rows.Next() {
 			var device models.DeviceEthernetFiberDetail
 			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
-				log.Fatal(err)
+				logger.ErrorLogger.Println("Failed to scan database row:", err)
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan database row"})
 				return
 			}
@@ -192,7 +207,7 @@ func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 		c.Header("Content-Disposition", "attachment; filename=DeviceEthernetFiberDetails.xlsx")
 		err = file.Write(c.Writer)
 		if err != nil {
-			log.Fatal(err)
+			logger.ErrorLogger.Println("Failed to write Excel file to response:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to write Excel file to response"})
 		}
 	}
@@ -200,9 +215,10 @@ func DownloadDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 
 func DownloadDeviceEthernetFiberDetailPDF(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading DeviceEthernetFiberDetails as PDF")
 		rows, err := db.Query("SELECT * FROM device_ethernet_fiber")
 		if err != nil {
-			log.Fatal(err)
+			logger.ErrorLogger.Println("Failed to query the database:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to query the database"})
 			return
 		}
@@ -224,7 +240,7 @@ func DownloadDeviceEthernetFiberDetailPDF(db *db.DB) gin.HandlerFunc {
 		for rows.Next() {
 			var device models.DeviceEthernetFiberDetail
 			if err := rows.Scan(&device.Id, &device.SerialNumber, &device.DeviceMakeModel, &device.Model, &device.DeviceType, &device.DevicePhysicalPort, &device.DevicePortType, &device.DevicePortMACWWN, &device.ConnectedDevicePort); err != nil {
-				log.Fatal(err)
+				logger.ErrorLogger.Println("Failed to scan database row:", err)
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan database row"})
 				return
 			}
@@ -249,6 +265,10 @@ func DownloadDeviceEthernetFiberDetailPDF(db *db.DB) gin.HandlerFunc {
 
 		c.Header("Content-Type", "application/pdf")
 		c.Header("Content-Disposition", "attachment; filename=DeviceEthernetFiberDetails.pdf")
-		pdf.Output(c.Writer)
+		err = pdf.Output(c.Writer)
+		if err != nil {
+			logger.ErrorLogger.Println("Failed to write PDF file to response:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to write PDF file to response"})
+		}
 	}
 }

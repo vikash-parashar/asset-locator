@@ -1,8 +1,7 @@
 package db
 
 import (
-	"log"
-
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -14,9 +13,10 @@ func (db *DB) CreateDeviceLocationDetail(data *models.DeviceLocationDetail) erro
 	`
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber)
 	if err != nil {
-		log.Printf("Error creating DeviceLocationDetail: %v", err)
+		logger.ErrorLogger.Printf("Error creating DeviceLocationDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Println("Created DeviceLocationDetail successfully")
 	return nil
 }
 
@@ -25,7 +25,7 @@ func (db *DB) GetAllDeviceLocationDetail() ([]models.DeviceLocationDetail, error
 	query := "SELECT * FROM device_location"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error querying DeviceLocationDetail: %v", err)
+		logger.ErrorLogger.Printf("Error querying DeviceLocationDetail: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -35,12 +35,13 @@ func (db *DB) GetAllDeviceLocationDetail() ([]models.DeviceLocationDetail, error
 		var data models.DeviceLocationDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
 		if err != nil {
-			log.Printf("Error scanning DeviceLocationDetail: %v", err)
+			logger.ErrorLogger.Printf("Error scanning DeviceLocationDetail: %v", err)
 			return nil, err
 		}
 		results = append(results, data)
 	}
 
+	logger.InfoLogger.Println("Retrieved all DeviceLocationDetail records successfully")
 	return results, nil
 }
 
@@ -53,9 +54,10 @@ func (db *DB) UpdateDeviceLocationDetail(id int, data *models.DeviceLocationDeta
     `
 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber)
 	if err != nil {
-		log.Printf("Error updating DeviceLocationDetail: %v", err)
+		logger.ErrorLogger.Printf("Error updating DeviceLocationDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Printf("Updated DeviceLocationDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -64,9 +66,10 @@ func (db *DB) DeleteDeviceLocationDetail(id int) error {
 	query := "DELETE FROM device_location WHERE id = $1"
 	_, err := db.Exec(query, id)
 	if err != nil {
-		log.Printf("Error deleting DeviceLocationDetail: %v", err)
+		logger.ErrorLogger.Printf("Error deleting DeviceLocationDetail with ID %d: %v", id, err)
 		return err
 	}
+	logger.InfoLogger.Printf("Deleted DeviceLocationDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -75,7 +78,7 @@ func (db *DB) FetchDataFromDeviceLocation() ([]*models.DeviceLocationDetail, err
 	query := "SELECT * FROM device_location"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error fetching data from table 3: %v", err)
+		logger.ErrorLogger.Printf("Error fetching data from table 3: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -85,11 +88,12 @@ func (db *DB) FetchDataFromDeviceLocation() ([]*models.DeviceLocationDetail, err
 		var data models.DeviceLocationDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DataCenter, &data.Region, &data.DCLocation, &data.DeviceLocation, &data.DeviceRowNumber, &data.DeviceRackNumber, &data.DeviceRUNumber)
 		if err != nil {
-			log.Printf("Error scanning data from table 3: %v", err)
+			logger.ErrorLogger.Printf("Error scanning data from table 3: %v", err)
 			return nil, err
 		}
 		results = append(results, &data)
 	}
 
+	logger.InfoLogger.Println("Fetched data from device_location table successfully")
 	return results, nil
 }

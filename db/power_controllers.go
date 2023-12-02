@@ -1,8 +1,7 @@
 package db
 
 import (
-	"log"
-
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -14,9 +13,10 @@ func (db *DB) CreateDevicePowerDetail(data *models.DevicePowerDetail) error {
 	`
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.TotalPowerWatt, data.TotalBTU, data.TotalPowerCable, data.PowerSocketType)
 	if err != nil {
-		log.Printf("Error creating DevicePowerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error creating DevicePowerDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Println("Created DevicePowerDetail successfully")
 	return nil
 }
 
@@ -25,7 +25,7 @@ func (db *DB) GetAllDevicePowerDetail() ([]models.DevicePowerDetail, error) {
 	query := "SELECT * FROM device_power"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error querying DevicePowerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error querying DevicePowerDetail: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -35,12 +35,13 @@ func (db *DB) GetAllDevicePowerDetail() ([]models.DevicePowerDetail, error) {
 		var data models.DevicePowerDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
 		if err != nil {
-			log.Printf("Error scanning DevicePowerDetail: %v", err)
+			logger.ErrorLogger.Printf("Error scanning DevicePowerDetail: %v", err)
 			return nil, err
 		}
 		results = append(results, data)
 	}
 
+	logger.InfoLogger.Println("Retrieved all DevicePowerDetail records successfully")
 	return results, nil
 }
 
@@ -53,9 +54,10 @@ func (db *DB) UpdateDevicePowerDetail(id int, data *models.DevicePowerDetail) er
     `
 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.TotalPowerWatt, data.TotalBTU, data.TotalPowerCable, data.PowerSocketType)
 	if err != nil {
-		log.Printf("Error updating DevicePowerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error updating DevicePowerDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Printf("Updated DevicePowerDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -64,9 +66,10 @@ func (db *DB) DeleteDevicePowerDetail(id int) error {
 	query := "DELETE FROM device_power WHERE id = $1"
 	_, err := db.Exec(query, id)
 	if err != nil {
-		log.Printf("Error deleting DevicePowerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error deleting DevicePowerDetail with ID %d: %v", id, err)
 		return err
 	}
+	logger.InfoLogger.Printf("Deleted DevicePowerDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -75,7 +78,7 @@ func (db *DB) FetchDataFromDevicePower() ([]*models.DevicePowerDetail, error) {
 	query := "SELECT * FROM device_power"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error fetching data from table 4: %v", err)
+		logger.ErrorLogger.Printf("Error fetching data from table 4: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -85,11 +88,12 @@ func (db *DB) FetchDataFromDevicePower() ([]*models.DevicePowerDetail, error) {
 		var data models.DevicePowerDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.TotalPowerWatt, &data.TotalBTU, &data.TotalPowerCable, &data.PowerSocketType)
 		if err != nil {
-			log.Printf("Error scanning data from table 4: %v", err)
+			logger.ErrorLogger.Printf("Error scanning data from table 4: %v", err)
 			return nil, err
 		}
 		results = append(results, &data)
 	}
 
+	logger.InfoLogger.Println("Fetched data from device_power table successfully")
 	return results, nil
 }

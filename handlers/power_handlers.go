@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/gin-gonic/gin"
@@ -17,9 +18,11 @@ import (
 // GetPowerDetails handles the GET request to retrieve power details.
 func GetPowerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling GET request for Power Details")
+
 		data, err := db.GetAllDevicePowerDetail()
 		if err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println("Failed to retrieve power details:", err)
 			return
 		}
 		c.HTML(http.StatusOK, "power_details.html", data)
@@ -28,6 +31,8 @@ func GetPowerDetails(db *db.DB) gin.HandlerFunc {
 
 func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling POST request for creating new Power Details")
+
 		var data models.DevicePowerDetail
 
 		// Retrieve form data
@@ -61,7 +66,7 @@ func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.CreateDevicePowerDetail(&data); err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println("Failed to create new Power Details entry:", err)
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{
@@ -74,6 +79,8 @@ func CreateNewPowerDetails(db *db.DB) gin.HandlerFunc {
 // DeleteDevicePowerDetailHandler deletes a DevicePowerDetail record based on its ID.
 func DeleteDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling DELETE request for Power Details")
+
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
@@ -82,17 +89,19 @@ func DeleteDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.DeleteDevicePowerDetail(id); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DevicePowerDetail"})
+			logger.ErrorLogger.Println("Failed to delete Power Details:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete Power Details"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DevicePowerDetail deleted successfully"})
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Power Details deleted successfully"})
 	}
 }
 
 // UpdateDevicePowerDetail updates a DevicePowerDetail record based on its ID.
 func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling PUT request for updating Power Details")
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
@@ -134,17 +143,20 @@ func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.UpdateDevicePowerDetail(id, updatedData); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Device Power Detail"})
+			logger.ErrorLogger.Println("Failed to update Power Details:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Power Details"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device Power Detail updated successfully"})
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Power Details updated successfully"})
 	}
 }
 
 // DeleteDevicePowerDetailHandler deletes a DevicePowerDetail record based on its ID.
 func DownloadDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling GET request for downloading Power Details in Excel format")
+
 		rows, err := db.Query("SELECT * FROM device_power")
 		if err != nil {
 			log.Fatal(err)
@@ -202,12 +214,15 @@ func DownloadDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 			log.Fatal(err)
 			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
 		}
+		logger.InfoLogger.Println("Power Details downloaded successfully in Excel format.")
 	}
 }
 
 // DownloadDevicePowerDetailAsPDF exports DevicePowerDetail data as a PDF file.
 func DownloadDevicePowerDetailPDF(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling GET request for downloading Power Details in PDF format")
+
 		// Query the database for DevicePowerDetail data
 		rows, err := db.Query("SELECT * FROM device_power")
 		if err != nil {
@@ -264,5 +279,6 @@ func DownloadDevicePowerDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Set response headers
 		c.Header("Content-Type", "application/pdf")
 		c.Header("Content-Disposition", "attachment; filename=DevicePowerDetails.pdf")
+		logger.InfoLogger.Println("Power Details downloaded successfully in PDF format.")
 	}
 }

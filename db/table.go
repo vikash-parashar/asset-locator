@@ -2,7 +2,8 @@ package db
 
 import (
 	"database/sql"
-	"log"
+
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 )
 
 func CreateDatabaseTables(db *sql.DB) error {
@@ -73,13 +74,15 @@ func CreateDatabaseTables(db *sql.DB) error {
 	`
 	res, err := db.Exec(createTables)
 	if err != nil {
+		logger.ErrorLogger.Printf("Error creating database tables: %v", err)
 		return err
 	}
 	count, err := res.RowsAffected()
 	if err != nil {
+		logger.ErrorLogger.Printf("Error getting rows affected: %v", err)
 		return err
 	}
-	log.Println("Rows Affected : ", count)
+	logger.InfoLogger.Printf("Database tables created successfully. Rows Affected: %d", count)
 
 	return nil
 }

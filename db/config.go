@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/lib/pq"
+	"github.com/vikash-parashar/asset-locator/logger"
 )
 
 // DB represents the PostgreSQL database.
@@ -18,17 +19,25 @@ func NewDB(host, port, user, password, dbName string) (*DB, error) {
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
+		logger.ErrorLogger.Printf("Error opening database connection: %v", err)
 		return nil, err
 	}
 
 	if err = db.Ping(); err != nil {
+		logger.ErrorLogger.Printf("Error pinging database: %v", err)
 		return nil, err
 	}
+
+	logger.InfoLogger.Println("Connected to the database")
 
 	return &DB{db}, nil
 }
 
 // Close closes the database connection.
 func (db *DB) Close() {
-	db.DB.Close()
+	if err := db.DB.Close(); err != nil {
+		logger.ErrorLogger.Printf("Error closing database connection: %v", err)
+	} else {
+		logger.InfoLogger.Println("Closed database connection")
+	}
 }

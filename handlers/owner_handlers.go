@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/gin-gonic/gin"
@@ -18,11 +19,13 @@ import (
 // GetOwnerDetails handles the GET request to retrieve owner details.
 func GetOwnerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Fetching owner details from the database")
 		data, err := db.GetAllDeviceAMCOwnerDetail()
 		if err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println(err)
 			return
 		}
+		logger.InfoLogger.Println("Owner details fetched successfully.")
 		c.HTML(http.StatusOK, "owner_details.html", data)
 	}
 }
@@ -30,6 +33,8 @@ func GetOwnerDetails(db *db.DB) gin.HandlerFunc {
 func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceAMCOwnerDetail
+
+		logger.InfoLogger.Println("Creating new owner details")
 
 		// Retrieve form data
 		idStr := c.PostForm("id")
@@ -67,9 +72,10 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.CreateDeviceAMCOwnerDetail(&data); err != nil {
-			log.Println(err)
+			logger.ErrorLogger.Println(err)
 			return
 		}
+		logger.InfoLogger.Println("New owner details created successfully.")
 		c.JSON(http.StatusOK, gin.H{
 			"success": true,
 			"message": "Entry Added Successfully"},
@@ -80,9 +86,12 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 // UpdateDeviceAMCOwnerDetail updates a DeviceAMCOwnerDetail record based on its ID.
 func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Updating Device AMC Owner Detail")
+
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
 			return
 		}
@@ -150,10 +159,12 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.UpdateDeviceAMCOwnerDetail(id, updatedData); err != nil {
+			logger.ErrorLogger.Println("Failed to update Device AMC Owner Detail:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Device AMC Owner Detail"})
 			return
 		}
 
+		logger.InfoLogger.Println("Device AMC Owner Detail updated successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device AMC Owner Detail updated successfully"})
 	}
 }
@@ -161,24 +172,30 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 // DeleteDeviceAMCOwnerDetailHandler deletes a DeviceAMCOwnerDetail record based on its ID.
 func DeleteDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Deleting Device AMC Owner Detail")
+
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
 			return
 		}
 
 		if err := db.DeleteDeviceAMCOwnerDetail(id); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete DeviceAMCOwnerDetail"})
+			logger.ErrorLogger.Println("Failed to delete Device AMC Owner Detail:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete Device AMC Owner Detail"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceAMCOwnerDetail deleted successfully"})
+		logger.InfoLogger.Println("Device AMC Owner Detail deleted successfully.")
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device AMC Owner Detail deleted successfully"})
 	}
 }
 
 func DownloadDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading Device AMC Owner Detail in Excel format")
 		// Query the database for DeviceAMCOwnerDetail data
 		rows, err := db.Query("SELECT * FROM device_amc_owner")
 		if err != nil {
@@ -239,11 +256,13 @@ func DownloadDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 			log.Fatal(err)
 			http.Error(c.Writer, "Failed to write Excel file to response", http.StatusInternalServerError)
 		}
+		logger.InfoLogger.Println("Device AMC Owner Detail downloaded successfully in Excel format.")
 	}
 }
 
 func DownloadDeviceAMCOwnerDetailPDF(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading Device AMC Owner Detail in PDF format")
 		// Query the database for DeviceAMCOwnerDetail data
 		rows, err := db.Query("SELECT * FROM device_amc_owner")
 		if err != nil {
@@ -301,5 +320,6 @@ func DownloadDeviceAMCOwnerDetailPDF(db *db.DB) gin.HandlerFunc {
 		// Set response headers
 		c.Header("Content-Type", "application/pdf")
 		c.Header("Content-Disposition", "attachment; filename=DeviceAMCOwnerDetails.pdf")
+		logger.InfoLogger.Println("Device AMC Owner Detail downloaded successfully in PDF format.")
 	}
 }

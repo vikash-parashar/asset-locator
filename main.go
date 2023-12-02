@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
-	"log"
 	"os"
 
 	"github.com/vikash-parashar/asset-locator/config"
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/routes"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +18,7 @@ import (
 // load's environment variables values from .env file
 func loadEnvVariables() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		logger.ErrorLogger.Printf("Error loading .env file: %v", err)
 	}
 }
 
@@ -44,7 +44,7 @@ func runMigration(dbConn *db.DB, migrationType string) error {
 	return err
 }
 
-// entry point for this application
+// main function
 func main() {
 	loadEnvVariables()
 
@@ -54,7 +54,7 @@ func main() {
 	// Initialize the database connection
 	dbConn, err := db.NewDB(cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName)
 	if err != nil {
-		log.Fatalf("Error connecting to the database: %v", err)
+		logger.ErrorLogger.Printf("Error connecting to the database: %v", err)
 	}
 	defer dbConn.Close()
 
@@ -66,19 +66,19 @@ func main() {
 	if *migrateType != "" {
 		fmt.Printf("Running %s migration...\n", *migrateType)
 		if err := runMigration(dbConn, *migrateType); err != nil {
-			log.Fatalf("Error running migration: %v", err)
+			logger.ErrorLogger.Printf("Error running migration: %v", err)
 		}
 		fmt.Printf("%s migration completed.\n", *migrateType)
 		return
 	}
 
-	//setting server mux as default mux
+	// Setting server mux as default mux
 	r := gin.Default()
 
 	// Serve static files from the "static" directory
 	r.Static("/static", "./static")
 
-	//  Define a custom template function
+	// Define a custom template function
 	r.SetFuncMap(template.FuncMap{
 		"add1": func(i int) int {
 			return i + 1
@@ -91,6 +91,5 @@ func main() {
 	// Set up routes from the routes package
 	routes.SetupRoutes(r, dbConn)
 
-	log.Fatal(r.Run(":" + cfg.Port))
-
+	logger.ErrorLogger.Println(r.Run(":" + cfg.Port))
 }

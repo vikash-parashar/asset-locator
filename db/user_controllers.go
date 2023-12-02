@@ -3,15 +3,15 @@ package db
 import (
 	"database/sql"
 	"errors"
-	"log"
 	"time"
 
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 	"github.com/vikash-parashar/asset-locator/utils"
 )
 
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
-	log.Println(email)
+	logger.InfoLogger.Println(email)
 	query := `
         SELECT id, first_name, last_name,phone, email, password,role
         FROM users
@@ -23,10 +23,10 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user not found")
 		}
-		log.Printf("Error fetching user by email: %v", err)
+		logger.ErrorLogger.Printf("Error fetching user by email: %v", err)
 		return nil, err
 	}
-	log.Println("User From DB : ", user)
+	logger.InfoLogger.Println("User From DB : ", user)
 	return user, nil
 }
 
@@ -38,7 +38,7 @@ func (db *DB) RegisterUser(user *models.User) error {
     `
 	err := db.QueryRow(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role).Scan(&user.ID)
 	if err != nil {
-		log.Printf("Error registering user: %v", err)
+		logger.ErrorLogger.Printf("Error registering user: %v", err)
 		return err
 	}
 	return nil
@@ -52,7 +52,7 @@ func (db *DB) UpdateUserPassword(userID int, newPassword string) error {
     `
 	_, err := db.Exec(query, userID, newPassword)
 	if err != nil {
-		log.Printf("Error updating user password: %v", err)
+		logger.ErrorLogger.Printf("Error updating user password: %v", err)
 		return err
 	}
 	return nil
@@ -66,7 +66,7 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
     `
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error fetching all users: %v", err)
+		logger.ErrorLogger.Printf("Error fetching all users: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -76,13 +76,13 @@ func (db *DB) GetAllUsers() ([]*models.User, error) {
 		user := &models.User{}
 		err := rows.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Password, &user.Role)
 		if err != nil {
-			log.Printf("Error scanning user rows: %v", err)
+			logger.ErrorLogger.Printf("Error scanning user rows: %v", err)
 			return nil, err
 		}
 		users = append(users, user)
 	}
 	if err := rows.Err(); err != nil {
-		log.Printf("Error iterating over user rows: %v", err)
+		logger.ErrorLogger.Printf("Error iterating over user rows: %v", err)
 		return nil, err
 	}
 	return users, nil
@@ -101,7 +101,7 @@ func (db *DB) GetUserByResetToken(resetToken string) (*models.User, error) {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user not found by reset token")
 		}
-		log.Printf("Error fetching user by reset token: %v", err)
+		logger.ErrorLogger.Printf("Error fetching user by reset token: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -116,26 +116,11 @@ func (db *DB) UpdateUser(user *models.User) error {
     `
 	_, err := db.Exec(query, user.FirstName, user.LastName, user.Email, user.Password, user.Role, user.ID)
 	if err != nil {
-		log.Printf("Error updating user: %v", err)
+		logger.ErrorLogger.Printf("Error updating user: %v", err)
 		return err
 	}
 	return nil
 }
-
-// SetResetToken sets the reset token for a user in the database.
-// func (db *DB) SetResetToken(userID int, resetToken string) error {
-// 	query := `
-//         UPDATE users
-//         SET reset_token = $1
-//         WHERE id = $2
-//     `
-// 	_, err := db.Exec(query, resetToken, userID)
-// 	if err != nil {
-// 		log.Printf("Error setting reset token: %v", err)
-// 		return err
-// 	}
-// 	return nil
-// }
 
 // SetResetToken sets the reset token and reset token expiry for a user in the database.
 func (db *DB) SetResetToken(userID int, resetToken string, expiryTime time.Time) error {
@@ -146,7 +131,7 @@ func (db *DB) SetResetToken(userID int, resetToken string, expiryTime time.Time)
     `
 	_, err := db.Exec(query, resetToken, expiryTime, userID)
 	if err != nil {
-		log.Printf("Error setting reset token: %v", err)
+		logger.ErrorLogger.Printf("Error setting reset token: %v", err)
 		return err
 	}
 	return nil
@@ -161,7 +146,7 @@ func (db *DB) ClearResetToken(userID int) error {
     `
 	_, err := db.Exec(query, userID)
 	if err != nil {
-		log.Printf("Error clearing reset token: %v", err)
+		logger.ErrorLogger.Printf("Error clearing reset token: %v", err)
 		return err
 	}
 	return nil
@@ -180,14 +165,14 @@ func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("reset token not found")
 		}
-		log.Printf("Error fetching user by reset token: %v", err)
+		logger.ErrorLogger.Printf("Error fetching user by reset token: %v", err)
 		return nil, err
 	}
-	log.Println("user from db for password reset token : ")
-	log.Println("getting user from token")
-	log.Println(user.ResetToken)
-	log.Println(user.FirstName)
-	log.Println(user.Email)
+	logger.InfoLogger.Println("user from db for password reset token : ")
+	logger.InfoLogger.Println("getting user from token")
+	// logger.InfoLogger.Println(user.ResetToken)
+	// logger.InfoLogger.Println(user.FirstName)
+	// logger.InfoLogger.Println(user.Email)
 	// Check if the reset token has expired (optional)
 	if utils.IsTokenExpired(user.ResetTokenExpiry) {
 		return nil, errors.New("reset token has expired")

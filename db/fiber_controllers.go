@@ -3,8 +3,8 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -16,9 +16,10 @@ func (db *DB) CreateDeviceEthernetFiberDetail(data *models.DeviceEthernetFiberDe
 	`
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DevicePhysicalPort, data.DevicePortType, data.DevicePortMACWWN, data.ConnectedDevicePort)
 	if err != nil {
-		log.Printf("Error creating DeviceEthernetFiberDetail: %v", err)
+		logger.ErrorLogger.Printf("Error creating DeviceEthernetFiberDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Println("Created DeviceEthernetFiberDetail successfully")
 	return nil
 }
 
@@ -27,7 +28,7 @@ func (db *DB) GetAllDeviceEthernetFiberDetail() ([]models.DeviceEthernetFiberDet
 	query := "SELECT * FROM device_ethernet_fiber"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error querying DeviceEthernetFiberDetail: %v", err)
+		logger.ErrorLogger.Printf("Error querying DeviceEthernetFiberDetail: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -37,12 +38,13 @@ func (db *DB) GetAllDeviceEthernetFiberDetail() ([]models.DeviceEthernetFiberDet
 		var data models.DeviceEthernetFiberDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
 		if err != nil {
-			log.Printf("Error scanning DeviceEthernetFiberDetail: %v", err)
+			logger.ErrorLogger.Printf("Error scanning DeviceEthernetFiberDetail: %v", err)
 			return nil, err
 		}
 		results = append(results, data)
 	}
 
+	logger.InfoLogger.Println("Retrieved all DeviceEthernetFiberDetail records successfully")
 	return results, nil
 }
 
@@ -66,11 +68,13 @@ func (db *DB) GetFiberDetailByID(id int) (models.DeviceEthernetFiberDetail, erro
 	if err != nil {
 		if err == sql.ErrNoRows {
 			// Return a custom error when the fiber detail is not found
+			logger.ErrorLogger.Printf("Fiber detail with ID %d not found", id)
 			return fiberDetail, fmt.Errorf("fiber detail with ID %d not found", id)
 		}
-		log.Printf("Error retrieving FiberDetail: %v", err)
+		logger.ErrorLogger.Printf("Error retrieving FiberDetail: %v", err)
 		return fiberDetail, err
 	}
+	logger.InfoLogger.Printf("Retrieved FiberDetail with ID %d successfully", id)
 	return fiberDetail, nil
 }
 
@@ -78,9 +82,10 @@ func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
 	query := "DELETE FROM device_ethernet_fiber WHERE id = $1"
 	_, err := db.Exec(query, id)
 	if err != nil {
-		log.Printf("Error deleting DeviceEthernetFiberDetail: %v", err)
+		logger.ErrorLogger.Printf("Error deleting DeviceEthernetFiberDetail with ID %d: %v", id, err)
 		return err
 	}
+	logger.InfoLogger.Printf("Deleted DeviceEthernetFiberDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -91,12 +96,12 @@ func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEtherne
         WHERE id = $1
     `
 
-	log.Println("data sent to db to update::")
-	log.Println(data)
+	logger.InfoLogger.Printf("Updating DeviceEthernetFiberDetail with ID %d", id)
 	_, err := db.Exec(query, &id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
 	if err != nil {
-		log.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
+		logger.ErrorLogger.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Printf("Updated DeviceEthernetFiberDetail with ID %d successfully", id)
 	return nil
 }

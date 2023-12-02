@@ -2,10 +2,11 @@ package utils
 
 import (
 	"crypto/tls"
-	"log"
 	"net/smtp"
 	"os"
 	"strconv"
+
+	"github.com/vikash-parashar/asset-locator/logger"
 )
 
 // SendResetPasswordEmail sends a reset email to the user using Gmail SMTP.
@@ -30,36 +31,36 @@ func SendResetPasswordEmail(recipientEmail, resetToken string) error {
 	// Connect to the SMTP server
 	client, err := smtp.Dial(smtpServer + ":" + strconv.Itoa(smtpPort))
 	if err != nil {
-		log.Println("Failed to connect to SMTP server:", err)
+		logger.ErrorLogger.Println("Failed to connect to SMTP server:", err)
 		return err
 	}
 	defer client.Close()
 
 	// Upgrade the connection to use TLS
 	if err := client.StartTLS(tlsConfig); err != nil {
-		log.Println("Failed to start TLS:", err)
+		logger.ErrorLogger.Println("Failed to start TLS:", err)
 		return err
 	}
 
 	// Authenticate and send the email
 	if err := client.Auth(auth); err != nil {
-		log.Println("SMTP authentication failed:", err)
+		logger.ErrorLogger.Println("SMTP authentication failed:", err)
 		return err
 	}
 
 	if err := client.Mail(emailUsername); err != nil {
-		log.Println("Failed to set sender:", err)
+		logger.ErrorLogger.Println("Failed to set sender:", err)
 		return err
 	}
 
 	if err := client.Rcpt(recipientEmail); err != nil {
-		log.Println("Failed to set recipient:", err)
+		logger.ErrorLogger.Println("Failed to set recipient:", err)
 		return err
 	}
 
 	wc, err := client.Data()
 	if err != nil {
-		log.Println("Failed to open data connection:", err)
+		logger.ErrorLogger.Println("Failed to open data connection:", err)
 		return err
 	}
 	defer wc.Close()
@@ -72,10 +73,10 @@ func SendResetPasswordEmail(recipientEmail, resetToken string) error {
 
 	_, err = wc.Write([]byte(message))
 	if err != nil {
-		log.Println("Failed to send email data:", err)
+		logger.ErrorLogger.Println("Failed to send email data:", err)
 		return err
 	}
 
-	log.Println("Email sent successfully")
+	logger.InfoLogger.Println("Email sent successfully")
 	return nil
 }

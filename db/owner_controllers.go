@@ -1,8 +1,7 @@
 package db
 
 import (
-	"log"
-
+	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -14,9 +13,10 @@ func (db *DB) CreateDeviceAMCOwnerDetail(data *models.DeviceAMCOwnerDetail) erro
     `
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
 	if err != nil {
-		log.Printf("Error creating DeviceAMCOwnerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error creating DeviceAMCOwnerDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Println("Created DeviceAMCOwnerDetail successfully")
 	return nil
 }
 
@@ -25,7 +25,7 @@ func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error
 	query := "SELECT * FROM device_amc_owner"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error querying DeviceAMCOwnerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error querying DeviceAMCOwnerDetail: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -35,12 +35,13 @@ func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error
 		var data models.DeviceAMCOwnerDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
 		if err != nil {
-			log.Printf("Error scanning DeviceAMCOwnerDetail: %v", err)
+			logger.ErrorLogger.Printf("Error scanning DeviceAMCOwnerDetail: %v", err)
 			return nil, err
 		}
 		results = append(results, data)
 	}
 
+	logger.InfoLogger.Println("Retrieved all DeviceAMCOwnerDetail records successfully")
 	return results, nil
 }
 
@@ -53,9 +54,10 @@ func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDeta
     `
 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
 	if err != nil {
-		log.Printf("Error updating DeviceAMCOwnerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error updating DeviceAMCOwnerDetail: %v", err)
 		return err
 	}
+	logger.InfoLogger.Printf("Updated DeviceAMCOwnerDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -64,9 +66,10 @@ func (db *DB) DeleteDeviceAMCOwnerDetail(id int) error {
 	query := "DELETE FROM device_amc_owner WHERE id = $1"
 	_, err := db.Exec(query, id)
 	if err != nil {
-		log.Printf("Error deleting DeviceAMCOwnerDetail: %v", err)
+		logger.ErrorLogger.Printf("Error deleting DeviceAMCOwnerDetail with ID %d: %v", id, err)
 		return err
 	}
+	logger.InfoLogger.Printf("Deleted DeviceAMCOwnerDetail with ID %d successfully", id)
 	return nil
 }
 
@@ -75,7 +78,7 @@ func (db *DB) FetchDataFromDeviceOwner() ([]*models.DeviceAMCOwnerDetail, error)
 	query := "SELECT * FROM device_amc_owner"
 	rows, err := db.Query(query)
 	if err != nil {
-		log.Printf("Error fetching data from table 1: %v", err)
+		logger.ErrorLogger.Printf("Error fetching data from table 1: %v", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -85,11 +88,12 @@ func (db *DB) FetchDataFromDeviceOwner() ([]*models.DeviceAMCOwnerDetail, error)
 		var data models.DeviceAMCOwnerDetail
 		err := rows.Scan(&data.Id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.PONumber, &data.POOrderDate, &data.EOSLDate, &data.AMCStartDate, &data.AMCEndDate, &data.DeviceOwner)
 		if err != nil {
-			log.Printf("Error scanning data from table 1: %v", err)
+			logger.ErrorLogger.Printf("Error scanning data from table 1: %v", err)
 			return nil, err
 		}
 		results = append(results, &data)
 	}
 
+	logger.InfoLogger.Println("Fetched data from device_amc_owner table successfully")
 	return results, nil
 }

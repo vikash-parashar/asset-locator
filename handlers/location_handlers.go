@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 
 	"github.com/gin-gonic/gin"
@@ -14,14 +15,16 @@ import (
 	"github.com/tealeg/xlsx"
 )
 
-// GetLocationDetails handles the GET request to retrieve location details.
 func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Fetching location details from the database")
 		data, err := db.GetAllDeviceLocationDetail()
 		if err != nil {
+			logger.ErrorLogger.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch data"})
 			return
 		}
+		logger.InfoLogger.Println("Location details fetched successfully.")
 		c.HTML(http.StatusOK, "location_details.html", data)
 	}
 }
@@ -29,6 +32,8 @@ func GetLocationDetails(db *db.DB) gin.HandlerFunc {
 func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data models.DeviceLocationDetail
+
+		logger.InfoLogger.Println("Creating new location details")
 
 		// Retrieve form data
 		serialNumber := c.PostForm("serial_number")
@@ -70,9 +75,12 @@ func CreateNewLocationDetails(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := db.CreateDeviceLocationDetail(&data); err != nil {
+			logger.ErrorLogger.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create DeviceLocationDetail"})
 			return
 		}
+
+		logger.InfoLogger.Println("New location details created successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Entry Added Successfully"})
 	}
 }
@@ -155,6 +163,7 @@ func DeleteDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 
 func DownloadDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading DeviceLocationDetails as Excel file")
 		// Query the database for DeviceLocationDetail data
 		rows, err := db.Query("SELECT * FROM device_location")
 		if err != nil {
@@ -224,6 +233,7 @@ func DownloadDeviceLocationDetail(db *db.DB) gin.HandlerFunc {
 
 func DownloadDeviceLocationDetailPDF(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Downloading DeviceLocationDetails as PDF")
 		// Query the database for DeviceLocationDetail data
 		rows, err := db.Query("SELECT * FROM device_location")
 		if err != nil {

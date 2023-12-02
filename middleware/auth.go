@@ -1,14 +1,13 @@
-// auth_middleware.go
-
 package middleware
 
 import (
 	"net/http"
 
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/utils"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin" // Update with your actual import path
 )
 
 // Claims represents the JWT claims.
@@ -26,6 +25,7 @@ func AuthMiddleware(roles ...string) gin.HandlerFunc {
 		cookie, err := c.Request.Cookie("jwt-token")
 		if err != nil {
 			// Token not found, redirect to login page
+			logger.ErrorLogger.Printf("Token not found, redirecting to login page: %s\n", err)
 			c.Redirect(http.StatusSeeOther, "http://localhost:8080")
 			c.Abort()
 			return
@@ -36,6 +36,7 @@ func AuthMiddleware(roles ...string) gin.HandlerFunc {
 		claims, valid := utils.VerifyJWTToken(token)
 		if !valid {
 			// Token is invalid or expired, redirect to login page
+			logger.WarningLogger.Printf("Invalid or expired token, redirecting to login page\n")
 			c.Redirect(http.StatusSeeOther, "http://localhost:8080/")
 			c.Abort()
 			return
@@ -53,11 +54,13 @@ func AuthMiddleware(roles ...string) gin.HandlerFunc {
 		}
 
 		if !hasRequiredRole {
+			logger.ErrorLogger.Printf("Access Forbidden for role: %s\n", userRole)
 			c.JSON(http.StatusForbidden, gin.H{"message": "Access Forbidden"})
 			c.Abort()
 			return
 		}
 
+		logger.InfoLogger.Printf("User %s has access\n", claims.UserEmail)
 		c.Next()
 	}
 }

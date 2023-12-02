@@ -1,26 +1,32 @@
 package handlers
 
 import (
-	"log"
-	"net/http"
-
-	"github.com/vikash-parashar/asset-locator/utils"
+	"net/http" // Update with your actual import path
 
 	"github.com/gin-gonic/gin"
+	"github.com/vikash-parashar/asset-locator/logger"
+	"github.com/vikash-parashar/asset-locator/utils"
 )
 
 func FetchDisks(c *gin.Context) {
-	log.Println("fetching disk's data")
+	logger.InfoLogger.Println("Fetching disk's data")
+
 	data, err := utils.FetchAndSendDisksInfo()
 	if err != nil {
-		log.Println("failed to fetch disk's data")
-		log.Println(err)
-	}
-	log.Println("disk's data fetched successfully from external server.")
-	log.Println("sending disk's data")
+		logger.ErrorLogger.Println("Failed to fetch disk's data")
+		logger.ErrorLogger.Println(err)
 
-	c.JSON(http.StatusFound, gin.H{
-		"message":      "disk's data fetched successfully",
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to fetch disk's data",
+		})
+		return
+	}
+
+	logger.InfoLogger.Println("Disk's data fetched successfully from external server.")
+	logger.InfoLogger.Println("Sending disk's data")
+
+	c.JSON(http.StatusOK, gin.H{
+		"message":      "Disk's data fetched successfully",
 		"disk's count": string(data),
 	})
 }

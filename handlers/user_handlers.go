@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/vikash-parashar/asset-locator/db"
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 	"github.com/vikash-parashar/asset-locator/utils"
 
@@ -18,8 +19,8 @@ import (
 // SignUp handles the registration of a new user.
 func SignUp(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse request body into a User struct
-		// Replace the struct for form data binding
+		logger.InfoLogger.Println("Handling POST request for user registration")
+
 		var signupRequest struct {
 			FirstName string `json:"first_name" binding:"required"`
 			LastName  string `json:"last_name" binding:"required"`
@@ -29,6 +30,7 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 		}
 
 		if err := c.ShouldBindJSON(&signupRequest); err != nil {
+			logger.ErrorLogger.Println("Invalid form data for user registration:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid form data"})
 			return
 		}
@@ -62,12 +64,13 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 		}
 		newUser.Password = hashedPassword
 
-		err = db.RegisterUser(newUser)
-		if err != nil {
+		if err := db.RegisterUser(newUser); err != nil {
+			logger.ErrorLogger.Println("Failed to create user:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to create user"})
 			return
 		}
 
+		logger.InfoLogger.Println("User registered successfully")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "User registered successfully"})
 	}
 }
@@ -75,13 +78,15 @@ func SignUp(db *db.DB) gin.HandlerFunc {
 // Login handles the user login and returns a JWT token upon successful login.
 func Login(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Parse request body into a User struct
-		// Parse request body into a User struct
+		logger.InfoLogger.Println("Handling POST request for user login")
+
 		var loginRequest struct {
 			Email    string `form:"email" binding:"required"`
 			Password string `form:"password" binding:"required"`
 		}
+
 		if err := c.ShouldBind(&loginRequest); err != nil {
+			logger.ErrorLogger.Println("Invalid form data for user login:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid form data"})
 			return
 		}
@@ -115,6 +120,8 @@ func Login(db *db.DB) gin.HandlerFunc {
 			Expires: time.Now().Add(60 * time.Minute),
 		}
 		http.SetCookie(c.Writer, &cookie)
+
+		logger.InfoLogger.Println("User logged in successfully")
 		c.JSON(http.StatusOK, gin.H{"success": true, "token": token, "message": "Login successful"})
 	}
 }
@@ -122,6 +129,8 @@ func Login(db *db.DB) gin.HandlerFunc {
 // Logout handles the user logout by clearing the JWT token cookie.
 func Logout() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling GET request for user logout")
+
 		// Clear the JWT token cookie by setting its expiration to a past time
 		cookie := http.Cookie{
 			Name:     "jwt-token",
@@ -134,6 +143,7 @@ func Logout() gin.HandlerFunc {
 		}
 		http.SetCookie(c.Writer, &cookie)
 		c.Redirect(http.StatusPermanentRedirect, "/")
+		logger.InfoLogger.Println("User logged out successfully")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Logout successful"})
 	}
 }
@@ -141,6 +151,8 @@ func Logout() gin.HandlerFunc {
 // ForgotPassword handles the process of resetting a user's forgotten password.
 func ForgotPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling POST request for password reset")
+
 		// Retrieve email address from the user input
 		var resetRequest struct {
 			Email string `json:"email" binding:"required"`
@@ -178,16 +190,19 @@ func ForgotPassword(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
+		logger.InfoLogger.Println("Password reset instructions sent successfully")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Reset instructions sent to your email"})
 	}
 }
 
 func ResetPassword(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling POST request for resetting password")
+
 		resetToken := c.Query("token")
 
-		log.Printf("Reset token: %s", resetToken)
 		if resetToken == "" {
+			logger.ErrorLogger.Println("Reset token is missing")
 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Reset token is missing"})
 			return
 		}
@@ -228,12 +243,15 @@ func ResetPassword(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
+		logger.InfoLogger.Println("Password reset successful")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Password reset successful"})
 	}
 }
 
 func GetCurrentUser(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling GET request for current user details")
+
 		// Retrieve the JWT token from the cookie
 		cookie, err := c.Request.Cookie("jwt-token")
 		if err != nil {
@@ -263,42 +281,12 @@ func GetCurrentUser(db *db.DB) gin.HandlerFunc {
 		}
 
 		// Send the user information in the response
-		c.JSON(http.StatusOK, gin.H{
-			"user": user,
-		})
+		logger.InfoLogger.Println("Current user details retrieved successfully")
+		c.JSON(http.StatusOK, gin.H{"user": user})
 	}
 }
 
 func RenderResetPasswordPage(c *gin.Context) {
+	logger.InfoLogger.Println("Rendering reset password page")
 	c.HTML(http.StatusOK, "reset_password.html", gin.H{})
 }
-
-// func SendOTP(db *db.DB) gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// Return a success response
-//  c.JSON(http.StatusOK, gin.H{
-// 	"message": "OTP sent successfully",
-// })
-// 	}
-// }
-// func VerifyOTP(db *db.DB) gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// Retrieve the entered OTP from the request
-//  enteredOTP := c.PostForm("otp")
-
-// Retrieve the stored OTP and user information from your database based on email
-
-// Perform OTP verification
-//  if storedOTP == enteredOTP {
-// 	 // OTP is valid
-// 	 c.JSON(http.StatusOK, gin.H{
-// 		 "message": "OTP verified successfully",
-// 	 })
-//  } else {
-// 	 // Invalid OTP
-// 	 c.JSON(http.StatusBadRequest, gin.H{
-// 		 "message": "Invalid OTP",
-// 	 })
-//  }
-// 	}
-// }
