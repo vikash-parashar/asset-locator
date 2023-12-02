@@ -1,2 +1,5 @@
 ERROR: 2023/11/30 20:18:23 main.go:38: Error loading .env file: open .env: The system cannot find the file specified.
 ERROR: 2023/11/30 20:18:23 main.go:74: Error connecting to the database: dial tcp: lookup port=: no such host
+ERROR: 2023/12/02 21:15:08 main.go:21: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/02 21:15:08 config.go:27: Error pinging database: dial tcp: lookup port=: no such host
+ERROR: 2023/12/02 21:15:08 main.go:57: Error connecting to the database: dial tcp: lookup port=: no such host
