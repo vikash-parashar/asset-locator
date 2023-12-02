@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 	"github.com/vikash-parashar/asset-locator/utils"
 )
