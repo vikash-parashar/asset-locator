@@ -46,8 +46,6 @@ func runMigration(dbConn *db.DB, migrationType string) error {
 
 // main function
 func main() {
-	loadEnvVariables()
-
 	// Load configuration
 	cfg := config.LoadConfig()
 
@@ -72,6 +70,9 @@ func main() {
 		return
 	}
 
+	// Set Gin to production mode
+	gin.SetMode(gin.ReleaseMode)
+
 	// Setting server mux as default mux
 	r := gin.Default()
 
@@ -85,11 +86,26 @@ func main() {
 		},
 	})
 
+	// Log only critical errors in production
+	if cfg.Env == "production" {
+		r.Use(gin.Recovery())
+	}
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
 	// Set up routes from the routes package
 	routes.SetupRoutes(r, dbConn)
 
-	logger.ErrorLogger.Println(r.Run(":" + cfg.Port))
+	// Run the server with HTTPS if configured
+	if cfg.UseHTTPS {
+		err := r.RunTLS(":"+cfg.Port, cfg.CertFile, cfg.KeyFile)
+		if err != nil {
+			logger.ErrorLogger.Printf("Error running the server: %v", err)
+		}
+	} else {
+		err := r.Run(":" + cfg.Port)
+		if err != nil {
+			logger.ErrorLogger.Printf("Error running the server: %v", err)
+		}
+	}
 }
