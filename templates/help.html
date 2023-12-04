@@ -133,7 +133,8 @@
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
-
+        /* @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
 
         main {
             height: 100rem;
@@ -142,17 +143,19 @@
         }
 
         .left-section {
+
             height: 100rem;
             width: 20vw;
-            background-color: #818FB4;
+            background-color: #353d53;
             /* display: inline-block; */
             border: solid 1px rgb(113, 113, 65);
         }
 
         .left-div {
+
             height: 10em;
             width: 100%;
-            background-color: #818FB4;
+            background-color: #353d53;
             /* display: inline-block; */
             /* overflow-x: scroll; */
         }
@@ -174,6 +177,7 @@
         }
 
         .nav-link {
+            font-family: 'Heebo', sans-serif;
             color: white;
             font-size: 1rem;
         }
@@ -197,7 +201,6 @@
             width: 100%;
             /* background-color: rgb(4, 250, 139); */
             /* display: inline-block; */
-            justify-content: center;
         }
 
         .page-heading {
@@ -214,12 +217,70 @@
             height: 10%;
         }
 
+        .data-filter {
+            /* display: inline-block; */
+            margin-top: 5rem;
+            margin-left: 10rem;
+            width: 80%;
+            justify-content: center;
+            padding: 80px;
+            border: solid 1px rgb(130, 113, 113);
+            box-sizing: border-box;
+            background-color: #f6f170;
+
+        }
+
+        .data-filter p {
+            color: #363062;
+        }
+
         .buttons {
             margin: 50px;
 
         }
 
+        .data-table {
+            overflow: auto;
+            /* display: inline-block; */
+            width: 93%;
+            margin: 50px;
 
+        }
+
+        .data-table th {
+            background-color: #C3ACD0;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .data-table td {
+            background-color: #F7EFE5;
+            color: #190f0f;
+        }
+
+        .delete {
+            padding: 5px;
+            box-sizing: border-box;
+            margin: 1px;
+            height: 30px;
+            width: 60px;
+            justify-content: center;
+            text-align: center;
+            border: solid 2px #363062;
+            font-size: small;
+        }
+
+        .update {
+            padding: 5px;
+            box-sizing: border-box;
+            margin: 1px;
+            height: 30px;
+            justify-content: center;
+            text-align: center;
+            width: 60px;
+            border: solid 2px #363062;
+            font-size: small;
+        }
 
         footer {
             position: fixed;
@@ -349,6 +410,7 @@
     </header>
 
 
+    <!-- main content -->
     <main>
         <!-- left side navbar container-->
         <section class="left-section">
@@ -359,34 +421,34 @@
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/homepage">
                             <img class="off-img" src="/static/images/home (1).png" alt="homepage">
-                            Home
+                            HOME
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/location-details">
                             <img class="off-img" src="/static/images/location-round.png" alt="location-logo">
-                            Location
+                            LOCATION
 
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">
                             <img class="off-img" src="/static/images/ownership-round.png" alt="owner-logo">
-                            Owner
+                            OWNER
 
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/power-details">
                             <img class="off-img" src="/static/images/power-round.png" alt="power-logo">
-                            Power
+                            POWER
 
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">
                             <img class="off-img" src="/static/images/fiber-cable-round.png" alt="fiber-logo">
-                            Fiber
+                            FIBER
 
                         </a>
                     </li>
@@ -394,13 +456,13 @@
 
                         <a class="nav-link" href="http://localhost:8080/about">
                             <img src="/static/images/about.png" alt="" class="off-img">
-                            About Us
+                            ABOUT
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" style="color: #ea0d26" href="http://localhost:8080/help">
+                        <a class="nav-link disabled" href="http://localhost:8080/help">
                             <img src="/static/images/contactus.png" alt="" class="off-img">
-                            Get Help
+                            HELP
                         </a>
                     </li>
                 </ul>
