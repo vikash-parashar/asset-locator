@@ -3,3 +3,47 @@ ERROR: 2023/11/30 20:18:23 main.go:74: Error connecting to the database: dial tc
 ERROR: 2023/12/02 21:15:08 main.go:21: Error loading .env file: open .env: The system cannot find the file specified.
 ERROR: 2023/12/02 21:15:08 config.go:27: Error pinging database: dial tcp: lookup port=: no such host
 ERROR: 2023/12/02 21:15:08 main.go:57: Error connecting to the database: dial tcp: lookup port=: no such host
+INFO: 2023/12/02 22:46:02 config.go:31: Connected to the database
+INFO: 2023/12/04 17:29:49 config.go:31: Connected to the database
+INFO: 2023/12/04 17:36:54 config.go:31: Connected to the database
+INFO: 2023/12/04 17:38:24 config.go:31: Connected to the database
+INFO: 2023/12/04 17:39:43 config.go:31: Connected to the database
+INFO: 2023/12/04 17:40:42 config.go:31: Connected to the database
+INFO: 2023/12/04 17:40:56 config.go:31: Connected to the database
+INFO: 2023/12/04 17:40:56 config.go:31: Connected to the database
+ERROR: 2023/12/04 17:40:56 main.go:102: Error running the server: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/04 17:40:56 config.go:41: Closed database connection
+INFO: 2023/12/04 17:54:43 config.go:31: Connected to the database
+INFO: 2023/12/04 18:00:06 user_handlers.go:81: Handling POST request for user login
+INFO: 2023/12/04 18:00:06 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/04 18:00:06 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/04 18:00:06 user_handlers.go:124: User logged in successfully
+INFO: 2023/12/04 18:00:08 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:09 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:09 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/04 18:00:09 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/04 18:00:09 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/04 18:00:09 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/04 18:00:21 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:21 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/04 18:00:21 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/04 18:00:21 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/04 18:00:22 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:22 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/04 18:00:22 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/04 18:00:22 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/04 18:00:22 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/04 18:00:31 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:31 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/04 18:00:31 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/04 18:00:31 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/04 18:00:31 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/04 18:00:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:32 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/04 18:00:32 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/04 18:00:32 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/04 18:00:33 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/04 18:00:33 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/04 18:00:33 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/04 18:00:33 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/04 18:00:33 user_handlers.go:284: Current user details retrieved successfully

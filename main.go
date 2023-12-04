@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"log"
 	"os"
 
 	"github.com/vikash-parashar/asset-locator/config"
@@ -12,15 +13,7 @@ import (
 	"github.com/vikash-parashar/asset-locator/routes"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
-
-// load's environment variables values from .env file
-func loadEnvVariables() {
-	if err := godotenv.Load(); err != nil {
-		logger.ErrorLogger.Printf("Error loading .env file: %v", err)
-	}
-}
 
 // automate db related operations like create db/table or drop db/table etc.
 func runMigration(dbConn *db.DB, migrationType string) error {
@@ -102,10 +95,12 @@ func main() {
 		if err != nil {
 			logger.ErrorLogger.Printf("Error running the server: %v", err)
 		}
+		log.Println("server is running")
 	} else {
 		err := r.Run(":" + cfg.Port)
 		if err != nil {
 			logger.ErrorLogger.Printf("Error running the server: %v", err)
 		}
+		log.Println("server is running")
 	}
 }
