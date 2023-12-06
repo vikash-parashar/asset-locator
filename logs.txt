@@ -222,3 +222,4 @@ INFO: 2023/12/04 19:30:08 user_handlers.go:253: Handling GET request for current
 INFO: 2023/12/04 19:30:08 user_controllers.go:14: gowithvikash@gmail.com
 INFO: 2023/12/04 19:30:08 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
 INFO: 2023/12/04 19:30:08 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/06 21:26:28 config.go:31: Connected to the database
