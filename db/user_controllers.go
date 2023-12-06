@@ -180,3 +180,18 @@ func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 
 	return user, nil
 }
+
+// UpdateUserProfile updates a user's profile information in the database.
+func (db *DB) UpdateUserProfile(user *models.User) error {
+	query := `
+        UPDATE users
+        SET first_name = $1, last_name = $2, phone = $3, email = $4, password = $5, role = $6
+        WHERE id = $7
+    `
+	_, err := db.Exec(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role, user.ID)
+	if err != nil {
+		logger.ErrorLogger.Printf("Error updating user profile: %v", err)
+		return err
+	}
+	return nil
+}

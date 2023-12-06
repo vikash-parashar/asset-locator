@@ -16,6 +16,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Marhey&family=Righteous&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&family=Rubik:wght@600&display=swap');
 
         * {
             padding: 0;
@@ -56,9 +57,10 @@
         }
 
         .user-profile {
-            /* font-family: 'Nunito Sans', sans-serif; */
-            font-family: 'Righteous', sans-serif;
+            font-family: 'Rubik', sans-serif;
             cursor: pointer;
+            position: relative;
+            z-index: 1;
         }
 
         .user-profile img {
@@ -74,12 +76,14 @@
             position: absolute;
             top: 100%;
             right: 10px;
-            top: 80px;
+            margin-top: 20px;
             display: none;
             background-color: #fff;
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            /* Set a lower z-index than .user-profile */
         }
 
         @media only screen and (max-width: 412px) {
@@ -108,6 +112,7 @@
                 border: 1px solid #ccc;
                 padding: 10px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 2;
             }
 
             .app-name {
@@ -282,13 +287,7 @@
             font-size: small;
         }
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            height: 5vh;
-            width: 100vw;
-            background-color: #fff;
-        }
+
 
         @media only screen and (max-width: 950px) {
             .nav-item {
@@ -322,6 +321,27 @@
 
             h1 {
                 display: inline-block;
+            }
+        }
+    </style>
+
+    <!-- custom css for footer -->
+    <style>
+        .footer {
+            background-color: #363062;
+            color: white;
+            padding: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media only screen and (max-width: 950px) {
+            .footer {
+                position: relative;
+                bottom: 0;
+                width: 100%;
             }
         }
     </style>
@@ -379,7 +399,6 @@
                 Asset Locator - Device Discovery
             </div>
             <div class="user-profile">
-                <!-- Your user profile component goes here -->
                 <img class="profile" src="/static/images/man.png" alt="Profile" onclick="toggleDropdown()" />
                 <div id="dropdown-content" style="display: none;">
                     <div>
@@ -388,14 +407,24 @@
                     <hr />
                     <br />
                     <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        NAME :
+                        FIRST :
                         <span id="firstNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
                     </h6>
                     <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        PHONE : <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                        LAST :
+                        <span id="lastNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
                     </h6>
                     <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        ROLE : <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                        PHONE :
+                        <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                    </h6>
+                    <h6 class="dropdown-item-text" style="color: #de9b4a">
+                        EMAIL :
+                        <span id="emailPlaceholder" style="color: #3d5f7a">LOADING ...</span>
+                    </h6>
+                    <h6 class="dropdown-item-text" style="color: #de9b4a">
+                        ROLE :
+                        <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
                     </h6>
                     <br />
                     <hr />
@@ -584,9 +613,9 @@
                 })
                 .then(data => {
                     document.getElementById('firstNamePlaceholder').innerHTML = capitalize(data.user.first_name);
-                    // document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
+                    document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
                     document.getElementById('phonePlaceholder').innerHTML = capitalize(data.user.phone);
-                    // document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
+                    document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
                     document.getElementById('rolePlaceholder').innerHTML = capitalize(data.user.role);
                 })
 

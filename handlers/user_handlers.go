@@ -290,3 +290,127 @@ func RenderResetPasswordPage(c *gin.Context) {
 	logger.InfoLogger.Println("Rendering reset password page")
 	c.HTML(http.StatusOK, "reset_password.html", gin.H{})
 }
+
+// UpdateUserProfileRoute updates a user's profile information.
+func UpdateUserProfile(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		logger.InfoLogger.Println("Handling PUT request for updating user profile")
+
+		// Retrieve the JWT token from the cookie
+		cookie, err := c.Request.Cookie("jwt-token")
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
+		token := cookie.Value
+
+		claims, valid := utils.VerifyJWTToken(token)
+		if !valid {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
+		// Extract the user email from the claims
+		userEmail := claims.UserEmail
+
+		// Retrieve the user based on the user email from the database
+		user, err := db.GetUserByEmailID(userEmail)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Error retrieving user"})
+			c.Abort()
+			return
+		}
+
+		// Parse the updated profile information from the request body
+		var updateProfileRequest struct {
+			FirstName string `json:"first_name"`
+			LastName  string `json:"last_name"`
+			Phone     string `json:"phone"`
+			Email     string `json:"email"`
+			Password  string `json:"password"`
+			Role      string `json:"role"`
+		}
+		if err := c.ShouldBindJSON(&updateProfileRequest); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid input data"})
+			return
+		}
+
+		// Update the user's profile information
+		user.FirstName = updateProfileRequest.FirstName
+		user.LastName = updateProfileRequest.LastName
+		user.Phone = updateProfileRequest.Phone
+		user.Email = updateProfileRequest.Email
+		user.Password = updateProfileRequest.Password
+		user.Role = updateProfileRequest.Role
+
+		if err := db.UpdateUserProfile(user); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to update user profile"})
+			return
+		}
+
+		logger.InfoLogger.Println("User profile updated successfully")
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "User profile updated successfully"})
+	}
+}
+
+// UpdateUserProfile handles the updating of a user's profile information.
+// func UpdateUserProfile(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		logger.InfoLogger.Println("Handling PUT request for updating user profile")
+
+// 		// Retrieve the JWT token from the cookie
+// 		cookie, err := c.Request.Cookie("jwt-token")
+// 		if err != nil {
+// 			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+// 			c.Abort()
+// 			return
+// 		}
+
+// 		token := cookie.Value
+
+// 		claims, valid := utils.VerifyJWTToken(token)
+// 		if !valid {
+// 			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+// 			c.Abort()
+// 			return
+// 		}
+
+// 		// Extract the user email from the claims
+// 		userEmail := claims.UserEmail
+
+// 		// Retrieve the user based on the user email from the database
+// 		user, err := db.GetUserByEmailID(userEmail)
+// 		if err != nil {
+// 			c.JSON(http.StatusInternalServerError, gin.H{"message": "Error retrieving user"})
+// 			c.Abort()
+// 			return
+// 		}
+
+// 		// Parse the updated profile information from the request body
+// 		var updateProfileRequest struct {
+// 			FirstName string `json:"first_name"`
+// 			LastName  string `json:"last_name"`
+// 			Phone     string `json:"phone"`
+// 		}
+// 		if err := c.ShouldBindJSON(&updateProfileRequest); err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid input data"})
+// 			return
+// 		}
+
+// 		// Update the user's profile information
+// 		user.FirstName = updateProfileRequest.FirstName
+// 		user.LastName = updateProfileRequest.LastName
+// 		user.Phone = updateProfileRequest.Phone
+
+// 		if err := db.UpdateUserProfile(user); err != nil {
+// 			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Failed to update user profile"})
+// 			return
+// 		}
+
+// 		logger.InfoLogger.Println("User profile updated successfully")
+// 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "User profile updated successfully"})
+// 	}
+// }

@@ -35,6 +35,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 
 	// User
 	protected.GET("/get-current-user", handlers.GetCurrentUser(dbConn))
+	protected.GET("/update-user-profile", handlers.UpdateUserProfile(dbConn))
 
 	// Location Details
 	protected.GET("/location-details", handlers.GetLocationDetails(dbConn))

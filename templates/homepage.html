@@ -16,6 +16,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Righteous&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Marhey&family=Righteous&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&family=Rubik:wght@600&display=swap');
 
     * {
       padding: 0;
@@ -56,9 +57,10 @@
     }
 
     .user-profile {
-      /* font-family: 'Nunito Sans', sans-serif; */
-      font-family: 'Righteous', sans-serif;
+      font-family: 'Rubik', sans-serif;
       cursor: pointer;
+      position: relative;
+      z-index: 1;
     }
 
     .user-profile img {
@@ -74,12 +76,14 @@
       position: absolute;
       top: 100%;
       right: 10px;
-      top: 80px;
+      margin-top: 20px;
       display: none;
       background-color: #fff;
       border: 1px solid #ccc;
-      padding: 10px;
+      padding: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      /* Set a lower z-index than .user-profile */
     }
 
     @media only screen and (max-width: 412px) {
@@ -135,11 +139,16 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
     /* @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&family=Rubik:wght@600&display=swap');
 
     main {
       height: 100rem;
       display: flex;
       font-family: 'Montserrat', sans-serif;
+    }
+
+    .main-centent {
+      font-size: 2rem;
     }
 
     .left-section {
@@ -282,13 +291,6 @@
       font-size: small;
     }
 
-    footer {
-      position: fixed;
-      bottom: 0;
-      height: 5vh;
-      width: 100vw;
-      background-color: #fff;
-    }
 
     @media only screen and (max-width: 950px) {
       .nav-item {
@@ -325,6 +327,26 @@
       }
     }
   </style>
+  <!-- custom css for footer -->
+  <style>
+    .footer {
+      background-color: #363062;
+      color: white;
+      padding: 10px;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    @media only screen and (max-width: 950px) {
+      .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+  </style>
 
 </head>
 
@@ -342,7 +364,6 @@
         Asset Locator - Device Discovery
       </div>
       <div class="user-profile">
-        <!-- Your user profile component goes here -->
         <img class="profile" src="/static/images/man.png" alt="Profile" onclick="toggleDropdown()" />
         <div id="dropdown-content" style="display: none;">
           <div>
@@ -351,14 +372,24 @@
           <hr />
           <br />
           <h6 class="dropdown-item-text" style="color: #de9b4a">
-            NAME :
+            FIRST :
             <span id="firstNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
           </h6>
           <h6 class="dropdown-item-text" style="color: #de9b4a">
-            PHONE : <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+            LAST :
+            <span id="lastNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
           </h6>
           <h6 class="dropdown-item-text" style="color: #de9b4a">
-            ROLE : <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+            PHONE :
+            <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
+          </h6>
+          <h6 class="dropdown-item-text" style="color: #de9b4a">
+            EMAIL :
+            <span id="emailPlaceholder" style="color: #3d5f7a">LOADING ...</span>
+          </h6>
+          <h6 class="dropdown-item-text" style="color: #de9b4a">
+            ROLE :
+            <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
           </h6>
           <br />
           <hr />
@@ -369,6 +400,8 @@
           </div>
         </div>
       </div>
+
+
     </nav>
   </header>
 
@@ -442,7 +475,7 @@
           <h1>Welcome To Asset Locator</h1>
         </div>
         <div class="container">
-          <div>
+          <div class="main-centent">
             An asset locator system is a technology-driven solution designed to track and manage valuable assets within
             an organization, across various industries, or even in personal use. The primary purpose of such a system is
             to provide real-time or near-real-time visibility into the location, status, and condition of assets,
@@ -540,9 +573,9 @@
         })
         .then(data => {
           document.getElementById('firstNamePlaceholder').innerHTML = capitalize(data.user.first_name);
-          // document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
+          document.getElementById('lastNamePlaceholder').innerHTML = capitalize(data.user.last_name);
           document.getElementById('phonePlaceholder').innerHTML = capitalize(data.user.phone);
-          // document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
+          document.getElementById('emailPlaceholder').innerHTML = capitalize(data.user.email);
           document.getElementById('rolePlaceholder').innerHTML = capitalize(data.user.role);
         })
 
@@ -551,6 +584,8 @@
           console.error('Error fetching user details:', error);
         });
     }
+
+
 
     // Add an event listener to fetch user details when the page loads
     document.addEventListener('DOMContentLoaded', fetchCurrentUserDetails);
@@ -586,6 +621,57 @@
     const logoutButton = document.getElementById("logout-button");
     logoutButton.addEventListener("click", handleLogout);
 
+  </script>
+  <!-- About User-->
+  <script>
+    // ... (existing script code) ...
+
+    function toggleEditProfile() {
+      // Get all editable elements
+      const elementsToEdit = document.querySelectorAll('.user-profile-card span');
+
+      // Toggle the contenteditable attribute
+      elementsToEdit.forEach(element => {
+        element.contentEditable = !element.isContentEditable;
+      });
+
+      // Toggle the display of buttons
+      document.getElementById('editProfileButton').style.display = 'none';
+      document.getElementById('updateProfileButton').style.display = 'block';
+    }
+
+    async function updateUserProfile() {
+      const updatedUser = {
+        firstName: document.getElementById('firstNamePlaceholder').innerText,
+        phone: document.getElementById('phonePlaceholder').innerText,
+        email: document.getElementById('emailPlaceholder').innerText,
+        role: document.getElementById('rolePlaceholder').innerText,
+      };
+
+      try {
+        const response = await fetch('/api/v1/update-user-profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedUser),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update user profile');
+        }
+
+        // Notify the user about the profile update
+        showToast('success', 'Profile updated successfully');
+
+        // Toggle back to view mode
+        toggleEditProfile();
+      } catch (error) {
+        // Handle the error
+        console.error('Error updating user profile:', error);
+        showToast('error', 'Failed to update user profile');
+      }
+    }
   </script>
 </body>
 
