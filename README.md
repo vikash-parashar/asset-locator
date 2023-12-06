@@ -29,24 +29,14 @@ Before getting started, ensure you have the following installed on your machine:
         DB_PASSWORD=your_database_password
         DB_NAME=your_database_name
         PORT=8080  # Or any desired port
-
-    <!-- # JWT SECRET CONFIG -->
-
         JWT_SECRET=your_custom_jwt_secret
-
-    <!-- # EMAIL CONFIG -->
-
         EMAIL_PASSWORD=your_email_password
         EMAIL_USERNAME=your_email
-
-    <!-- # EXTERNAL SERVER CONFIG -->
-
         S_SERVER=your_external_server_host
         S_PORT=your_external_server_port
         S_USER=your_external_server_username
         S_PASS=your_external_server_password
-
-APP_ENV=development
+        APP_ENV=development
 
 ````
 
