@@ -101,6 +101,6 @@ func main() {
 		if err != nil {
 			logger.ErrorLogger.Printf("Error running the server: %v", err)
 		}
-		log.Println("server is running")
+		logger.InfoLogger.Println("server is running")
 	}
 }
