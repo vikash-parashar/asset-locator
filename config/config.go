@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/joho/godotenv"
+	"github.com/vikash-parashar/asset-locator/logger"
 )
 
 // Config struct to hold configuration parameters
@@ -40,7 +41,7 @@ func LoadConfig() *Config {
 		err := godotenv.Load(configFile)
 		if err != nil {
 			// Log or handle the error if needed
-			println("Error loading additional configuration:", err)
+			logger.ErrorLogger.Println("Error loading additional configuration:", err)
 		}
 	}
 

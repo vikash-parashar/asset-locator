@@ -1,11 +1,7 @@
 package main
 
 import (
-	"flag"
-	"fmt"
 	"html/template"
-	"log"
-	"os"
 
 	"github.com/vikash-parashar/asset-locator/config"
 	"github.com/vikash-parashar/asset-locator/db"
@@ -13,32 +9,20 @@ import (
 	"github.com/vikash-parashar/asset-locator/routes"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
-// automate db related operations like create db/table or drop db/table etc.
-func runMigration(dbConn *db.DB, migrationType string) error {
-	var migrationFile string
-
-	switch migrationType {
-	case "up":
-		migrationFile = "./db/schema.up.sql"
-	case "down":
-		migrationFile = "./db/schema.down.sql"
-	default:
-		return fmt.Errorf("unsupported migration type: %s", migrationType)
+// load's environment variables values from .env file
+func loadEnvVariables() {
+	if err := godotenv.Load(); err != nil {
+		logger.ErrorLogger.Printf("Error loading .env file: %v", err)
 	}
-
-	content, err := os.ReadFile(migrationFile)
-	if err != nil {
-		return err
-	}
-
-	_, err = dbConn.Exec(string(content))
-	return err
 }
 
 // main function
 func main() {
+	loadEnvVariables()
+
 	// Load configuration
 	cfg := config.LoadConfig()
 
@@ -48,23 +32,6 @@ func main() {
 		logger.ErrorLogger.Printf("Error connecting to the database: %v", err)
 	}
 	defer dbConn.Close()
-
-	// Parse command-line arguments
-	migrateType := flag.String("migrate", "", "Specify migration type: up or down")
-	flag.Parse()
-
-	// Run migration if the -migrate flag is provided
-	if *migrateType != "" {
-		fmt.Printf("Running %s migration...\n", *migrateType)
-		if err := runMigration(dbConn, *migrateType); err != nil {
-			logger.ErrorLogger.Printf("Error running migration: %v", err)
-		}
-		fmt.Printf("%s migration completed.\n", *migrateType)
-		return
-	}
-
-	// Set Gin to production mode
-	gin.SetMode(gin.ReleaseMode)
 
 	// Setting server mux as default mux
 	r := gin.Default()
@@ -79,28 +46,11 @@ func main() {
 		},
 	})
 
-	// Log only critical errors in production
-	if cfg.Env == "production" {
-		r.Use(gin.Recovery())
-	}
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*.html")
 
 	// Set up routes from the routes package
 	routes.SetupRoutes(r, dbConn)
 
-	// Run the server with HTTPS if configured
-	if cfg.UseHTTPS {
-		err := r.RunTLS(":"+cfg.Port, cfg.CertFile, cfg.KeyFile)
-		if err != nil {
-			logger.ErrorLogger.Printf("Error running the server: %v", err)
-		}
-		log.Println("server is running")
-	} else {
-		err := r.Run(":" + cfg.Port)
-		if err != nil {
-			logger.ErrorLogger.Printf("Error running the server: %v", err)
-		}
-		logger.InfoLogger.Println("server is running")
-	}
+	logger.ErrorLogger.Println(r.Run(":" + cfg.Port))
 }
