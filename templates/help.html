@@ -80,11 +80,35 @@
             display: none;
             background-color: #fff;
             border: 1px solid #ccc;
-            padding: 20px;
+            /* padding: 20px; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             z-index: 2;
             /* Set a lower z-index than .user-profile */
         }
+
+        .logout-div {
+            background-color: #353d53;
+            padding: 10px;
+        }
+
+        .profile-div {
+            background-color: #353d53;
+            padding: 10px;
+            color: #d4d5da;
+        }
+
+        .dropdown-item-text {
+            color: #de9b4a;
+        }
+
+        h6>span {
+            /* Your styles for the span go here */
+            color: #3d5f7a;
+            /* For example, change the text color to red */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
 
         @media only screen and (max-width: 412px) {
 
@@ -112,7 +136,7 @@
                 border: 1px solid #ccc;
                 padding: 10px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                z-index: 2;
+
             }
 
             .app-name {
@@ -133,6 +157,7 @@
             }
         }
     </style>
+
 
     <!-- main section css -->
     <style>
@@ -401,34 +426,36 @@
             <div class="user-profile">
                 <img class="profile" src="/static/images/man.png" alt="Profile" onclick="toggleDropdown()" />
                 <div id="dropdown-content" style="display: none;">
-                    <div>
-                        <h2 style="color: #4a6be1" class="text-center">User Profile</h2>
+                    <div class="profile-div">
+                        <h2 class="text-center">User Profile</h2>
                     </div>
-                    <hr />
-                    <br />
-                    <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        FIRST :
-                        <span id="firstNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
-                    </h6>
-                    <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        LAST :
-                        <span id="lastNamePlaceholder" style="color: #3d5f7a">LOADING ...</span>
-                    </h6>
-                    <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        PHONE :
-                        <span id="phonePlaceholder" style="color: #3d5f7a">LOADING ...</span>
-                    </h6>
-                    <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        EMAIL :
-                        <span id="emailPlaceholder" style="color: #3d5f7a">LOADING ...</span>
-                    </h6>
-                    <h6 class="dropdown-item-text" style="color: #de9b4a">
-                        ROLE :
-                        <span id="rolePlaceholder" style="color: #3d5f7a">LOADING ...</span>
-                    </h6>
-                    <br />
-                    <hr />
-                    <div class="text-center">
+                    <!-- <hr /> -->
+                    <div class="container">
+                        <br />
+                        <h6 class="dropdown-item-text">
+                            FIRST :
+                            <span id="firstNamePlaceholder">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text">
+                            LAST :
+                            <span id="lastNamePlaceholder">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text">
+                            PHONE :
+                            <span id="phonePlaceholder">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text">
+                            EMAIL :
+                            <span id="emailPlaceholder">LOADING ...</span>
+                        </h6>
+                        <h6 class="dropdown-item-text">
+                            ROLE :
+                            <span id="rolePlaceholder">LOADING ...</span>
+                        </h6>
+                        <br />
+                    </div>
+                    <!-- <hr /> -->
+                    <div class="text-center logout-div">
                         <button id="logout-button" class="btn btn-danger ml-2">
                             Logout
                         </button>
