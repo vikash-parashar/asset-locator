@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -9,7 +9,7 @@ import (
 func (db *DB) CreateDeviceAMCOwnerDetail(data *models.DeviceAMCOwnerDetail) error {
 	query := `
         INSERT INTO device_amc_owner (serial_number, device_make_model, model, po_number, po_order_date, eosl_date, amc_start_date, amc_end_date, device_owner)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
 	if err != nil {
@@ -49,10 +49,10 @@ func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error
 func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDetail) error {
 	query := `
         UPDATE device_amc_owner
-        SET serial_number = $2, device_make_model = $3, model = $4, po_number = $5, po_order_date = $6, eosl_date = $7, amc_start_date = $8, amc_end_date = $9, device_owner = $10
-        WHERE id = $1
+        SET serial_number = ?, device_make_model = ?, model = ?, po_number = ?, po_order_date = ?, eosl_date = ?, amc_start_date = ?, amc_end_date = ?, device_owner = ?
+        WHERE id = ?
     `
-	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
+	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error updating DeviceAMCOwnerDetail: %v", err)
 		return err
@@ -63,7 +63,7 @@ func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDeta
 
 // DeleteDeviceAMCOwnerDetail deletes a record from the device_amc_owner table based on the ID.
 func (db *DB) DeleteDeviceAMCOwnerDetail(id int) error {
-	query := "DELETE FROM device_amc_owner WHERE id = $1"
+	query := "DELETE FROM device_amc_owner WHERE id = ?"
 	_, err := db.Exec(query, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error deleting DeviceAMCOwnerDetail with ID %d: %v", id, err)

@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -9,7 +9,7 @@ import (
 func (db *DB) CreateDeviceLocationDetail(data *models.DeviceLocationDetail) error {
 	query := `
 		INSERT INTO device_location (serial_number, device_make_model, model, device_type, data_center, region, dc_location, device_location, device_row_number, device_rack_number, device_ru_number)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber)
 	if err != nil {
@@ -49,10 +49,10 @@ func (db *DB) GetAllDeviceLocationDetail() ([]models.DeviceLocationDetail, error
 func (db *DB) UpdateDeviceLocationDetail(id int, data *models.DeviceLocationDetail) error {
 	query := `
         UPDATE device_location
-        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, data_center = $6, region = $7, dc_location = $8, device_location = $9, device_row_number = $10, device_rack_number = $11, device_ru_number = $12
-        WHERE id = $1
+        SET serial_number = ?, device_make_model = ?, model = ?, device_type = ?, data_center = ?, region = ?, dc_location = ?, device_location = ?, device_row_number = ?, device_rack_number = ?, device_ru_number = ?
+        WHERE id = ?
     `
-	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber)
+	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DataCenter, data.Region, data.DCLocation, data.DeviceLocation, data.DeviceRowNumber, data.DeviceRackNumber, data.DeviceRUNumber, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error updating DeviceLocationDetail: %v", err)
 		return err
@@ -63,7 +63,7 @@ func (db *DB) UpdateDeviceLocationDetail(id int, data *models.DeviceLocationDeta
 
 // DeleteDeviceLocationDetail deletes a record from the device_location table based on the ID.
 func (db *DB) DeleteDeviceLocationDetail(id int) error {
-	query := "DELETE FROM device_location WHERE id = $1"
+	query := "DELETE FROM device_location WHERE id = ?"
 	_, err := db.Exec(query, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error deleting DeviceLocationDetail with ID %d: %v", id, err)

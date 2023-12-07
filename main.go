@@ -26,12 +26,31 @@ func main() {
 	// Load configuration
 	cfg := config.LoadConfig()
 
-	// Initialize the database connection
-	dbConn, err := db.NewDB(cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName)
+	// Initialize the MySQL database connection
+	dbConn, err := db.NewMySQLDB(cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName)
 	if err != nil {
-		logger.ErrorLogger.Printf("Error connecting to the database: %v", err)
+		logger.ErrorLogger.Printf("Error connecting to the MySQL database: %v", err)
+		return
 	}
 	defer dbConn.Close()
+
+	logger.InfoLogger.Println("Connection to MySQL database is successful!")
+
+	// Create database tables
+	if err := db.CreateDatabaseTables(dbConn.DB); err != nil {
+		logger.ErrorLogger.Fatalln("Failed to create tables in the database")
+	}
+	logger.InfoLogger.Println("Tables are created in the database successfully!")
+
+	// File path to the insertdata.mysql file
+	filePath := ".db/schema/insertdata.mysql"
+
+	// Insert data from the file into the database
+	if err := db.InsertDataFromFile(dbConn.DB, filePath); err != nil {
+		logger.ErrorLogger.Printf("Error inserting dummy data into the database: %v", err)
+		return
+	}
+	logger.InfoLogger.Println("Dummy data inserted successfully")
 
 	// Setting server mux as default mux
 	r := gin.Default()

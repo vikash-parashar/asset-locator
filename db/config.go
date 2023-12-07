@@ -3,32 +3,35 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
-	_ "github.com/lib/pq"
 	"github.com/vikash-parashar/asset-locator/logger"
 )
 
-// DB represents the PostgreSQL database.
+// DB represents the MySQL database.
 type DB struct {
 	*sql.DB
 }
 
-// NewDB creates a new database connection.
-func NewDB(host, port, user, password, dbName string) (*DB, error) {
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
+// NewMySQLDB creates a new database connection.
+func NewMySQLDB(dbUser, dbPassword, dbHost, dbPort, dbName string) (*DB, error) {
 
-	db, err := sql.Open("postgres", connStr)
+	// Create the MySQL connection string
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
+
+	// Open a connection to the MySQL database
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		logger.ErrorLogger.Printf("Error opening database connection: %v", err)
-		return nil, err
+		log.Fatal("Error connecting to the database: ", err)
 	}
 
-	if err = db.Ping(); err != nil {
-		logger.ErrorLogger.Printf("Error pinging database: %v", err)
-		return nil, err
+	// Ping the database to test the connection
+	err = db.Ping()
+	if err != nil {
+		log.Fatal("Error pinging the database: ", err)
 	}
 
-	logger.InfoLogger.Println("Connected to the database")
+	fmt.Println("Connected to the local database!")
 
 	return &DB{db}, nil
 }

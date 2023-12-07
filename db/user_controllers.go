@@ -13,9 +13,9 @@ import (
 func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 	logger.InfoLogger.Println(email)
 	query := `
-        SELECT id, first_name, last_name,phone, email, password,role
+        SELECT id, first_name, last_name, phone, email, password, role
         FROM users
-        WHERE email = $1
+        WHERE email = ?;
     `
 	user := &models.User{}
 	err := db.QueryRow(query, email).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Phone, &user.Email, &user.Password, &user.Role)
@@ -33,24 +33,24 @@ func (db *DB) GetUserByEmailID(email string) (*models.User, error) {
 func (db *DB) RegisterUser(user *models.User) error {
 	query := `
         INSERT INTO users (first_name, last_name, phone, email, password, role)
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id
+        VALUES (?, ?, ?, ?, ?, ?)
     `
-	err := db.QueryRow(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role).Scan(&user.ID)
+	_, err := db.Exec(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error registering user: %v", err)
 		return err
 	}
+	// user.ID, _ = res.LastInsertId()
 	return nil
 }
 
 func (db *DB) UpdateUserPassword(userID int, newPassword string) error {
 	query := `
         UPDATE users
-        SET password = $2
-        WHERE id = $1
+        SET password = ?
+        WHERE id = ?
     `
-	_, err := db.Exec(query, userID, newPassword)
+	_, err := db.Exec(query, newPassword, userID)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error updating user password: %v", err)
 		return err
@@ -93,7 +93,7 @@ func (db *DB) GetUserByResetToken(resetToken string) (*models.User, error) {
 	query := `
         SELECT id, first_name, last_name, email, password, role
         FROM users
-        WHERE reset_token = $1
+        WHERE reset_token = ?
     `
 	user := &models.User{}
 	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Password, &user.Role)
@@ -111,8 +111,8 @@ func (db *DB) GetUserByResetToken(resetToken string) (*models.User, error) {
 func (db *DB) UpdateUser(user *models.User) error {
 	query := `
         UPDATE users
-        SET first_name = $1, last_name = $2, email = $3, password = $4, role = $5
-        WHERE id = $6
+        SET first_name = ?, last_name = ?, email = ?, password = ?, role = ?
+        WHERE id = ?
     `
 	_, err := db.Exec(query, user.FirstName, user.LastName, user.Email, user.Password, user.Role, user.ID)
 	if err != nil {
@@ -126,8 +126,8 @@ func (db *DB) UpdateUser(user *models.User) error {
 func (db *DB) SetResetToken(userID int, resetToken string, expiryTime time.Time) error {
 	query := `
         UPDATE users
-        SET reset_token = $1, reset_token_expiry = $2
-        WHERE id = $3
+        SET reset_token = ?, reset_token_expiry = ?
+        WHERE id = ?
     `
 	_, err := db.Exec(query, resetToken, expiryTime, userID)
 	if err != nil {
@@ -142,7 +142,7 @@ func (db *DB) ClearResetToken(userID int) error {
 	query := `
         UPDATE users
         SET reset_token = NULL
-        WHERE id = $1
+        WHERE id = ?
     `
 	_, err := db.Exec(query, userID)
 	if err != nil {
@@ -155,9 +155,9 @@ func (db *DB) ClearResetToken(userID int) error {
 // VerifyResetToken verifies the reset token for a user.
 func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 	query := `
-        SELECT id, first_name, email, reset_token,reset_token_expiry
+        SELECT id, first_name, email, reset_token, reset_token_expiry
         FROM users
-        WHERE reset_token = $1
+        WHERE reset_token = ?
     `
 	user := &models.User{}
 	err := db.QueryRow(query, resetToken).Scan(&user.ID, &user.FirstName, &user.Email, &user.ResetToken, &user.ResetTokenExpiry)
@@ -185,8 +185,8 @@ func (db *DB) VerifyResetToken(resetToken string) (*models.User, error) {
 func (db *DB) UpdateUserProfile(user *models.User) error {
 	query := `
         UPDATE users
-        SET first_name = $1, last_name = $2, phone = $3, email = $4, password = $5, role = $6
-        WHERE id = $7
+        SET first_name = ?, last_name = ?, phone = ?, email = ?, password = ?, role = ?
+        WHERE id = ?
     `
 	_, err := db.Exec(query, user.FirstName, user.LastName, user.Phone, user.Email, user.Password, user.Role, user.ID)
 	if err != nil {

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
+	"github.com/vikash-parashar/asset-locator/logger"
 	"github.com/vikash-parashar/asset-locator/models"
 )
 
@@ -12,7 +12,7 @@ import (
 func (db *DB) CreateDeviceEthernetFiberDetail(data *models.DeviceEthernetFiberDetail) error {
 	query := `
 		INSERT INTO device_ethernet_fiber (serial_number, device_make_model, model, device_type, device_physical_port, device_port_type, device_port_mac_address_wwn, connected_device_port)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	`
 	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DevicePhysicalPort, data.DevicePortType, data.DevicePortMACWWN, data.ConnectedDevicePort)
 	if err != nil {
@@ -51,9 +51,7 @@ func (db *DB) GetAllDeviceEthernetFiberDetail() ([]models.DeviceEthernetFiberDet
 // Your GetFiberDetailByID function
 func (db *DB) GetFiberDetailByID(id int) (models.DeviceEthernetFiberDetail, error) {
 	var fiberDetail models.DeviceEthernetFiberDetail
-	query := `
-        SELECT * FROM device_ethernet_fiber WHERE id = $1
-    `
+	query := "SELECT * FROM device_ethernet_fiber WHERE id = ?"
 	err := db.QueryRow(query, id).Scan(
 		&fiberDetail.Id,
 		&fiberDetail.SerialNumber,
@@ -67,7 +65,6 @@ func (db *DB) GetFiberDetailByID(id int) (models.DeviceEthernetFiberDetail, erro
 	)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			// Return a custom error when the fiber detail is not found
 			logger.ErrorLogger.Printf("Fiber detail with ID %d not found", id)
 			return fiberDetail, fmt.Errorf("fiber detail with ID %d not found", id)
 		}
@@ -79,7 +76,7 @@ func (db *DB) GetFiberDetailByID(id int) (models.DeviceEthernetFiberDetail, erro
 }
 
 func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
-	query := "DELETE FROM device_ethernet_fiber WHERE id = $1"
+	query := "DELETE FROM device_ethernet_fiber WHERE id = ?"
 	_, err := db.Exec(query, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error deleting DeviceEthernetFiberDetail with ID %d: %v", id, err)
@@ -92,12 +89,12 @@ func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
 func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEthernetFiberDetail) error {
 	query := `
         UPDATE device_ethernet_fiber
-        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, device_physical_port = $6, device_port_type = $7, device_port_mac_address_wwn = $8, connected_device_port = $9
-        WHERE id = $1
+        SET serial_number = ?, device_make_model = ?, model = ?, device_type = ?, device_physical_port = ?, device_port_type = ?, device_port_mac_address_wwn = ?, connected_device_port = ?
+        WHERE id = ?
     `
 
 	logger.InfoLogger.Printf("Updating DeviceEthernetFiberDetail with ID %d", id)
-	_, err := db.Exec(query, &id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+	_, err := db.Exec(query, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.DevicePhysicalPort, data.DevicePortType, data.DevicePortMACWWN, data.ConnectedDevicePort, id)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
 		return err
