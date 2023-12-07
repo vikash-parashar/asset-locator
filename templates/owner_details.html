@@ -110,6 +110,34 @@
             /* Make the text bold */
         }
 
+        .close :hover {
+            color: #f70404;
+            background-color: #ffffff;
+        }
+
+        .close {
+            color: #ffffff;
+        }
+
+        #createEntryModal .modal-header .close #updatePowerModal {
+            color: rgb(255, 255, 255);
+            /* background-color: #000000; */
+            height: 3em;
+        }
+
+        .modal-header {
+            background-color: #3945b1;
+            color: #ccce3a;
+            font-weight: bold;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        div>.modal-body {
+            background-color: #F9F9E0;
+            color: #092635;
+            font-family: 'Rubik', sans-serif;
+        }
+
 
         @media only screen and (max-width: 412px) {
 
@@ -584,17 +612,20 @@
     </main>
 
     <!-- Modal for add data-->
-    <div class="modal new-data" tabindex="-1" role="dialog" id="createEntryModal">
+    <div class="modal fade new-data" tabindex="-1" role="dialog" aria-labelledby="createOwnerModalLabel"
+        id="createEntryModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create New Owner Details Entry</h5>
+                    <h5 class="modal-title" id="createOwnerModalLabel">Create New Owner Details Entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form id="entryForm">
+
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -618,6 +649,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -632,6 +665,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -646,6 +681,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -660,7 +697,16 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <div class="row">
+                            <div class="col-5">
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -669,7 +715,7 @@
 
     <!-- modal for update data -->
     <div class="modal fade" id="updateAMCOwnerModal" tabindex="-1" role="dialog"
-        aria-labelledby="updateAMCOwnerModalLabel" aria-hidden="true">
+        aria-labelledby="updateAMCOwnerModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -680,68 +726,108 @@
                 </div>
                 <div class="modal-body">
                     <form id="updateAMCOwnerForm">
-                        <!-- Serial Number -->
-                        <div class="form-group">
-                            <label for="serialNumber">Serial Number :</label>
-                            <input type="text" class="form-control" id="updateAMCSerialNumber" name="serial_number">
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- Serial Number -->
+                                <div class="form-group">
+                                    <label for="serialNumber">Serial Number :</label>
+                                    <input type="text" class="form-control" id="updateAMCSerialNumber"
+                                        name="serial_number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Device Make and Model -->
+                                <div class="form-group">
+                                    <label for="deviceMakeModel">Device Make :</label>
+                                    <input type="text" class="form-control" id="updateAMCDeviceMakeModel"
+                                        name="device_make_model">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Model -->
+                                <div class="form-group">
+                                    <label for="model">Model :</label>
+                                    <input type="text" class="form-control" id="updateAMCModel" name="model">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Device Make and Model -->
-                        <div class="form-group">
-                            <label for="deviceMakeModel">Device Make :</label>
-                            <input type="text" class="form-control" id="updateAMCDeviceMakeModel"
-                                name="device_make_model">
+                        <div class="row">
+                            <div class="col">
+                                <!-- PO Number -->
+                                <div class="form-group">
+                                    <label for="poNumber">PO Number :</label>
+                                    <input type="text" class="form-control" id="updateAMCPONumber" name="po_number">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- PO Order Date -->
+                                <div class="form-group">
+                                    <label for="poOrderDate">PO Order Date :</label>
+                                    <input type="date" class="form-control" id="updateAMCPOOrderDate"
+                                        name="po_order_date">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Model -->
-                        <div class="form-group">
-                            <label for="model">Model :</label>
-                            <input type="text" class="form-control" id="updateAMCModel" name="model">
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- EOSL Date -->
+                                <div class="form-group">
+                                    <label for="eoslDate">EOSL Date:</label>
+                                    <input type="date" class="form-control" id="updateAMCEOSLDate" name="eosl_date">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- AMC Start Date -->
+                                <div class="form-group">
+                                    <label for="amcStartDate">AMC Start Date:</label>
+                                    <input type="date" class="form-control" id="updateAMCAMCStartDate"
+                                        name="amc_start_date">
+                                </div>
+
+                            </div>
                         </div>
 
-                        <!-- PO Number -->
-                        <div class="form-group">
-                            <label for="poNumber">PO Number :</label>
-                            <input type="text" class="form-control" id="updateAMCPONumber" name="po_number">
-                        </div>
 
-                        <!-- PO Order Date -->
-                        <div class="form-group">
-                            <label for="poOrderDate">PO Order Date :</label>
-                            <input type="date" class="form-control" id="updateAMCPOOrderDate" name="po_order_date">
+                        <div class="row">
+                            <div class="col">
+                                <!-- AMC End Date -->
+                                <div class="form-group">
+                                    <label for="amcEndDate">AMC End Date:</label>
+                                    <input type="date" class="form-control" id="updateAMCAMCEndDate"
+                                        name="amc_end_date">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Device Owner -->
+                                <div class="form-group">
+                                    <label for="deviceOwner">Device Owner:</label>
+                                    <input type="text" class="form-control" id="updateAMCDeviceOwner"
+                                        name="device_owner">
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- EOSL Date -->
-                        <div class="form-group">
-                            <label for="eoslDate">EOSL Date:</label>
-                            <input type="date" class="form-control" id="updateAMCEOSLDate" name="eosl_date">
-                        </div>
-
-                        <!-- AMC Start Date -->
-                        <div class="form-group">
-                            <label for="amcStartDate">AMC Start Date:</label>
-                            <input type="date" class="form-control" id="updateAMCAMCStartDate" name="amc_start_date">
-                        </div>
-
-                        <!-- AMC End Date -->
-                        <div class="form-group">
-                            <label for="amcEndDate">AMC End Date:</label>
-                            <input type="date" class="form-control" id="updateAMCAMCEndDate" name="amc_end_date">
-                        </div>
-
-                        <!-- Device Owner -->
-                        <div class="form-group">
-                            <label for="deviceOwner">Device Owner:</label>
-                            <input type="text" class="form-control" id="updateAMCDeviceOwner" name="device_owner">
-                        </div>
-
                         <input type="hidden" id="updateAMCOwnerId" name="id">
+                        <div class="row">
+                            <div class="col-5">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" id="updateAMCOwnerSubmit">Update</button>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateAMCOwnerSubmit">Update</button>
-                </div>
+
+
+
+
             </div>
         </div>
     </div>

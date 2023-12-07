@@ -108,6 +108,34 @@
             /* Make the text bold */
         }
 
+        .close :hover {
+            color: #f70404;
+            background-color: #ffffff;
+        }
+
+        .close {
+            color: #ffffff;
+        }
+
+        #createEntryModal .modal-header .close #updatePowerModal {
+            color: rgb(255, 255, 255);
+            /* background-color: #000000; */
+            height: 3em;
+        }
+
+        .modal-header {
+            background-color: #3945b1;
+            color: #ccce3a;
+            font-weight: bold;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        div>.modal-body {
+            background-color: #F9F9E0;
+            color: #092635;
+            font-family: 'Rubik', sans-serif;
+        }
+
 
         @media only screen and (max-width: 412px) {
 
@@ -585,8 +613,9 @@
         </section>
     </main>
 
-    <!-- Modal for add data -->
-    <div class="modal" tabindex="-1" role="dialog" id="createEntryModal">
+    <!-- Modal for add data-->
+    <div class="modal fade new-data" tabindex="-1" role="dialog" aria-labelledby="createOwnerModalLabel"
+        id="createEntryModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -597,6 +626,8 @@
                 </div>
                 <div class="modal-body">
                     <form id="entryForm">
+
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -605,6 +636,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -620,6 +652,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -634,6 +667,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -648,6 +682,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -663,6 +698,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -679,7 +715,17 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <div class="row">
+                            <div class="col-5">
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -687,8 +733,7 @@
     </div>
 
     <!-- modal for update data -->
-    <div class="modal fade" id="updateLocationModal" tabindex="-1" role="dialog"
-        aria-labelledby="updateLocationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateLocationModal" tabindex="-1" role="dialog" aria-labelledby="updateLocationModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -700,71 +745,106 @@
                 <div class="modal-body">
                     <form id="updateLocationForm">
                         <!-- Serial Number -->
-                        <div class="form-group">
-                            <label for="serialNumber">Serial Number:</label>
-                            <input type="text" class="form-control" id="updateSerialNumber" name="serial_number">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="serialNumber">Serial Number:</label>
+                                    <input type="text" class="form-control" id="updateSerialNumber"
+                                        name="serial_number">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Device Make and Model -->
-                        <div class="form-group">
-                            <label for="deviceMakeModel">Device Make and Model:</label>
-                            <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Device Make and Model -->
+                                <div class="form-group">
+                                    <label for="deviceMakeModel">Device Make and Model:</label>
+                                    <input type="text" class="form-control" id="updateDeviceMakeModel"
+                                        name="device_make_model">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Model -->
+                                <div class="form-group">
+                                    <label for="model">Model:</label>
+                                    <input type="text" class="form-control" id="updateModel" name="model">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Model -->
-                        <div class="form-group">
-                            <label for="model">Model:</label>
-                            <input type="text" class="form-control" id="updateModel" name="model">
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- Device Type -->
+                                <div class="form-group">
+                                    <label for="deviceType">Device Type:</label>
+                                    <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Data Center -->
+                                <div class="form-group">
+                                    <label for="dataCenter">Data Center:</label>
+                                    <input type="text" class="form-control" id="updateDataCenter" name="data_center">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Device Type -->
-                        <div class="form-group">
-                            <label for="deviceType">Device Type:</label>
-                            <input type="text" class="form-control" id="updateDeviceType" name="device_type">
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- Region -->
+                                <div class="form-group">
+                                    <label for="region">Region:</label>
+                                    <input type="text" class="form-control" id="updateRegion" name="region">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- DC Location -->
+                                <div class="form-group">
+                                    <label for="dcLocation">DC Location:</label>
+                                    <input type="text" class="form-control" id="updateDCLocation" name="dc_location">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Data Center -->
-                        <div class="form-group">
-                            <label for="dataCenter">Data Center:</label>
-                            <input type="text" class="form-control" id="updateDataCenter" name="data_center">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Device Location -->
+                                <div class="form-group">
+                                    <label for="deviceLocation">Device Location:</label>
+                                    <input type="text" class="form-control" id="updateDeviceLocation"
+                                        name="device_location">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Device Row Number -->
+                                <div class="form-group">
+                                    <label for="deviceRowNumber">Device Row Number:</label>
+                                    <input type="number" class="form-control" id="updateDeviceRowNumber"
+                                        name="device_row_number">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Region -->
-                        <div class="form-group">
-                            <label for="region">Region:</label>
-                            <input type="text" class="form-control" id="updateRegion" name="region">
-                        </div>
-
-                        <!-- DC Location -->
-                        <div class="form-group">
-                            <label for="dcLocation">DC Location:</label>
-                            <input type="text" class="form-control" id="updateDCLocation" name="dc_location">
-                        </div>
-
-                        <!-- Device Location -->
-                        <div class="form-group">
-                            <label for="deviceLocation">Device Location:</label>
-                            <input type="text" class="form-control" id="updateDeviceLocation" name="device_location">
-                        </div>
-
-                        <!-- Device Row Number -->
-                        <div class="form-group">
-                            <label for="deviceRowNumber">Device Row Number:</label>
-                            <input type="number" class="form-control" id="updateDeviceRowNumber"
-                                name="device_row_number">
-                        </div>
-
-                        <!-- Device Rack Number -->
-                        <div class="form-group">
-                            <label for="deviceRackNumber">Device Rack Number:</label>
-                            <input type="number" class="form-control" id="updateDeviceRackNumber"
-                                name="device_rack_number">
-                        </div>
-
-                        <!-- Device RU Number -->
-                        <div class="form-group">
-                            <label for="deviceRUNumber">Device RU Number:</label>
-                            <input type="text" class="form-control" id="updateDeviceRUNumber" name="device_ru_number">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Device Rack Number -->
+                                <div class="form-group">
+                                    <label for="deviceRackNumber">Device Rack Number:</label>
+                                    <input type="number" class="form-control" id="updateDeviceRackNumber"
+                                        name="device_rack_number">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Device RU Number -->
+                                <div class="form-group">
+                                    <label for="deviceRUNumber">Device RU Number:</label>
+                                    <input type="text" class="form-control" id="updateDeviceRUNumber"
+                                        name="device_ru_number">
+                                </div>
+                            </div>
                         </div>
 
                         <input type="hidden" id="updateLocationId" name="id">

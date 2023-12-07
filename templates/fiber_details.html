@@ -2,9 +2,9 @@
 <html>
 
 <head>
+  <title>Fiber Details</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fiber Details</title>
   <link rel="icon" href="/static/images/favicon.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -107,6 +107,34 @@
       /* For example, change the text color to red */
       font-weight: bold;
       /* Make the text bold */
+    }
+
+    .close :hover {
+      color: #f70404;
+      background-color: #ffffff;
+    }
+
+    .close {
+      color: #ffffff;
+    }
+
+    #createEntryModal .modal-header .close #updatePowerModal {
+      color: rgb(255, 255, 255);
+      /* background-color: #000000; */
+      height: 3em;
+    }
+
+    .modal-header {
+      background-color: #3945b1;
+      color: #ccce3a;
+      font-weight: bold;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    div>.modal-body {
+      background-color: #F9F9E0;
+      color: #092635;
+      font-family: 'Rubik', sans-serif;
     }
 
 
@@ -377,15 +405,19 @@
   <!-- top navbar -->
   <header>
     <nav>
+      
       <div class="brand-logo">
         <img src="/static/images/logo3.png" alt="Logo" />
       </div>
+     
       <div class="app-name">
         <!-- Your application name goes here -->
         Asset Locator - Device Discovery
       </div>
+     
       <div class="user-profile">
         <img class="profile" src="/static/images/man.png" alt="Profile" onclick="toggleDropdown()" />
+      
         <div id="dropdown-content" style="display: none;">
           <div class="profile-div">
             <h2 class="text-center">User Profile</h2>
@@ -430,7 +462,6 @@
   <main>
     <!-- left side navbar container-->
     <section class="left-section">
-
       <!-- left side content -->
       <div class="left-div">
         <ul>
@@ -469,7 +500,6 @@
             </a>
           </li>
           <li class="nav-item">
-
             <a class="nav-link" href="http://localhost:8080/about">
               <img src="/static/images/about.png" alt="" class="off-img">
               ABOUT
@@ -574,7 +604,6 @@
           </table>
         </div>
       </div>
-      </div>
     </section>
   </main>
 
@@ -645,65 +674,81 @@
         </div>
         <div class="modal-body">
           <form id="updateForm">
-            <!-- Serial Number -->
-            <div class="form-group">
-              <label for="serialNumber">Serial Number:</label>
-              <input type="text" class="form-control" id="updateSerialNumber" name="serial_number" />
-            </div>
 
-            <!-- Device Make and Model -->
-            <div class="form-group">
-              <label for="deviceMakeModel">Device Make and Model:</label>
-              <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model" />
+            <div class="row">
+              <div class="col">
+                <!-- Serial Number -->
+                <div class="form-group">
+                  <label for="serialNumber">Serial Number:</label>
+                  <input type="text" class="form-control" id="updateSerialNumber" name="serial_number" />
+                </div>
+              </div>
             </div>
-
-            <!-- Model -->
-            <div class="form-group">
-              <label for="model">Model:</label>
-              <input type="text" class="form-control" id="updateModel" name="model" />
+            <div class="row">
+              <div class="col"> <!-- Device Make and Model -->
+                <div class="form-group">
+                  <label for="deviceMakeModel">Device Make and Model:</label>
+                  <input type="text" class="form-control" id="updateDeviceMakeModel" name="device_make_model" />
+                </div>
+              </div>
+              <div class="col">
+                <!-- Model -->
+                <div class="form-group">
+                  <label for="model">Model:</label>
+                  <input type="text" class="form-control" id="updateModel" name="model" />
+                </div>
+              </div>
             </div>
-
-            <!-- Device Type -->
-            <div class="form-group">
-              <label for="deviceType">Device Type:</label>
-              <input type="text" class="form-control" id="updateDeviceType" name="device_type" />
+            <div class="row">
+              <div class="col"><!-- Device Type -->
+                <div class="form-group">
+                  <label for="deviceType">Device Type:</label>
+                  <input type="text" class="form-control" id="updateDeviceType" name="device_type" />
+                </div>
+              </div>
+              <div class="col">
+                <!-- Device Physical Port -->
+                <div class="form-group">
+                  <label for="devicePhysicalPort">Device Physical Port:</label>
+                  <input type="text" class="form-control" id="updateDevicePhysicalPort" name="device_physical_port" />
+                </div>
+              </div>
             </div>
-
-            <!-- Device Physical Port -->
-            <div class="form-group">
-              <label for="devicePhysicalPort">Device Physical Port:</label>
-              <input type="text" class="form-control" id="updateDevicePhysicalPort" name="device_physical_port" />
+            <div class="row">
+              <div class="col"> <!-- Device Port Type -->
+                <div class="form-group">
+                  <label for="devicePortType">Device Port Type:</label>
+                  <input type="text" class="form-control" id="updateDevicePortType" name="device_port_type" />
+                </div>
+              </div>
+              <div class="col"> <!-- Device Port MAC/WWN -->
+                <div class="form-group">
+                  <label for="devicePortMACWWN">Device Port MAC/WWN:</label>
+                  <input type="text" class="form-control" id="updateDevicePortMACWWN" name="device_port_macwwn" />
+                </div>
+              </div>
             </div>
-
-            <!-- Device Port Type -->
-            <div class="form-group">
-              <label for="devicePortType">Device Port Type:</label>
-              <input type="text" class="form-control" id="updateDevicePortType" name="device_port_type" />
+            <div class="row">
+              <div class="col"> <!-- Connected Device Port -->
+                <div class="form-group">
+                  <label for="connectedDevicePort">Connected Device Port:</label>
+                  <input type="text" class="form-control" id="updateConnectedDevicePort" name="connected_device_port" />
+                </div>
+              </div>
             </div>
-
-            <!-- Device Port MAC/WWN -->
-            <div class="form-group">
-              <label for="devicePortMACWWN">Device Port MAC/WWN:</label>
-              <input type="text" class="form-control" id="updateDevicePortMACWWN" name="device_port_macwwn" />
-            </div>
-
-            <!-- Connected Device Port -->
-            <div class="form-group">
-              <label for="connectedDevicePort">Connected Device Port:</label>
-              <input type="text" class="form-control" id="updateConnectedDevicePort" name="connected_device_port" />
-            </div>
-
             <input type="hidden" id="updateId" name="id" />
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-2">
+                <button type="button" class="btn btn-primary" id="updateSubmit">
+                  Update
+                </button>
+              </div>
+              <div class="col-5"></div>
+            </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary" id="updateSubmit">
-            Update
-          </button>
-        </div>
+
       </div>
     </div>
   </div>
@@ -722,8 +767,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
   <!-- user dropdown script -->
   <script>
@@ -736,6 +781,7 @@
       }
     }
   </script>
+
   <script>
     // <!-- sweet alerts -->
 
@@ -1056,7 +1102,7 @@
           console.error("An error occurred while logging out:", error);
           showToast("error", "Try Again !");
         });
-    }
+    };
 
     // Attach the handleLogout function to the logout button's click event
     const logoutButton = document.getElementById("logout-button");
