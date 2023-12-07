@@ -17,7 +17,7 @@ type DB struct {
 func NewMySQLDB(dbUser, dbPassword, dbHost, dbPort, dbName string) (*DB, error) {
 
 	// Create the MySQL connection string
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 	// Open a connection to the MySQL database
 	db, err := sql.Open("mysql", dsn)
