@@ -23,6 +23,8 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	r.POST("/forget-password", handlers.ForgotPassword(dbConn))
 	r.GET("/reset-password", handlers.RenderResetPasswordPage)
 	r.POST("/reset-password", handlers.ResetPassword(dbConn))
+	// for fetching disk details from external server
+	r.GET("/disk-details", handlers.FetchDisks)
 
 	// Protected routes
 	protected := r.Group("/api/v1", middleware.AuthMiddleware("admin", "general"))
@@ -31,7 +33,7 @@ func SetupRoutes(r *gin.Engine, dbConn *db.DB) {
 	protected.GET("/homepage", handlers.RenderHomePage(dbConn))
 
 	// for fetching disk details from external server
-	protected.GET("/disk-details", handlers.FetchDisks)
+	// protected.GET("/disk-details", handlers.FetchDisks)
 
 	// User
 	protected.GET("/get-current-user", handlers.GetCurrentUser(dbConn))
