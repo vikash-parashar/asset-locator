@@ -8675,3 +8675,173 @@ INFO: 2023/12/11 11:36:50 auth.go:63: User gowithvikash@gmail.com has access
 INFO: 2023/12/11 11:36:50 fiber_controllers.go:77: Retrieved FiberDetail with ID 64 successfully
 ERROR: 2023/12/11 11:36:50 fiber_controllers.go:151: Error updating DeviceEthernetFiberDetail: pq: got 8 parameters but the statement requires 9
 ERROR: 2023/12/11 11:36:50 fiber_handlers.go:201: Failed to update DeviceEthernetFiberDetail: pq: got 8 parameters but the statement requires 9
+ERROR: 2023/12/11 11:41:12 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:41:12 config.go:31: Connected to the database
+INFO: 2023/12/11 11:41:21 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:41:21 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:41:21 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:41:21 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:41:22 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:41:22 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:41:22 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:41:22 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:41:22 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:41:41 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:41:41 fiber_controllers.go:77: Retrieved FiberDetail with ID 64 successfully
+INFO: 2023/12/11 11:41:41 fiber_controllers.go:111: Updated DeviceEthernetFiberDetail with ID 64 successfully
+INFO: 2023/12/11 11:41:41 fiber_handlers.go:206: DeviceEthernetFiberDetail updated successfully.
+INFO: 2023/12/11 11:41:41 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:41:41 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:41:41 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:41:41 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:41:42 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:41:42 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:41:42 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:41:42 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:41:42 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:42:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:42:00 fiber_controllers.go:77: Retrieved FiberDetail with ID 64 successfully
+INFO: 2023/12/11 11:42:00 fiber_controllers.go:111: Updated DeviceEthernetFiberDetail with ID 64 successfully
+INFO: 2023/12/11 11:42:00 fiber_handlers.go:206: DeviceEthernetFiberDetail updated successfully.
+INFO: 2023/12/11 11:42:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:42:00 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:42:00 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:42:00 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:42:01 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:42:01 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:42:01 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:42:01 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:42:01 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 11:47:41 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:47:41 config.go:31: Connected to the database
+INFO: 2023/12/11 11:47:41 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:47:41 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:47:41 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:47:41 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:47:41 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:47:41 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:47:41 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:47:41 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:47:41 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:59:28 external_handlers.go:36: Fetching disk's data from external server
+ERROR: 2023/12/11 11:59:28 external_handlers.go:43: Failed to fetch disk's data from external server
+ERROR: 2023/12/11 11:59:28 external_handlers.go:44: Get "http://localhost:8090/get-disk-count": dial tcp [::1]:8090: connectex: No connection could be made because the target machine actively refused it.
+INFO: 2023/12/11 11:59:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:59:35 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 11:59:35 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 11:59:35 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 11:59:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:59:35 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:59:35 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:59:35 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:59:35 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:59:53 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:59:53 owner_handlers.go:37: Creating new owner details
+INFO: 2023/12/11 11:59:53 owner_controllers.go:19: Created DeviceAMCOwnerDetail successfully
+INFO: 2023/12/11 11:59:53 owner_handlers.go:78: New owner details created successfully.
+INFO: 2023/12/11 11:59:54 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:59:54 owner_handlers.go:37: Creating new owner details
+INFO: 2023/12/11 11:59:54 owner_controllers.go:19: Created DeviceAMCOwnerDetail successfully
+INFO: 2023/12/11 11:59:54 owner_handlers.go:78: New owner details created successfully.
+INFO: 2023/12/11 12:00:04 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:00:04 owner_handlers.go:37: Creating new owner details
+INFO: 2023/12/11 12:00:04 owner_controllers.go:19: Created DeviceAMCOwnerDetail successfully
+INFO: 2023/12/11 12:00:04 owner_handlers.go:78: New owner details created successfully.
+INFO: 2023/12/11 12:00:13 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:00:13 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 12:00:13 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 12:00:13 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 12:00:13 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:00:13 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:00:13 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:00:13 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:00:13 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 12:01:09 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:01:09 owner_handlers.go:89: Updating Device AMC Owner Detail
+INFO: 2023/12/11 12:01:20 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:01:20 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 12:01:20 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 12:01:20 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 12:01:20 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:01:20 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:01:20 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:01:20 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:01:20 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 12:06:18 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:06:18 config.go:31: Connected to the database
+INFO: 2023/12/11 12:06:43 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:06:43 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:06:43 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:06:43 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:06:43 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 12:35:57 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:35:57 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:39:15 auth.go:28: Token not found, redirecting to login page: http: named cookie not present
+INFO: 2023/12/11 12:39:21 user_handlers.go:81: Handling POST request for user login
+INFO: 2023/12/11 12:39:21 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:39:21 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:39:21 user_handlers.go:124: User logged in successfully
+INFO: 2023/12/11 12:39:23 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:39:24 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:39:24 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:39:24 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:39:24 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:39:24 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 12:39:27 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:39:27 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 12:39:27 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 12:39:27 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 12:39:27 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:39:27 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:39:27 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:39:27 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:39:27 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 12:40:20 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:40:20 owner_handlers.go:89: Updating Device AMC Owner Detail
+ERROR: 2023/12/11 12:43:33 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:43:56 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:43:56 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:44:03 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:44:03 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:44:03 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:44:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:44:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:44:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:44:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:44:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:44:29 config.go:31: Connected to the database
+INFO: 2023/12/11 12:44:29 config.go:31: Connected to the database
+INFO: 2023/12/11 12:44:29 config.go:31: Connected to the database
+INFO: 2023/12/11 12:44:29 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:44:29 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 12:44:29 config.go:41: Closed database connection
+ERROR: 2023/12/11 12:44:29 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 12:44:29 config.go:41: Closed database connection
+INFO: 2023/12/11 12:44:29 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:44:29 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 12:44:29 config.go:41: Closed database connection
+ERROR: 2023/12/11 12:44:29 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 12:44:29 config.go:41: Closed database connection
+ERROR: 2023/12/11 12:44:30 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:44:30 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:44:30 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 12:44:30 config.go:41: Closed database connection
+ERROR: 2023/12/11 12:44:53 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:44:53 config.go:31: Connected to the database
+INFO: 2023/12/11 12:45:03 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:45:03 owner_handlers.go:89: Updating Device AMC Owner Detail
+INFO: 2023/12/11 12:45:03 owner_controllers.go:71: Updated DeviceAMCOwnerDetail with ID 29 successfully
+INFO: 2023/12/11 12:45:03 owner_handlers.go:179: Device AMC Owner Detail updated successfully.
+INFO: 2023/12/11 12:45:07 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:45:07 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 12:45:07 owner_controllers.go:44: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 12:45:07 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 12:45:08 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 12:45:08 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 12:45:08 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 12:45:08 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 12:45:08 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 12:48:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 12:48:29 config.go:31: Connected to the database
+ERROR: 2023/12/11 12:48:47 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 12:48:48 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.

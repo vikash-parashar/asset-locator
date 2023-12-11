@@ -46,10 +46,18 @@ func (db *DB) GetAllDevicePowerDetail() ([]models.DevicePowerDetail, error) {
 }
 
 // UpdateDevicePowerDetail updates an existing record in the device_power table based on the ID.
+// UpdateDevicePowerDetail updates an existing record in the device_power table based on the ID.
 func (db *DB) UpdateDevicePowerDetail(id int, data *models.DevicePowerDetail) error {
 	query := `
         UPDATE device_power
-        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, total_power_watt = $6, total_btu = $7, total_power_cable = $8, power_socket_type = $9
+        SET serial_number = COALESCE($2, serial_number),
+            device_make_model = COALESCE($3, device_make_model),
+            model = COALESCE($4, model),
+            device_type = COALESCE($5, device_type),
+            total_power_watt = COALESCE($6, total_power_watt),
+            total_btu = COALESCE($7, total_btu),
+            total_power_cable = COALESCE($8, total_power_cable),
+            power_socket_type = COALESCE($9, power_socket_type)
         WHERE id = $1
     `
 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.TotalPowerWatt, data.TotalBTU, data.TotalPowerCable, data.PowerSocketType)
@@ -60,6 +68,21 @@ func (db *DB) UpdateDevicePowerDetail(id int, data *models.DevicePowerDetail) er
 	logger.InfoLogger.Printf("Updated DevicePowerDetail with ID %d successfully", id)
 	return nil
 }
+
+// func (db *DB) UpdateDevicePowerDetail(id int, data *models.DevicePowerDetail) error {
+// 	query := `
+//         UPDATE device_power
+//         SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, total_power_watt = $6, total_btu = $7, total_power_cable = $8, power_socket_type = $9
+//         WHERE id = $1
+//     `
+// 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.DeviceType, data.TotalPowerWatt, data.TotalBTU, data.TotalPowerCable, data.PowerSocketType)
+// 	if err != nil {
+// 		logger.ErrorLogger.Printf("Error updating DevicePowerDetail: %v", err)
+// 		return err
+// 	}
+// 	logger.InfoLogger.Printf("Updated DevicePowerDetail with ID %d successfully", id)
+// 	return nil
+// }
 
 // DeleteDevicePowerDetail deletes a record from the device_power table based on the ID.
 func (db *DB) DeleteDevicePowerDetail(id int) error {

@@ -84,6 +84,8 @@ func CreateNewOwnerDetails(db *db.DB) gin.HandlerFunc {
 }
 
 // UpdateDeviceAMCOwnerDetail updates a DeviceAMCOwnerDetail record based on its ID.
+
+// UpdateDeviceAMCOwnerDetail updates a DeviceAMCOwnerDetail record based on its ID.
 func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		logger.InfoLogger.Println("Updating Device AMC Owner Detail")
@@ -93,6 +95,14 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		if err != nil {
 			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		// Fetch the original data from the database
+		originalData, err := db.GetDeviceAMCOwnerDetailById(id)
+		if err != nil {
+			logger.ErrorLogger.Println("Failed to fetch original data:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch original data"})
 			return
 		}
 
@@ -117,48 +127,57 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		// Define the layout that matches the date format
 		layout := "2006-01-02"
 
-		// Parse the date string into a time.Time value
-		pD, err := time.Parse(layout, requestData.POOrderDate)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
+		// Update fields only if data is available in the request
+		if requestData.SerialNumber != "" {
+			originalData.SerialNumber = requestData.SerialNumber
+		}
+		if requestData.DeviceMakeModel != "" {
+			originalData.DeviceMakeModel = requestData.DeviceMakeModel
+		}
+		if requestData.Model != "" {
+			originalData.Model = requestData.Model
+		}
+		if requestData.PONumber != "" {
+			originalData.PONumber = requestData.PONumber
+		}
+		if requestData.POOrderDate != "" {
+			pD, err := time.Parse(layout, requestData.POOrderDate)
+			if err != nil {
+				fmt.Println("Error parsing POOrderDate:", err)
+				return
+			}
+			originalData.POOrderDate = pD
+		}
+		if requestData.EOSLDate != "" {
+			eD, err := time.Parse(layout, requestData.EOSLDate)
+			if err != nil {
+				fmt.Println("Error parsing EOSLDate:", err)
+				return
+			}
+			originalData.EOSLDate = eD
+		}
+		if requestData.AMCStartDate != "" {
+			aD, err := time.Parse(layout, requestData.AMCStartDate)
+			if err != nil {
+				fmt.Println("Error parsing AMCStartDate:", err)
+				return
+			}
+			originalData.AMCStartDate = aD
+		}
+		if requestData.AMCEndDate != "" {
+			aDD, err := time.Parse(layout, requestData.AMCEndDate)
+			if err != nil {
+				fmt.Println("Error parsing AMCEndDate:", err)
+				return
+			}
+			originalData.AMCEndDate = aDD
+		}
+		if requestData.DeviceOwner != "" {
+			originalData.DeviceOwner = requestData.DeviceOwner
 		}
 
-		// Parse the date string into a time.Time value
-		eD, err := time.Parse(layout, requestData.AMCEndDate)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-
-		// Parse the date string into a time.Time value
-		aD, err := time.Parse(layout, requestData.AMCStartDate)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-
-		// Parse the date string into a time.Time value
-		aDD, err := time.Parse(layout, requestData.AMCEndDate)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-
-		updatedData := &models.DeviceAMCOwnerDetail{
-			Id:              id,
-			SerialNumber:    requestData.SerialNumber,
-			DeviceMakeModel: requestData.DeviceMakeModel,
-			Model:           requestData.Model,
-			PONumber:        requestData.PONumber,
-			POOrderDate:     pD,
-			EOSLDate:        eD,
-			AMCStartDate:    aD,
-			AMCEndDate:      aDD,
-			DeviceOwner:     requestData.DeviceOwner,
-		}
-
-		if err := db.UpdateDeviceAMCOwnerDetail(id, updatedData); err != nil {
+		// Update the data in the database
+		if err := db.UpdateDeviceAMCOwnerDetail(id, originalData); err != nil {
 			logger.ErrorLogger.Println("Failed to update Device AMC Owner Detail:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Device AMC Owner Detail"})
 			return
@@ -168,6 +187,103 @@ func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device AMC Owner Detail updated successfully"})
 	}
 }
+
+// func UpdateDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		logger.InfoLogger.Println("Updating Device AMC Owner Detail")
+
+// 		idStr := c.Param("id")
+// 		id, err := strconv.Atoi(idStr)
+// 		if err != nil {
+// 			logger.ErrorLogger.Println("Invalid ID:", err)
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+// 			return
+// 		}
+
+// 		type RequestData struct {
+// 			SerialNumber    string `json:"serial_number"`
+// 			DeviceMakeModel string `json:"device_make_model"`
+// 			Model           string `json:"model"`
+// 			PONumber        string `json:"po_number"`
+// 			POOrderDate     string `json:"po_order_date"`
+// 			EOSLDate        string `json:"eosl_date"`
+// 			AMCStartDate    string `json:"amc_start_date"`
+// 			AMCEndDate      string `json:"amc_end_date"`
+// 			DeviceOwner     string `json:"device_owner"`
+// 		}
+
+// 		var requestData RequestData
+// 		if err := c.ShouldBindJSON(&requestData); err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+// 			return
+// 		}
+
+// 		// Define the layout that matches the date format
+// 		layout := "2006-01-02"
+
+// 		// Parse the POOrderDate only if it's not empty
+// 		var pD time.Time
+// 		if requestData.POOrderDate != "" {
+// 			pD, err = time.Parse(layout, requestData.POOrderDate)
+// 			if err != nil {
+// 				fmt.Println("Error parsing POOrderDate:", err)
+// 				return
+// 			}
+// 		}
+
+// 		// Parse the POOrderDate only if it's not empty
+// 		var eD time.Time
+// 		if requestData.POOrderDate != "" {
+// 			eD, err = time.Parse(layout, requestData.AMCEndDate)
+// 			if err != nil {
+// 				fmt.Println("Error parsing POOrderDate:", err)
+// 				return
+// 			}
+// 		}
+
+// 		// Parse the AMCStartDate only if it's not empty
+// 		var aD time.Time
+// 		if requestData.AMCStartDate != "" {
+// 			aD, err = time.Parse(layout, requestData.AMCStartDate)
+// 			if err != nil {
+// 				fmt.Println("Error parsing AMCStartDate:", err)
+// 				return
+// 			}
+// 		}
+
+// 		// Parse the AMCEndDate only if it's not empty
+// 		var aDD time.Time
+// 		if requestData.AMCEndDate != "" {
+// 			aDD, err = time.Parse(layout, requestData.AMCEndDate)
+// 			if err != nil {
+// 				fmt.Println("Error parsing AMCEndDate:", err)
+// 				return
+// 			}
+// 		}
+
+// 		// Use the parsed time values in the DeviceAMCOwnerDetail struct
+// 		updatedData := &models.DeviceAMCOwnerDetail{
+// 			SerialNumber:    requestData.SerialNumber,
+// 			DeviceMakeModel: requestData.DeviceMakeModel,
+// 			Model:           requestData.Model,
+// 			PONumber:        requestData.PONumber,
+// 			POOrderDate:     pD,
+// 			EOSLDate:        eD,
+// 			AMCStartDate:    aD,
+// 			AMCEndDate:      aDD,
+// 			DeviceOwner:     requestData.DeviceOwner,
+// 		}
+
+// 		if err := db.UpdateDeviceAMCOwnerDetail(id, updatedData); err != nil {
+// 			logger.ErrorLogger.Println("Failed to update Device AMC Owner Detail:", err)
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Device AMC Owner Detail"})
+// 			return
+// 		}
+
+// 		logger.InfoLogger.Println("Device AMC Owner Detail updated successfully.")
+// 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Device AMC Owner Detail updated successfully"})
+// 	}
+// }
 
 // DeleteDeviceAMCOwnerDetailHandler deletes a DeviceAMCOwnerDetail record based on its ID.
 func DeleteDeviceAMCOwnerDetail(db *db.DB) gin.HandlerFunc {

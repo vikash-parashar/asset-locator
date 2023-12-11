@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+
 	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
@@ -45,11 +47,50 @@ func (db *DB) GetAllDeviceAMCOwnerDetail() ([]models.DeviceAMCOwnerDetail, error
 	return results, nil
 }
 
+// GetDeviceAMCOwnerDetail fetches a DeviceAMCOwnerDetail record from the database based on its ID.
+func (db *DB) GetDeviceAMCOwnerDetailById(id int) (*models.DeviceAMCOwnerDetail, error) {
+	query := "SELECT * FROM device_amc_owner WHERE id = $1"
+	var deviceAMCOwnerDetail models.DeviceAMCOwnerDetail
+
+	row := db.QueryRow(query, id)
+	err := row.Scan(
+		&deviceAMCOwnerDetail.Id,
+		&deviceAMCOwnerDetail.SerialNumber,
+		&deviceAMCOwnerDetail.DeviceMakeModel,
+		&deviceAMCOwnerDetail.Model,
+		&deviceAMCOwnerDetail.PONumber,
+		&deviceAMCOwnerDetail.POOrderDate,
+		&deviceAMCOwnerDetail.EOSLDate,
+		&deviceAMCOwnerDetail.AMCStartDate,
+		&deviceAMCOwnerDetail.AMCEndDate,
+		&deviceAMCOwnerDetail.DeviceOwner,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			logger.InfoLogger.Printf("DeviceAMCOwnerDetail with ID %d not found", id)
+			return nil, nil // Return nil and no error for "not found" case
+		}
+		logger.ErrorLogger.Printf("Error fetching DeviceAMCOwnerDetail with ID %d: %v", id, err)
+		return nil, err
+	}
+
+	return &deviceAMCOwnerDetail, nil
+}
+
 // UpdateDeviceAMCOwnerDetail updates an existing record in the device_amc_owner table based on the ID.
 func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDetail) error {
 	query := `
         UPDATE device_amc_owner
-        SET serial_number = $2, device_make_model = $3, model = $4, po_number = $5, po_order_date = $6, eosl_date = $7, amc_start_date = $8, amc_end_date = $9, device_owner = $10
+        SET serial_number = COALESCE($2, serial_number),
+            device_make_model = COALESCE($3, device_make_model),
+            model = COALESCE($4, model),
+            po_number = COALESCE($5, po_number),
+            po_order_date = COALESCE($6, po_order_date),
+            eosl_date = COALESCE($7, eosl_date),
+            amc_start_date = COALESCE($8, amc_start_date),
+            amc_end_date = COALESCE($9, amc_end_date),
+            device_owner = COALESCE($10, device_owner)
         WHERE id = $1
     `
 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
@@ -60,6 +101,21 @@ func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDeta
 	logger.InfoLogger.Printf("Updated DeviceAMCOwnerDetail with ID %d successfully", id)
 	return nil
 }
+
+// func (db *DB) UpdateDeviceAMCOwnerDetail(id int, data *models.DeviceAMCOwnerDetail) error {
+// 	query := `
+//         UPDATE device_amc_owner
+//         SET serial_number = $2, device_make_model = $3, model = $4, po_number = $5, po_order_date = $6, eosl_date = $7, amc_start_date = $8, amc_end_date = $9, device_owner = $10
+//         WHERE id = $1
+//     `
+// 	_, err := db.Exec(query, id, data.SerialNumber, data.DeviceMakeModel, data.Model, data.PONumber, data.POOrderDate, data.EOSLDate, data.AMCStartDate, data.AMCEndDate, data.DeviceOwner)
+// 	if err != nil {
+// 		logger.ErrorLogger.Printf("Error updating DeviceAMCOwnerDetail: %v", err)
+// 		return err
+// 	}
+// 	logger.InfoLogger.Printf("Updated DeviceAMCOwnerDetail with ID %d successfully", id)
+// 	return nil
+// }
 
 // DeleteDeviceAMCOwnerDetail deletes a record from the device_amc_owner table based on the ID.
 func (db *DB) DeleteDeviceAMCOwnerDetail(id int) error {
