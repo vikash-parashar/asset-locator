@@ -635,3 +635,278 @@ ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of
 INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection
 ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
 INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:53:13 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:53:13 config.go:31: Connected to the database
+INFO: 2023/12/11 14:53:18 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:18 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:18 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:18 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:18 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:18 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:19 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:19 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 14:53:19 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 14:53:19 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 14:53:19 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:19 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:19 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:19 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:19 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:20 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:20 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:29 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:29 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:53:29 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:53:29 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:53:29 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:29 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:29 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:29 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:29 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:31 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:31 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 14:53:31 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 14:53:31 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 14:53:31 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:31 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:31 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:31 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:31 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:32 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:53:32 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:53:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:32 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:32 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:32 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:32 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:33 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:33 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:53:33 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:53:33 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:53:33 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:33 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:33 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:33 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:33 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:35 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:53:35 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:53:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:35 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:35 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:35 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:35 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:35 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:53:35 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:53:35 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:53:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:35 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:35 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:35 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:35 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:37 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:37 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:37 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:37 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:37 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:39 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:39 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:42 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:42 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:53:42 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:53:42 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:53:43 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:43 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:43 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:43 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:43 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:43 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:43 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:53:43 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:53:43 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:43 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:43 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:43 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:43 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:44 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:44 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:46 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:46 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:47 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:47 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:53:47 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:53:47 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:53:47 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:47 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:47 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:47 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:47 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:48 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:48 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:49 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:49 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:53:49 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:53:49 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:53:49 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:49 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:49 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:49 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:49 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:50 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:50 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:51 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:51 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 14:53:51 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 14:53:51 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 14:53:51 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:51 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:51 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:51 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:51 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:52 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:52 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:54 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:54 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:54 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:54 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:54 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:54 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:55 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:55 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 14:53:55 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 14:53:55 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 14:53:55 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:55 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:55 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:55 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:55 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:56 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:53:56 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:53:57 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:57 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:53:57 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:53:57 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:53:57 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:57 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:57 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:57 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:57 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:58 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:58 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:53:58 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:53:58 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:58 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:58 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:58 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:58 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:53:59 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:59 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:53:59 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:53:59 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:53:59 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:53:59 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:53:59 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:53:59 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:53:59 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:00 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:54:00 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:54:00 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:54:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:00 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:00 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:00 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:00 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:00 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:54:00 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:54:01 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:01 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:01 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:01 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:01 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:01 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:01 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:54:01 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:54:01 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:54:01 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:01 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:01 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:01 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:01 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:01 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:01 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 14:54:01 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 14:54:01 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 14:54:02 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:02 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:02 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:02 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:02 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:07 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:07 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:54:07 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:54:07 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:54:07 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:07 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:07 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:07 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:07 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:10 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:10 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:54:10 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:54:10 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:10 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:10 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:10 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:10 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:54:13 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:13 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:54:13 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:54:13 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:54:13 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:54:13 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:54:13 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:54:13 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:54:13 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:56:11 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:56:11 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:56:11 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:56:11 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:56:11 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:56:11 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:56:11 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:56:11 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:57:31 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:31 owner_handlers.go:22: Fetching owner details from the database
+INFO: 2023/12/11 14:57:31 owner_controllers.go:46: Retrieved all DeviceAMCOwnerDetail records successfully
+INFO: 2023/12/11 14:57:31 owner_handlers.go:28: Owner details fetched successfully.
+INFO: 2023/12/11 14:57:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:32 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:57:32 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:57:32 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:57:32 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:57:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:32 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:57:32 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:57:33 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:33 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:57:33 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:57:33 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:57:33 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:57:38 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:38 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 14:57:38 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 14:57:38 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 14:57:38 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:57:38 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:57:38 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:57:38 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:57:38 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:58:33 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:58:33 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:58:33 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:58:33 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:58:33 user_handlers.go:284: Current user details retrieved successfully
