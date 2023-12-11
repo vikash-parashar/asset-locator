@@ -210,7 +210,6 @@
     }
 
     .left-div {
-
       height: 10em;
       width: 100%;
       background-color: #353d53;
@@ -279,23 +278,36 @@
       /* display: inline-block; */
       margin-top: 3rem;
       margin-left: 3rem;
-      width: 50%;
+      width: 90%;
       justify-content: center;
-      padding: 80px;
+      padding: 50px;
       border: solid 1px rgb(130, 113, 113);
       box-sizing: border-box;
-      background-color: #acf670bd;
+      background-color: #a370f6bd;
 
+    }
+
+    #diskInfoContainer {
+      margin-top: 20px;
+      background-color: #8ad1a586;
+      padding: 20px;
+    }
+
+    #diskInfoContainer>p {
+      color: #c27a28fd;
     }
 
     .data-filter p {
       color: #ffffff;
-      font-size: 3em;
+      font-size: 2.5em;
+    }
+
+    .disk-btn {
+      margin-right: 50px;
     }
 
     .buttons {
       margin: 50px;
-
     }
 
     .data-table {
@@ -549,11 +561,22 @@
             </div>
           </div>
 
-          <div class="text-center mt-5">
+          <div class="text-center mt-1">
             <button type="submit" id="applyFilterButton" class="btn-sm btn-warning bg-light">
               Search
             </button>
           </div>
+
+          <!-- fetch disk's from external server -->
+          <div id="diskInfoContainer">
+            <p>Find Disk's From Server</p><button onclick="fetchDiskCount()"
+              class="btn btn-warning disk-btn">Fetch</button><span id="diskCount"
+              style="color: white;height: 26.67px;"></span>
+            <br>
+          </div>
+
+
+
         </div>
 
         <!-- Data Add/Download Buttons -->
@@ -1111,6 +1134,37 @@
 
 
 
+  </script>
+
+  <!-- fetch disk count js -->
+  <script>
+    function fetchDiskCount() {
+      // Make an AJAX request to the server
+      $.ajax({
+        type: 'GET',
+        url: '/disk-details', // Endpoint that triggers disk count fetch in your Go server
+        success: function (data) {
+          // Update the UI with the fetched disk count
+          $('#diskCount').text('Disk Count: ' + data["disk's count"]);
+
+          // Add a close button next to the diskCount span
+          $('#diskCount').append('<button class="btn-sm btn-danger" onclick="clearDiskCount()" style="margin-left:15px;">x</button>');
+        },
+        error: function (error) {
+          // Handle error cases, e.g., display an error message on the UI
+          console.error('Error fetching disk count:', error.responseJSON.error);
+          $('#diskCount').text('Error fetching disk count');
+
+          // Add a close button next to the diskCount span even in case of an error
+          $('#diskCount').append('<button class="btn-sm btn-danger" onclick="clearDiskCount()" style="margin-left:15px;">x</button>');
+        }
+      });
+    }
+
+    // Function to clear the content of the diskCount span
+    function clearDiskCount() {
+      $('#diskCount').empty();
+    }
   </script>
 </body>
 

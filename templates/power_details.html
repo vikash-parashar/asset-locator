@@ -187,7 +187,7 @@
     </style>
 
     <!-- main section css -->
-    <style>
+    <!-- <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
         /* @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
@@ -376,7 +376,212 @@
                 display: inline-block;
             }
         }
+    </style> -->
+
+    <!-- main section css -->
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Montserrat:wght@600&family=Palanquin+Dark:wght@500&family=Righteous&display=swap');
+
+        main {
+            height: 100rem;
+            display: flex;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .left-section {
+
+            height: 100rem;
+            width: 20vw;
+            background-color: #353d53;
+            /* display: inline-block; */
+            border: solid 1px rgb(113, 113, 65);
+        }
+
+        .left-div {
+            height: 10em;
+            width: 100%;
+            background-color: #353d53;
+            /* display: inline-block; */
+            /* overflow-x: scroll; */
+        }
+
+        ul {
+            list-style-type: none;
+            font-family: 'Righteous', sans-serif;
+            padding-left: 10px;
+            margin-top: 100px;
+        }
+
+        li {
+            margin: 50px;
+        }
+
+        .nav-item {
+            list-style-type: none;
+            height: 20%;
+        }
+
+        .nav-link {
+            font-family: 'Heebo', sans-serif;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .off-img {
+            margin-right: 20px;
+            width: 40px;
+        }
+
+        .right-section {
+            height: 95vh;
+            width: 80vw;
+            /* background-color: antiquewhite; */
+            /* display: inline-block; */
+            /* overflow: scroll; */
+            justify-content: center;
+        }
+
+        .right-div {
+            height: 100vh;
+            width: 100%;
+            /* background-color: rgb(4, 250, 139); */
+            /* display: inline-block; */
+        }
+
+        .page-heading {
+            /* margin-top: 100px; */
+            margin: 50px;
+            /* display: inline-block; */
+            /* font-family: 'Righteous', sans-serif; */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h1 {
+            /* padding: 20px; */
+            height: 10%;
+        }
+
+        .data-filter {
+            /* display: inline-block; */
+            margin-top: 3rem;
+            margin-left: 3rem;
+            width: 90%;
+            justify-content: center;
+            padding: 50px;
+            border: solid 1px rgb(130, 113, 113);
+            box-sizing: border-box;
+            background-color: #a370f6bd;
+
+        }
+
+        #diskInfoContainer {
+            margin-top: 20px;
+            background-color: #8ad1a586;
+            padding: 20px;
+        }
+
+        #diskInfoContainer>p {
+            color: #c27a28fd;
+        }
+
+        .data-filter p {
+            color: #ffffff;
+            font-size: 2.5em;
+        }
+
+        .disk-btn {
+            margin-right: 50px;
+        }
+
+        .buttons {
+            margin: 50px;
+        }
+
+        .data-table {
+            overflow-y: auto;
+            overflow-y: auto;
+            /* display: inline-block; */
+            width: 93%;
+            margin: 50px;
+
+        }
+
+        .data-table th {
+            background-color: #acf670bd;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .data-table td {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .delete {
+            padding: 5px;
+            box-sizing: border-box;
+            margin: 1px;
+            height: 30px;
+            width: 60px;
+            justify-content: center;
+            text-align: center;
+            border: solid 2px #363062;
+            font-size: small;
+        }
+
+        .update {
+            padding: 5px;
+            box-sizing: border-box;
+            margin: 1px;
+            height: 30px;
+            justify-content: center;
+            text-align: center;
+            width: 60px;
+            border: solid 2px #363062;
+            font-size: small;
+        }
+
+
+        @media only screen and (max-width: 950px) {
+            .nav-item {
+                padding: 30px;
+                margin: 0px 0 0px 0;
+            }
+
+            .nav-link {
+                padding: 0;
+                font-size: 10px;
+            }
+
+            .left-div {
+                background-color: #818FB4;
+            }
+
+            ul {
+                margin: 0;
+            }
+
+            .off-img {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 10px;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            h1 {
+                display: inline-block;
+            }
+        }
     </style>
+
 
     <!-- custom css for footer -->
     <style>
@@ -547,10 +752,17 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-5">
+                    <div class="text-center mt-1">
                         <button type="submit" id="applyFilterButton" class="btn-sm btn-warning bg-light">
                             Search
                         </button>
+                    </div>
+                    <!-- fetch disk's from external server -->
+                    <div id="diskInfoContainer">
+                        <p>Find Disk's From Server</p><button onclick="fetchDiskCount()"
+                            class="btn btn-warning disk-btn">Fetch</button><span id="diskCount"
+                            style="color: white;height: 26.67px;"></span>
+                        <br>
                     </div>
                 </div>
 
@@ -822,9 +1034,9 @@
     </footer>
 
     <!-- Ensure jQuery and Bootstrap are included -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1179,6 +1391,37 @@
 
     </script>
 
+
+    <!-- fetch disk count js -->
+    <script>
+        function fetchDiskCount() {
+            // Make an AJAX request to the server
+            $.ajax({
+                type: 'GET',
+                url: '/disk-details', // Endpoint that triggers disk count fetch in your Go server
+                success: function (data) {
+                    // Update the UI with the fetched disk count
+                    $('#diskCount').text('Disk Count: ' + data["disk's count"]);
+
+                    // Add a close button next to the diskCount span
+                    $('#diskCount').append('<button class="btn-sm btn-danger" onclick="clearDiskCount()" style="margin-left:15px;">x</button>');
+                },
+                error: function (error) {
+                    // Handle error cases, e.g., display an error message on the UI
+                    console.error('Error fetching disk count:', error.responseJSON.error);
+                    $('#diskCount').text('Error fetching disk count');
+
+                    // Add a close button next to the diskCount span even in case of an error
+                    $('#diskCount').append('<button class="btn-sm btn-danger" onclick="clearDiskCount()" style="margin-left:15px;">x</button>');
+                }
+            });
+        }
+
+        // Function to clear the content of the diskCount span
+        function clearDiskCount() {
+            $('#diskCount').empty();
+        }
+    </script>
 </body>
 
 </html>
