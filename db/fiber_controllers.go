@@ -92,12 +92,18 @@ func (db *DB) DeleteDeviceEthernetFiberDetail(id int) error {
 func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEthernetFiberDetail) error {
 	query := `
         UPDATE device_ethernet_fiber
-        SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, device_physical_port = $6, device_port_type = $7, device_port_mac_address_wwn = $8, connected_device_port = $9
+        SET serial_number = COALESCE($2, serial_number),
+            device_make_model = COALESCE($3, device_make_model),
+            model = COALESCE($4, model),
+            device_type = COALESCE($5, device_type),
+            device_physical_port = COALESCE($6, device_physical_port),
+            device_port_type = COALESCE($7, device_port_type),
+            device_port_mac_address_wwn = COALESCE($8, device_port_mac_address_wwn),
+            connected_device_port = COALESCE($9, connected_device_port)
         WHERE id = $1
     `
 
-	logger.InfoLogger.Printf("Updating DeviceEthernetFiberDetail with ID %d", id)
-	_, err := db.Exec(query, &id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+	_, err := db.Exec(query, id,data.SerialNumber,data.DeviceMakeModel,data.Model,data.DeviceType,data.DevicePhysicalPort,data.DevicePortType,data.DevicePortMACWWN,data.ConnectedDevicePort)
 	if err != nil {
 		logger.ErrorLogger.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
 		return err
@@ -105,3 +111,69 @@ func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEtherne
 	logger.InfoLogger.Printf("Updated DeviceEthernetFiberDetail with ID %d successfully", id)
 	return nil
 }
+
+// func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEthernetFiberDetail) error {
+// 	query := `
+//         UPDATE device_ethernet_fiber
+//         SET serial_number = $2, device_make_model = $3, model = $4, device_type = $5, device_physical_port = $6, device_port_type = $7, device_port_mac_address_wwn = $8, connected_device_port = $9
+//         WHERE id = $1
+//     `
+
+// 	logger.InfoLogger.Printf("Updating DeviceEthernetFiberDetail with ID %d", id)
+// 	_, err := db.Exec(query, &id, &data.SerialNumber, &data.DeviceMakeModel, &data.Model, &data.DeviceType, &data.DevicePhysicalPort, &data.DevicePortType, &data.DevicePortMACWWN, &data.ConnectedDevicePort)
+// 	if err != nil {
+// 		logger.ErrorLogger.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
+// 		return err
+// 	}
+// 	logger.InfoLogger.Printf("Updated DeviceEthernetFiberDetail with ID %d successfully", id)
+// 	return nil
+// }
+
+// func (db *DB) UpdateDeviceEthernetFiberDetail(id int, data *models.DeviceEthernetFiberDetail) error {
+// 	query := `
+//         UPDATE device_ethernet_fiber
+//         SET serial_number = COALESCE($2, serial_number),
+//             device_make_model = COALESCE($3, device_make_model),
+//             model = COALESCE($4, model),
+//             device_type = COALESCE($5, device_type),
+//             device_physical_port = COALESCE($6, device_physical_port),
+//             device_port_type = COALESCE($7, device_port_type),
+//             device_port_mac_address_wwn = COALESCE($8, device_port_mac_address_wwn),
+//             connected_device_port = COALESCE($9, connected_device_port)
+//         WHERE id = $1
+//     `
+
+// 	params := []interface{}{id}
+// 	if data.SerialNumber != "" {
+// 		params = append(params, data.SerialNumber)
+// 	}
+// 	if data.DeviceMakeModel != "" {
+// 		params = append(params, data.DeviceMakeModel)
+// 	}
+// 	if data.Model != "" {
+// 		params = append(params, data.Model)
+// 	}
+// 	if data.DeviceType != "" {
+// 		params = append(params, data.DeviceType)
+// 	}
+// 	if data.DevicePhysicalPort != "" {
+// 		params = append(params, data.DevicePhysicalPort)
+// 	}
+// 	if data.DevicePortType != "" {
+// 		params = append(params, data.DevicePortType)
+// 	}
+// 	if data.DevicePortMACWWN != "" {
+// 		params = append(params, data.DevicePortMACWWN)
+// 	}
+// 	if data.ConnectedDevicePort != "" {
+// 		params = append(params, data.ConnectedDevicePort)
+// 	}
+
+// 	_, err := db.Exec(query, params...)
+// 	if err != nil {
+// 		logger.ErrorLogger.Printf("Error updating DeviceEthernetFiberDetail: %v", err)
+// 		return err
+// 	}
+// 	logger.InfoLogger.Printf("Updated DeviceEthernetFiberDetail with ID %d successfully", id)
+// 	return nil
+// }

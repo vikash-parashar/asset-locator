@@ -8588,3 +8588,90 @@ INFO: 2023/12/11 10:51:22 user_handlers.go:253: Handling GET request for current
 INFO: 2023/12/11 10:51:22 user_controllers.go:14: gowithvikash@gmail.com
 INFO: 2023/12/11 10:51:22 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
 INFO: 2023/12/11 10:51:22 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 11:04:05 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:04:05 config.go:31: Connected to the database
+INFO: 2023/12/11 11:04:05 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:04:05 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 11:04:05 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 11:04:05 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 11:04:06 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:04:06 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:04:06 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:04:06 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:04:06 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:04:18 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:04:18 location_controllers.go:85: Updated DeviceLocationDetail with ID 24 successfully
+INFO: 2023/12/11 11:04:20 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:04:20 location_handlers.go:20: Fetching location details from the database
+INFO: 2023/12/11 11:04:20 location_controllers.go:44: Retrieved all DeviceLocationDetail records successfully
+INFO: 2023/12/11 11:04:20 location_handlers.go:27: Location details fetched successfully.
+INFO: 2023/12/11 11:04:21 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:04:21 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:04:21 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:04:21 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:04:21 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 11:16:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:16:35 config.go:31: Connected to the database
+INFO: 2023/12/11 11:16:38 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:16:38 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:16:38 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:16:38 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:16:39 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:16:39 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:16:39 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:16:39 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:16:39 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:16:53 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:16:53 fiber_handlers.go:57: Creating new fiber details
+INFO: 2023/12/11 11:16:53 fiber_controllers.go:22: Created DeviceEthernetFiberDetail successfully
+INFO: 2023/12/11 11:16:53 fiber_handlers.go:86: New fiber details created successfully.
+INFO: 2023/12/11 11:16:53 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:16:53 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:16:53 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:16:53 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:16:54 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:16:54 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:16:54 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:16:54 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:16:54 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:17:25 auth.go:63: User gowithvikash@gmail.com has access
+ERROR: 2023/12/11 11:17:25 fiber_handlers.go:152: Invalid JSON data: json: cannot unmarshal string into Go struct field UpdateEthernetFiberDetailRequest.id of type int
+ERROR: 2023/12/11 11:34:46 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:34:46 config.go:31: Connected to the database
+ERROR: 2023/12/11 11:34:53 auth.go:28: Token not found, redirecting to login page: http: named cookie not present
+INFO: 2023/12/11 11:35:01 user_handlers.go:81: Handling POST request for user login
+INFO: 2023/12/11 11:35:01 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:35:01 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:35:01 user_handlers.go:124: User logged in successfully
+INFO: 2023/12/11 11:35:03 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:35:04 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:35:04 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:35:04 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:35:04 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:35:04 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:35:07 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:35:07 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:35:07 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:35:07 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:35:08 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:35:08 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:35:08 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:35:08 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:35:08 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:35:18 auth.go:63: User gowithvikash@gmail.com has access
+ERROR: 2023/12/11 11:35:18 fiber_handlers.go:160: Invalid JSON data: json: cannot unmarshal string into Go struct field UpdateEthernetFiberDetailRequest.id of type int
+ERROR: 2023/12/11 11:36:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 11:36:17 config.go:31: Connected to the database
+INFO: 2023/12/11 11:36:40 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:36:40 fiber_handlers.go:18: Fetching fiber details from the database
+INFO: 2023/12/11 11:36:40 fiber_controllers.go:47: Retrieved all DeviceEthernetFiberDetail records successfully
+INFO: 2023/12/11 11:36:40 fiber_handlers.go:25: Fiber details fetched successfully.
+INFO: 2023/12/11 11:36:41 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:36:41 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 11:36:41 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 11:36:41 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 11:36:41 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 11:36:50 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 11:36:50 fiber_controllers.go:77: Retrieved FiberDetail with ID 64 successfully
+ERROR: 2023/12/11 11:36:50 fiber_controllers.go:151: Error updating DeviceEthernetFiberDetail: pq: got 8 parameters but the statement requires 9
+ERROR: 2023/12/11 11:36:50 fiber_handlers.go:201: Failed to update DeviceEthernetFiberDetail: pq: got 8 parameters but the statement requires 9

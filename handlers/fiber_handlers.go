@@ -88,10 +88,62 @@ func CreateNewFiberDetails(db *db.DB) gin.HandlerFunc {
 	}
 }
 
+// func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		type DeviceEthernetFiberDetail struct {
+// 			Id                  string `json:"id"`
+// 			SerialNumber        string `json:"serial_number"`
+// 			DeviceMakeModel     string `json:"device_make_model"`
+// 			Model               string `json:"model"`
+// 			DeviceType          string `json:"device_type"`
+// 			DevicePhysicalPort  string `json:"device_physical_port"`
+// 			DevicePortType      string `json:"device_port_type"`
+// 			DevicePortMACWWN    string `json:"device_port_macwwn"`
+// 			ConnectedDevicePort string `json:"connected_device_port"`
+// 		}
+// 		var r DeviceEthernetFiberDetail
+// 		if err := c.BindJSON(&r); err != nil {
+// 			logger.ErrorLogger.Println("Invalid JSON data:", err)
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON data"})
+// 			return
+// 		}
+
+// 		nid, _ := strconv.Atoi(r.Id)
+
+// 		updatedData := &models.DeviceEthernetFiberDetail{
+// 			Id:                  nid,
+// 			SerialNumber:        r.SerialNumber,
+// 			DeviceMakeModel:     r.DeviceMakeModel,
+// 			Model:               r.Model,
+// 			DeviceType:          r.DeviceType,
+// 			DevicePhysicalPort:  r.DevicePhysicalPort,
+// 			DevicePortType:      r.DevicePortType,
+// 			DevicePortMACWWN:    r.DevicePortMACWWN,
+// 			ConnectedDevicePort: r.ConnectedDevicePort,
+// 		}
+
+// 		if err := db.UpdateDeviceEthernetFiberDetail(nid, updatedData); err != nil {
+// 			logger.ErrorLogger.Println("Failed to update DeviceEthernetFiberDetail:", err)
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceEthernetFiberDetail"})
+// 			return
+// 		}
+
+// 		logger.InfoLogger.Println("DeviceEthernetFiberDetail updated successfully.")
+// 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "DeviceEthernetFiberDetail updated successfully"})
+// 	}
+// }
+
 func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		type DeviceEthernetFiberDetail struct {
-			Id                  string `json:"id"`
+		idStr := c.Param("id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			logger.ErrorLogger.Println(err)
+			return
+		}
+
+		type UpdateEthernetFiberDetailRequest struct {
 			SerialNumber        string `json:"serial_number"`
 			DeviceMakeModel     string `json:"device_make_model"`
 			Model               string `json:"model"`
@@ -101,28 +153,51 @@ func UpdateDeviceEthernetFiberDetail(db *db.DB) gin.HandlerFunc {
 			DevicePortMACWWN    string `json:"device_port_macwwn"`
 			ConnectedDevicePort string `json:"connected_device_port"`
 		}
-		var r DeviceEthernetFiberDetail
-		if err := c.BindJSON(&r); err != nil {
+
+		var request UpdateEthernetFiberDetailRequest
+		if err := c.BindJSON(&request); err != nil {
 			logger.ErrorLogger.Println("Invalid JSON data:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON data"})
 			return
 		}
 
-		nid, _ := strconv.Atoi(r.Id)
-
-		updatedData := &models.DeviceEthernetFiberDetail{
-			Id:                  nid,
-			SerialNumber:        r.SerialNumber,
-			DeviceMakeModel:     r.DeviceMakeModel,
-			Model:               r.Model,
-			DeviceType:          r.DeviceType,
-			DevicePhysicalPort:  r.DevicePhysicalPort,
-			DevicePortType:      r.DevicePortType,
-			DevicePortMACWWN:    r.DevicePortMACWWN,
-			ConnectedDevicePort: r.ConnectedDevicePort,
+		// Retrieve existing data
+		existingData, err := db.GetFiberDetailByID(id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch existing DeviceEthernetFiberDetail"})
+			logger.ErrorLogger.Println(err)
+			return
 		}
 
-		if err := db.UpdateDeviceEthernetFiberDetail(nid, updatedData); err != nil {
+		// Update only non-null fields
+		if request.SerialNumber != "" {
+			existingData.SerialNumber = request.SerialNumber
+		}
+		if request.DeviceMakeModel != "" {
+			existingData.DeviceMakeModel = request.DeviceMakeModel
+		}
+		if request.Model != "" {
+			existingData.Model = request.Model
+		}
+		if request.DeviceType != "" {
+			existingData.DeviceType = request.DeviceType
+		}
+		if request.DevicePhysicalPort != "" {
+			existingData.DevicePhysicalPort = request.DevicePhysicalPort
+		}
+		if request.DevicePortType != "" {
+			existingData.DevicePortType = request.DevicePortType
+		}
+		if request.DevicePortMACWWN != "" {
+			existingData.DevicePortMACWWN = request.DevicePortMACWWN
+		}
+		if request.ConnectedDevicePort != "" {
+			existingData.ConnectedDevicePort = request.ConnectedDevicePort
+		}
+
+		// You can add additional validation or handle errors here
+
+		if err := db.UpdateDeviceEthernetFiberDetail(id, &existingData); err != nil {
 			logger.ErrorLogger.Println("Failed to update DeviceEthernetFiberDetail:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update DeviceEthernetFiberDetail"})
 			return
