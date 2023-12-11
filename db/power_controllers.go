@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+
 	"github.com/vikash-parashar/asset-locator/logger" // Import the logger package
 	"github.com/vikash-parashar/asset-locator/models"
 )
@@ -94,6 +96,36 @@ func (db *DB) DeleteDevicePowerDetail(id int) error {
 	}
 	logger.InfoLogger.Printf("Deleted DevicePowerDetail with ID %d successfully", id)
 	return nil
+}
+
+// GetDevicePowerDetailById fetches a DevicePowerDetail record from the database based on its ID.
+func (db *DB) GetDevicePowerDetailById(id int) (*models.DevicePowerDetail, error) {
+	query := "SELECT * FROM device_power WHERE id = $1"
+	var devicePowerDetail models.DevicePowerDetail
+
+	row := db.QueryRow(query, id)
+	err := row.Scan(
+		&devicePowerDetail.Id,
+		&devicePowerDetail.SerialNumber,
+		&devicePowerDetail.DeviceMakeModel,
+		&devicePowerDetail.Model,
+		&devicePowerDetail.DeviceType,
+		&devicePowerDetail.TotalPowerWatt,
+		&devicePowerDetail.TotalBTU,
+		&devicePowerDetail.TotalPowerCable,
+		&devicePowerDetail.PowerSocketType,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			logger.InfoLogger.Printf("DevicePowerDetail with ID %d not found", id)
+			return nil, nil // Return nil and no error for "not found" case
+		}
+		logger.ErrorLogger.Printf("Error fetching DevicePowerDetail with ID %d: %v", id, err)
+		return nil, err
+	}
+
+	return &devicePowerDetail, nil
 }
 
 // FetchDataFromDevicePower retrieves data from table 4.

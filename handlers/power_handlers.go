@@ -102,10 +102,23 @@ func DeleteDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		logger.InfoLogger.Println("Handling PUT request for updating Power Details")
+
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			logger.ErrorLogger.Println("Invalid ID:", err)
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+			return
+		}
+
+		logger.InfoLogger.Printf("Fetching original data for ID: %d", id)
+
+		// Fetch the original data from the database
+		originalData, err := db.GetDevicePowerDetailById(id)
+		if err != nil {
+
+			logger.ErrorLogger.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 			return
 		}
 
@@ -122,7 +135,9 @@ func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 
 		var requestData RequestData
 		if err := c.ShouldBindJSON(&requestData); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+
+			logger.ErrorLogger.Println(err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": err})
 			return
 		}
 
@@ -130,27 +145,177 @@ func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
 		tpc, _ := strconv.Atoi(requestData.TotalPowerCable)
 		tbtu, _ := strconv.ParseFloat(requestData.TotalBTU, 64)
 
-		updatedData := &models.DevicePowerDetail{
-			Id:              id,
-			SerialNumber:    requestData.SerialNumber,
-			DeviceMakeModel: requestData.DeviceMakeModel,
-			Model:           requestData.Model,
-			DeviceType:      requestData.DeviceType,
-			TotalPowerWatt:  tpw,
-			TotalBTU:        tbtu,
-			TotalPowerCable: tpc,
-			PowerSocketType: requestData.PowerSocketType,
+		// Update fields only if data is available in the request
+		if requestData.SerialNumber != "" {
+			originalData.SerialNumber = requestData.SerialNumber
+		}
+		if requestData.DeviceMakeModel != "" {
+			originalData.DeviceMakeModel = requestData.DeviceMakeModel
+		}
+		if requestData.Model != "" {
+			originalData.Model = requestData.Model
+		}
+		if requestData.DeviceType != "" {
+			originalData.DeviceType = requestData.DeviceType
+		}
+		if requestData.TotalPowerWatt != "" {
+			originalData.TotalPowerWatt = tpw
+		}
+		if requestData.TotalBTU != "" {
+			originalData.TotalBTU = tbtu
+		}
+		if requestData.TotalPowerCable != "" {
+			originalData.TotalPowerCable = tpc
+		}
+		if requestData.PowerSocketType != "" {
+			originalData.PowerSocketType = requestData.PowerSocketType
 		}
 
-		if err := db.UpdateDevicePowerDetail(id, updatedData); err != nil {
-			logger.ErrorLogger.Println("Failed to update Power Details:", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Power Details"})
+		logger.InfoLogger.Printf("Updating data for ID: %d", id)
+
+		// Update the data in the database
+		if err := db.UpdateDevicePowerDetail(id, originalData); err != nil {
+			logger.ErrorLogger.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 			return
 		}
 
+		logger.InfoLogger.Println("Power Details updated successfully.")
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Power Details updated successfully"})
 	}
 }
+
+// func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		logger.InfoLogger.Println("Updating Power Details")
+
+// 		idStr := c.Param("id")
+// 		id, err := strconv.Atoi(idStr)
+// 		if err != nil {
+// 			logger.ErrorLogger.Println("Invalid ID:", err)
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+// 			return
+// 		}
+
+// 		// Fetch the original data from the database
+// 		originalData, err := db.GetDevicePowerDetailById(id)
+// 		if err != nil {
+// 			logger.ErrorLogger.Println("Failed to fetch original data:", err)
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch original data"})
+// 			return
+// 		}
+
+// 		type RequestData struct {
+// 			SerialNumber    string `json:"serial_number"`
+// 			DeviceMakeModel string `json:"device_make_model"`
+// 			Model           string `json:"model"`
+// 			DeviceType      string `json:"device_type"`
+// 			TotalPowerWatt  string `json:"total_power_watt"`
+// 			TotalBTU        string `json:"total_btu"`
+// 			TotalPowerCable string `json:"total_power_cable"`
+// 			PowerSocketType string `json:"power_socket_type"`
+// 		}
+
+// 		var requestData RequestData
+// 		if err := c.ShouldBindJSON(&requestData); err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+// 			return
+// 		}
+
+// 		tpw, _ := strconv.Atoi(requestData.TotalPowerWatt)
+// 		tpc, _ := strconv.Atoi(requestData.TotalPowerCable)
+// 		tbtu, _ := strconv.ParseFloat(requestData.TotalBTU, 64)
+
+// 		// Update fields only if data is available in the request
+// 		if requestData.SerialNumber != "" {
+// 			originalData.SerialNumber = requestData.SerialNumber
+// 		}
+// 		if requestData.DeviceMakeModel != "" {
+// 			originalData.DeviceMakeModel = requestData.DeviceMakeModel
+// 		}
+// 		if requestData.Model != "" {
+// 			originalData.Model = requestData.Model
+// 		}
+// 		if requestData.DeviceType != "" {
+// 			originalData.DeviceType = requestData.DeviceType
+// 		}
+// 		if requestData.TotalPowerWatt != "" {
+// 			originalData.TotalPowerWatt = tpw
+// 		}
+// 		if requestData.TotalBTU != "" {
+// 			originalData.TotalBTU = tbtu
+// 		}
+// 		if requestData.TotalPowerCable != "" {
+// 			originalData.TotalPowerCable = tpc
+// 		}
+// 		if requestData.PowerSocketType != "" {
+// 			originalData.PowerSocketType = requestData.PowerSocketType
+// 		}
+
+// 		// Update the data in the database
+// 		if err := db.UpdateDevicePowerDetail(id, originalData); err != nil {
+// 			logger.ErrorLogger.Println("Failed to update Power Details:", err)
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Power Details"})
+// 			return
+// 		}
+
+// 		logger.InfoLogger.Println("Power Details updated successfully.")
+// 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Power Details updated successfully"})
+// 	}
+// }
+
+// func UpdateDevicePowerDetail(db *db.DB) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		logger.InfoLogger.Println("Handling PUT request for updating Power Details")
+// 		idStr := c.Param("id")
+// 		id, err := strconv.Atoi(idStr)
+// 		if err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+// 			return
+// 		}
+
+// 		type RequestData struct {
+// 			SerialNumber    string `json:"serial_number"`
+// 			DeviceMakeModel string `json:"device_make_model"`
+// 			Model           string `json:"model"`
+// 			DeviceType      string `json:"device_type"`
+// 			TotalPowerWatt  string `json:"total_power_watt"`
+// 			TotalBTU        string `json:"total_btu"`
+// 			TotalPowerCable string `json:"total_power_cable"`
+// 			PowerSocketType string `json:"power_socket_type"`
+// 		}
+
+// 		var requestData RequestData
+// 		if err := c.ShouldBindJSON(&requestData); err != nil {
+// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
+// 			return
+// 		}
+
+// 		tpw, _ := strconv.Atoi(requestData.TotalPowerWatt)
+// 		tpc, _ := strconv.Atoi(requestData.TotalPowerCable)
+// 		tbtu, _ := strconv.ParseFloat(requestData.TotalBTU, 64)
+
+// 		updatedData := &models.DevicePowerDetail{
+// 			Id:              id,
+// 			SerialNumber:    requestData.SerialNumber,
+// 			DeviceMakeModel: requestData.DeviceMakeModel,
+// 			Model:           requestData.Model,
+// 			DeviceType:      requestData.DeviceType,
+// 			TotalPowerWatt:  tpw,
+// 			TotalBTU:        tbtu,
+// 			TotalPowerCable: tpc,
+// 			PowerSocketType: requestData.PowerSocketType,
+// 		}
+
+// 		if err := db.UpdateDevicePowerDetail(id, updatedData); err != nil {
+// 			logger.ErrorLogger.Println("Failed to update Power Details:", err)
+// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Power Details"})
+// 			return
+// 		}
+
+// 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "Power Details updated successfully"})
+// 	}
+// }
 
 // DeleteDevicePowerDetailHandler deletes a DevicePowerDetail record based on its ID.
 func DownloadDevicePowerDetail(db *db.DB) gin.HandlerFunc {
