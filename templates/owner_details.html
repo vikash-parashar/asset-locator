@@ -731,43 +731,56 @@
                     <h1>Owner Details</h1>
                 </div>
 
-                <!-- Data Filter -->
-                <div class="data-filter">
-                    <div class="row">
-                        <p>Search data based on these three fields .</p>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="serialNumberFilter"
-                                    placeholder="serial number" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="makeFilter" placeholder="device make" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="modelFilter" placeholder="device model" />
-                            </div>
+               <!-- Data Filter -->
+               <div class="data-filter">
+                <div class="row">
+                    <p>Search data based on these three fields .</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="serialNumberFilter"
+                                placeholder="serial number" />
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="makeFilter" placeholder="device make" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="modelFilter" placeholder="device model" />
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="text-center mt-1">
-                        <button type="submit" id="applyFilterButton" class="btn-sm btn-warning bg-light">
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-1">
+                        <button type="submit" id="applyFilterButton" class="btn-sm btn-light bg-warning">
                             Search
                         </button>
                     </div>
-                    <!-- fetch disk's from external server -->
-                    <div id="diskInfoContainer">
-                        <p>Find Disk's From Server</p><button onclick="fetchDiskCount()"
-                            class="btn btn-warning disk-btn">Fetch</button><span id="diskCount"
-                            style="color: white;height: 26.67px;"></span>
-                        <br>
+
+                    <div class="col-2">
+                        <!-- Add Clear Filters button -->
+                        <button type="button" id="clearFiltersButton" class="btn-sm btn-light bg-danger">
+                            Clear Filter
+                        </button>
                     </div>
+                    <!-- <div class="col-4"></div> -->
                 </div>
+
+
+                <!-- fetch disk's from external server -->
+                <div id="diskInfoContainer" style="background-color: #ffffffef;">
+                    <p>Find Disk's From Server</p><button onclick="fetchDiskCount()"
+                        class="btn-sm btn-light bg-info disk-btn">Fetch</button><span id="diskCount"
+                        style="color: rgba(23, 158, 68, 0.801);height: 26.67px;"></span>
+                    <br>
+                </div>
+            </div>
 
                 <!-- Data Add/Download Buttons -->
                 <div class="buttons text-center">
@@ -1462,6 +1475,16 @@
 
     </script>
 
+
+    <script>
+        // Add an event listener for the Clear Filters button
+        document.getElementById('clearFiltersButton').addEventListener('click', function () {
+            // Clear the input values
+            document.getElementById('serialNumberFilter').value = '';
+            document.getElementById('makeFilter').value = '';
+            document.getElementById('modelFilter').value = '';
+        });
+    </script>
     <!-- fetch disk count js -->
     <script>
         function fetchDiskCount() {

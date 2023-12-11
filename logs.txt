@@ -25,3 +25,613 @@ INFO: 2023/12/11 13:43:41 user_handlers.go:253: Handling GET request for current
 INFO: 2023/12/11 13:43:41 user_controllers.go:14: gowithvikash@gmail.com
 INFO: 2023/12/11 13:43:41 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
 INFO: 2023/12/11 13:43:41 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 14:16:41 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:16:41 config.go:31: Connected to the database
+INFO: 2023/12/11 14:16:44 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:16:44 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:16:44 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:16:44 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:16:44 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:16:44 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:16:44 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:16:44 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:17:11 external_handlers.go:36: Fetching disk's data from external server
+ERROR: 2023/12/11 14:17:11 external_handlers.go:43: Failed to fetch disk's data from external server
+ERROR: 2023/12/11 14:17:11 external_handlers.go:44: Get "http://localhost:8090/get-disk-count": dial tcp [::1]:8090: connectex: No connection could be made because the target machine actively refused it.
+ERROR: 2023/12/11 14:26:04 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:26:04 config.go:31: Connected to the database
+INFO: 2023/12/11 14:26:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:26:32 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:26:32 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:26:32 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:26:32 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:26:32 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:26:32 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:26:32 user_handlers.go:284: Current user details retrieved successfully
+ERROR: 2023/12/11 14:27:05 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:27:16 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:27:17 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:27:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:27:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:27:35 config.go:31: Connected to the database
+INFO: 2023/12/11 14:27:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:27:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:27:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:27:51 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:27:52 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:27:53 config.go:31: Connected to the database
+INFO: 2023/12/11 14:27:53 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:27:53 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:27:53 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:28:08 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:08 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:15 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:15 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:16 config.go:31: Connected to the database
+INFO: 2023/12/11 14:28:16 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:16 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:16 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:28:29 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:29 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:31 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:31 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:31 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:31 config.go:41: Closed database connection
+INFO: 2023/12/11 14:28:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:31 config.go:41: Closed database connection
+INFO: 2023/12/11 14:28:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:31 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:28:51 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:51 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:52 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:52 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:52 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:52 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:52 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:52 config.go:41: Closed database connection
+INFO: 2023/12/11 14:28:52 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:53 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:53 config.go:41: Closed database connection
+INFO: 2023/12/11 14:28:53 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:53 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:53 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:28:55 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:28:55 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:28:55 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:55 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:55 config.go:41: Closed database connection
+INFO: 2023/12/11 14:28:55 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:28:55 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:28:55 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:29:20 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:29:20 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:29:20 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:29:20 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:29:20 config.go:31: Connected to the database
+INFO: 2023/12/11 14:29:20 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:29:20 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:29:20 config.go:41: Closed database connection
+INFO: 2023/12/11 14:29:20 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:29:20 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:29:20 config.go:41: Closed database connection
+INFO: 2023/12/11 14:29:20 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:29:20 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:29:20 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:30:19 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:19 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:30:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:30:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:22 config.go:31: Connected to the database
+INFO: 2023/12/11 14:30:22 config.go:31: Connected to the database
+INFO: 2023/12/11 14:30:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:30:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:30:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:30:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:30:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:30:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:30:34 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:34 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:37 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:37 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:39 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:39 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:39 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:30:39 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:30:51 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:51 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:51 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:30:51 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:30:51 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:30:51 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:31:34 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:31:34 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:31:36 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:31:36 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:31:36 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:31:36 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:31:41 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:31:42 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:31:43 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:31:43 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:31:43 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:31:43 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:32:00 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:00 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:02 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:02 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:02 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:32:02 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:32:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:26 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:26 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:26 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:32:26 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:32:28 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:28 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:28 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:32:28 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:32:28 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:28 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:28 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:32:28 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:32:50 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:50 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:32:59 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:32:59 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:32:59 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:32:59 config.go:31: Connected to the database
+INFO: 2023/12/11 14:33:00 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:00 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:00 config.go:41: Closed database connection
+INFO: 2023/12/11 14:33:00 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:00 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:00 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:01 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:02 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:02 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:02 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:02 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:33:02 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:02 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:02 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:02 config.go:41: Closed database connection
+INFO: 2023/12/11 14:33:02 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:02 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:02 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:06 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:06 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:06 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:06 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:33:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:33:22 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:33:22 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:22 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:22 config.go:31: Connected to the database
+INFO: 2023/12/11 14:33:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:22 config.go:41: Closed database connection
+INFO: 2023/12/11 14:33:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:22 config.go:41: Closed database connection
+INFO: 2023/12/11 14:33:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:23 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:33 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:34 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:33:56 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:57 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:58 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:33:58 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:33:58 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:33:58 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:35:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:35:21 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:35:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:35:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:35:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:35:23 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:35:27 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:35:27 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:35:28 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:35:28 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:35:28 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:35:28 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:35:58 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:35:58 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:35:59 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:00 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:00 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:00 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:36:20 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:20 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:21 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:21 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:21 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:36:30 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:36:30 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:30 config.go:31: Connected to the database
+INFO: 2023/12/11 14:36:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:31 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:36:31 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:36:31 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:31 config.go:41: Closed database connection
+INFO: 2023/12/11 14:36:31 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:31 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:31 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:36:34 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:36:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:36:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:36:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:36:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:37:43 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:37:44 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:37:45 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:37:45 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:37:46 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:37:46 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:37:51 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:37:51 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:37:52 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:37:52 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:37:52 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:37:52 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:39:05 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:39:05 config.go:31: Connected to the database
+INFO: 2023/12/11 14:39:10 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:39:10 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:39:10 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:39:11 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:39:11 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:39:11 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:39:11 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:39:11 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:39:16 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:39:16 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:39:20 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:39:20 external_handlers.go:85: Disk count fetched successfully from external server: 15
+ERROR: 2023/12/11 14:39:56 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:39:56 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:39:56 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:39:56 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:39:56 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:39:56 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:39:56 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:39:57 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:39:57 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:39:57 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:39:58 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:39:58 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:39:58 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:39:58 config.go:41: Closed database connection
+INFO: 2023/12/11 14:40:06 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:06 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:09 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:09 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:12 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:12 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:18 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:18 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:40:23 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:40:23 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:40:23 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:40:24 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:40:24 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:40:24 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:40:24 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:40:24 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:40:25 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:40:25 external_handlers.go:85: Disk count fetched successfully from external server: 15
+ERROR: 2023/12/11 14:40:44 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:40:44 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:40:44 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:40:44 config.go:31: Connected to the database
+INFO: 2023/12/11 14:40:44 config.go:31: Connected to the database
+INFO: 2023/12/11 14:40:44 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:40:44 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:40:44 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:40:44 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:40:44 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:40:47 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:40:47 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:40:47 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:40:47 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:41:18 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:41:18 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:18 auth.go:28: Token not found, redirecting to login page: http: named cookie not present
+ERROR: 2023/12/11 14:41:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:41:21 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:41:21 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:21 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:41:21 config.go:41: Closed database connection
+INFO: 2023/12/11 14:41:21 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:21 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:41:21 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:41:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:41:24 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:41:24 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:24 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:41:24 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:41:24 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:41:24 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:24 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:41:24 config.go:41: Closed database connection
+INFO: 2023/12/11 14:41:24 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:41:24 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:41:24 config.go:41: Closed database connection
+INFO: 2023/12/11 14:41:25 user_handlers.go:81: Handling POST request for user login
+INFO: 2023/12/11 14:41:25 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:41:25 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:41:25 user_handlers.go:124: User logged in successfully
+INFO: 2023/12/11 14:41:27 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:41:27 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:41:27 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:41:27 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:41:27 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:41:27 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:41:30 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:41:30 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:41:30 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:41:30 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:41:30 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:41:30 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:41:30 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:41:30 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:41:31 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:41:31 external_handlers.go:85: Disk count fetched successfully from external server: 15
+ERROR: 2023/12/11 14:41:54 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:41:54 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:07 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:42:08 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:09 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:09 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:42:09 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:09 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:09 config.go:41: Closed database connection
+INFO: 2023/12/11 14:42:09 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:09 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:09 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:42:10 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:42:11 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:11 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:11 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:42:35 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:42:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:35 config.go:41: Closed database connection
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:42:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:35 config.go:41: Closed database connection
+INFO: 2023/12/11 14:42:35 config.go:31: Connected to the database
+INFO: 2023/12/11 14:42:35 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:42:35 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:42:35 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+ERROR: 2023/12/11 14:42:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:35 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:42:35 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:42:35 config.go:41: Closed database connection
+INFO: 2023/12/11 14:42:36 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:42:36 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:42:36 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:42:36 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:42:36 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:42:38 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:42:38 external_handlers.go:85: Disk count fetched successfully from external server: 15
+ERROR: 2023/12/11 14:43:30 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:43:30 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:43:30 config.go:31: Connected to the database
+INFO: 2023/12/11 14:43:30 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:43:30 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:43:30 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:43:45 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:43:45 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:43:45 config.go:31: Connected to the database
+INFO: 2023/12/11 14:43:45 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:43:45 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:43:45 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:44:02 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:03 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:03 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:04 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:04 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:04 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:44:18 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:19 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:24 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:24 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:24 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:24 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:44:25 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:25 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:25 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:25 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:44:25 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:44:25 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:44:25 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:44:26 config.go:31: Connected to the database
+INFO: 2023/12/11 14:44:26 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:26 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:44:26 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:26 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:44:26 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:26 config.go:41: Closed database connection
+INFO: 2023/12/11 14:44:26 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:26 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:26 config.go:41: Closed database connection
+INFO: 2023/12/11 14:44:26 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:44:26 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:44:26 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:46:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:46:17 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:22 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:46:22 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:22 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:22 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:46:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:46:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:46:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:46:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:23 config.go:41: Closed database connection
+INFO: 2023/12/11 14:46:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:23 config.go:41: Closed database connection
+INFO: 2023/12/11 14:46:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:23 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:46:53 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:46:53 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:55 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:46:55 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:55 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:46:56 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:56 config.go:41: Closed database connection
+INFO: 2023/12/11 14:46:56 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:46:56 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:46:56 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:47:11 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:47:11 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:47:11 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:47:12 config.go:31: Connected to the database
+INFO: 2023/12/11 14:47:12 config.go:31: Connected to the database
+INFO: 2023/12/11 14:47:12 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:47:12 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:47:12 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:47:12 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:47:12 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:47:13 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:47:13 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:47:13 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:47:13 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:47:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:47:23 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:47:23 config.go:31: Connected to the database
+INFO: 2023/12/11 14:47:23 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:47:23 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:47:23 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:47:34 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:47:34 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:47:34 config.go:31: Connected to the database
+INFO: 2023/12/11 14:47:34 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:47:34 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:47:34 config.go:41: Closed database connection
+INFO: 2023/12/11 14:49:59 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:49:59 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:49:59 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:50:00 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:50:00 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:50:00 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:50:00 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:50:00 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:50:06 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:50:06 power_handlers.go:21: Handling GET request for Power Details
+INFO: 2023/12/11 14:50:06 power_controllers.go:46: Retrieved all DevicePowerDetail records successfully
+INFO: 2023/12/11 14:50:06 auth.go:63: User gowithvikash@gmail.com has access
+INFO: 2023/12/11 14:50:06 user_handlers.go:253: Handling GET request for current user details
+INFO: 2023/12/11 14:50:06 user_controllers.go:14: gowithvikash@gmail.com
+INFO: 2023/12/11 14:50:06 user_controllers.go:29: User From DB :  &{12 vikash parashar 8930008915 gowithvikash@gmail.com $2a$10$uL4RHCerMpdztNpqiflQVeyVLsa3R5QjbPVFyogJc5eiFevRqNGcm admin  0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}
+INFO: 2023/12/11 14:50:06 user_handlers.go:284: Current user details retrieved successfully
+INFO: 2023/12/11 14:50:08 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:50:08 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:50:11 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:50:11 external_handlers.go:85: Disk count fetched successfully from external server: 15
+INFO: 2023/12/11 14:50:12 external_handlers.go:36: Fetching disk's data from external server
+INFO: 2023/12/11 14:50:12 external_handlers.go:85: Disk count fetched successfully from external server: 15
+ERROR: 2023/12/11 14:51:28 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:51:28 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:32 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:51:33 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:34 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:51:34 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:51:42 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:51:42 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:51:42 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:51:42 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:51:42 config.go:31: Connected to the database
+INFO: 2023/12/11 14:51:42 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:42 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:51:42 config.go:41: Closed database connection
+INFO: 2023/12/11 14:51:42 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:42 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:51:42 config.go:41: Closed database connection
+INFO: 2023/12/11 14:51:42 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:42 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:51:42 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:51:53 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:51:53 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:51:55 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:10 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:52:10 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:52:15 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:15 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:15 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:52:15 config.go:31: Connected to the database
+INFO: 2023/12/11 14:52:15 config.go:31: Connected to the database
+INFO: 2023/12/11 14:52:16 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:52:16 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:16 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:52:16 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:16 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:52:16 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:16 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:52:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+ERROR: 2023/12/11 14:52:17 main.go:18: Error loading .env file: open .env: The system cannot find the file specified.
+INFO: 2023/12/11 14:52:17 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection
+INFO: 2023/12/11 14:52:17 config.go:31: Connected to the database
+INFO: 2023/12/11 14:52:17 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection
+INFO: 2023/12/11 14:52:17 config.go:31: Connected to the database
+ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection
+ERROR: 2023/12/11 14:52:17 main.go:55: listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+INFO: 2023/12/11 14:52:17 config.go:41: Closed database connection

@@ -752,16 +752,29 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-1">
-                        <button type="submit" id="applyFilterButton" class="btn-sm btn-warning bg-light">
-                            Search
-                        </button>
+                    <div class="row">
+                        <div class="col-9"></div>
+                        <div class="col-1">
+                            <button type="submit" id="applyFilterButton" class="btn-sm btn-light bg-warning">
+                                Search
+                            </button>
+                        </div>
+
+                        <div class="col-2">
+                            <!-- Add Clear Filters button -->
+                            <button type="button" id="clearFiltersButton" class="btn-sm btn-light bg-danger">
+                                Clear Filter
+                            </button>
+                        </div>
+                        <!-- <div class="col-4"></div> -->
                     </div>
+
+
                     <!-- fetch disk's from external server -->
-                    <div id="diskInfoContainer">
+                    <div id="diskInfoContainer" style="background-color: #ffffffef;">
                         <p>Find Disk's From Server</p><button onclick="fetchDiskCount()"
-                            class="btn btn-warning disk-btn">Fetch</button><span id="diskCount"
-                            style="color: white;height: 26.67px;"></span>
+                            class="btn-sm btn-light bg-info disk-btn">Fetch</button><span id="diskCount"
+                            style="color: rgba(23, 158, 68, 0.801);height: 26.67px;"></span>
                         <br>
                     </div>
                 </div>
@@ -1450,6 +1463,17 @@
         logoutButton.addEventListener("click", handleLogout);
 
 
+    </script>
+
+
+    <!-- Clear Filters button -->
+    <script>
+        document.getElementById('clearFiltersButton').addEventListener('click', function () {
+            // Clear the input values
+            document.getElementById('serialNumberFilter').value = '';
+            document.getElementById('makeFilter').value = '';
+            document.getElementById('modelFilter').value = '';
+        });
     </script>
 
 
